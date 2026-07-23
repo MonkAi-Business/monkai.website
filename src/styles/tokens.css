@@ -1,0 +1,26 @@
+:root {
+  --bg-page: #F4F2EC;
+  --bg-canvas: #E7E5DE;
+  --ink: #24261F;
+  --ink-soft: #4A4E42;
+  --muted: #656A5C;
+  --border: #D9DACE;
+  --card: #FBFAF6;
+  --card-alt: #E9EADF;
+  --section-alt: #EFEDE5;
+  --green: #4C5F3B;
+  --green-hover: #37472A;
+  --green-light: #8FA478;
+
+  --dark: #24261F;
+  --dark-text: #C9CBBF;
+  --dark-dim: #A9AC9C;
+
+  --maxw: 1120px;
+  --radius-sm: 4px;
+  --radius: 6px;
+
+  --font-serif: 'Source Serif 4', serif;
+  --font-sans: 'Work Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
