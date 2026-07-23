@@ -1,0 +1,45 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const fmt = (d: Date) => new Intl.DateTimeFormat('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' }).format(d);
+---
+<BaseLayout title={`${post.data.title} — MonkAi Business`} description={post.data.description}>
+  <Nav />
+  <main class="section">
+    <article class="container article">
+      <div class="date">{fmt(post.data.date)}</div>
+      <h1>{post.data.title}</h1>
+      <div class="prose"><Content /></div>
+      <a class="back" href="/blog">&larr; Alle artikels</a>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+  .article { max-width: 720px; }
+  .date { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+  h1 { font-size: 44px; font-weight: 500; line-height: 1.2; margin: 12px 0 24px; text-wrap: pretty; }
+  .prose { line-height: 1.7; font-size: 17px; color: var(--ink-soft); }
+  .prose :global(h2) { font-family: var(--font-serif); font-size: 26px; font-weight: 600; color: var(--ink); margin: 40px 0 16px; }
+  .prose :global(h3) { font-family: var(--font-serif); font-size: 21px; font-weight: 600; color: var(--ink); margin: 32px 0 14px; }
+  .prose :global(p) { margin: 0 0 20px; }
+  .prose :global(ul), .prose :global(ol) { margin: 0 0 20px; padding-left: 22px; }
+  .prose :global(li) { margin-bottom: 8px; }
+  .prose :global(a) { color: var(--green); text-decoration: underline; }
+  .prose :global(strong) { color: var(--ink); }
+  .back { display: inline-block; margin-top: 40px; color: var(--ink); font-weight: 600; border-bottom: 1.5px solid var(--green); padding-bottom: 2px; }
+  @media (max-width: 768px) {
+    h1 { font-size: 30px; margin: 10px 0 18px; }
+    .prose { font-size: 16px; }
+  }
+</style>
