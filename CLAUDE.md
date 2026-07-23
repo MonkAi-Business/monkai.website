@@ -1,0 +1,177 @@
+# MonkAi Business — CLAUDE.md
+
+Durable knowledge base for future sessions on this repo. Keep this file accurate: update it whenever facts here change, and append to **Lessons learned** after every session that touches this codebase.
+
+## Project
+
+MonkAi Business is the AI-offering of **SDK Solutions BV** — a marketing site for AI-adoption coaching aimed at Flemish SMEs ("KMO's"), delivered by **Stijn De Ketelaere**. It is a static **Astro 5** site, content and copy in **Dutch (nl)**, deployed on **Netlify**.
+
+The site is a single long-scroll homepage (nav, hero, problem, approach/ladder, agreement, services, "beyond chat", AI-Act note, use cases, blog teaser, statement, contact, footer) plus three sub-areas: a blog, a use-cases library, and a Netlify-Forms-powered contact flow with a thank-you page.
+
+## Design provenance
+
+The visual design originates from a **Claude Design** project, not from this repo directly:
+
+- Project name: **"Drie style tiles klaar"**
+- Project ID: `d12a143b-8fe1-42af-bd49-3ebc7160a3cf`
+- Files in that project:
+  - `Homepage.dc.html` — the homepage design that was ported into this site.
+  - `Style Tiles.dc.html` — the design-system reference (colors, type, components).
+  - `favicon.svg`
+
+**Important — what a `.dc.html` file actually is:** these are Claude **design canvases**, not deployable websites. Each one contains a **desktop variant** (`<div id="4a">`, 1440px wide) and a **mobile variant** (`<div id="4b">`, 390px wide) laid out side by side, wrapped in `<x-dc>` / `<helmet>` markup with Claude's own canvas tooling (`support.js`, `image-slot.js`, `<image-slot>` custom elements). None of that wrapper or tooling is ported — it exists only to let the canvas render inside Claude's design surface.
+
+**Porting rule:** the **desktop `id="4a"`** frame is the source of truth for markup/content/layout at desktop width; the **mobile `id="4b"`** frame is the responsive reference used to size the same component down to small screens (breakpoints, stacking, font-size drops). When the two disagree on content, `4a` wins and `4b` is treated as "how this looks small," not as a second source of truth.
+
+A local snapshot of the ported homepage source is kept at `docs/design-source/Homepage.dc.html` for reference — it is not built or imported by the app.
+
+**How to re-pull / update the design later:** use the `claude_design` MCP server, tool **`DesignSync`**:
+1. `list_files` (method, with the `projectId` above) to see what's currently in the project.
+2. `get_file` (method, with the same `projectId` and a file name) to fetch the latest contents of `Homepage.dc.html`, `Style Tiles.dc.html`, or `favicon.svg`.
+3. Diff the fetched `id="4a"` markup against what's currently in `src/components/`, then re-port only the changed sections into the matching Astro component(s) — translating inline styles to the tokens in `src/styles/tokens.css` as you go (see below).
+
+## Design tokens
+
+Canonical tokens live in **`src/styles/tokens.css`**, loaded globally. **Never hardcode a hex color, radius, or font stack in a component where a token already exists for it** — add a new token instead if the design introduces a genuinely new value.
+
+| Token | Value | Use |
+|---|---|---|
+| `--bg-page` | `#F4F2EC` | Page background |
+| `--bg-canvas` | `#E7E5DE` | Canvas/section background |
+| `--ink` | `#24261F` | Primary text |
+| `--ink-soft` | `#4A4E42` | Secondary text |
+| `--muted` | `#656A5C` | Muted/tertiary text |
+| `--border` | `#D9DACE` | Default border color |
+| `--card` | `#FBFAF6` | Card background (light) |
+| `--card-alt` | `#E9EADF` | Alternate card background |
+| `--section-alt` | `#EFEDE5` | Alternate section background |
+| `--green` | `#4C5F3B` | Brand green (buttons, links, accents) |
+| `--green-hover` | `#37472A` | Brand green, hover/active state |
+| `--green-light` | `#8FA478` | Light green accent |
+| `--dark` | `#24261F` | Dark surface background (e.g. dark cards) |
+| `--dark-text` | `#C9CBBF` | Text on dark surfaces |
+| `--dark-dim` | `#A9AC9C` | Dimmed text on dark surfaces |
+| `--input-bg` | `#FFFFFF` | Form input background |
+| `--placeholder` | `#A5A79C` | Form placeholder text color |
+| `--maxw` | `1120px` | Content max-width |
+| `--radius-sm` | `4px` | Small corner radius (inputs, chips) |
+| `--radius` | `6px` | Default corner radius (cards, buttons) |
+| `--font-serif` | `'Source Serif 4', serif` | Headings |
+| `--font-sans` | `'Work Sans', sans-serif` | Body/UI text |
+| `--font-mono` | `'JetBrains Mono', monospace` | Mono accents (labels, tags) |
+
+## Structure
+
+```
+src/
+  layouts/
+    BaseLayout.astro       — shared <head>, fonts, global.css/tokens.css import, Nav + Footer slot wrapper
+  components/
+    Nav.astro, Footer.astro, Logo.astro       — global chrome, used on every page
+    Hero.astro, Problem.astro, Approach.astro,
+    Ladder.astro, Agreement.astro, Services.astro,
+    BeyondChat.astro, AiAct.astro, About.astro,
+    Statement.astro                            — static homepage sections, ported 1:1 from Homepage.dc.html (4a)
+    UseCases.astro, BlogTeaser.astro           — homepage sections driven by content collections
+    Contact.astro                              — the Netlify-Forms contact form section
+    VideoEmbed.astro                           — renders a use case's video (file/YouTube/Vimeo variants)
+  content/
+    blog/*.md              — blog post collection (see "Add a blog post" below)
+    usecases/*.md           — use case collection (see "Add a use case" below)
+  content.config.ts        — Astro 5 collection definitions (glob loader + zod schemas) for blog & usecases
+  pages/
+    index.astro             — homepage, assembles all sections in order
+    bedankt.astro            — thank-you page the contact form POSTs/redirects to
+    blog/index.astro         — blog listing
+    blog/[slug].astro        — blog post detail (dynamic route, slug = entry.id)
+    use-cases/index.astro    — use case listing
+    use-cases/[slug].astro   — use case detail (dynamic route, slug = entry.id)
+  styles/
+    tokens.css               — design tokens (see above), the single source of truth for colors/fonts/shape
+    global.css                — resets, base element styles, typography defaults
+public/
+  favicon.svg
+  media/
+    stijn.svg               — placeholder profile image (see Deploy section)
+docs/
+  design-source/Homepage.dc.html   — local snapshot of the ported design canvas, for reference only
+  superpowers/                     — spec/plan docs from the build process (not app code)
+.superpowers/sdd/                  — per-task briefs/reports/diffs from this project's staged build (task-1..8)
+netlify.toml                       — Netlify build config (see Deploy)
+CLAUDE.md                          — this file
+```
+
+## How to add a blog post
+
+Create `src/content/blog/<slug>.md` with frontmatter:
+
+```yaml
+---
+title: "Post title"
+date: 2026-07-23
+description: "One or two sentence summary shown in listings and previews."
+tags: ["optional", "tag", "list"]
+draft: false
+---
+Post body in Markdown.
+```
+
+- `title` (string, required)
+- `date` (string, required, `YYYY-MM-DD`)
+- `description` (string, required)
+- `tags` (array of strings, optional)
+- `draft` (boolean, optional, default `false`)
+
+The homepage teaser section automatically shows the **newest 3 non-draft** posts (sorted by `date`, descending). `/blog` lists all non-draft posts. Each post's detail page is served at `/blog/<slug>` (the file's slug, taken from `entry.id`).
+
+## How to add a use case
+
+Create `src/content/usecases/<slug>.md` with frontmatter:
+
+```yaml
+---
+title: "Use case title"
+order: 10
+summary: "One or two sentence summary shown in the listing card."
+video:
+  type: file        # or: youtube | vimeo
+  src: /media/example.mp4
+  poster: /media/example-poster.jpg
+draft: false
+---
+Use case body in Markdown.
+```
+
+- `title` (string, required)
+- `order` (number, required) — controls sort order in the listing (ascending)
+- `summary` (string, required)
+- `video` (optional object): `type` is `file`, `youtube`, or `vimeo`; `src` is the file path or embed URL; `poster` (optional) is a poster image path, used with `type: file`
+- `draft` (boolean, optional, default `false`)
+
+For a local video, drop the `.mp4` (and poster image, if any) into `public/media/` and reference them as `/media/<filename>` with `type: file`. For a hosted video, use the YouTube or Vimeo embed URL with `type: youtube` or `type: vimeo` — `VideoEmbed.astro` renders the right markup for each case. The detail page is served at `/use-cases/<slug>`.
+
+## Deploy
+
+- GitHub repo: **`MonkAi-Business/monkai.website`** (already set as the `origin` remote).
+- **To deploy via Netlify UI:** in the Netlify team **`sdksolutionsbe`**, choose "Add new project → Import from GitHub" and select this repo. Netlify reads `netlify.toml` at the repo root (`npm run build`, publish directory `dist`, Node 20) and will redeploy automatically on every push to `main`.
+- **Alternative — CLI:** `netlify deploy --prod`, authenticated with a Netlify personal access token.
+- **Contact form:** uses **Netlify Forms** — the form has `data-netlify="true"`, a hidden `form-name` input matching the form's `name` attribute, and a honeypot field (`netlify-honeypot="bot-field"` + a hidden `bot-field` input). Netlify's build-time HTML parser detects the form from this static markup; no JS or serverless function is needed. Submissions appear under the site's **Forms** tab in the Netlify dashboard after the *first* deploy (the form must exist in a deployed build for Netlify to register it).
+- **Known placeholders awaiting real assets:** `public/media/stijn.svg` (profile photo) and the use-case videos are placeholders — swap them for real media when available; no code changes should be needed beyond updating file paths in frontmatter.
+
+## Commands
+
+- `npm run dev` — start the local dev server.
+- `npm run build` — build the static site to `dist/`.
+- `npm run preview` — preview the production build locally.
+
+## Lessons learned
+
+Running log — append an entry here after any future session that changes this codebase, so the project gets smarter over time.
+
+1. The design lives as a Claude design canvas (`.dc.html`) with a desktop `id="4a"` frame and a mobile `id="4b"` frame side by side; port from `4a`, size mobile behavior from `4b`. The canvas file itself is not directly deployable — it's a design artifact, not a website.
+2. Astro 5 content collections are configured in **`src/content.config.ts`** at the project root (NOT the older `src/content/config.ts` convention from Astro 2–4). Use the `glob` loader from `astro/loaders`, import `render()` from `astro:content` to render an entry's Markdown body, and use `entry.id` as the URL slug.
+3. Every inline hex value in the design maps to a token CSS variable — keep `tokens.css` authoritative. When the design introduces a new value with no matching token (e.g. `--input-bg`, `--placeholder` for form styling), add a new token rather than hardcoding the hex in a component.
+4. Nav/Footer links that point at homepage sections must be root-absolute (`/#aanpak`), not bare fragment links (`#aanpak`) — bare fragments break when the link is rendered on `/blog` or `/use-cases` sub-pages, since they'd resolve relative to the current path instead of the homepage.
+5. Netlify Forms needs exactly three things present in the static (build-time) HTML to be detected: `data-netlify="true"` on the `<form>`, a hidden `<input name="form-name" value="...">` matching the form's `name` attribute, and a honeypot field (`netlify-honeypot` attribute + matching hidden input). No JavaScript or serverless function is involved in detection.
+6. The design's Services section has **8 regular cards + 1 dark "Raad van advies" card (9 total)** — when porting from a design canvas, verify exact counts/variants against the actual `id="4a"` source markup, not against a prose summary of the section, since summaries can silently drop an outlier card.
+7. Responsive behavior: multi-column grids collapse to a single column at `max-width: 768px`. Watch for `flex` rows with `flex-wrap: nowrap` and many inline items (e.g. the hero meta row) — these can overflow horizontally at narrow widths (390px) even when the surrounding grid collapses correctly; test the narrowest supported width explicitly, not just one intermediate breakpoint.
