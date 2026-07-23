@@ -1,0 +1,159 @@
+---
+import Logo from './Logo.astro';
+
+const links = [
+  { href: '#aanpak', label: 'Aanpak' },
+  { href: '#diensten', label: 'Diensten' },
+  { href: '#over', label: 'Over Stijn' },
+];
+---
+
+<header class="nav">
+  <div class="nav-bar">
+    <a href="#" class="nav-logo" aria-label="MonkAi Business — home">
+      <Logo variant="light" />
+    </a>
+
+    <nav class="nav-links" aria-label="Hoofdnavigatie">
+      {links.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+      <a href="#contact" class="btn nav-cta">Laten we praten</a>
+    </nav>
+
+    <button
+      type="button"
+      class="nav-toggle"
+      aria-label="Menu openen"
+      aria-expanded="false"
+      aria-controls="nav-mobile-menu"
+      data-nav-toggle
+    >
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </div>
+
+  <nav
+    id="nav-mobile-menu"
+    class="nav-mobile"
+    aria-label="Mobiele navigatie"
+    data-nav-mobile
+  >
+    {links.map((link) => (
+      <a href={link.href}>{link.label}</a>
+    ))}
+    <a href="#contact" class="btn nav-cta-mobile">Laten we praten</a>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector('[data-nav-toggle]');
+  const menu = document.querySelector('[data-nav-mobile]');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = menu?.getAttribute('data-open') === 'true';
+    menu?.setAttribute('data-open', String(!isOpen));
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  menu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      menu.setAttribute('data-open', 'false');
+      toggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+<style>
+  .nav {
+    background: var(--bg-page);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 64px;
+  }
+
+  .nav-logo {
+    display: inline-flex;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .nav-links a {
+    color: var(--ink);
+  }
+
+  .nav-links a:hover {
+    color: var(--green-hover);
+  }
+
+  .nav-cta {
+    padding: 11px 20px;
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 14px 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .nav-toggle-bar {
+    width: 22px;
+    height: 1.5px;
+    background: var(--ink);
+  }
+
+  .nav-mobile {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    padding: 22px;
+    border-top: 1px solid var(--border);
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .nav-mobile a {
+    color: var(--ink);
+  }
+
+  .nav-cta-mobile {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .nav-mobile[data-open='true'] {
+    display: flex;
+  }
+
+  @media (max-width: 768px) {
+    .nav-bar {
+      padding: 18px 22px;
+    }
+
+    .nav-links {
+      display: none;
+    }
+
+    .nav-toggle {
+      display: flex;
+    }
+  }
+</style>
