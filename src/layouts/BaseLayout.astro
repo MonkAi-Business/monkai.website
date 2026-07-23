@@ -1,6 +1,92 @@
 ---
-const { title, description = 'AI zonder apenstreken. Rustig en veilig starten met AI voor Vlaamse KMO\'s.' } = Astro.props;
+const {
+  title,
+  description = "AI-adoptiecoaching voor Vlaamse KMO's door Stijn De Ketelaere. Rustig starten met AI, Claude-training en kennisstructuur — van Gent tot de Vlaamse Ardennen.",
+  image = '/og-image.svg',
+  noindex = false,
+  schema = [],
+} = Astro.props;
+
 import '../styles/global.css';
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(image, Astro.site).href;
+
+// Sitewide structured data: het bedrijf + Stijn als persoon (entiteiten die
+// alle doelwoorden en het werkgebied aan elkaar knopen voor Google en AI-engines).
+const siteSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': 'https://monkai.business/#business',
+      name: 'MonkAi Business',
+      description:
+        "AI-adoptiecoaching voor Vlaamse KMO's, geleverd door Stijn De Ketelaere. Rustig en veilig starten met AI, Claude-training en kennisstructuur.",
+      url: 'https://monkai.business/',
+      image: 'https://monkai.business/og-image.svg',
+      email: 'hallo@monkai.business',
+      priceRange: '€€',
+      founder: { '@id': 'https://monkai.business/#stijn' },
+      parentOrganization: {
+        '@type': 'Organization',
+        name: 'SDK Solutions BV',
+        vatID: 'BE1027019469',
+      },
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Robert De Preesterstraat 55',
+        postalCode: '9700',
+        addressLocality: 'Oudenaarde',
+        addressRegion: 'Oost-Vlaanderen',
+        addressCountry: 'BE',
+      },
+      areaServed: [
+        { '@type': 'AdministrativeArea', name: 'Oost-Vlaanderen' },
+        { '@type': 'AdministrativeArea', name: 'West-Vlaanderen' },
+        { '@type': 'City', name: 'Gent' },
+        { '@type': 'Place', name: 'Vlaamse Ardennen' },
+        { '@type': 'Place', name: 'Vlaanderen' },
+      ],
+      knowsAbout: [
+        'AI-adoptie',
+        'Claude-training',
+        'Second brain',
+        'Collective brain',
+        'AI-governance',
+        'EU AI Act',
+        'Microsoft 365 Copilot',
+      ],
+      knowsLanguage: 'nl-BE',
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://monkai.business/#stijn',
+      name: 'Stijn De Ketelaere',
+      jobTitle: 'AI-adoptiecoach',
+      description:
+        "Stijn De Ketelaere is AI-adoptiecoach voor KMO's in Vlaanderen. Hij begeleidt bedrijven bij AI-adoptie, Claude-training en het opzetten van een second brain en collective brain.",
+      url: 'https://monkai.business/#over',
+      worksFor: { '@id': 'https://monkai.business/#business' },
+      knowsAbout: [
+        'AI-adoptie',
+        'Claude-training',
+        'Second brain',
+        'Collective brain',
+        'AI-governance',
+        'EU AI Act',
+      ],
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Oudenaarde',
+        addressRegion: 'Oost-Vlaanderen',
+        addressCountry: 'BE',
+      },
+    },
+  ],
+};
+
+const schemas = [siteSchema, ...(Array.isArray(schema) ? schema : [schema])];
 ---
 <!DOCTYPE html>
 <html lang="nl">
@@ -9,10 +95,32 @@ import '../styles/global.css';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MonkAi Business" />
+    <meta property="og:locale" content="nl_BE" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    {schemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
   </head>
   <body>
     <slot />

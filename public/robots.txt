@@ -1,0 +1,32 @@
+# MonkAi Business — robots.txt
+
+# Zoekmachines: alles toegelaten
+User-agent: *
+Allow: /
+
+# AI-zoekmachines expliciet toegelaten (nodig om geciteerd te worden)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://monkai.business/sitemap-index.xml

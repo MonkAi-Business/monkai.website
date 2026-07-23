@@ -12,12 +12,35 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const fmt = (d: Date) => new Intl.DateTimeFormat('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' }).format(d);
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date.toISOString(),
+  inLanguage: 'nl-BE',
+  mainEntityOfPage: pageUrl,
+  keywords: post.data.tags.join(', '),
+  author: { '@type': 'Person', '@id': 'https://monkai.business/#stijn', name: 'Stijn De Ketelaere' },
+  publisher: { '@id': 'https://monkai.business/#business' },
+};
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://monkai.business/' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://monkai.business/blog' },
+    { '@type': 'ListItem', position: 3, name: post.data.title },
+  ],
+};
 ---
-<BaseLayout title={`${post.data.title} — MonkAi Business`} description={post.data.description}>
+<BaseLayout title={`${post.data.title} — MonkAi Business`} description={post.data.description} schema={[articleSchema, breadcrumbSchema]}>
   <Nav />
   <main class="section">
     <article class="container article">
-      <div class="date">{fmt(post.data.date)}</div>
+      <div class="meta"><span>{fmt(post.data.date)}</span><span class="dot">·</span><span>Door Stijn De Ketelaere</span></div>
       <h1>{post.data.title}</h1>
       <div class="prose"><Content /></div>
       <a class="back" href="/blog">&larr; Alle artikels</a>
@@ -27,7 +50,8 @@ const fmt = (d: Date) => new Intl.DateTimeFormat('nl-BE', { day: 'numeric', mont
 </BaseLayout>
 <style>
   .article { max-width: 720px; }
-  .date { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+  .meta { font-family: var(--font-mono); font-size: 13px; color: var(--muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .meta .dot { color: var(--border); }
   h1 { font-size: 44px; font-weight: 500; line-height: 1.2; margin: 12px 0 24px; text-wrap: pretty; }
   .prose { line-height: 1.7; font-size: 17px; color: var(--ink-soft); }
   .prose :global(h2) { font-family: var(--font-serif); font-size: 26px; font-weight: 600; color: var(--ink); margin: 40px 0 16px; }

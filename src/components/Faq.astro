@@ -1,0 +1,78 @@
+---
+// Vragen die dubbel werk doen: leesbaar voor bezoekers én extraheerbaar voor
+// AI-zoekmachines (via FAQPage-schema). Antwoorden zijn kort en zelfstandig
+// leesbaar, en dekken de doelwoorden natuurlijk: regio, AI-adoptie,
+// Claude-training, second brain en collective brain.
+const faqs = [
+  {
+    q: 'In welke regio geef je AI-training en AI-adoptiecoaching?',
+    a: "Ik werk op locatie bij KMO's in heel Oost-Vlaanderen en West-Vlaanderen. Vanuit Oudenaarde, in de Vlaamse Ardennen, ben ik snel in Gent, Kortrijk en alles daartussen. Voor bedrijven net buiten die regio bekijken we het per geval.",
+  },
+  {
+    q: 'Wat is AI-adoptie precies?',
+    a: 'AI-adoptie is het proces waarbij een organisatie AI niet alleen aankoopt, maar ook echt gebruikt in het dagelijkse werk. Het draait om mensen en gewoontes, niet om technologie: klein beginnen met concrete taken, herhalen tot het vanzelf gaat, en de kennis in huis houden.',
+  },
+  {
+    q: 'Doe je Claude-training voor bedrijven?',
+    a: "Ja. Ik geef Claude-training voor kenniswerkers die veilig en slim met Claude willen werken op hun eigen taken, en Claude-training voor developers rond accelerated coding. De focus ligt op verantwoord gebruik met behoud van controle, kwaliteit en security.",
+  },
+  {
+    q: 'Wat is het verschil tussen een second brain en een collective brain?',
+    a: 'Een second brain is een persoonlijk kennissysteem: je legt vast wat je leert zodat je het later terugvindt. Een collective brain tilt dat naar bedrijfsniveau: één gedeeld bedrijfsgeheugen waar kennis niet langer alleen in hoofden zit, maar op één plek staat en met AI bevraagbaar is.',
+  },
+  {
+    q: 'Voor wie is MonkAi Business bedoeld?',
+    a: "Voor Vlaamse KMO's die met AI aan de slag willen zonder erin te verdrinken. Je werkt rechtstreeks met Stijn De Ketelaere, zonder bureau of tussenlagen, van de eerste sessie tot het moment dat je team het zelf kan.",
+  },
+  {
+    q: 'Hoe start een traject?',
+    a: 'Elk traject begint met een AI-inspiratiesessie: twee uur, tot tien deelnemers, bij jou op locatie. Daarna kiezen we samen enkele haalbare use cases en bouwen we stap voor stap op. Je verbindt je nergens toe op voorhand.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+<section class="section faq" id="faq">
+  <div class="container faq-inner">
+    <div class="head">
+      <h2>Veelgestelde vragen</h2>
+      <p class="lede">Kort en nuchter, zoals de rest.</p>
+    </div>
+    <div class="faq-list">
+      {faqs.map((f) => (
+        <details class="faq-item">
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<style>
+  .faq-inner { display: flex; flex-direction: column; gap: 40px; }
+  .head { display: flex; flex-direction: column; gap: 12px; max-width: 640px; }
+  h2 { font-size: 40px; font-weight: 500; }
+  .lede { margin: 0; font-size: 17px; line-height: 1.65; color: var(--muted); }
+  .faq-list { display: flex; flex-direction: column; }
+  .faq-item { border-top: 1px solid var(--border); padding: 22px 0; }
+  .faq-item:last-child { border-bottom: 1px solid var(--border); }
+  .faq-item summary { font-size: 19px; font-weight: 500; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 20px; color: var(--ink); }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: '+'; font-family: var(--font-mono); font-size: 22px; color: var(--green); flex-shrink: 0; }
+  .faq-item[open] summary::after { content: '–'; }
+  .faq-item p { margin: 14px 0 0; font-size: 17px; line-height: 1.7; color: var(--muted); max-width: 760px; }
+  @media (max-width: 768px) {
+    h2 { font-size: 30px; }
+    .faq-item summary { font-size: 17px; }
+    .faq-item p { font-size: 16px; }
+  }
+</style>
