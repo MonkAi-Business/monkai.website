@@ -4,6 +4,7 @@ export interface Props {
   iconSize?: number;
   wordmarkSize?: number;
   businessSize?: number;
+  showBusiness?: boolean;
 }
 
 const {
@@ -11,6 +12,7 @@ const {
   iconSize = variant === 'light' ? 30 : 26,
   wordmarkSize = variant === 'light' ? 22 : 20,
   businessSize = variant === 'light' ? 15 : 14,
+  showBusiness = true,
 } = Astro.props;
 
 const isLight = variant === 'light';
@@ -60,7 +62,7 @@ const iconHeight = Math.round((iconSize * 30) / 36);
     class="logo-wordmark"
     style={`--wordmark-color:${wordmarkColor}; --ai-color:${aiColor}; --business-color:${businessColor}; --wordmark-size:${wordmarkSize}px; --business-size:${businessSize}px;`}
   >
-    Monk<span class="logo-ai">Ai</span> <span class="logo-business">Business</span>
+    Monk<span class="logo-ai">Ai</span>{showBusiness && <> <span class="logo-business">Business</span></>}
   </span>
 </span>
 

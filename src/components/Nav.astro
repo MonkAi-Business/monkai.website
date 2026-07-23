@@ -2,23 +2,24 @@
 import Logo from './Logo.astro';
 
 const links = [
-  { href: '#aanpak', label: 'Aanpak' },
-  { href: '#diensten', label: 'Diensten' },
-  { href: '#over', label: 'Over Stijn' },
+  { href: '/#aanpak', label: 'Aanpak' },
+  { href: '/#diensten', label: 'Diensten' },
+  { href: '/#over', label: 'Over Stijn' },
 ];
 ---
 
 <header class="nav">
   <div class="nav-bar">
-    <a href="#" class="nav-logo" aria-label="MonkAi Business — home">
-      <Logo variant="light" />
+    <a href="/" class="nav-logo" aria-label="MonkAi Business — home">
+      <span class="logo-desktop"><Logo variant="light" /></span>
+      <span class="logo-mobile"><Logo variant="light" iconSize={26} wordmarkSize={19} showBusiness={false} /></span>
     </a>
 
     <nav class="nav-links" aria-label="Hoofdnavigatie">
       {links.map((link) => (
         <a href={link.href}>{link.label}</a>
       ))}
-      <a href="#contact" class="btn nav-cta">Laten we praten</a>
+      <a href="/#contact" class="btn nav-cta">Laten we praten</a>
     </nav>
 
     <button
@@ -43,7 +44,7 @@ const links = [
     {links.map((link) => (
       <a href={link.href}>{link.label}</a>
     ))}
-    <a href="#contact" class="btn nav-cta-mobile">Laten we praten</a>
+    <a href="/#contact" class="btn nav-cta-mobile">Laten we praten</a>
   </nav>
 </header>
 
@@ -139,8 +140,8 @@ const links = [
     text-align: center;
   }
 
-  .nav-mobile[data-open='true'] {
-    display: flex;
+  .logo-mobile {
+    display: none;
   }
 
   @media (max-width: 768px) {
@@ -153,6 +154,18 @@ const links = [
     }
 
     .nav-toggle {
+      display: flex;
+    }
+
+    .logo-desktop {
+      display: none;
+    }
+
+    .logo-mobile {
+      display: inline-flex;
+    }
+
+    .nav-mobile[data-open='true'] {
       display: flex;
     }
   }
