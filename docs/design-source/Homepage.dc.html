@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  body { margin: 0; background: #E7E5DE; }
+  a { color: #4C5F3B; } a:hover { color: #37472A; }
+</style>
+</helmet>
+<section style="padding: 48px; display: flex; flex-direction: column; gap: 24px; font-family: 'Work Sans', sans-serif;">
+  <div style="max-width: 720px;">
+    <div style="font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #656A5C; font-weight: 600;">Opdracht 2 · Homepage · richting 2a + fonts 3b</div>
+  </div>
+  <div style="display: flex; gap: 48px; align-items: flex-start; width: max-content;">
+
+  <!-- ============ DESKTOP 1440 ============ -->
+  <div id="4a" style="width: 1440px; background: #F4F2EC; color: #24261F; flex-shrink: 0;">
+
+    <!-- Nav -->
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 22px 64px; border-bottom: 1px solid #D9DACE;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <svg width="30" height="26" viewBox="0 0 36 30" aria-hidden="true"><circle cx="6" cy="15" r="4.6" fill="#24261F"></circle><circle cx="30" cy="15" r="4.6" fill="#24261F"></circle><circle cx="6" cy="15" r="2" fill="#4C5F3B"></circle><circle cx="30" cy="15" r="2" fill="#4C5F3B"></circle><circle cx="18" cy="15" r="11" fill="#24261F"></circle><circle cx="13.5" cy="12" r="4.4" fill="#F4F2EC"></circle><circle cx="22.5" cy="12" r="4.4" fill="#F4F2EC"></circle><ellipse cx="18" cy="17.5" rx="7" ry="6" fill="#F4F2EC"></ellipse><circle cx="14.5" cy="13.5" r="1.5" fill="#24261F"></circle><circle cx="21.5" cy="13.5" r="1.5" fill="#24261F"></circle><circle cx="16.9" cy="17.6" r="0.9" fill="#24261F"></circle><circle cx="19.1" cy="17.6" r="0.9" fill="#24261F"></circle><path d="M14.8 20 Q18 23.2 21.2 20" stroke="#24261F" stroke-width="1.3" fill="none" stroke-linecap="round"></path></svg>
+        <div style="font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 600; letter-spacing: 0.01em;">Monk<span style="color: #4C5F3B;">Ai</span> <span style="font-family: 'Work Sans', sans-serif; font-weight: 400; font-size: 15px; color: #656A5C;">Business</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 36px; font-size: 15px; font-weight: 500;">
+        <span>Aanpak</span><span>Diensten</span><span>Over Stijn</span>
+        <span style="background: #4C5F3B; color: #FFFFFF; padding: 11px 20px; border-radius: 4px; font-weight: 600;">Laten we praten</span>
+      </div>
+    </div>
+
+    <!-- 1 Hero -->
+    <div style="padding: 110px 64px 90px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 28px;">
+      <h1 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 68px; font-weight: 500; line-height: 1.08; max-width: 800px; text-wrap: pretty;">AI zonder apenstreken<span style="color: #4C5F3B;">.</span></h1>
+      <p style="margin: 0; font-size: 20px; line-height: 1.6; color: #656A5C; max-width: 620px;">Ik help Vlaamse KMO's rustig en veilig starten met AI. Klein beginnen, herhalen, beheersen.</p>
+      <div style="display: flex; gap: 18px; align-items: center;">
+        <span style="background: #4C5F3B; color: #FFFFFF; font-size: 16px; font-weight: 600; padding: 15px 28px; border-radius: 4px;">Laten we praten</span>
+        <span style="color: #24261F; font-size: 16px; font-weight: 600; padding: 15px 4px; border-bottom: 1.5px solid #24261F;">Bekijk de aanpak</span>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: center; font-size: 15px; color: #656A5C; margin-top: 8px;">
+        <span>2 uur</span><span style="color: #D9DACE;">|</span><span>10 deelnemers</span><span style="color: #D9DACE;">|</span><span>bij jou op locatie</span>
+      </div>
+    </div>
+
+    <!-- 2 Probleem -->
+    <div style="padding: 90px 64px; border-top: 1px solid #D9DACE;">
+      <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 44px;">
+        <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 40px; font-weight: 500; text-wrap: pretty;">Waar zit de monkey business bij jou?</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px;">
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 30px; display: flex; flex-direction: column; gap: 12px;">
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 600;">Kopiëren en plakken</h3>
+            <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #656A5C;">Bestellingen uit mails overtypen in het ERP. Gegevens van het ene systeem naar het andere slepen. Elke dag opnieuw.</p>
+          </div>
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 30px; display: flex; flex-direction: column; gap: 12px;">
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 600;">Kennis in mailboxen</h3>
+            <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #656A5C;">De beste antwoorden zitten in de mailbox van één collega. Valt die persoon uit, dan valt de kennis uit.</p>
+          </div>
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 30px; display: flex; flex-direction: column; gap: 12px;">
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 600;">Stiekem experimenteren</h3>
+            <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #656A5C;">Medewerkers proberen al AI, vaak met bedrijfsdata in een privé-account. Dat is geen probleem, dat is brandstof. Het heeft alleen een veilig kader nodig.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 Statement -->
+    <div style="padding: 150px 64px; border-top: 1px solid #D9DACE; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px;">
+      <div style="font-family: 'Source Serif 4', serif; font-size: 52px; font-weight: 500; line-height: 1.15; max-width: 760px; text-wrap: pretty;">Mijn doel is dat je mij niet meer nodig hebt.</div>
+      <p style="margin: 0; font-size: 18px; color: #656A5C;">Ik geef een kickstart en draag over. Ik blijf niet plakken.</p>
+    </div>
+
+    <!-- 4 Ladder -->
+    <div style="padding: 90px 64px; border-top: 1px solid #D9DACE;">
+      <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 44px;">
+        <div style="display: flex; flex-direction: column; gap: 12px; max-width: 640px;">
+          <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 40px; font-weight: 500;">Drie niveaus, één tempo</h2>
+          <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #656A5C;">Elk bedrijf start op het eerste niveau. De volgende komen pas als het vorige werkt.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 34px 40px; display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: baseline;">
+            <div style="font-family: 'Source Serif 4', serif; font-size: 26px; font-weight: 500;">Automatiseren</div>
+            <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #656A5C;">Repetitieve back-office taken wegnemen met AI-automatisaties in n8n, Make of vergelijkbare tools. Bijvoorbeeld: bonnetjes en facturen automatisch laten lezen, hernoemen, taggen, in de juiste map zetten en doorsturen naar de boekhouding.</p>
+          </div>
+          <div style="background: #E9EADF; border: 1px solid #D9DACE; border-radius: 6px; padding: 38px 40px; display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: baseline;">
+            <div style="font-family: 'Source Serif 4', serif; font-size: 28px; font-weight: 600;">Onthouden</div>
+            <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #4A4E42;">Een second brain voor jezelf, een collective brain voor het bedrijf. Kennis zo structureren dat je in minuten een eerste versie hebt in plaats van in dagen. Het fundament is een eenvoudige data-architectuur: kennis op één plek, met duidelijke afspraken over wie wat ziet.</p>
+          </div>
+          <div style="background: #24261F; border-radius: 6px; padding: 42px 40px; display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: baseline;">
+            <div style="font-family: 'Source Serif 4', serif; font-size: 30px; font-weight: 600; color: #F4F2EC;">Versnellen</div>
+            <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #C9CBBF;">Accelerated coding: ontwikkelteams die met AI sneller en met betere kwaliteit werken, met behoud van controle en security.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 Aanpak -->
+    <div style="padding: 90px 64px; border-top: 1px solid #D9DACE;">
+      <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 44px;">
+        <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 40px; font-weight: 500;">De aanpak</h2>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
+          <div style="display: flex; flex-direction: column; gap: 10px; border-top: 2px solid #4C5F3B; padding-top: 18px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #656A5C;">01</div>
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 600;">Inspireren</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.65; color: #656A5C;">Een sessie van twee uur die toont wat AI vandaag kan, met voorbeelden uit jouw sector.</p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px; border-top: 2px solid #4C5F3B; padding-top: 18px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #656A5C;">02</div>
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 600;">Kiezen</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.65; color: #656A5C;">Samen de use cases selecteren met de beste verhouding tussen impact en moeite.</p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px; border-top: 2px solid #4C5F3B; padding-top: 18px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #656A5C;">03</div>
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 600;">Experimenteren</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.65; color: #656A5C;">Klein en veilig proberen, met echte data in een afgesproken kader. Wat werkt blijft.</p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px; border-top: 2px solid #4C5F3B; padding-top: 18px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #656A5C;">04</div>
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 600;">Verankeren</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.65; color: #656A5C;">Afspraken, opleiding en overdracht. Jouw mensen nemen het over, ik stap terug.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Use cases -->
+    <div style="padding: 90px 64px; border-top: 1px solid #D9DACE;">
+      <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px;">
+        <div style="display: flex; flex-direction: column; gap: 12px; max-width: 640px;">
+          <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 40px; font-weight: 500;">Use cases uit de praktijk</h2>
+          <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #656A5C;">Geen vergezichten. Dit werkt vandaag al bij KMO's.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 64px;">
+          <div style="display: flex; gap: 20px; padding: 22px 0; border-top: 1px solid #D9DACE;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #4C5F3B; padding-top: 3px;">01</span><div><div style="font-size: 18px; font-weight: 500;">Offertes in minuten</div><div style="font-size: 15px; line-height: 1.6; color: #656A5C; margin-top: 4px;">Een eerste versie op basis van eerdere offertes en de vraag van de klant.</div></div></div>
+          <div style="display: flex; gap: 20px; padding: 22px 0; border-top: 1px solid #D9DACE;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #4C5F3B; padding-top: 3px;">02</span><div><div style="font-size: 18px; font-weight: 500;">Facturen zonder overtypen</div><div style="font-size: 15px; line-height: 1.6; color: #656A5C; margin-top: 4px;">Bonnetjes en facturen automatisch gelezen, geboekt en gearchiveerd.</div></div></div>
+          <div style="display: flex; gap: 20px; padding: 22px 0; border-top: 1px solid #D9DACE;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #4C5F3B; padding-top: 3px;">03</span><div><div style="font-size: 18px; font-weight: 500;">Interne kennis bevragen</div><div style="font-size: 15px; line-height: 1.6; color: #656A5C; margin-top: 4px;">Hoe stel ik machine X af? Het antwoord komt uit je eigen documentatie.</div></div></div>
+          <div style="display: flex; gap: 20px; padding: 22px 0; border-top: 1px solid #D9DACE;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #4C5F3B; padding-top: 3px;">04</span><div><div style="font-size: 18px; font-weight: 500;">Klantmails voorbereid</div><div style="font-size: 15px; line-height: 1.6; color: #656A5C; margin-top: 4px;">Antwoordvoorstellen in jouw toon, klaar om na te lezen en te versturen.</div></div></div>
+          <div style="display: flex; gap: 20px; padding: 22px 0; border-top: 1px solid #D9DACE;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #4C5F3B; padding-top: 3px;">05</span><div><div style="font-size: 18px; font-weight: 500;">Rapporten die zichzelf schrijven</div><div style="font-size: 15px; line-height: 1.6; color: #656A5C; margin-top: 4px;">Cijfers uit je systemen samengevat in een helder maandrapport.</div></div></div>
+          <div style="display: flex; gap: 20px; padding: 22px 0; border-top: 1px solid #D9DACE;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #4C5F3B; padding-top: 3px;">06</span><div><div style="font-size: 18px; font-weight: 500;">Sneller inwerken</div><div style="font-size: 15px; line-height: 1.6; color: #656A5C; margin-top: 4px;">Onboardingdocumenten en antwoorden voor nieuwe collega's uit bestaande kennis.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 Diensten -->
+    <div style="padding: 90px 64px; border-top: 1px solid #D9DACE; background: #EFEDE5;">
+      <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 44px;">
+        <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 40px; font-weight: 500;">Diensten</h2>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 28px; display: flex; flex-direction: column; gap: 10px;">
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">AI-inspiratiesessie</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Twee uur, tien deelnemers, bij jou op locatie. Het vertrekpunt van elk traject.</p>
+          </div>
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 28px; display: flex; flex-direction: column; gap: 10px;">
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">Use case workshop</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Ideeën verzamelen en wegen op een impact/effort-matrix. Je vertrekt met drie haalbare cases.</p>
+          </div>
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 28px; display: flex; flex-direction: column; gap: 10px;">
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">AI-geletterdheid en AI-maturiteit</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Waar staat je team vandaag? Opleiding op maat van elk niveau, van sceptisch tot gevorderd.</p>
+          </div>
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 28px; display: flex; flex-direction: column; gap: 10px;">
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">AI-governance en EU AI Act</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Duidelijke afspraken over data, tools en verantwoordelijkheid. Klaar voor de wet, zonder juristentaal.</p>
+          </div>
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 28px; display: flex; flex-direction: column; gap: 10px;">
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">Claude voor knowledge workers</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Kenniswerkers leren veilig en slim werken met Claude, op hun eigen taken.</p>
+          </div>
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 28px; display: flex; flex-direction: column; gap: 10px;">
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">Claude voor developers</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Accelerated coding: sneller ontwikkelen met AI als assistent, met behoud van controle en kwaliteit.</p>
+          </div>
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 28px; display: flex; flex-direction: column; gap: 10px;">
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">Microsoft 365 Copilot veilig inzetten</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Copilot staat vaak al aan. Ik help je het veilig en zinvol gebruiken.</p>
+          </div>
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 28px; display: flex; flex-direction: column; gap: 10px;">
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">Het juiste model kiezen</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Niet gebonden aan één leverancier. Ook ChatGPT, Gemini en Chinese modellen zoals Z.Ai en KIMI komen op tafel als ze beter passen.</p>
+          </div>
+          <div style="background: #24261F; border-radius: 6px; padding: 28px 32px; display: flex; flex-direction: column; gap: 10px; justify-content: center;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #A9AC9C;">Langlopend engagement</div>
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 600; color: #F4F2EC;">Raad van advies</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #C9CBBF;">Zetelen in je raad van advies rond AI, digitale transformatie en innovatie in de brede zin. Geen project, wel een vaste kritische stem aan tafel.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 Breder dan chat -->
+    <div style="padding: 90px 64px; border-top: 1px solid #D9DACE;">
+      <div style="max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 40px; font-weight: 500; text-wrap: pretty;">AI is breder dan chat</h2>
+          <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #656A5C;">Generatieve AI is het vertrekpunt, niet de grens. Waar het past kijk ik ook naar wat er op de werkvloer zelf kan.</p>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-bottom: 1px solid #D9DACE;"><span style="font-size: 18px; font-weight: 500;">Augmented reality</span><span style="font-size: 15px; color: #656A5C;">instructies op de plek waar je werkt</span></div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-bottom: 1px solid #D9DACE;"><span style="font-size: 18px; font-weight: 500;">Smart glasses</span><span style="font-size: 15px; color: #656A5C;">handen vrij, informatie in beeld</span></div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-bottom: 1px solid #D9DACE;"><span style="font-size: 18px; font-weight: 500;">Computer vision</span><span style="font-size: 15px; color: #656A5C;">camera's die controleren en tellen</span></div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0;"><span style="font-size: 18px; font-weight: 500;">Connected worker</span><span style="font-size: 15px; color: #656A5C;">de werkvloer verbonden met de systemen</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 AI Act -->
+    <div style="padding: 90px 64px; border-top: 1px solid #D9DACE; background: #E9EADF;">
+      <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #656A5C;">AI-geletterdheid · EU AI Act</div>
+        <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 34px; font-weight: 500; line-height: 1.25; text-wrap: pretty;">De EU AI Act vraagt dat wie met AI werkt, AI voldoende begrijpt.</h2>
+        <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #4A4E42; max-width: 720px;">Sinds februari 2025 geldt die verplichting ook voor KMO's. Geen reden tot paniek, wel tot een plan. Ik breng in kaart waar je team staat en bouw de geletterdheid stap voor stap op, aangepast aan elke rol.</p>
+        <span style="font-size: 16px; font-weight: 600; color: #24261F; border-bottom: 1.5px solid #4C5F3B; align-self: flex-start; padding-bottom: 2px; margin-top: 6px;">Lees meer over AI-geletterdheid</span>
+      </div>
+    </div>
+
+    <!-- 9 Wederzijdse afspraak -->
+    <div style="padding: 90px 64px; border-top: 1px solid #D9DACE;">
+      <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 44px;">
+        <div style="display: flex; flex-direction: column; gap: 12px; max-width: 640px;">
+          <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 40px; font-weight: 500;">Onze afspraak</h2>
+          <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #656A5C;">Een traject lukt alleen als we allebei iets meebrengen. Dit is de eerlijke verdeling.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 36px; display: flex; flex-direction: column; gap: 18px;">
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 600;">Wat ik breng</h3>
+            <div style="display: flex; flex-direction: column; gap: 12px; font-size: 17px; line-height: 1.6; color: #656A5C;">
+              <div style="display: flex; gap: 12px;"><span style="color: #4C5F3B;">•</span><span>Heldere uitleg, zonder jargon en zonder hype.</span></div>
+              <div style="display: flex; gap: 12px;"><span style="color: #4C5F3B;">•</span><span>Een aanpak die overdraagt in plaats van bindt.</span></div>
+              <div style="display: flex; gap: 12px;"><span style="color: #4C5F3B;">•</span><span>Ervaring met processen van Vlaamse KMO's.</span></div>
+              <div style="display: flex; gap: 12px;"><span style="color: #4C5F3B;">•</span><span>Eerlijk advies, ook als AI niet het antwoord is.</span></div>
+            </div>
+          </div>
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 36px; display: flex; flex-direction: column; gap: 18px;">
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 600;">Wat jij brengt</h3>
+            <div style="display: flex; flex-direction: column; gap: 12px; font-size: 17px; line-height: 1.6; color: #656A5C;">
+              <div style="display: flex; gap: 12px;"><span style="color: #4C5F3B;">•</span><span style="color: #24261F; font-weight: 500;">Minstens één persoon die dit intern mee draagt. Dit is de belangrijkste voorwaarde.</span></div>
+              <div style="display: flex; gap: 12px;"><span style="color: #4C5F3B;">•</span><span>Tijd om te experimenteren tussen de sessies door.</span></div>
+              <div style="display: flex; gap: 12px;"><span style="color: #4C5F3B;">•</span><span>Toegang tot echte processen en voorbeelden.</span></div>
+              <div style="display: flex; gap: 12px;"><span style="color: #4C5F3B;">•</span><span>De wil om klein te beginnen.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blog -->
+    <div style="padding: 90px 64px; border-top: 1px solid #D9DACE; background: #EFEDE5;">
+      <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+          <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 40px; font-weight: 500;">Uit de blog</h2>
+          <span style="font-size: 16px; font-weight: 600; color: #24261F; border-bottom: 1.5px solid #4C5F3B; padding-bottom: 2px;">Alle artikels</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px;">
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 30px; display: flex; flex-direction: column; gap: 12px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #656A5C;">12 juli 2026</div>
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 600; line-height: 1.3;">Shadow AI: waarom verbieden niet werkt</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Je medewerkers gebruiken al AI. Geef het kattenkwaad een speelplaats.</p>
+          </div>
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 30px; display: flex; flex-direction: column; gap: 12px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #656A5C;">28 juni 2026</div>
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 600; line-height: 1.3;">Wat de EU AI Act echt vraagt van een KMO</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Minder dan je vreest, meer dan niets doen. Een nuchter overzicht.</p>
+          </div>
+          <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 30px; display: flex; flex-direction: column; gap: 12px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #656A5C;">14 juni 2026</div>
+            <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 600; line-height: 1.3;">Second brain: begin met één map</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Kennis structureren hoeft niet groots. Zo begin je vandaag.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 Over Stijn -->
+    <div style="padding: 90px 64px; border-top: 1px solid #D9DACE;">
+      <div style="max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 380px 1fr; gap: 64px; align-items: center;">
+        <image-slot id="stijn-desktop" shape="rounded" radius="6" style="width: 380px; height: 440px;" placeholder="Foto van Stijn"></image-slot>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 40px; font-weight: 500;">Over Stijn</h2>
+          <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #656A5C; max-width: 560px;">Ik ben Stijn De Ketelaere, AI-adoptiecoach voor KMO's in Vlaanderen. Geen bureau, geen team: je werkt rechtstreeks met mij, van de eerste sessie tot de overdracht.</p>
+          <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #656A5C; max-width: 560px;">Ik geloof niet in technologie omdat het kan. Innovatie telt pas als ze gebruikt wordt. Daarom begin ik klein, leg ik alles uit in gewone taal en vertrek ik pas als jouw mensen het zelf kunnen.</p>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #656A5C; margin-top: 6px;">MonkAi Business is de AI-offering van SDK Solutions BV.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 Contact -->
+    <div style="padding: 90px 64px 110px; border-top: 1px solid #D9DACE; background: #EFEDE5;">
+      <div style="max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 40px; font-weight: 500; text-wrap: pretty;">Laten we eerst praten</h2>
+          <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #656A5C;">Geen verkooppraatje en geen verplichtingen. In een kort gesprek bekijken we waar de monkey business bij jou zit. Past een inspiratiesessie? Dan plannen we die daarna in. Vul het formulier in, ik antwoord binnen twee werkdagen.</p>
+        </div>
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 40px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="display: flex; flex-direction: column; gap: 7px;"><label style="font-size: 14px; font-weight: 600;">Naam</label><div style="border: 1px solid #D9DACE; border-radius: 4px; padding: 13px 14px; font-size: 16px; color: #A5A79C; background: #FFFFFF;">Voor- en achternaam</div></div>
+            <div style="display: flex; flex-direction: column; gap: 7px;"><label style="font-size: 14px; font-weight: 600;">Bedrijf</label><div style="border: 1px solid #D9DACE; border-radius: 4px; padding: 13px 14px; font-size: 16px; color: #A5A79C; background: #FFFFFF;">Bedrijfsnaam</div></div>
+            <div style="display: flex; flex-direction: column; gap: 7px;"><label style="font-size: 14px; font-weight: 600;">E-mail</label><div style="border: 1px solid #D9DACE; border-radius: 4px; padding: 13px 14px; font-size: 16px; color: #A5A79C; background: #FFFFFF;">naam@bedrijf.be</div></div>
+            <div style="display: flex; flex-direction: column; gap: 7px;"><label style="font-size: 14px; font-weight: 600;">Telefoon <span style="font-weight: 400; color: #656A5C;">(optioneel)</span></label><div style="border: 1px solid #D9DACE; border-radius: 4px; padding: 13px 14px; font-size: 16px; color: #A5A79C; background: #FFFFFF;">+32</div></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><label style="font-size: 14px; font-weight: 600;">Bericht</label><div style="border: 1px solid #D9DACE; border-radius: 4px; padding: 13px 14px; font-size: 16px; color: #A5A79C; background: #FFFFFF; min-height: 90px;">Waar zit de monkey business bij jou?</div></div>
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <div style="width: 18px; height: 18px; border: 1.5px solid #656A5C; border-radius: 3px; flex-shrink: 0; margin-top: 2px;"></div>
+            <span style="font-size: 14px; line-height: 1.55; color: #656A5C;">Ik ga akkoord dat mijn gegevens gebruikt worden om mijn vraag te beantwoorden. Meer in de <span style="text-decoration: underline;">privacyverklaring</span>.</span>
+          </div>
+          <span style="background: #4C5F3B; color: #FFFFFF; font-size: 16px; font-weight: 600; padding: 15px 28px; border-radius: 4px; align-self: flex-start;">Verstuur je vraag</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12 Footer -->
+    <div style="padding: 64px; background: #24261F; color: #C9CBBF;">
+      <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 44px;">
+        <div style="display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; align-items: start;">
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+            <svg width="26" height="23" viewBox="0 0 36 30" aria-hidden="true"><circle cx="6" cy="15" r="4.6" fill="#F4F2EC"></circle><circle cx="30" cy="15" r="4.6" fill="#F4F2EC"></circle><circle cx="6" cy="15" r="2" fill="#8FA478"></circle><circle cx="30" cy="15" r="2" fill="#8FA478"></circle><circle cx="18" cy="15" r="11" fill="#F4F2EC"></circle><circle cx="13.5" cy="12" r="4.4" fill="#24261F"></circle><circle cx="22.5" cy="12" r="4.4" fill="#24261F"></circle><ellipse cx="18" cy="17.5" rx="7" ry="6" fill="#24261F"></ellipse><circle cx="14.5" cy="13.5" r="1.5" fill="#F4F2EC"></circle><circle cx="21.5" cy="13.5" r="1.5" fill="#F4F2EC"></circle><circle cx="16.9" cy="17.6" r="0.9" fill="#F4F2EC"></circle><circle cx="19.1" cy="17.6" r="0.9" fill="#F4F2EC"></circle><path d="M14.8 20 Q18 23.2 21.2 20" stroke="#F4F2EC" stroke-width="1.3" fill="none" stroke-linecap="round"></path></svg>
+            <div style="font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600; color: #F4F2EC;">Monk<span style="color: #8FA478;">Ai</span> <span style="font-family: 'Work Sans', sans-serif; font-weight: 400; font-size: 14px; color: #A9AC9C;">Business</span></div>
+          </div>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; max-width: 320px;">AI zonder apenstreken. Rustig en veilig starten met AI voor Vlaamse KMO's.</p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px; font-size: 15px;">
+            <div style="font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #A9AC9C; font-weight: 600; margin-bottom: 4px;">Sitemap</div>
+            <span>Aanpak</span><span>Diensten</span><span>Over Stijn</span><span>Blog</span><span>Contact</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px; font-size: 15px;">
+            <div style="font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #A9AC9C; font-weight: 600; margin-bottom: 4px;">SDK Solutions BV</div>
+            <span>Robert De Preesterstraat 55, 9700 Oudenaarde</span>
+            <span>BTW BE 1027.019.469</span>
+            <span>hallo@monkai.business</span>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #3A3D33; padding-top: 24px; font-size: 14px; color: #A9AC9C;">
+          <div style="display: flex; gap: 24px;"><span>Privacy</span><span>Cookies</span></div>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px;">Geen apen nodig gehad bij het maken van deze site. Wel AI.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MOBIEL 390 ============ -->
+  <div id="4b" style="width: 390px; background: #F4F2EC; color: #24261F; flex-shrink: 0;">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; border-bottom: 1px solid #D9DACE;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <svg width="26" height="23" viewBox="0 0 36 30" aria-hidden="true"><circle cx="6" cy="15" r="4.6" fill="#24261F"></circle><circle cx="30" cy="15" r="4.6" fill="#24261F"></circle><circle cx="6" cy="15" r="2" fill="#4C5F3B"></circle><circle cx="30" cy="15" r="2" fill="#4C5F3B"></circle><circle cx="18" cy="15" r="11" fill="#24261F"></circle><circle cx="13.5" cy="12" r="4.4" fill="#F4F2EC"></circle><circle cx="22.5" cy="12" r="4.4" fill="#F4F2EC"></circle><ellipse cx="18" cy="17.5" rx="7" ry="6" fill="#F4F2EC"></ellipse><circle cx="14.5" cy="13.5" r="1.5" fill="#24261F"></circle><circle cx="21.5" cy="13.5" r="1.5" fill="#24261F"></circle><circle cx="16.9" cy="17.6" r="0.9" fill="#24261F"></circle><circle cx="19.1" cy="17.6" r="0.9" fill="#24261F"></circle><path d="M14.8 20 Q18 23.2 21.2 20" stroke="#24261F" stroke-width="1.3" fill="none" stroke-linecap="round"></path></svg>
+        <div style="font-family: 'Source Serif 4', serif; font-size: 19px; font-weight: 600;">Monk<span style="color: #4C5F3B;">Ai</span></div>
+      </div>
+      
+<div style="display: flex; flex-direction: column; gap: 5px; padding: 14px 6px;">
+        <div style="width: 22px; height: 1.5px; background: #24261F;"></div>
+        <div style="width: 22px; height: 1.5px; background: #24261F;"></div>
+      </div>
+    </div>
+    <div style="padding: 64px 22px 56px; display: flex; flex-direction: column; gap: 22px; text-align: center; align-items: center;">
+      <h1 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 40px; font-weight: 500; line-height: 1.12; text-wrap: pretty;">AI zonder apenstreken<span style="color: #4C5F3B;">.</span></h1>
+      <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #656A5C;">Ik help Vlaamse KMO's rustig en veilig starten met AI. Klein beginnen, herhalen, beheersen.</p>
+      <div style="display: flex; flex-direction: column; gap: 14px; align-items: center; width: 100%;">
+        <span style="background: #4C5F3B; color: #FFFFFF; font-size: 16px; font-weight: 600; padding: 15px 28px; border-radius: 4px; width: 100%; box-sizing: border-box;">Laten we praten</span>
+        <span style="color: #24261F; font-size: 16px; font-weight: 600; padding: 12px 4px; border-bottom: 1.5px solid #24261F;">Bekijk de aanpak</span>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center; font-size: 14px; color: #656A5C;">
+        <span>2 uur</span><span style="color: #D9DACE;">|</span><span>10 deelnemers</span><span style="color: #D9DACE;">|</span><span>op locatie</span>
+      </div>
+    </div>
+    <div style="padding: 56px 22px; border-top: 1px solid #D9DACE; display: flex; flex-direction: column; gap: 24px;">
+      <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 30px; font-weight: 500; text-wrap: pretty;">Waar zit de monkey business bij jou?</h2>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 24px; display: flex; flex-direction: column; gap: 8px;">
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">Kopiëren en plakken</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Bestellingen uit mails overtypen in het ERP. Elke dag opnieuw.</p>
+        </div>
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 24px; display: flex; flex-direction: column; gap: 8px;">
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">Kennis in mailboxen</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">De beste antwoorden zitten in de mailbox van één collega.</p>
+        </div>
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 24px; display: flex; flex-direction: column; gap: 8px;">
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">Stiekem experimenteren</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Medewerkers proberen al AI, vaak met bedrijfsdata in een privé-account. Dat is brandstof, geen probleem. Het vraagt alleen een veilig kader.</p>
+        </div>
+      </div>
+    </div>
+    <div style="padding: 90px 22px; border-top: 1px solid #D9DACE; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px;">
+      <div style="font-family: 'Source Serif 4', serif; font-size: 32px; font-weight: 500; line-height: 1.2; text-wrap: pretty;">Mijn doel is dat je mij niet meer nodig hebt.</div>
+      <p style="margin: 0; font-size: 16px; color: #656A5C;">Ik geef een kickstart en draag over. Ik blijf niet plakken.</p>
+    </div>
+    <div style="padding: 56px 22px; border-top: 1px solid #D9DACE; display: flex; flex-direction: column; gap: 24px;">
+      <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 30px; font-weight: 500;">Drie niveaus, één tempo</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 24px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 500;">Automatiseren</div>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Repetitieve back-office taken wegnemen met AI-automatisaties in n8n, Make of vergelijkbare tools. Bonnetjes en facturen automatisch lezen, hernoemen en doorsturen.</p>
+        </div>
+        <div style="background: #E9EADF; border: 1px solid #D9DACE; border-radius: 6px; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-family: 'Source Serif 4', serif; font-size: 23px; font-weight: 600;">Onthouden</div>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A4E42;">Een second brain voor jezelf, een collective brain voor het bedrijf. Het fundament is een eenvoudige data-architectuur: kennis op één plek, met duidelijke afspraken over wie wat ziet.</p>
+        </div>
+        <div style="background: #24261F; border-radius: 6px; padding: 28px 24px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 600; color: #F4F2EC;">Versnellen</div>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #C9CBBF;">Accelerated coding: ontwikkelteams die met AI sneller en beter werken, met behoud van controle en security.</p>
+        </div>
+      </div>
+    </div>
+    <div style="padding: 56px 22px; border-top: 1px solid #D9DACE; display: flex; flex-direction: column; gap: 24px;">
+      <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 30px; font-weight: 500;">De aanpak</h2>
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="border-top: 2px solid #4C5F3B; padding-top: 14px; display: flex; flex-direction: column; gap: 6px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #656A5C;">01</div>
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">Inspireren</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Twee uur die tonen wat AI vandaag kan.</p>
+        </div>
+        <div style="border-top: 2px solid #4C5F3B; padding-top: 14px; display: flex; flex-direction: column; gap: 6px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #656A5C;">02</div>
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">Kiezen</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">De use cases met de beste verhouding tussen impact en moeite.</p>
+        </div>
+        <div style="border-top: 2px solid #4C5F3B; padding-top: 14px; display: flex; flex-direction: column; gap: 6px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #656A5C;">03</div>
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">Experimenteren</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Klein en veilig proberen, met echte data in een afgesproken kader.</p>
+        </div>
+        <div style="border-top: 2px solid #4C5F3B; padding-top: 14px; display: flex; flex-direction: column; gap: 6px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #656A5C;">04</div>
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">Verankeren</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #656A5C;">Afspraken, opleiding en overdracht. Jouw mensen nemen het over.</p>
+        </div>
+      </div>
+    </div>
+    <div style="padding: 56px 22px; border-top: 1px solid #D9DACE; display: flex; flex-direction: column; gap: 20px;">
+      <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 30px; font-weight: 500;">Use cases uit de praktijk</h2>
+      <div style="display: flex; flex-direction: column;">
+        <div style="display: flex; gap: 14px; padding: 18px 0; border-top: 1px solid #D9DACE;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #4C5F3B; padding-top: 3px;">01</span><div><div style="font-size: 17px; font-weight: 500;">Offertes in minuten</div><div style="font-size: 14px; line-height: 1.6; color: #656A5C; margin-top: 3px;">Een eerste versie op basis van eerdere offertes.</div></div></div>
+        <div style="display: flex; gap: 14px; padding: 18px 0; border-top: 1px solid #D9DACE;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #4C5F3B; padding-top: 3px;">02</span><div><div style="font-size: 17px; font-weight: 500;">Facturen zonder overtypen</div><div style="font-size: 14px; line-height: 1.6; color: #656A5C; margin-top: 3px;">Automatisch gelezen, geboekt en gearchiveerd.</div></div></div>
+        <div style="display: flex; gap: 14px; padding: 18px 0; border-top: 1px solid #D9DACE;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #4C5F3B; padding-top: 3px;">03</span><div><div style="font-size: 17px; font-weight: 500;">Interne kennis bevragen</div><div style="font-size: 14px; line-height: 1.6; color: #656A5C; margin-top: 3px;">Antwoorden uit je eigen documentatie.</div></div></div>
+        <div style="display: flex; gap: 14px; padding: 18px 0; border-top: 1px solid #D9DACE;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #4C5F3B; padding-top: 3px;">04</span><div><div style="font-size: 17px; font-weight: 500;">Klantmails voorbereid</div><div style="font-size: 14px; line-height: 1.6; color: #656A5C; margin-top: 3px;">Antwoordvoorstellen in jouw toon.</div></div></div>
+        <div style="display: flex; gap: 14px; padding: 18px 0; border-top: 1px solid #D9DACE;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #4C5F3B; padding-top: 3px;">05</span><div><div style="font-size: 17px; font-weight: 500;">Rapporten die zichzelf schrijven</div><div style="font-size: 14px; line-height: 1.6; color: #656A5C; margin-top: 3px;">Cijfers samengevat in een helder maandrapport.</div></div></div>
+        <div style="display: flex; gap: 14px; padding: 18px 0; border-top: 1px solid #D9DACE;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #4C5F3B; padding-top: 3px;">06</span><div><div style="font-size: 17px; font-weight: 500;">Sneller inwerken</div><div style="font-size: 14px; line-height: 1.6; color: #656A5C; margin-top: 3px;">Onboarding uit bestaande kennis.</div></div></div>
+      </div>
+    </div>
+    <div style="padding: 56px 22px; border-top: 1px solid #D9DACE; background: #EFEDE5; display: flex; flex-direction: column; gap: 24px;">
+      <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 30px; font-weight: 500;">Diensten</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 6px;">
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 19px; font-weight: 600;">AI-inspiratiesessie</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #656A5C;">Twee uur, tien deelnemers, bij jou op locatie. Het vertrekpunt.</p>
+        </div>
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 6px;">
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 19px; font-weight: 600;">Use case workshop</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #656A5C;">Ideeën wegen op een impact/effort-matrix. Drie haalbare cases.</p>
+        </div>
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 6px;">
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 19px; font-weight: 600;">AI-geletterdheid en AI-maturiteit</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #656A5C;">Opleiding op maat van elk niveau.</p>
+        </div>
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 6px;">
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 19px; font-weight: 600;">AI-governance en EU AI Act</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #656A5C;">Duidelijke afspraken over data, tools en verantwoordelijkheid.</p>
+        </div>
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 6px;">
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 19px; font-weight: 600;">Claude voor knowledge workers</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #656A5C;">Veilig en slim werken met Claude, op eigen taken.</p>
+        </div>
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 6px;">
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 19px; font-weight: 600;">Claude voor developers</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #656A5C;">Accelerated coding: sneller ontwikkelen met AI als assistent.</p>
+        </div>
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 6px;">
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 19px; font-weight: 600;">Microsoft 365 Copilot veilig inzetten</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #656A5C;">Copilot staat vaak al aan. Veilig en zinvol gebruiken.</p>
+        </div>
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 6px;">
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 19px; font-weight: 600;">Het juiste model kiezen</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #656A5C;">Ook ChatGPT, Gemini, Z.Ai en KIMI komen op tafel als ze beter passen.</p>
+        </div>
+        <div style="background: #24261F; border-radius: 6px; padding: 24px 22px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #A9AC9C;">Langlopend engagement</div>
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600; color: #F4F2EC;">Raad van advies</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #C9CBBF;">Een vaste kritische stem aan tafel rond AI, digitale transformatie en innovatie.</p>
+        </div>
+      </div>
+    </div>
+    <div style="padding: 56px 22px; border-top: 1px solid #D9DACE; display: flex; flex-direction: column; gap: 20px;">
+      <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 30px; font-weight: 500;">AI is breder dan chat</h2>
+      <div style="display: flex; flex-direction: column;">
+        <div style="padding: 14px 0; border-bottom: 1px solid #D9DACE; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 17px; font-weight: 500;">Augmented reality</span><span style="font-size: 14px; color: #656A5C;">instructies op de plek waar je werkt</span></div>
+        <div style="padding: 14px 0; border-bottom: 1px solid #D9DACE; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 17px; font-weight: 500;">Smart glasses</span><span style="font-size: 14px; color: #656A5C;">handen vrij, informatie in beeld</span></div>
+        <div style="padding: 14px 0; border-bottom: 1px solid #D9DACE; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 17px; font-weight: 500;">Computer vision</span><span style="font-size: 14px; color: #656A5C;">camera's die controleren en tellen</span></div>
+        <div style="padding: 14px 0; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 17px; font-weight: 500;">Connected worker</span><span style="font-size: 14px; color: #656A5C;">de werkvloer verbonden met de systemen</span></div>
+      </div>
+    </div>
+    <div style="padding: 56px 22px; border-top: 1px solid #D9DACE; background: #E9EADF; display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #656A5C;">AI-geletterdheid · EU AI Act</div>
+      <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 26px; font-weight: 500; line-height: 1.3; text-wrap: pretty;">De EU AI Act vraagt dat wie met AI werkt, AI voldoende begrijpt.</h2>
+      <p style="margin: 0; font-size: 16px; line-height: 1.65; color: #4A4E42;">Sinds februari 2025 geldt dat ook voor KMO's. Geen paniek, wel een plan.</p>
+      <span style="font-size: 15px; font-weight: 600; color: #24261F; border-bottom: 1.5px solid #4C5F3B; align-self: flex-start; padding-bottom: 2px;">Lees meer over AI-geletterdheid</span>
+    </div>
+    <div style="padding: 56px 22px; border-top: 1px solid #D9DACE; display: flex; flex-direction: column; gap: 20px;">
+      <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 30px; font-weight: 500;">Onze afspraak</h2>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 24px; display: flex; flex-direction: column; gap: 12px;">
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">Wat ik breng</h3>
+          <div style="display: flex; flex-direction: column; gap: 10px; font-size: 16px; line-height: 1.6; color: #656A5C;">
+            <div style="display: flex; gap: 10px;"><span style="color: #4C5F3B;">•</span><span>Heldere uitleg, zonder jargon en zonder hype.</span></div>
+            <div style="display: flex; gap: 10px;"><span style="color: #4C5F3B;">•</span><span>Een aanpak die overdraagt in plaats van bindt.</span></div>
+            <div style="display: flex; gap: 10px;"><span style="color: #4C5F3B;">•</span><span>Eerlijk advies, ook als AI niet het antwoord is.</span></div>
+          </div>
+        </div>
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 24px; display: flex; flex-direction: column; gap: 12px;">
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600;">Wat jij brengt</h3>
+          <div style="display: flex; flex-direction: column; gap: 10px; font-size: 16px; line-height: 1.6; color: #656A5C;">
+            <div style="display: flex; gap: 10px;"><span style="color: #4C5F3B;">•</span><span style="color: #24261F; font-weight: 500;">Minstens één persoon die dit intern mee draagt.</span></div>
+            <div style="display: flex; gap: 10px;"><span style="color: #4C5F3B;">•</span><span>Tijd om te experimenteren tussen de sessies.</span></div>
+            <div style="display: flex; gap: 10px;"><span style="color: #4C5F3B;">•</span><span>De wil om klein te beginnen.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="padding: 56px 22px; border-top: 1px solid #D9DACE; background: #EFEDE5; display: flex; flex-direction: column; gap: 20px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 30px; font-weight: 500;">Uit de blog</h2>
+        <span style="font-size: 15px; font-weight: 600; color: #24261F; border-bottom: 1.5px solid #4C5F3B; padding-bottom: 2px;">Alle artikels</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #656A5C;">12 juli 2026</div>
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 19px; font-weight: 600; line-height: 1.3;">Shadow AI: waarom verbieden niet werkt</h3>
+        </div>
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #656A5C;">28 juni 2026</div>
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 19px; font-weight: 600; line-height: 1.3;">Wat de EU AI Act echt vraagt van een KMO</h3>
+        </div>
+        <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #656A5C;">14 juni 2026</div>
+          <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 19px; font-weight: 600; line-height: 1.3;">Second brain: begin met één map</h3>
+        </div>
+      </div>
+    </div>
+    <div style="padding: 56px 22px; border-top: 1px solid #D9DACE; display: flex; flex-direction: column; gap: 20px;">
+      <image-slot id="stijn-mobiel" shape="rounded" radius="6" style="width: 100%; height: 320px;" placeholder="Foto van Stijn"></image-slot>
+      <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 30px; font-weight: 500;">Over Stijn</h2>
+      <p style="margin: 0; font-size: 16px; line-height: 1.7; color: #656A5C;">Ik ben Stijn De Ketelaere, AI-adoptiecoach voor KMO's in Vlaanderen. Geen bureau, geen team: je werkt rechtstreeks met mij, van de eerste sessie tot de overdracht.</p>
+      <p style="margin: 0; font-size: 16px; line-height: 1.7; color: #656A5C;">Innovatie telt pas als ze gebruikt wordt. Daarom begin ik klein, leg ik alles uit in gewone taal en vertrek ik pas als jouw mensen het zelf kunnen.</p>
+    </div>
+    <div style="padding: 56px 22px; border-top: 1px solid #D9DACE; background: #EFEDE5; display: flex; flex-direction: column; gap: 20px;">
+      <h2 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 30px; font-weight: 500;">Laten we eerst praten</h2>
+      <p style="margin: 0; font-size: 16px; line-height: 1.65; color: #656A5C;">Geen verkooppraatje. In een kort gesprek bekijken we waar de monkey business bij jou zit. Ik antwoord binnen twee werkdagen.</p>
+      <div style="background: #FBFAF6; border: 1px solid #D9DACE; border-radius: 6px; padding: 24px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; flex-direction: column; gap: 7px;"><label style="font-size: 14px; font-weight: 600;">Naam</label><div style="border: 1px solid #D9DACE; border-radius: 4px; padding: 13px 14px; font-size: 16px; color: #A5A79C; background: #FFFFFF;">Voor- en achternaam</div></div>
+        <div style="display: flex; flex-direction: column; gap: 7px;"><label style="font-size: 14px; font-weight: 600;">Bedrijf</label><div style="border: 1px solid #D9DACE; border-radius: 4px; padding: 13px 14px; font-size: 16px; color: #A5A79C; background: #FFFFFF;">Bedrijfsnaam</div></div>
+        <div style="display: flex; flex-direction: column; gap: 7px;"><label style="font-size: 14px; font-weight: 600;">E-mail</label><div style="border: 1px solid #D9DACE; border-radius: 4px; padding: 13px 14px; font-size: 16px; color: #A5A79C; background: #FFFFFF;">naam@bedrijf.be</div></div>
+        <div style="display: flex; flex-direction: column; gap: 7px;"><label style="font-size: 14px; font-weight: 600;">Telefoon <span style="font-weight: 400; color: #656A5C;">(optioneel)</span></label><div style="border: 1px solid #D9DACE; border-radius: 4px; padding: 13px 14px; font-size: 16px; color: #A5A79C; background: #FFFFFF;">+32</div></div>
+        <div style="display: flex; flex-direction: column; gap: 7px;"><label style="font-size: 14px; font-weight: 600;">Bericht</label><div style="border: 1px solid #D9DACE; border-radius: 4px; padding: 13px 14px; font-size: 16px; color: #A5A79C; background: #FFFFFF; min-height: 80px;">Waar zit de monkey business bij jou?</div></div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="width: 18px; height: 18px; border: 1.5px solid #656A5C; border-radius: 3px; flex-shrink: 0; margin-top: 2px;"></div>
+          <span style="font-size: 14px; line-height: 1.55; color: #656A5C;">Ik ga akkoord dat mijn gegevens gebruikt worden om mijn vraag te beantwoorden. Meer in de <span style="text-decoration: underline;">privacyverklaring</span>.</span>
+        </div>
+        <span style="background: #4C5F3B; color: #FFFFFF; font-size: 16px; font-weight: 600; padding: 15px 28px; border-radius: 4px; text-align: center;">Verstuur je vraag</span>
+      </div>
+    </div>
+    <div style="padding: 48px 22px; background: #24261F; color: #C9CBBF; display: flex; flex-direction: column; gap: 28px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <svg width="24" height="21" viewBox="0 0 36 30" aria-hidden="true"><circle cx="6" cy="15" r="4.6" fill="#F4F2EC"></circle><circle cx="30" cy="15" r="4.6" fill="#F4F2EC"></circle><circle cx="6" cy="15" r="2" fill="#8FA478"></circle><circle cx="30" cy="15" r="2" fill="#8FA478"></circle><circle cx="18" cy="15" r="11" fill="#F4F2EC"></circle><circle cx="13.5" cy="12" r="4.4" fill="#24261F"></circle><circle cx="22.5" cy="12" r="4.4" fill="#24261F"></circle><ellipse cx="18" cy="17.5" rx="7" ry="6" fill="#24261F"></ellipse><circle cx="14.5" cy="13.5" r="1.5" fill="#F4F2EC"></circle><circle cx="21.5" cy="13.5" r="1.5" fill="#F4F2EC"></circle><circle cx="16.9" cy="17.6" r="0.9" fill="#F4F2EC"></circle><circle cx="19.1" cy="17.6" r="0.9" fill="#F4F2EC"></circle><path d="M14.8 20 Q18 23.2 21.2 20" stroke="#F4F2EC" stroke-width="1.3" fill="none" stroke-linecap="round"></path></svg>
+        <div style="font-family: 'Source Serif 4', serif; font-size: 18px; font-weight: 600; color: #F4F2EC;">Monk<span style="color: #8FA478;">Ai</span> <span style="font-family: 'Work Sans', sans-serif; font-weight: 400; font-size: 13px; color: #A9AC9C;">Business</span></div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; font-size: 15px;">
+        <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #A9AC9C; font-weight: 600;">Sitemap</div>
+        <span>Aanpak</span><span>Diensten</span><span>Over Stijn</span><span>Blog</span><span>Contact</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; font-size: 15px;">
+        <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #A9AC9C; font-weight: 600;">SDK Solutions BV</div>
+        <span>Robert De Preesterstraat 55, 9700 Oudenaarde</span>
+        <span>BTW BE 1027.019.469</span>
+        <span>hallo@monkai.business</span>
+      </div>
+      <div style="border-top: 1px solid #3A3D33; padding-top: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: #A9AC9C;">
+        <div style="display: flex; gap: 20px;"><span>Privacy</span><span>Cookies</span></div>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px;">Geen apen nodig gehad bij het maken van deze site. Wel AI.</span>
+      </div>
+    </div>
+  </div>
+  </div>
+</section></x-dc>
+</body>
+</html>
