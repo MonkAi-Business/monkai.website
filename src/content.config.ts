@@ -12,4 +12,19 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const usecases = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/usecases' }),
+  schema: z.object({
+    title: z.string(),
+    order: z.number(),
+    summary: z.string(),
+    video: z.object({
+      type: z.enum(['file', 'youtube', 'vimeo']),
+      src: z.string(),
+      poster: z.string().optional(),
+    }).optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { blog, usecases };

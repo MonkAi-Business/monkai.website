@@ -1,0 +1,40 @@
+---
+interface Video {
+  type: 'file' | 'youtube' | 'vimeo';
+  src: string;
+  poster?: string;
+}
+interface Props {
+  video?: Video;
+}
+const { video } = Astro.props as Props;
+---
+{video?.type === 'file' && (
+  <video controls preload="none" poster={video.poster} class="video-embed video-embed--file">
+    <source src={video.src} />
+  </video>
+)}
+{(video?.type === 'youtube' || video?.type === 'vimeo') && (
+  <div class="video-embed video-embed--frame">
+    <iframe src={video.src} loading="lazy" allowfullscreen title="Use case video"></iframe>
+  </div>
+)}
+<style>
+  .video-embed--file {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+  .video-embed--frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .video-embed--frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>

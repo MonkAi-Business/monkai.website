@@ -1,0 +1,49 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+
+export async function getStaticPaths() {
+  const cases = await getCollection('usecases', ({ data }) => !data.draft);
+  return cases.map((item) => ({ params: { slug: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+---
+<BaseLayout title={`${item.data.title} — MonkAi Business`} description={item.data.summary}>
+  <Nav />
+  <main class="section">
+    <article class="container article">
+      <h1>{item.data.title}</h1>
+      {item.data.video && (
+        <div class="video-wrap">
+          <VideoEmbed video={item.data.video} />
+        </div>
+      )}
+      <div class="prose"><Content /></div>
+      <a class="back" href="/use-cases">&larr; Alle use cases</a>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+  .article { max-width: 720px; }
+  h1 { font-size: 44px; font-weight: 500; line-height: 1.2; margin: 0 0 24px; text-wrap: pretty; }
+  .video-wrap { margin: 0 0 32px; }
+  .prose { line-height: 1.7; font-size: 17px; color: var(--ink-soft); }
+  .prose :global(h2) { font-family: var(--font-serif); font-size: 26px; font-weight: 600; color: var(--ink); margin: 40px 0 16px; }
+  .prose :global(h3) { font-family: var(--font-serif); font-size: 21px; font-weight: 600; color: var(--ink); margin: 32px 0 14px; }
+  .prose :global(p) { margin: 0 0 20px; }
+  .prose :global(ul), .prose :global(ol) { margin: 0 0 20px; padding-left: 22px; }
+  .prose :global(li) { margin-bottom: 8px; }
+  .prose :global(a) { color: var(--green); text-decoration: underline; }
+  .prose :global(strong) { color: var(--ink); }
+  .back { display: inline-block; margin-top: 40px; color: var(--ink); font-weight: 600; border-bottom: 1.5px solid var(--green); padding-bottom: 2px; }
+  @media (max-width: 768px) {
+    h1 { font-size: 30px; margin: 0 0 18px; }
+    .prose { font-size: 16px; }
+  }
+</style>

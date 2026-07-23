@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+
+const cases = (await getCollection('usecases', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+<section class="section usecases">
+  <div class="container usecases-inner">
+    <div class="head">
+      <h2>Use cases uit de praktijk</h2>
+      <p class="lede">Geen vergezichten. Dit werkt vandaag al bij KMO's.</p>
+    </div>
+    <div class="grid">
+      {cases.map((item) => (
+        <a class="row" href={`/use-cases/${item.id}`}>
+          <span class="num">{pad(item.data.order)}</span>
+          <div>
+            <div class="title">{item.data.title}</div>
+            <div class="summary">{item.data.summary}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+  .usecases-inner { display: flex; flex-direction: column; gap: 40px; }
+  .head { display: flex; flex-direction: column; gap: 12px; max-width: 640px; }
+  h2 { font-size: 40px; font-weight: 500; }
+  .lede { margin: 0; font-size: 17px; line-height: 1.65; color: var(--muted); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 64px; }
+  .row { display: flex; gap: 20px; padding: 22px 0; border-top: 1px solid var(--border); color: var(--ink); }
+  .row:hover { color: var(--ink); }
+  .row:hover .title { color: var(--green-hover); }
+  .num { font-family: var(--font-mono); font-size: 13px; color: var(--green); padding-top: 3px; }
+  .title { font-size: 18px; font-weight: 500; }
+  .summary { font-size: 15px; line-height: 1.6; color: var(--muted); margin-top: 4px; }
+  @media (max-width: 768px) {
+    h2 { font-size: 30px; }
+    .grid { grid-template-columns: 1fr; column-gap: 0; }
+    .row { padding: 18px 0; gap: 14px; }
+    .title { font-size: 17px; }
+    .summary { font-size: 14px; }
+  }
+</style>
