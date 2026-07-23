@@ -1,0 +1,56 @@
+---
+const bring = [
+  'Heldere uitleg, zonder jargon en zonder hype.',
+  'Een aanpak die overdraagt in plaats van bindt.',
+  'Ervaring met processen van Vlaamse KMO\'s.',
+  'Eerlijk advies, ook als AI niet het antwoord is.',
+];
+---
+<section class="section agreement">
+  <div class="container agreement-inner">
+    <div class="agreement-head">
+      <h2>Onze afspraak</h2>
+      <p class="lede">Een traject lukt alleen als we allebei iets meebrengen. Dit is de eerlijke verdeling.</p>
+    </div>
+    <div class="agreement-grid">
+      <div class="agreement-card">
+        <h3>Wat ik breng</h3>
+        <div class="agreement-list">
+          {bring.map((item) => (
+            <div class="agreement-item"><span class="bullet">•</span><span>{item}</span></div>
+          ))}
+        </div>
+      </div>
+      <div class="agreement-card">
+        <h3>Wat jij brengt</h3>
+        <div class="agreement-list">
+          <div class="agreement-item"><span class="bullet">•</span><span class="agreement-item--strong">Minstens één persoon die dit intern mee draagt. Dit is de belangrijkste voorwaarde.</span></div>
+          <div class="agreement-item"><span class="bullet">•</span><span>Tijd om te experimenteren tussen de sessies door.</span></div>
+          <div class="agreement-item"><span class="bullet">•</span><span>Toegang tot echte processen en voorbeelden.</span></div>
+          <div class="agreement-item"><span class="bullet">•</span><span>De wil om klein te beginnen.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .agreement-inner { display:flex; flex-direction:column; gap:44px; }
+  .agreement-head { display:flex; flex-direction:column; gap:12px; max-width:640px; }
+  h2 { font-size:40px; font-weight:500; }
+  .lede { margin:0; font-size:17px; line-height:1.65; color:var(--muted); }
+  .agreement-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .agreement-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:36px; display:flex; flex-direction:column; gap:18px; }
+  .agreement-card h3 { font-size:24px; font-weight:600; }
+  .agreement-list { display:flex; flex-direction:column; gap:12px; font-size:17px; line-height:1.6; color:var(--muted); }
+  .agreement-item { display:flex; gap:12px; }
+  .agreement-item .bullet { color:var(--green); }
+  .agreement-item--strong { color:var(--ink); font-weight:500; }
+  @media (max-width:768px){
+    h2{ font-size:30px; }
+    .agreement-grid{ grid-template-columns:1fr; gap:14px; }
+    .agreement-card{ padding:24px; gap:12px; }
+    .agreement-card h3{ font-size:20px; }
+    .agreement-list{ gap:10px; font-size:16px; }
+    .agreement-item{ gap:10px; }
+  }
+</style>

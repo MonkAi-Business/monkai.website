@@ -1,0 +1,54 @@
+---
+const services = [
+  { title: 'AI-inspiratiesessie', text: 'Twee uur, tien deelnemers, bij jou op locatie. Het vertrekpunt van elk traject.' },
+  { title: 'Use case workshop', text: 'Ideeën verzamelen en wegen op een impact/effort-matrix. Je vertrekt met drie haalbare cases.' },
+  { title: 'AI-geletterdheid en AI-maturiteit', text: 'Waar staat je team vandaag? Opleiding op maat van elk niveau, van sceptisch tot gevorderd.' },
+  { title: 'AI-governance en EU AI Act', text: 'Duidelijke afspraken over data, tools en verantwoordelijkheid. Klaar voor de wet, zonder juristentaal.' },
+  { title: 'Claude voor knowledge workers', text: 'Kenniswerkers leren veilig en slim werken met Claude, op hun eigen taken.' },
+  { title: 'Claude voor developers', text: 'Accelerated coding: sneller ontwikkelen met AI als assistent, met behoud van controle en kwaliteit.' },
+  { title: 'Microsoft 365 Copilot veilig inzetten', text: 'Copilot staat vaak al aan. Ik help je het veilig en zinvol gebruiken.' },
+  { title: 'Het juiste model kiezen', text: 'Niet gebonden aan één leverancier. Ook ChatGPT, Gemini en Chinese modellen zoals Z.Ai en KIMI komen op tafel als ze beter passen.' },
+];
+---
+<section class="section services" id="diensten">
+  <div class="container services-inner">
+    <h2>Diensten</h2>
+    <div class="services-grid">
+      {services.map((service) => (
+        <div class="service-card">
+          <h3>{service.title}</h3>
+          <p>{service.text}</p>
+        </div>
+      ))}
+      <div class="service-card service-card--dark">
+        <div class="eyebrow">Langlopend engagement</div>
+        <h3>Raad van advies</h3>
+        <p>Zetelen in je raad van advies rond AI, digitale transformatie en innovatie in de brede zin. Geen project, wel een vaste kritische stem aan tafel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .services { background:var(--section-alt); }
+  .services-inner { display:flex; flex-direction:column; gap:44px; }
+  h2 { font-size:40px; font-weight:500; }
+  .services-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; }
+  .service-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:28px; display:flex; flex-direction:column; gap:10px; }
+  .service-card h3 { font-size:20px; font-weight:600; }
+  .service-card p { margin:0; font-size:16px; line-height:1.6; color:var(--muted); }
+  .service-card--dark { background:var(--dark); border:none; justify-content:center; }
+  .service-card--dark .eyebrow { font-size:12px; color:var(--dark-dim); }
+  .service-card--dark h3 { color:var(--bg-page); }
+  .service-card--dark p { color:var(--dark-text); }
+  @media (max-width:768px){
+    .services{ padding:56px 22px; }
+    h2{ font-size:30px; }
+    .services-grid{ grid-template-columns:1fr; gap:12px; }
+    .service-card{ padding:22px; gap:6px; }
+    .service-card h3{ font-size:19px; }
+    .service-card p{ font-size:15px; }
+    .service-card--dark{ padding:24px 22px; }
+    .service-card--dark .eyebrow{ font-size:11px; }
+    .service-card--dark h3{ font-size:20px; }
+  }
+</style>

@@ -1,0 +1,27 @@
+---
+---
+<section class="section about" id="over">
+  <div class="container about-inner">
+    <img src="/media/stijn.svg" alt="Foto van Stijn De Ketelaere" width="380" height="440" class="about-photo" />
+    <div class="about-copy">
+      <h2>Over Stijn</h2>
+      <p>Ik ben Stijn De Ketelaere, AI-adoptiecoach voor KMO's in Vlaanderen. Geen bureau, geen team: je werkt rechtstreeks met mij, van de eerste sessie tot de overdracht.</p>
+      <p>Ik geloof niet in technologie omdat het kan. Innovatie telt pas als ze gebruikt wordt. Daarom begin ik klein, leg ik alles uit in gewone taal en vertrek ik pas als jouw mensen het zelf kunnen.</p>
+      <div class="about-mono">MonkAi Business is de AI-offering van SDK Solutions BV.</div>
+    </div>
+  </div>
+</section>
+<style>
+  .about-inner { display:grid; grid-template-columns:380px 1fr; gap:64px; align-items:center; }
+  .about-photo { border-radius:var(--radius); width:380px; height:440px; object-fit:cover; }
+  .about-copy { display:flex; flex-direction:column; gap:16px; }
+  h2 { font-size:40px; font-weight:500; }
+  .about-copy p { margin:0; font-size:17px; line-height:1.7; color:var(--muted); max-width:560px; }
+  .about-mono { font-family:var(--font-mono); font-size:14px; color:var(--muted); margin-top:6px; }
+  @media (max-width:768px){
+    .about-inner{ grid-template-columns:1fr; gap:20px; }
+    .about-photo{ width:100%; height:320px; }
+    h2{ font-size:30px; }
+    .about-copy p{ font-size:16px; max-width:none; }
+  }
+</style>
