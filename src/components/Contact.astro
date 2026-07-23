@@ -33,7 +33,7 @@
       </div>
       <label class="consent">
         <input type="checkbox" name="akkoord" required />
-        <span>Ik ga akkoord dat mijn gegevens gebruikt worden om mijn vraag te beantwoorden. Meer in de <span class="privacy-link">privacyverklaring</span>.</span>
+        <span>Ik ga akkoord dat mijn gegevens gebruikt worden om mijn vraag te beantwoorden. Meer in de <a href="/privacy" class="privacy-link">privacyverklaring</a>.</span>
       </label>
       <button type="submit" class="btn">Verstuur je vraag</button>
     </form>
@@ -69,7 +69,7 @@
   .consent { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; }
   .consent input[type="checkbox"] { width: 18px; height: 18px; margin: 2px 0 0; flex-shrink: 0; accent-color: var(--green); }
   .consent span { font-size: 14px; line-height: 1.55; color: var(--muted); }
-  .privacy-link { text-decoration: underline; }
+  .privacy-link { text-decoration: underline; color: inherit; }
   .contact-form .btn { border: none; font-size: 16px; align-self: flex-start; cursor: pointer; }
   @media (max-width: 768px) {
     .contact-inner { grid-template-columns: 1fr; gap: 20px; }

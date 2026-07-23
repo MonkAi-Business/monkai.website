@@ -1,0 +1,36 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const { title, description, heading, updated } = Astro.props;
+---
+<BaseLayout title={title} description={description}>
+  <Nav />
+  <main class="section">
+    <article class="container legal">
+      <h1>{heading}</h1>
+      {updated && <p class="updated">Laatst bijgewerkt: {updated}</p>}
+      <div class="prose"><slot /></div>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+  .legal { max-width: 720px; }
+  h1 { font-size: 44px; font-weight: 500; line-height: 1.2; margin: 0 0 12px; text-wrap: pretty; }
+  .updated { font-family: var(--font-mono); font-size: 13px; color: var(--muted); margin: 0 0 32px; }
+  .prose { line-height: 1.7; font-size: 17px; color: var(--ink-soft); }
+  .prose :global(h2) { font-family: var(--font-serif); font-size: 26px; font-weight: 600; color: var(--ink); margin: 40px 0 16px; }
+  .prose :global(h3) { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 30px 0 12px; }
+  .prose :global(p) { margin: 0 0 20px; }
+  .prose :global(ul) { margin: 0 0 20px; padding-left: 22px; }
+  .prose :global(li) { margin-bottom: 8px; }
+  .prose :global(a) { color: var(--green); text-decoration: underline; }
+  .prose :global(strong) { color: var(--ink); }
+  .back { display: inline-block; margin-top: 40px; color: var(--ink); font-weight: 600; border-bottom: 1.5px solid var(--green); padding-bottom: 2px; }
+  @media (max-width: 768px) {
+    h1 { font-size: 30px; }
+    .prose { font-size: 16px; }
+  }
+</style>
