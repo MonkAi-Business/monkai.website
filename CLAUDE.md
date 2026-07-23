@@ -156,7 +156,7 @@ For a local video, drop the `.mp4` (and poster image, if any) into `public/media
 - **To deploy via Netlify UI:** in the Netlify team **`sdksolutionsbe`**, choose "Add new project → Import from GitHub" and select this repo. Netlify reads `netlify.toml` at the repo root (`npm run build`, publish directory `dist`, Node 20) and will redeploy automatically on every push to `main`.
 - **Alternative — CLI:** `netlify deploy --prod`, authenticated with a Netlify personal access token.
 - **Contact form:** uses **Netlify Forms** — the form has `data-netlify="true"`, a hidden `form-name` input matching the form's `name` attribute, and a honeypot field (`netlify-honeypot="bot-field"` + a hidden `bot-field` input). Netlify's build-time HTML parser detects the form from this static markup; no JS or serverless function is needed. Submissions appear under the site's **Forms** tab in the Netlify dashboard after the *first* deploy (the form must exist in a deployed build for Netlify to register it).
-- **Known placeholders awaiting real assets:** `public/media/stijn.svg` (profile photo) and the use-case videos are placeholders — swap them for real media when available; no code changes should be needed beyond updating file paths in frontmatter.
+- **Known placeholders awaiting real assets:** the real profile photo is in place (`public/media/stijn.jpg`, 760×880 mozjpeg from the user's portrait, cropped from top; `About.astro` references it). The use-case videos are still placeholders — swap them for real media when available; no code changes should be needed beyond updating file paths in frontmatter.
 
 ## Commands
 
