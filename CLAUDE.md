@@ -6,7 +6,7 @@ Durable knowledge base for future sessions on this repo. Keep this file accurate
 
 MonkAi Business is the AI-offering of **SDK Solutions BV** — a marketing site for AI-adoption coaching aimed at Flemish SMEs ("KMO's"), delivered by **Stijn De Ketelaere**. It is a static **Astro 5** site, content and copy in **Dutch (nl)**, deployed on **Netlify**.
 
-The site is a single long-scroll homepage (nav, hero, problem, approach/ladder, agreement, services, "beyond chat", AI-Act note, use cases, blog teaser, statement, contact, footer) plus three sub-areas: a blog, a use-cases library, and a Netlify-Forms-powered contact flow with a thank-you page.
+The site is a single long-scroll homepage plus three sub-areas: a blog, a use-cases library, and a Netlify-Forms-powered contact flow with a thank-you page. The homepage sections, in their actual assembly order in `src/pages/index.astro`, are: Nav, Hero, Problem, Statement, Ladder, Approach, UseCases, Services, BeyondChat, AiAct ("EU AI Act" note), Agreement ("Onze afspraak"), BlogTeaser, About ("Over Stijn"), Contact, Footer.
 
 ## Design provenance
 
