@@ -1,13 +1,14 @@
 ---
 const {
   title,
-  description = "AI-adoptiecoaching voor Vlaamse KMO's door Stijn De Ketelaere. Rustig starten met AI, Claude-training en kennisstructuur — van Gent tot de Vlaamse Ardennen.",
+  description = "AI-adoptiecoaching voor Vlaamse KMO's door Stijn De Ketelaere. Rustig starten met AI, Claude-training en kennisstructuur — in heel Oost- en West-Vlaanderen.",
   image = '/og-image.png',
   noindex = false,
   schema = [],
 } = Astro.props;
 
 import '../styles/global.css';
+import Analytics from '../components/Analytics.astro';
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(image, Astro.site).href;
@@ -25,7 +26,7 @@ const siteSchema = {
         "AI-adoptiecoaching voor Vlaamse KMO's, geleverd door Stijn De Ketelaere. Rustig en veilig starten met AI, Claude-training en kennisstructuur.",
       url: 'https://monkai.business/',
       image: 'https://monkai.business/og-image.png',
-      email: 'hallo@monkai.business',
+      email: 'stijn@monkai.business',
       priceRange: '€€',
       founder: { '@id': 'https://monkai.business/#stijn' },
       parentOrganization: {
@@ -121,6 +122,8 @@ const schemas = [siteSchema, ...(Array.isArray(schema) ? schema : [schema])];
     {schemas.map((s) => (
       <script type="application/ld+json" set:html={JSON.stringify(s)} />
     ))}
+
+    <Analytics />
   </head>
   <body>
     <slot />

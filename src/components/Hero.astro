@@ -5,7 +5,7 @@
     <h1>AI zonder apenstreken<span style="color:var(--green)">.</span></h1>
     <p class="lede">Ik help Vlaamse KMO's rustig en veilig starten met AI. Klein beginnen, herhalen, beheersen.</p>
     <div class="hero-cta">
-      <a class="btn" href="#contact">Laten we praten</a>
+      <a class="btn hero-cta-primary" href="#contact">Laten we praten</a>
       <a class="link-underline" href="#aanpak">Bekijk de aanpak</a>
     </div>
     <div class="hero-meta"><span>2 uur</span><span class="sep">|</span><span>10 deelnemers</span><span class="sep">|</span><span>bij jou op locatie</span></div>
@@ -22,3 +22,11 @@
   .hero-meta .sep { color:var(--border); }
   @media (max-width:768px){ .hero{ padding:64px 22px 56px; } h1{ font-size:40px; } .lede{ font-size:17px; } .hero-cta{ flex-direction:column; width:100%; } .hero-cta .btn{ width:100%; text-align:center; } .hero-meta{ flex-wrap:wrap; justify-content:center; gap:10px; font-size:14px; } }
 </style>
+<script is:inline>
+  var heroCta = document.querySelector('.hero-cta-primary');
+  if (heroCta) {
+    heroCta.addEventListener('click', function () {
+      window.posthog?.capture('hero_cta_clicked');
+    });
+  }
+</script>

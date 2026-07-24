@@ -57,6 +57,16 @@ const faqSchema = {
   </div>
 </section>
 <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script is:inline>
+  document.querySelectorAll('.faq-item').forEach(function (item) {
+    item.addEventListener('toggle', function () {
+      if (item.open) {
+        var q = item.querySelector('summary')?.textContent?.trim() ?? '';
+        window.posthog?.capture('faq_expanded', { question: q });
+      }
+    });
+  });
+</script>
 <style>
   .faq-inner { display: flex; flex-direction: column; gap: 40px; }
   .head { display: flex; flex-direction: column; gap: 12px; max-width: 640px; }

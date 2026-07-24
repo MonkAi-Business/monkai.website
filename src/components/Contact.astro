@@ -39,6 +39,19 @@
     </form>
   </div>
 </section>
+<script is:inline>
+  (function () {
+    var formStarted = false;
+    var form = document.querySelector('.contact-form');
+    if (!form) return;
+    form.addEventListener('focusin', function () {
+      if (!formStarted) {
+        formStarted = true;
+        window.posthog?.capture('contact_form_started');
+      }
+    }, { once: false });
+  })();
+</script>
 <style>
   .contact { background: var(--section-alt); }
   .contact-inner { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: start; }

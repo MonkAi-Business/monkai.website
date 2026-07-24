@@ -92,4 +92,4 @@ Voeg onder "Diensten" deze items toe (naam + korte omschrijving). Ze komen overe
 
 ## Waarom dit werkt met de rest van de site
 
-De website levert nu al de gestructureerde signalen (`ProfessionalService`-schema met `areaServed`, `Person` voor Stijn, `hallo@monkai.business`, adres in Oudenaarde). Een geverifieerd GBP met dezelfde gegevens bevestigt die entiteit voor Google én voor AI-zoekmachines. Samen maken ze je vindbaar op combinaties als *"AI-adoptiecoach Oost-Vlaanderen"*, *"Claude-training Gent"* of *"AI-coach Vlaamse Ardennen"*.
+De website levert nu al de gestructureerde signalen (`ProfessionalService`-schema met `areaServed`, `Person` voor Stijn, `stijn@monkai.business`, adres in Oudenaarde). Een geverifieerd GBP met dezelfde gegevens bevestigt die entiteit voor Google én voor AI-zoekmachines. Samen maken ze je vindbaar op combinaties als *"AI-adoptiecoach Oost-Vlaanderen"*, *"Claude-training Gent"* of *"AI-coach Vlaamse Ardennen"*.
