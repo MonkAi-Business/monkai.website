@@ -5,7 +5,7 @@ description: "Een second brain maakt jou slimmer. Een collective brain maakt je 
 tags: ["kennis", "collective brain", "adoptie"]
 ---
 
-Een collective brain is het gedeelde geheugen van een bedrijf: een plek waar kennis, afspraken en ervaring worden vastgelegd zodat ze niet langer alleen in de hoofden van mensen zitten. Waar een [second brain](/blog/second-brain-een-map) jou als individu slimmer maakt, zorgt een collective brain ervoor dat je organisatie blijft weten wat ze weet — ook als iemand met vakantie is, van job verandert of met pensioen gaat.
+Een collective brain is het gedeelde geheugen van een bedrijf: een plek waar kennis, afspraken en ervaring worden vastgelegd zodat ze niet langer alleen in de hoofden van mensen zitten. Waar een [second brain](/blog/second-brain-een-map) jou als individu slimmer maakt, zorgt een collective brain ervoor dat je organisatie blijft weten wat ze weet - ook als iemand met vakantie is, van job verandert of met pensioen gaat.
 
 ## Waarom een second brain alleen niet volstaat
 
@@ -13,7 +13,7 @@ Steeds meer mensen leggen hun eigen kennis vast in notities, mappen of een tool 
 
 ## Wat een collective brain concreet is
 
-Het is geen dure software en geen jarenlang project. In de kern is het drie dingen: één plek waar bedrijfskennis samenkomt, duidelijke afspraken over wie wat mag zien en aanvullen, en de gewoonte om kennis vast te leggen op het moment dat ze ontstaat. De vorm mag simpel zijn — een gedeelde mappenstructuur of een wiki volstaat om te beginnen. Wat telt is dat de kennis vindbaar is voor wie ze nodig heeft, en niet begraven in iemands mailbox.
+Het is geen dure software en geen jarenlang project. In de kern is het drie dingen: één plek waar bedrijfskennis samenkomt, duidelijke afspraken over wie wat mag zien en aanvullen, en de gewoonte om kennis vast te leggen op het moment dat ze ontstaat. De vorm mag simpel zijn - een gedeelde mappenstructuur of een wiki volstaat om te beginnen. Wat telt is dat de kennis vindbaar is voor wie ze nodig heeft, en niet begraven in iemands mailbox.
 
 ## Waar AI het verschil maakt
 
@@ -21,4 +21,4 @@ Een gedeelde kennisbasis wordt pas echt krachtig zodra je hem kan bevragen in ge
 
 ## Begin klein, net als bij een second brain
 
-Je bouwt geen collective brain in één keer. Begin met één team of één domein — bijvoorbeeld alles rond klanten, of alles rond een terugkerend proces. Spreek af wat erin komt en wie het bijhoudt. Laat het een paar weken groeien voor je nadenkt over structuur, precies zoals bij een persoonlijk second brain. De discipline zit in het vastleggen; de rest volgt vanzelf. Het doel is niet perfectie, maar een bedrijf dat onthoudt.
+Je bouwt geen collective brain in één keer. Begin met één team of één domein - bijvoorbeeld alles rond klanten, of alles rond een terugkerend proces. Spreek af wat erin komt en wie het bijhoudt. Laat het een paar weken groeien voor je nadenkt over structuur, precies zoals bij een persoonlijk second brain. De discipline zit in het vastleggen; de rest volgt vanzelf. Het doel is niet perfectie, maar een bedrijf dat onthoudt.

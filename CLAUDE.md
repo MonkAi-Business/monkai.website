@@ -8,6 +8,16 @@ MonkAi Business is the AI-offering of **SDK Solutions BV** — a marketing site 
 
 The site is a single long-scroll homepage plus three sub-areas: a blog, a use-cases library, and a Netlify-Forms-powered contact flow with a thank-you page. The homepage sections, in their actual assembly order in `src/pages/index.astro`, are: Nav, Hero, Problem, Statement, Ladder, Approach, UseCases, Services, BeyondChat, AiAct ("EU AI Act" note), Agreement ("Onze afspraak"), BlogTeaser, About ("Over Stijn"), Contact, Footer.
 
+## Writing style (IMPORTANT)
+
+Avoid "AI slop" in all copy: site content, commit messages, docs, and chat replies.
+
+- **Never use an em dash (—) or en dash (–). Use a plain hyphen "-" instead.** This is a hard rule. Where an em dash would join clauses, either use a hyphen with spaces (" - ") or rewrite as two sentences.
+- Write plainly and concretely. Avoid filler, hype, and the typical LLM tics (e.g. "in het huidige landschap", "het is belangrijk om op te merken", overuse of "bovendien"/"daarnaast", tidy rule-of-three lists everywhere).
+- Match the existing Dutch tone: direct, nuchter, no marketing bloat.
+
+Note: older text in this file and in the codebase still contains em dashes from before this rule. Do not introduce new ones; replace them with "-" when you touch a file anyway.
+
 ## Design provenance
 
 The visual design originates from a **Claude Design** project, not from this repo directly:
