@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Een bol half in licht, half in schaduw, binnen een begrensde speelplaats">
+  <!-- Brand-kleuren staan hier hardcoded: een via <img> geladen SVG erft geen CSS-variabelen uit tokens.css. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EDEBE3"/>
+      <stop offset="1" stop-color="#E4E2D9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+
+  <!-- begrensde 'speelplaats' -->
+  <rect x="360" y="230" width="480" height="340" rx="22" fill="none" stroke="#4C5F3B" stroke-width="2.5" stroke-dasharray="9 13"/>
+
+  <!-- bol: half in licht, half in schaduw -->
+  <circle cx="600" cy="400" r="150" fill="#8FA478"/>
+  <path d="M600 250 A150 150 0 0 1 600 550 Z" fill="#37472A"/>
+  <line x1="600" y1="250" x2="600" y2="550" stroke="#E4E2D9" stroke-width="2" opacity="0.5"/>
+
+  <!-- gebruik dat buiten de grenzen 'ontsnapt' -->
+  <circle cx="905" cy="205" r="12" fill="#4C5F3B"/>
+  <circle cx="965" cy="255" r="8" fill="#4C5F3B" opacity="0.72"/>
+  <circle cx="1010" cy="310" r="6" fill="#4C5F3B" opacity="0.5"/>
+  <circle cx="255" cy="585" r="12" fill="#4C5F3B"/>
+  <circle cx="205" cy="640" r="8" fill="#4C5F3B" opacity="0.68"/>
+</svg>

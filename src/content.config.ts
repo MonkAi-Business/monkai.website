@@ -8,6 +8,21 @@ const blog = defineCollection({
     date: z.coerce.date(),
     description: z.string(),
     tags: z.array(z.string()).default([]),
+    image: z.string().optional(),
+    imageAlt: z.string().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+const resources = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/resources' }),
+  schema: z.object({
+    title: z.string(),
+    tool: z.enum(['claude', 'chatgpt', 'copilot', 'gemini', 'overig']),
+    description: z.string(),
+    file: z.string(),
+    type: z.string(),
+    order: z.number().default(100),
     draft: z.boolean().default(false),
   }),
 });
@@ -27,4 +42,4 @@ const usecases = defineCollection({
   }),
 });
 
-export const collections = { blog, usecases };
+export const collections = { blog, usecases, resources };

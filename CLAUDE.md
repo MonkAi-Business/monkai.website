@@ -88,9 +88,11 @@ src/
   content/
     blog/*.md              — blog post collection (see "Add a blog post" below)
     usecases/*.md           — use case collection (see "Add a use case" below)
-  content.config.ts        — Astro 5 collection definitions (glob loader + zod schemas) for blog & usecases
+    resources/*.md          — download/prompt collection for the hidden /data page (see "The /data page" below)
+  content.config.ts        — Astro 5 collection definitions (glob loader + zod schemas) for blog, usecases & resources
   pages/
     index.astro             — homepage, assembles all sections in order
+    data/index.astro         — hidden /data besloten zone (client-side login + tool tabs, see below)
     bedankt.astro            — thank-you page the contact form POSTs/redirects to
     blog/index.astro         — blog listing
     blog/[slug].astro        — blog post detail (dynamic route, slug = entry.id)
@@ -121,6 +123,8 @@ title: "Post title"
 date: 2026-07-23
 description: "One or two sentence summary shown in listings and previews."
 tags: ["optional", "tag", "list"]
+image: "/media/blog/<slug>.svg"
+imageAlt: "Korte beschrijving van het beeld"
 draft: false
 ---
 Post body in Markdown.
@@ -130,6 +134,8 @@ Post body in Markdown.
 - `date` (string, required, `YYYY-MM-DD`)
 - `description` (string, required)
 - `tags` (array of strings, optional)
+- `image` (string, optional) — cover/thumbnail path. Renders as a 3:2 cover on the detail page and as the card thumbnail in `/blog` + the homepage teaser; also fed into the `BlogPosting` schema. Posts without it still build (no image shown). The four existing posts use on-brand SVG covers in `public/media/blog/` (hand-authored, brand hex hardcoded because an `<img>`-loaded SVG can't read `tokens.css` variables).
+- `imageAlt` (string, optional) — alt text for `image`
 - `draft` (boolean, optional, default `false`)
 
 The homepage teaser section automatically shows the **newest 3 non-draft** posts (sorted by `date`, descending). `/blog` lists all non-draft posts. Each post's detail page is served at `/blog/<slug>` (the file's slug, taken from `entry.id`).
@@ -159,6 +165,28 @@ Use case body in Markdown.
 - `draft` (boolean, optional, default `false`)
 
 For a local video, drop the `.mp4` (and poster image, if any) into `public/media/` and reference them as `/media/<filename>` with `type: file`. For a hosted video, use the YouTube or Vimeo embed URL with `type: youtube` or `type: vimeo` — `VideoEmbed.astro` renders the right markup for each case. The detail page is served at `/use-cases/<slug>`.
+
+## The `/data` page (besloten zone) — how to add a resource
+
+`/data` (`src/pages/data/index.astro`) is a **hidden, `noindex`, not-linked** page with a **client-side login** (`monkai` / `business`, checked in an inline script, `sessionStorage` flag `monkai_data_unlock`). After unlocking, five tool tabs (Claude / ChatGPT / Copilot / Gemini / Overig) filter downloadable resources.
+
+⚠️ **This is obscurity, not security.** The password sits in the page source and every file under `public/data/files/` is reachable by direct URL regardless of login. Only ever put non-sensitive material here (workshop hand-outs, prompt templates). This was a deliberate choice (see lesson #11); do **not** describe it to the user as protected.
+
+To add a resource, create `src/content/resources/<slug>.md` (body can be empty — only the frontmatter is used):
+
+```yaml
+---
+title: "Offerte-prompt voor Claude"
+tool: "claude"          # claude | chatgpt | copilot | gemini | overig
+description: "Korte uitleg wat het is."
+file: "/data/files/offerte-prompt.pptx"
+type: "pptx"            # free-form label shown as a chip: pptx | pdf | prompt | docx | zip ...
+order: 10               # ascending sort within a tool
+draft: false
+---
+```
+
+Drop the actual download (PowerPoint/PDF/prompt/...) into `public/data/files/` and point `file` at it. Empty tools render "Nog geen content voor <tool>." The `resources` collection is defined in `src/content.config.ts`; `/data` is filtered out of the sitemap in `astro.config.mjs`.
 
 ## Deploy
 
@@ -190,3 +218,5 @@ Running log — append an entry here after any future session that changes this 
 7. Responsive behavior: multi-column grids collapse to a single column at `max-width: 768px`. Watch for `flex` rows with `flex-wrap: nowrap` and many inline items (e.g. the hero meta row) — these can overflow horizontally at narrow widths (390px) even when the surrounding grid collapses correctly; test the narrowest supported width explicitly, not just one intermediate breakpoint.
 8. **SEO/AI-SEO/GEO layer (added 2026-07):** `BaseLayout.astro` is now the single source of head SEO — it builds a self-referencing `<link rel="canonical">` from `Astro.url`, Open Graph + Twitter tags, and always emits sitewide JSON-LD (`ProfessionalService` `#business` + `Person` `#stijn`, with `areaServed` = Oost-/West-Vlaanderen, Gent, Vlaamse Ardennen and `knowsAbout` = AI-adoptie, Claude-training, second/collective brain). It accepts `noindex` (used on `/bedankt`) and a `schema` prop (array of extra JSON-LD objects). Blog posts pass `BlogPosting` + `BreadcrumbList`; use cases pass `BreadcrumbList`. Target keywords are woven into copy + schema, never stuffed (stuffing costs ~-10% AI visibility). `Faq.astro` (homepage, between About and Contact) renders a `FAQPage` and is the main hook for AI citations. Sitemap via `@astrojs/sitemap` (config filters out `/bedankt`) at `/sitemap-index.xml`; `public/robots.txt` allows AI bots (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, …) and references the sitemap; `public/llms.txt` gives AI systems a site overview. The `og:image` is a real 1200×630 PNG (`public/og-image.png`) rasterized from `public/og-image.svg` with sharp (regenerate: `sharp(svg).resize(1200,630).png()`); the SVG is kept as editable source. Legal pages `/privacy` and `/cookies` exist via a shared `LegalLayout.astro` (BaseLayout + Nav + Footer + prose); footer links and the contact-form privacy link point to `/privacy` and `/cookies` (no more dead `#` anchors). A ready-to-use Google Business Profile setup pack lives at `docs/google-business-profile.md` — Claude can't create the GBP itself (needs the user's Google account + verification), so it's pre-filled for copy-paste. **Still open:** the user must actually create/verify the GBP, and fonts are still loaded from Google Fonts (self-hosting would help LCP + GDPR).
 9. **Analytics + copy corrections (2026-07-24):** PostHog is wired **cookieless** via `src/components/Analytics.astro` (included in `BaseLayout` head): EU host (`eu.i.posthog.com`), `persistence: 'memory'` (no cookies, no localStorage → **no consent banner needed**), `person_profiles: 'identified_only'`, session recording disabled, `respect_dnt: true`. The component only renders when `PUBLIC_POSTHOG_KEY` is set (env var; `.env.example` documents it), so a keyless build simply omits it — verified: with a dummy key the EU host + `persistence:'memory'` appear in `dist/index.html`; without, `posthog` count is 0. The Netlify env var `PUBLIC_POSTHOG_KEY` must be set for production (Astro inlines `PUBLIC_` vars at build). Primary conversion event **`contact_submitted`** fires via an inline script on `/bedankt` (Netlify form `action="/bedankt"`); other clicks are covered by PostHog autocapture. Tradeoff of `persistence:'memory'` on this MPA: each pageload is a fresh anonymous id, so "unique visitors" ≈ pageviews — that's the price of cookieless/no-consent. `/cookies` and `/privacy` were rewritten to disclose the cookieless analytics (legal basis: **gerechtvaardigd belang**, no consent required because it's cookieless + anonymous + honours DNT). Also this session: contact email changed sitewide `hallo@` → **`stijn@monkai.business`**; region framing broadened from "van Gent tot de Vlaamse Ardennen" to **"heel Oost- en West-Vlaanderen"** in the meta-description default (`BaseLayout`), `llms.txt`, and the OG image (SVG text edited + `og-image.png` re-rasterized with sharp). `areaServed` in the schema still lists both provinces + Gent + Vlaamse Ardennen (kept as extra served places — good for local SEO). Domain is fully `monkai.business` everywhere; site is hosted on monkai.business only.
+10. **Writing style + blog covers (2026-07-24):** Added a **hard house-style rule** (see "Writing style" near the top): never use em/en dashes (— –), always a plain `-`; avoid AI-slop tics. All four blog posts were swept for dashes. Blog posts now support optional `image` + `imageAlt` frontmatter: rendered as a 3:2 cover on the detail page and as full-bleed card thumbnails in `/blog` + `BlogTeaser` (cards were restructured: `padding` moved off `.card` onto a `.card-body`, image sits above with `overflow:hidden` on the card). The four covers are **hand-authored on-brand SVGs** in `public/media/blog/` — chosen because there is no image-generation tool available in-session (the user first wanted AI photos, then opted for SVG). Brand hex is hardcoded inside each SVG on purpose: a `<img src>`-loaded SVG does **not** inherit `tokens.css` CSS variables. `image` also feeds the `BlogPosting` JSON-LD.
+11. **`/data` besloten zone (2026-07-24):** Added a hidden resources page at `/data` with a **client-side-only** login (`monkai`/`business`) and five tool tabs filtering a new `resources` content collection (downloads live in `public/data/files/`). The user explicitly accepted that this is **obscurity, not security** (password in source, files reachable by direct URL) — fine for non-sensitive workshop material; never present it as protected. **Gotcha caught in visual QA:** toggling an element's `hidden` attribute does nothing if author CSS sets `display` on it — `.gate{display:flex}` beat the UA `[hidden]{display:none}`, so both the login card and the content showed at once. Fixed with `[hidden]{display:none !important}`. Lesson: when using the `hidden` attribute as a visibility toggle, add that override, and always screenshot JS-driven show/hide states rather than trusting a green build. `/data` is `noindex` + filtered out of the sitemap; not linked anywhere.

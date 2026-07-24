@@ -25,6 +25,7 @@ const articleSchema = {
   keywords: post.data.tags.join(', '),
   author: { '@type': 'Person', '@id': 'https://monkai.business/#stijn', name: 'Stijn De Ketelaere' },
   publisher: { '@id': 'https://monkai.business/#business' },
+  ...(post.data.image ? { image: new URL(post.data.image, Astro.site).href } : {}),
 };
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
@@ -42,6 +43,9 @@ const breadcrumbSchema = {
     <article class="container article">
       <div class="meta"><span>{fmt(post.data.date)}</span><span class="dot">·</span><span>Door Stijn De Ketelaere</span></div>
       <h1>{post.data.title}</h1>
+      {post.data.image && (
+        <img class="cover" src={post.data.image} alt={post.data.imageAlt ?? ''} width="1200" height="800" loading="eager" />
+      )}
       <div class="prose"><Content /></div>
       <a class="back" href="/blog">&larr; Alle artikels</a>
     </article>
@@ -53,6 +57,7 @@ const breadcrumbSchema = {
   .meta { font-family: var(--font-mono); font-size: 13px; color: var(--muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
   .meta .dot { color: var(--border); }
   h1 { font-size: 44px; font-weight: 500; line-height: 1.2; margin: 12px 0 24px; text-wrap: pretty; }
+  .cover { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--border); margin: 0 0 36px; }
   .prose { line-height: 1.7; font-size: 17px; color: var(--ink-soft); }
   .prose :global(h2) { font-family: var(--font-serif); font-size: 26px; font-weight: 600; color: var(--ink); margin: 40px 0 16px; }
   .prose :global(h3) { font-family: var(--font-serif); font-size: 21px; font-weight: 600; color: var(--ink); margin: 32px 0 14px; }

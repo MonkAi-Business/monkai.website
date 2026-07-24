@@ -1,0 +1,178 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Let op: dit is een lichte, client-side drempel (obscuriteit), geen echte beveiliging.
+// Het wachtwoord staat in de broncode en de bestanden onder /data/files zijn met de
+// directe URL altijd bereikbaar. Prima voor niet-gevoelig workshopmateriaal.
+
+const tools = [
+  { key: 'claude', label: 'Claude' },
+  { key: 'chatgpt', label: 'ChatGPT' },
+  { key: 'copilot', label: 'Copilot' },
+  { key: 'gemini', label: 'Gemini' },
+  { key: 'overig', label: 'Overig' },
+];
+
+const resources = (await getCollection('resources', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const byTool = Object.fromEntries(
+  tools.map((t) => [t.key, resources.filter((r) => r.data.tool === t.key)])
+);
+---
+<BaseLayout title="Besloten zone — MonkAi Business" description="Afgeschermde downloads en prompts." noindex={true}>
+  <main class="data">
+    <!-- Inlogdrempel -->
+    <section id="gate" class="gate">
+      <form id="gate-form" class="gate-card">
+        <a class="wordmark" href="/">MonkAi<span>Business</span></a>
+        <h1>Besloten zone</h1>
+        <p class="sub">Log in om de prompts en downloads te bekijken.</p>
+        <label>Gebruikersnaam
+          <input type="text" id="u" autocomplete="off" autocapitalize="none" spellcheck="false" required />
+        </label>
+        <label>Wachtwoord
+          <input type="password" id="p" autocomplete="off" required />
+        </label>
+        <button type="submit" class="btn">Inloggen</button>
+        <p id="err" class="err" hidden>Onjuiste gegevens. Probeer opnieuw.</p>
+      </form>
+    </section>
+
+    <!-- Inhoud (verborgen tot ontgrendeld) -->
+    <section id="content" class="content" hidden>
+      <header class="content-head">
+        <div>
+          <a class="wordmark" href="/">MonkAi<span>Business</span></a>
+          <h1>Downloads &amp; prompts</h1>
+          <p class="sub">Kies een tool om de bijhorende content te zien.</p>
+        </div>
+        <button id="logout" class="logout" type="button">Uitloggen</button>
+      </header>
+
+      <div class="tools" role="tablist" aria-label="Kies een AI-tool">
+        {tools.map((t, i) => (
+          <button class="tool" type="button" role="tab" data-tool={t.key} aria-selected={i === 0 ? 'true' : 'false'}>
+            {t.label}
+            <span class="count">{byTool[t.key].length}</span>
+          </button>
+        ))}
+      </div>
+
+      {tools.map((t, i) => (
+        <div class="panel" data-panel={t.key} hidden={i !== 0}>
+          {byTool[t.key].length === 0 ? (
+            <p class="empty">Nog geen content voor {t.label}.</p>
+          ) : (
+            <div class="grid">
+              {byTool[t.key].map((r) => (
+                <a class="res" href={r.data.file} download>
+                  <span class="type">{r.data.type}</span>
+                  <span class="res-title">{r.data.title}</span>
+                  <span class="res-desc">{r.data.description}</span>
+                  <span class="dl">Downloaden &darr;</span>
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  /* [hidden] moet winnen van .gate{display:flex}, anders blijft de gate zichtbaar */
+  [hidden] { display: none !important; }
+  .data { min-height: 100vh; background: var(--bg-page); padding: 48px 22px 80px; }
+
+  .wordmark { font-family: var(--font-serif); font-size: 22px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
+  .wordmark span { color: var(--green); margin-left: 4px; }
+
+  /* Inlogkaart */
+  .gate { display: flex; justify-content: center; align-items: flex-start; padding-top: 6vh; }
+  .gate-card { width: 100%; max-width: 380px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 36px 32px; display: flex; flex-direction: column; gap: 14px; }
+  .gate-card h1 { font-family: var(--font-serif); font-size: 26px; font-weight: 600; margin: 10px 0 0; }
+  .sub { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
+  .gate-card label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: var(--ink-soft); margin-top: 6px; }
+  .gate-card input { font: inherit; font-weight: 400; padding: 11px 13px; background: var(--input-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--ink); }
+  .gate-card input:focus { outline: none; border-color: var(--green); }
+  .gate-card .btn { border: none; cursor: pointer; font-size: 15px; margin-top: 8px; text-align: center; }
+  .err { color: #9a3b2f; font-size: 14px; margin: 4px 0 0; }
+
+  /* Inhoud */
+  .content { max-width: var(--maxw); margin: 0 auto; }
+  .content-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; margin-bottom: 32px; }
+  .content-head h1 { font-family: var(--font-serif); font-size: 34px; font-weight: 600; margin: 12px 0 6px; }
+  .logout { flex-shrink: 0; background: none; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 14px; font: inherit; font-size: 14px; font-weight: 600; color: var(--ink-soft); cursor: pointer; }
+  .logout:hover { border-color: var(--green); color: var(--green); }
+
+  .tools { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+  .tool { display: inline-flex; align-items: center; gap: 8px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 16px; font: inherit; font-size: 15px; font-weight: 600; color: var(--ink-soft); cursor: pointer; }
+  .tool:hover { border-color: var(--green-light); }
+  .tool[aria-selected='true'] { background: var(--green); border-color: var(--green); color: #fff; }
+  .tool .count { font-family: var(--font-mono); font-size: 12px; font-weight: 500; background: var(--card-alt); color: var(--muted); border-radius: 999px; padding: 1px 8px; }
+  .tool[aria-selected='true'] .count { background: rgba(255, 255, 255, 0.2); color: #fff; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .res { display: flex; flex-direction: column; gap: 8px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; color: var(--ink); }
+  .res:hover { border-color: var(--green); color: var(--ink); }
+  .type { align-self: flex-start; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); background: var(--card-alt); border-radius: var(--radius-sm); padding: 3px 8px; }
+  .res-title { font-family: var(--font-serif); font-size: 19px; font-weight: 600; line-height: 1.3; margin-top: 2px; }
+  .res-desc { font-size: 15px; line-height: 1.55; color: var(--muted); }
+  .dl { margin-top: 6px; font-size: 14px; font-weight: 600; color: var(--green); }
+  .empty { color: var(--muted); font-size: 16px; }
+
+  @media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .content-head { flex-direction: column-reverse; align-items: stretch; }
+    .content-head h1 { font-size: 28px; }
+    .logout { align-self: flex-end; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var USER = 'monkai', PASS = 'business', KEY = 'monkai_data_unlock';
+    var gate = document.getElementById('gate');
+    var content = document.getElementById('content');
+    var form = document.getElementById('gate-form');
+    var err = document.getElementById('err');
+
+    function unlock() { gate.hidden = true; content.hidden = false; }
+    function lock() { content.hidden = true; gate.hidden = false; }
+
+    if (sessionStorage.getItem(KEY) === '1') { unlock(); }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var u = document.getElementById('u').value.trim().toLowerCase();
+      var p = document.getElementById('p').value;
+      if (u === USER && p === PASS) {
+        sessionStorage.setItem(KEY, '1');
+        err.hidden = true;
+        form.reset();
+        unlock();
+      } else {
+        err.hidden = false;
+      }
+    });
+
+    document.getElementById('logout').addEventListener('click', function () {
+      sessionStorage.removeItem(KEY);
+      lock();
+    });
+
+    var toolBtns = document.querySelectorAll('.tool');
+    var panels = document.querySelectorAll('.panel');
+    toolBtns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        toolBtns.forEach(function (x) { x.setAttribute('aria-selected', 'false'); });
+        b.setAttribute('aria-selected', 'true');
+        var key = b.getAttribute('data-tool');
+        panels.forEach(function (pnl) { pnl.hidden = pnl.getAttribute('data-panel') !== key; });
+      });
+    });
+  })();
+</script>
