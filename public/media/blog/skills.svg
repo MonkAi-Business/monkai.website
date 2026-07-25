@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Een centraal skill-blok dat vanuit meerdere kanten wordt opgeroepen en hergebruikt">
+  <!-- Brand-kleuren staan hier hardcoded: een via <img> geladen SVG erft geen CSS-variabelen uit tokens.css. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EDEBE3"/>
+      <stop offset="1" stop-color="#E4E2D9"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4C5F3B"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+
+  <!-- oproepen vanuit meerdere contexten, pijlen wijzen naar het centrale blok -->
+  <g stroke="#4C5F3B" stroke-width="2.5" opacity="0.55" marker-end="url(#arrow)" fill="none">
+    <line x1="250" y1="300" x2="472" y2="368"/>
+    <line x1="300" y1="520" x2="478" y2="452"/>
+    <line x1="600" y1="212" x2="600" y2="316"/>
+    <line x1="950" y1="300" x2="728" y2="368"/>
+    <line x1="905" y1="525" x2="722" y2="452"/>
+  </g>
+
+  <!-- context-knooppunten -->
+  <g>
+    <circle cx="250" cy="300" r="20" fill="#8FA478"/>
+    <circle cx="300" cy="520" r="20" fill="#4C5F3B"/>
+    <circle cx="600" cy="212" r="22" fill="#4C5F3B"/>
+    <circle cx="950" cy="300" r="20" fill="#8FA478"/>
+    <circle cx="905" cy="525" r="20" fill="#4C5F3B"/>
+  </g>
+
+  <!-- centraal skill-blok: een abstract SKILL.md-document -->
+  <g>
+    <rect x="500" y="322" width="200" height="156" rx="10" fill="#FBFAF6" stroke="#4C5F3B" stroke-width="2.5"/>
+    <rect x="500" y="322" width="200" height="34" rx="10" fill="#4C5F3B"/>
+    <rect x="500" y="345" width="200" height="12" fill="#4C5F3B"/>
+    <circle cx="522" cy="339" r="5" fill="#8FA478"/>
+    <circle cx="540" cy="339" r="5" fill="#C9CBBF" opacity="0.7"/>
+    <!-- tekstregels -->
+    <rect x="524" y="382" width="152" height="9" rx="4.5" fill="#D9DACE"/>
+    <rect x="524" y="404" width="120" height="9" rx="4.5" fill="#D9DACE"/>
+    <rect x="524" y="426" width="140" height="9" rx="4.5" fill="#D9DACE"/>
+    <rect x="524" y="448" width="96" height="9" rx="4.5" fill="#8FA478"/>
+  </g>
+</svg>
