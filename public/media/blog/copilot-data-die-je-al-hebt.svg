@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Een ijsberg: een kleine top boven water, een veel grotere massa eronder">
+  <!-- Brand-kleuren staan hier hardcoded: een via <img> geladen SVG erft geen CSS-variabelen uit tokens.css. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EDEBE3"/>
+      <stop offset="1" stop-color="#E4E2D9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+
+  <!-- waterlijn -->
+  <line x1="230" y1="410" x2="970" y2="410" stroke="#4C5F3B" stroke-width="2" opacity="0.35"/>
+
+  <!-- top boven water: het kleine zichtbare stuk -->
+  <polygon points="600,332 558,410 648,410" fill="#4C5F3B"/>
+
+  <!-- de grote massa onder water: de data waar je al op zit -->
+  <polygon points="558,410 648,410 726,468 704,566 600,606 500,560 486,470" fill="#8FA478"/>
+  <polygon points="600,606 500,560 486,470 558,410 600,410" fill="#6E855A"/>
+  <polygon points="648,410 726,468 704,566 600,606 600,410" fill="#9DAF87"/>
+
+  <!-- verborgen 'documenten' in de diepte: mails, Teams, SharePoint -->
+  <rect x="545" y="452" width="30" height="22" rx="3" fill="#EDEBE3" opacity="0.55"/>
+  <rect x="592" y="486" width="30" height="22" rx="3" fill="#EDEBE3" opacity="0.5"/>
+  <rect x="548" y="520" width="30" height="22" rx="3" fill="#EDEBE3" opacity="0.42"/>
+  <rect x="628" y="520" width="30" height="22" rx="3" fill="#EDEBE3" opacity="0.42"/>
+
+  <!-- diepte-lijnen -->
+  <line x1="504" y1="470" x2="712" y2="470" stroke="#37472A" stroke-width="1.5" opacity="0.14"/>
+  <line x1="520" y1="530" x2="690" y2="530" stroke="#37472A" stroke-width="1.5" opacity="0.12"/>
+</svg>
