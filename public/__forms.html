@@ -1,0 +1,28 @@
+<!--
+  Statisch formulier-definitiebestand voor Netlify Forms.
+  Netlify's build-time parser scant statische HTML en registreert hieruit het
+  "contact"-formulier met al zijn velden. Dit is de door Netlify aanbevolen aanpak
+  voor sites die met een framework (Astro) gebouwd zijn: het maakt detectie
+  betrouwbaar, los van hoe de zichtbare pagina gerenderd wordt.
+
+  Niet gelinkt, niet in de sitemap, noindex. Bevat geen echte inhoud.
+  Belangrijk: de velden hier moeten overeenkomen met het echte formulier in
+  src/components/Contact.astro (name="contact").
+-->
+<html>
+  <head>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input name="bot-field" />
+      <input type="text" name="naam" />
+      <input type="text" name="bedrijf" />
+      <input type="email" name="email" />
+      <input type="tel" name="telefoon" />
+      <textarea name="bericht"></textarea>
+      <input type="checkbox" name="akkoord" />
+    </form>
+  </body>
+</html>
