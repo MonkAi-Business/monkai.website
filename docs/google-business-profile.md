@@ -50,8 +50,8 @@ MonkAi Business helpt Vlaamse KMO's rustig en veilig starten met AI. Je werkt
 rechtstreeks met Stijn De Ketelaere, AI-adoptiecoach — geen bureau, geen
 tussenlagen. We beginnen klein met een AI-inspiratiesessie op locatie en bouwen
 stap voor stap op: repetitief werk automatiseren, kennis structureren met een
-second brain en collective brain, en teams versnellen met Claude-training voor
-kenniswerkers en developers. Ook AI-geletterdheid, AI-governance en de EU AI Act
+second brain en collective brain, en teams versterken met Claude-sessies in
+kleine groepen voor kenniswerkers en developers. Ook AI-geletterdheid, AI-governance en de EU AI Act
 komen aan bod, in gewone taal. Werkgebied: Oost- en West-Vlaanderen, van Gent
 tot de Vlaamse Ardennen. Innovatie telt pas als ze gebruikt wordt.
 ```
@@ -62,14 +62,14 @@ tot de Vlaamse Ardennen. Innovatie telt pas als ze gebruikt wordt.
 
 Voeg onder "Diensten" deze items toe (naam + korte omschrijving). Ze komen overeen met de website:
 
-- **AI-inspiratiesessie** — Twee uur, tien deelnemers, bij jou op locatie. Het vertrekpunt van elk traject.
-- **Use case workshop** — Ideeën wegen op een impact/effort-matrix. Je vertrekt met drie haalbare cases.
-- **AI-geletterdheid en AI-maturiteit** — Opleiding op maat van elk niveau, van sceptisch tot gevorderd.
-- **AI-governance en EU AI Act** — Duidelijke afspraken over data, tools en verantwoordelijkheid, zonder juristentaal.
-- **Claude-training voor kenniswerkers** — Veilig en slim werken met Claude op je eigen taken.
-- **Claude-training voor developers** — Accelerated coding met behoud van controle en kwaliteit.
-- **Microsoft 365 Copilot veilig inzetten** — Copilot staat vaak al aan; leer het veilig en zinvol gebruiken.
-- **Second brain en collective brain** — Kennis structureren zodat ze niet in hoofden blijft zitten.
+- **AI-inspiratiesessie** - Twee uur, max 10 deelnemers, bij jou op locatie. Het vertrekpunt van elk traject.
+- **Use case workshop** - Ideeën wegen op een impact/effort-matrix. Je vertrekt met drie haalbare cases.
+- **AI-geletterdheid en AI-maturiteit** - Op maat van elk niveau, van sceptisch tot gevorderd.
+- **AI-governance en EU AI Act** - Duidelijke afspraken over data, tools en verantwoordelijkheid, zonder juristentaal.
+- **Claude voor kenniswerkers** - In kleine groepen veilig en slim werken met Claude op je eigen taken.
+- **Claude voor developers** - Accelerated coding in kleine groepen, met behoud van controle en kwaliteit.
+- **Microsoft 365 Copilot veilig inzetten** - Copilot staat vaak al aan; leer het veilig en zinvol gebruiken.
+- **Second brain en collective brain** - Kennis structureren zodat ze niet in hoofden blijft zitten.
 
 ---
 
