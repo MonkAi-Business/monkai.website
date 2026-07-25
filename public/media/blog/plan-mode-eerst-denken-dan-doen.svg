@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Een plan met aangevinkte stappen dat leidt naar een afgewerkt blok">
+  <!-- Brand-kleuren staan hier hardcoded: een via <img> geladen SVG erft geen CSS-variabelen uit tokens.css. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EDEBE3"/>
+      <stop offset="1" stop-color="#E4E2D9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+
+  <!-- het plan: een vel met aangevinkte stappen -->
+  <rect x="360" y="286" width="230" height="230" rx="16" fill="#F4F2EC" stroke="#D9DACE" stroke-width="2"/>
+
+  <!-- stap 1, aangevinkt -->
+  <rect x="386" y="322" width="24" height="24" rx="6" fill="#4C5F3B"/>
+  <path d="M392 334 l5 5 l9 -11" fill="none" stroke="#F4F2EC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="424" y1="334" x2="560" y2="334" stroke="#A5A79C" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- stap 2, aangevinkt -->
+  <rect x="386" y="366" width="24" height="24" rx="6" fill="#4C5F3B"/>
+  <path d="M392 378 l5 5 l9 -11" fill="none" stroke="#F4F2EC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="424" y1="378" x2="540" y2="378" stroke="#A5A79C" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- stap 3, aangevinkt -->
+  <rect x="386" y="410" width="24" height="24" rx="6" fill="#4C5F3B"/>
+  <path d="M392 422 l5 5 l9 -11" fill="none" stroke="#F4F2EC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="424" y1="422" x2="560" y2="422" stroke="#A5A79C" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- stap 4, nog leeg -->
+  <rect x="386" y="454" width="24" height="24" rx="6" fill="none" stroke="#D9DACE" stroke-width="2"/>
+  <line x1="424" y1="466" x2="520" y2="466" stroke="#C7C8BC" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- pijl naar de uitvoering -->
+  <line x1="640" y1="401" x2="742" y2="401" stroke="#37472A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M736 389 l16 12 l-16 12" fill="none" stroke="#37472A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- het afgewerkte blok -->
+  <rect x="792" y="316" width="170" height="170" rx="16" fill="#4C5F3B"/>
+  <rect x="792" y="316" width="170" height="40" rx="16" fill="#37472A"/>
+  <rect x="792" y="340" width="170" height="16" fill="#37472A"/>
+</svg>
