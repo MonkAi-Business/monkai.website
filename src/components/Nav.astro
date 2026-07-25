@@ -99,8 +99,13 @@ const links = [
     color: var(--green-hover);
   }
 
-  .nav-cta {
+  /* De .btn-tekst is wit, maar .nav-links a / .nav-mobile a (--ink) is
+     specifieker en zou de knoptekst donker maken op de groene knop.
+     Deze regels winnen op specificiteit en houden de tekst leesbaar wit. */
+  .nav-links a.nav-cta,
+  .nav-links a.nav-cta:hover {
     padding: 11px 20px;
+    color: #fff;
   }
 
   .nav-toggle {
@@ -134,10 +139,12 @@ const links = [
     color: var(--ink);
   }
 
-  .nav-cta-mobile {
+  .nav-mobile a.nav-cta-mobile,
+  .nav-mobile a.nav-cta-mobile:hover {
     width: 100%;
     box-sizing: border-box;
     text-align: center;
+    color: #fff;
   }
 
   .logo-mobile {
