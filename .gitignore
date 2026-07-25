@@ -8,6 +8,10 @@ dist/
 # netlify
 .netlify/
 
+# posthog artefacten
+.posthog-events.json
+posthog-setup-report.md
+
 # env
 .env
 .env.*
