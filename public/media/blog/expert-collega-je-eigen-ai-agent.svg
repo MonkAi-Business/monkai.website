@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Een figuur met een kaartje met instructies, naast vier AI-tegels">
+  <!-- Brand-kleuren staan hier hardcoded: een via <img> geladen SVG erft geen CSS-variabelen uit tokens.css. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EDEBE3"/>
+      <stop offset="1" stop-color="#E4E2D9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+
+  <!-- de expert-collega: een figuur -->
+  <circle cx="330" cy="360" r="46" fill="#4C5F3B"/>
+  <path d="M262 470 a68 62 0 0 1 136 0 v18 a10 10 0 0 1 -10 10 h-116 a10 10 0 0 1 -10 -10 z" fill="#4C5F3B"/>
+
+  <!-- het instructiekaartje dat je hem meegeeft -->
+  <rect x="430" y="300" width="250" height="200" rx="14" fill="#F4F2EC" stroke="#D9DACE" stroke-width="2"/>
+  <rect x="430" y="300" width="250" height="44" rx="14" fill="#37472A"/>
+  <rect x="430" y="326" width="250" height="18" fill="#37472A"/>
+  <line x1="458" y1="322" x2="540" y2="322" stroke="#C9CBBF" stroke-width="4" stroke-linecap="round"/>
+  <!-- regels instructies -->
+  <line x1="458" y1="376" x2="652" y2="376" stroke="#A5A79C" stroke-width="4" stroke-linecap="round"/>
+  <line x1="458" y1="404" x2="628" y2="404" stroke="#A5A79C" stroke-width="4" stroke-linecap="round"/>
+  <line x1="458" y1="432" x2="652" y2="432" stroke="#A5A79C" stroke-width="4" stroke-linecap="round"/>
+  <line x1="458" y1="460" x2="596" y2="460" stroke="#A5A79C" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- pijl: de instructies vormen de collega -->
+  <line x1="398" y1="400" x2="422" y2="400" stroke="#37472A" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- vier tegels: dezelfde agent in elke tool -->
+  <g>
+    <rect x="748" y="316" width="80" height="80" rx="14" fill="#FBFAF6" stroke="#D9DACE" stroke-width="2"/>
+    <circle cx="788" cy="356" r="18" fill="#4C5F3B"/>
+    <rect x="844" y="316" width="80" height="80" rx="14" fill="#FBFAF6" stroke="#D9DACE" stroke-width="2"/>
+    <circle cx="884" cy="356" r="18" fill="#8FA478"/>
+    <rect x="748" y="412" width="80" height="80" rx="14" fill="#FBFAF6" stroke="#D9DACE" stroke-width="2"/>
+    <circle cx="788" cy="452" r="18" fill="#8FA478"/>
+    <rect x="844" y="412" width="80" height="80" rx="14" fill="#FBFAF6" stroke="#D9DACE" stroke-width="2"/>
+    <circle cx="884" cy="452" r="18" fill="#4C5F3B"/>
+  </g>
+</svg>
