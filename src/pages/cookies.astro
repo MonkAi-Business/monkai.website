@@ -3,42 +3,57 @@ import LegalLayout from '../layouts/LegalLayout.astro';
 ---
 <LegalLayout
   title="Cookiebeleid — MonkAi Business"
-  description="Deze site plaatst geen tracking- of advertentiecookies. We meten wel cookieloos hoe de site gebruikt wordt. Dit is wat er gebeurt."
+  description="Deze site plaatst geen advertentiecookies en volgt je niet over websites heen. Voor de bezoekersstatistieken staat er wel één eigen cookie. Dit is wat er gebeurt."
   heading="Cookiebeleid"
-  updated="24 juli 2026"
+  updated="25 juli 2026"
 >
-  <p>Kort gezegd: deze website plaatst geen tracking-, analyse- of advertentiecookies, dus er is geen cookiebanner nodig. We gebruiken wél een privacyvriendelijk, <strong>cookieloos</strong> analysepakket om te zien hoe de site in het algemeen gebruikt wordt — zonder je te volgen over websites heen en zonder een profiel van je op te bouwen. Hieronder leggen we alles uit.</p>
+  <p>Kort gezegd: deze website plaatst geen advertentiecookies, geen social-mediacookies en volgt je niet over andere websites heen. Voor onze eigen bezoekersstatistieken bewaren we wel één klein herkenningsnummer op je toestel, in een cookie en in de opslag van je browser. Zonder dat nummer kunnen we niet zien of twee pagina's door dezelfde bezoeker bekeken zijn, en dan is elke statistiek onbruikbaar. Hieronder leggen we precies uit wat er bewaard wordt en hoe je het weigert.</p>
 
   <h2>Wat is een cookie?</h2>
-  <p>Een cookie is een klein tekstbestand dat een website op je toestel bewaart, bijvoorbeeld om voorkeuren te onthouden of om je gedrag te volgen. Voor niet-essentiële cookies (zoals analyse en advertenties) is je toestemming vereist.</p>
+  <p>Een cookie is een klein tekstbestand dat een website op je toestel bewaart, bijvoorbeeld om voorkeuren te onthouden of om te herkennen dat je terug bent. Naast cookies kan een website ook gegevens bewaren in de lokale opslag van je browser (local storage). Voor niet-strikt-noodzakelijke opslag, zoals statistieken en advertenties, geldt in België een toestemmingsvereiste.</p>
 
-  <h2>Welke cookies gebruiken we?</h2>
-  <p>Geen niet-essentiële cookies. We plaatsen geen analyse-, advertentie- of social-mediacookies. Voor onze websitestatistieken gebruiken we een cookieloze aanpak (zie hieronder), waarvoor geen toestemming en geen cookiebanner nodig is.</p>
-
-  <h2>Cookieloze statistieken</h2>
-  <p>Om de website te verbeteren, meten we op een privacyvriendelijke manier hoe ze gebruikt wordt. Daarvoor gebruiken we <strong>PostHog</strong>, bewust cookieloos opgezet:</p>
+  <h2>Wat bewaren we precies?</h2>
+  <p>Eén item, geplaatst door ons analysepakket <strong>PostHog</strong>:</p>
   <ul>
-    <li>Er worden geen cookies of andere bestanden op je toestel bewaard.</li>
-    <li>Er wordt geen herkenbaar profiel van je opgebouwd; de metingen zijn geaggregeerd en anoniem.</li>
-    <li>We volgen je niet over andere websites heen.</li>
-    <li>Er worden geen sessieopnames (session recordings) gemaakt.</li>
-    <li>De verwerking gebeurt op servers binnen de Europese Unie (EU-host van PostHog).</li>
-    <li>Staat "Do Not Track" in je browser aan, dan meten we niets.</li>
+    <li><strong>Naam:</strong> <code>ph_…_posthog</code> (een cookie op <code>monkai.business</code>, met dezelfde inhoud ook in de local storage van je browser).</li>
+    <li><strong>Inhoud:</strong> een willekeurig gegenereerd nummer plus het nummer van je huidige bezoek. Geen naam, geen e-mailadres, niets wat naar jou als persoon verwijst.</li>
+    <li><strong>Doel:</strong> tellen hoeveel bezoekers er zijn, welke pagina's ze bekijken en waar ze afhaken. Zonder dit nummer telt elke pagina als een nieuwe bezoeker.</li>
+    <li><strong>Geplaatst door:</strong> ons, op onze eigen domeinnaam. Het is geen cookie van een advertentienetwerk.</li>
+    <li><strong>Bewaartermijn:</strong> maximaal één jaar, of tot je hem verwijdert.</li>
   </ul>
-  <p>Meer over de grondslag en je rechten lees je in de <a href="/privacy">privacyverklaring</a>.</p>
+
+  <h2>Wat we niet doen</h2>
+  <ul>
+    <li>Geen advertentie- of social-mediacookies.</li>
+    <li>Geen volgen over andere websites heen. Het nummer werkt alleen op deze site.</li>
+    <li>Geen sessieopnames (session recordings) en geen heatmaps van je muisbewegingen.</li>
+    <li>Geen persoonlijk profiel: we koppelen de statistieken niet aan een naam of een e-mailadres, en de cijfers die we bekijken zijn geaggregeerd.</li>
+    <li>Geen doorverkoop van gegevens aan derden.</li>
+    <li>Staat "Do Not Track" in je browser aan, dan meten we niets en bewaren we niets.</li>
+  </ul>
+  <p>De verwerking gebeurt op servers van PostHog binnen de Europese Unie. Meer over de grondslag en je rechten lees je in de <a href="/privacy">privacyverklaring</a>.</p>
+
+  <h2>Hoe weiger of verwijder je dit?</h2>
+  <p>Je hebt drie mogelijkheden:</p>
+  <ul>
+    <li>Zet <strong>"Do Not Track"</strong> aan in je browser. Dan start onze meting helemaal niet op.</li>
+    <li>Blokkeer cookies en local storage voor deze site in je browserinstellingen. De website blijft gewoon werken; er is geen enkele functie die dit nummer nodig heeft.</li>
+    <li>Verwijder je cookies en sitegegevens. Alles wat we bewaarden is dan weg.</li>
+  </ul>
+  <p>Wil je liever dat we je bezoek helemaal niet meetellen, mail dan naar <a href="mailto:stijn@monkai.business">stijn@monkai.business</a>.</p>
 
   <h2>Diensten van derden</h2>
   <ul>
-    <li><strong>PostHog</strong> — ons cookieloze analysepakket, met verwerking op een EU-host. Zie hierboven.</li>
-    <li><strong>Google Fonts</strong> — de lettertypes worden geladen van servers van Google. Daarbij wordt je IP-adres technisch doorgegeven, maar er worden geen cookies geplaatst.</li>
-    <li><strong>Netlify</strong> — onze hostingpartner kan strikt noodzakelijke, technische cookies inzetten voor de veiligheid en de goede werking van de website. Die zijn functioneel en dienen niet om je te volgen.</li>
+    <li><strong>PostHog</strong> - ons analysepakket, met verwerking op een EU-host. Zie hierboven.</li>
+    <li><strong>Google Fonts</strong> - de lettertypes worden geladen van servers van Google. Daarbij wordt je IP-adres technisch doorgegeven, maar er worden geen cookies geplaatst.</li>
+    <li><strong>Netlify</strong> - onze hostingpartner kan strikt noodzakelijke, technische cookies inzetten voor de veiligheid en de goede werking van de website. Die zijn functioneel en dienen niet om je te volgen.</li>
   </ul>
 
   <h2>Het contactformulier</h2>
-  <p>Wat je in het contactformulier invult, verwerken we zoals beschreven in onze <a href="/privacy">privacyverklaring</a>. Het versturen van het formulier plaatst geen cookies op je toestel.</p>
+  <p>Wat je in het contactformulier invult, verwerken we zoals beschreven in onze <a href="/privacy">privacyverklaring</a>. Het versturen van het formulier plaatst geen extra cookies op je toestel.</p>
 
   <h2>Wijzigingen</h2>
-  <p>Voegen we later een dienst toe die wél cookies gebruikt, dan passen we dit beleid aan en vragen we waar nodig je toestemming. De datum bovenaan geeft de laatste wijziging aan.</p>
+  <p>Voegen we later een dienst toe die meer of andere gegevens bewaart, dan passen we dit beleid aan en vragen we waar nodig je toestemming. De datum bovenaan geeft de laatste wijziging aan.</p>
 
   <a class="back" href="/">&larr; Terug naar de homepage</a>
 </LegalLayout>
