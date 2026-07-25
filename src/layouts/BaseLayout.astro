@@ -9,6 +9,7 @@ const {
 
 import '../styles/global.css';
 import Analytics from '../components/Analytics.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(image, Astro.site).href;
@@ -127,5 +128,6 @@ const schemas = [siteSchema, ...(Array.isArray(schema) ? schema : [schema])];
   </head>
   <body>
     <slot />
+    <ConsentBanner />
   </body>
 </html>

@@ -7,7 +7,7 @@ import LegalLayout from '../layouts/LegalLayout.astro';
   heading="Cookiebeleid"
   updated="25 juli 2026"
 >
-  <p>Kort gezegd: deze website plaatst geen advertentiecookies, geen social-mediacookies en volgt je niet over andere websites heen. Voor onze eigen bezoekersstatistieken bewaren we wel één klein herkenningsnummer op je toestel, in een cookie en in de opslag van je browser. Zonder dat nummer kunnen we niet zien of twee pagina's door dezelfde bezoeker bekeken zijn, en dan is elke statistiek onbruikbaar. Hieronder leggen we precies uit wat er bewaard wordt en hoe je het weigert.</p>
+  <p>Kort gezegd: deze website plaatst geen advertentiecookies, geen social-mediacookies en volgt je niet over andere websites heen. Voor onze eigen bezoekersstatistieken bewaren we wel één klein herkenningsnummer op je toestel, en <strong>daarvoor vragen we eerst je toestemming</strong>. Zeg je nee, of maak je geen keuze, dan wordt er niets geladen en niets bewaard. Hieronder leggen we precies uit wat er gebeurt als je ja zegt.</p>
 
   <h2>Wat is een cookie?</h2>
   <p>Een cookie is een klein tekstbestand dat een website op je toestel bewaart, bijvoorbeeld om voorkeuren te onthouden of om te herkennen dat je terug bent. Naast cookies kan een website ook gegevens bewaren in de lokale opslag van je browser (local storage). Voor niet-strikt-noodzakelijke opslag, zoals statistieken en advertenties, geldt in België een toestemmingsvereiste.</p>
@@ -33,14 +33,12 @@ import LegalLayout from '../layouts/LegalLayout.astro';
   </ul>
   <p>De verwerking gebeurt op servers van PostHog binnen de Europese Unie. Meer over de grondslag en je rechten lees je in de <a href="/privacy">privacyverklaring</a>.</p>
 
-  <h2>Hoe weiger of verwijder je dit?</h2>
-  <p>Je hebt drie mogelijkheden:</p>
-  <ul>
-    <li>Zet <strong>"Do Not Track"</strong> aan in je browser. Dan start onze meting helemaal niet op.</li>
-    <li>Blokkeer cookies en local storage voor deze site in je browserinstellingen. De website blijft gewoon werken; er is geen enkele functie die dit nummer nodig heeft.</li>
-    <li>Verwijder je cookies en sitegegevens. Alles wat we bewaarden is dan weg.</li>
-  </ul>
-  <p>Wil je liever dat we je bezoek helemaal niet meetellen, mail dan naar <a href="mailto:stijn@monkai.business">stijn@monkai.business</a>.</p>
+  <h2>Je keuze</h2>
+  <p>Bij je eerste bezoek vragen we of we mogen meten. Je kan die keuze hieronder op elk moment herzien, in beide richtingen. Weigeren is één klik en verandert niets aan hoe de site werkt: er is geen enkele functie die dit herkenningsnummer nodig heeft.</p>
+  <p>
+    <button type="button" id="consent-reset" class="consent-reset">Wijzig je keuze</button>
+  </p>
+  <p>Verder geldt: staat <strong>"Do Not Track"</strong> aan in je browser, dan meten we niets en vragen we het ook niet. En verwijder je je cookies en sitegegevens, dan is alles wat we bewaarden weg.</p>
 
   <h2>Diensten van derden</h2>
   <ul>
@@ -57,3 +55,34 @@ import LegalLayout from '../layouts/LegalLayout.astro';
 
   <a class="back" href="/">&larr; Terug naar de homepage</a>
 </LegalLayout>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('consent-reset');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      // Wist de bewaarde keuze en zet een lopende meting stil. Na de herlaadactie
+      // stelt de banner de vraag opnieuw.
+      if (window.__monkaiConsent && typeof window.__monkaiConsent.reset === 'function') {
+        window.__monkaiConsent.reset();
+      }
+      window.location.reload();
+    });
+  })();
+</script>
+
+<style>
+  .consent-reset {
+    padding: 11px 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--card);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .consent-reset:hover { background: var(--card-alt); }
+  .consent-reset:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+</style>

@@ -1,0 +1,250 @@
+---
+// Opt-in consent voor de bezoekersstatistieken.
+//
+// Deze component weet één ding: heeft de bezoeker een keuze gemaakt, en welke.
+// Hij kent PostHog niet. Wanneer er toestemming is, roept hij
+// window.__monkaiAnalytics.start() aan; Analytics.astro bepaalt wat dat doet.
+//
+// Zolang er geen keuze is, wordt er niets geladen en niets bewaard. Weigeren en
+// accepteren zijn even makkelijk (zelfde grootte, zelfde gewicht, één klik), want
+// anders is de toestemming niet vrij gegeven en dus ongeldig.
+//
+// De keuze zelf staat in localStorage onder 'monkai_consent'. Het onthouden van een
+// keuze is strikt noodzakelijk om het verzoek van de bezoeker uit te voeren, dus dat
+// mag zonder toestemming.
+---
+<aside id="consent" class="consent" role="region" aria-label="Vraag over bezoekersstatistieken" hidden>
+  <p class="consent-title">Mag ik meten hoe je deze site gebruikt?</p>
+  <p class="consent-body">
+    Ik bewaar daarvoor één eigen cookie, zodat ik zie welke pagina's werken. Geen advertenties,
+    geen profielen, geen tracking over andere sites. Meer in het <a href="/cookies">cookiebeleid</a>.
+  </p>
+  <div class="consent-actions">
+    <button type="button" data-consent="denied">Weigeren</button>
+    <button type="button" data-consent="granted">Accepteren</button>
+  </div>
+</aside>
+
+<script is:inline>
+  (function () {
+    var KEY = 'monkai_consent';
+    var VERSION = 1;
+    // Na een weigering niet blijven zeuren. Zes maanden is de termijn die de
+    // Digital Omnibus voorstelt voor opnieuw vragen na een weigering.
+    var DENY_TTL_MS = 182 * 24 * 60 * 60 * 1000;
+
+    function read() {
+      try {
+        var raw = window.localStorage.getItem(KEY);
+        if (!raw) return null;
+        var parsed = JSON.parse(raw);
+        if (!parsed || parsed.v !== VERSION) return null;
+        if (parsed.choice !== 'granted' && parsed.choice !== 'denied') return null;
+        return parsed;
+      } catch (e) {
+        // localStorage geblokkeerd of vol: dan is er simpelweg geen keuze bekend.
+        return null;
+      }
+    }
+
+    function write(choice) {
+      try {
+        window.localStorage.setItem(KEY, JSON.stringify({ v: VERSION, choice: choice, ts: Date.now() }));
+      } catch (e) {
+        // Kan de keuze niet bewaren. Niet erg: zonder bewaarde toestemming meten we niets.
+      }
+    }
+
+    function clear() {
+      try { window.localStorage.removeItem(KEY); } catch (e) {}
+    }
+
+    // Wist alles wat PostHog op het toestel achterliet. Dit moet met de hand:
+    // posthog.reset(true) wist niet, het genereert juist een nieuwe id en schrijft
+    // die terug, en opt_out_capturing() zet zelf een vlag in dezelfde opslag.
+    // PostHog gebruikt twee voorvoegsels: 'ph_...' voor de identiteit en de flags, en
+    // '__ph_opt_in_out_...' voor de opt-out-vlag. Die tweede vergeten is stil dodelijk:
+    // dan blijft PostHog opgezegd en meet het niets meer, ook nadat de bezoeker later
+    // opnieuw ja zegt.
+    function isPosthogKey(name) {
+      return name.indexOf('ph_') === 0 || name.indexOf('__ph_') === 0;
+    }
+
+    function clearPosthogStorage() {
+      var names = [];
+      var cookies = document.cookie ? document.cookie.split(';') : [];
+      for (var i = 0; i < cookies.length; i++) {
+        var name = cookies[i].split('=')[0].trim();
+        if (isPosthogKey(name)) names.push(name);
+      }
+      // Door cross_subdomain_cookie staat de cookie op het hoofddomein
+      // (.monkai.business), lokaal op de host zelf. Een cookie verdwijnt alleen bij
+      // een exacte match op domain, dus we proberen alle varianten.
+      var host = window.location.hostname;
+      var parts = host.split('.');
+      var domains = [null, host];
+      if (parts.length > 1) domains.push('.' + parts.slice(-2).join('.'));
+      for (var j = 0; j < names.length; j++) {
+        for (var k = 0; k < domains.length; k++) {
+          document.cookie = names[j] + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' +
+            (domains[k] ? '; domain=' + domains[k] : '');
+        }
+      }
+      try {
+        var keys = [];
+        for (var m = 0; m < window.localStorage.length; m++) {
+          var key = window.localStorage.key(m);
+          if (key && isPosthogKey(key)) keys.push(key);
+        }
+        for (var n = 0; n < keys.length; n++) window.localStorage.removeItem(keys[n]);
+      } catch (e) {}
+    }
+
+    // Staat "Do Not Track" aan, dan heeft de bezoeker in zijn browser al nee gezegd.
+    // Die vragen we niet opnieuw.
+    function dntEnabled() {
+      var v = window.doNotTrack || navigator.doNotTrack || navigator.msDoNotTrack;
+      return v === '1' || v === 'yes' || v === 1 || v === true;
+    }
+
+    // Effectieve keuze: 'granted', 'denied' of null (nog niets gekozen).
+    function effective() {
+      if (dntEnabled()) return 'denied';
+      var stored = read();
+      if (!stored) return null;
+      // Een weigering verloopt, een toestemming niet.
+      if (stored.choice === 'denied' && Date.now() - stored.ts > DENY_TTL_MS) return null;
+      return stored.choice;
+    }
+
+    var banner = document.getElementById('consent');
+
+    function hide() { if (banner) banner.hidden = true; }
+    function show() { if (banner) banner.hidden = false; }
+
+    function startAnalytics() {
+      if (window.__monkaiAnalytics && typeof window.__monkaiAnalytics.start === 'function') {
+        window.__monkaiAnalytics.start();
+      }
+    }
+
+    function choose(choice) {
+      write(choice);
+      hide();
+      if (choice === 'granted') startAnalytics();
+    }
+
+    // Publieke interface, gebruikt door Analytics.astro en door /cookies.
+    window.__monkaiConsent = {
+      get: effective,
+      set: choose,
+      reset: function () {
+        clear();
+        // Eerst een lopende meting stilzetten, zodat er bij het verlaten van de pagina
+        // geen afscheidsevent meer vertrekt.
+        try {
+          if (window.posthog && typeof window.posthog.opt_out_capturing === 'function') {
+            window.posthog.opt_out_capturing();
+          }
+        } catch (e) {}
+        // Daarna alles van PostHog wissen, inclusief de opt-out-vlag die de regel
+        // hierboven net zette. Wie zijn toestemming intrekt, houdt niets achter.
+        clearPosthogStorage();
+      },
+    };
+
+    if (banner) {
+      var buttons = banner.querySelectorAll('[data-consent]');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function (ev) {
+          choose(ev.currentTarget.getAttribute('data-consent'));
+        });
+      }
+    }
+
+    // Deze component beslist, op elke pageload:
+    // - al toestemming gegeven: meting starten, niets tonen
+    // - geweigerd (of DNT aan): niets doen, niets tonen
+    // - nog geen keuze: vragen. De banner staat met `hidden` in de HTML en wordt
+    //   hier pas zichtbaar gemaakt, zodat wie al gekozen heeft geen flits ziet.
+    var current = effective();
+    if (current === 'granted') startAnalytics();
+    else if (current === null) show();
+  })();
+</script>
+
+<style>
+  /* [hidden] moet winnen van .consent{display:flex}, anders blijft de banner staan */
+  [hidden] { display: none !important; }
+
+  .consent {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: min(360px, calc(100vw - 40px));
+    padding: 20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 6px 24px rgba(36, 38, 31, 0.14);
+    font-family: var(--font-sans);
+    animation: consent-in 180ms ease-out;
+  }
+  .consent-title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .consent-body {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .consent-body a { color: inherit; text-decoration: underline; }
+  .consent-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  /* Gelijke grootte en gelijk gewicht: weigeren mag niet moeilijker zijn dan accepteren. */
+  .consent-actions button {
+    flex: 1;
+    padding: 11px 14px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--card);
+    cursor: pointer;
+  }
+  .consent-actions button[data-consent='denied'] { background: var(--ink); }
+  .consent-actions button[data-consent='denied']:hover { background: var(--ink-soft); }
+  .consent-actions button[data-consent='granted'] { background: var(--green); }
+  .consent-actions button[data-consent='granted']:hover { background: var(--green-hover); }
+  .consent-actions button:focus-visible { outline: 2px solid var(--green-light); outline-offset: 2px; }
+
+  @keyframes consent-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .consent { animation: none; }
+  }
+  @media (max-width: 768px) {
+    .consent {
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      width: auto;
+      padding: 16px;
+    }
+  }
+</style>
