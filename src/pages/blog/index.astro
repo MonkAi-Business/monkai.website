@@ -8,6 +8,15 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const fmt = (d: Date) => new Intl.DateTimeFormat('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' }).format(d);
+
+const counts = new Map<string, number>();
+for (const post of posts) {
+  for (const tag of post.data.tags) counts.set(tag, (counts.get(tag) ?? 0) + 1);
+}
+const tags = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'nl'));
+// Merknamen houden hun eigen schrijfwijze, de rest krijgt gewoon een hoofdletter.
+const labels: Record<string, string> = { 'ai-adoptie': 'AI-adoptie', chatgpt: 'ChatGPT' };
+const label = (t: string) => labels[t] ?? t.charAt(0).toUpperCase() + t.slice(1);
 ---
 <BaseLayout title="Blog — MonkAi Business" description="Artikels over AI-adoptie, governance en kennis voor Vlaamse KMO's.">
   <Nav />
@@ -17,38 +26,174 @@ const fmt = (d: Date) => new Intl.DateTimeFormat('nl-BE', { day: 'numeric', mont
         <h1>Blog</h1>
         <p class="lede">Nuchtere artikels over AI-adoptie, wetgeving en werken met kennis. Geschreven voor wie leiding geeft aan een Vlaamse KMO.</p>
       </div>
-      <div class="grid">
+
+      <div class="filters">
+        <div class="search">
+          <label class="sr-only" for="blog-search">Zoek in artikels</label>
+          <svg class="search-icon" viewBox="0 0 20 20" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7">
+            <circle cx="9" cy="9" r="6" />
+            <path d="M13.5 13.5 17.5 17.5" stroke-linecap="round" />
+          </svg>
+          <input type="search" id="blog-search" placeholder="Zoek op trefwoord, bv. governance of Copilot" autocomplete="off" />
+        </div>
+        <div class="chips" role="group" aria-label="Filter op tag">
+          <button type="button" class="chip" data-tag="" aria-pressed="true">Alles</button>
+          {tags.map(([tag, n]) => (
+            <button type="button" class="chip" data-tag={tag} aria-pressed="false">{label(tag)} <span class="n">{n}</span></button>
+          ))}
+        </div>
+        <p class="count" aria-live="polite">{posts.length} artikels</p>
+      </div>
+
+      <div class="posts">
         {posts.map((post) => (
-          <a class="card" href={`/blog/${post.id}`}>
+          <a
+            class="post"
+            href={`/blog/${post.id}`}
+            data-tags={post.data.tags.join(' ')}
+            data-search={`${post.data.title} ${post.data.description} ${post.data.tags.join(' ')}`.toLowerCase()}
+          >
             {post.data.image && <img class="thumb" src={post.data.image} alt={post.data.imageAlt ?? ''} width="600" height="400" loading="lazy" />}
-            <div class="card-body">
-              <div class="date">{fmt(post.data.date)}</div>
+            <div class="post-body">
+              <div class="meta">
+                <span class="date">{fmt(post.data.date)}</span>
+                {post.data.tags.map((tag) => <span class="tag">{label(tag)}</span>)}
+              </div>
               <h2>{post.data.title}</h2>
               <p>{post.data.description}</p>
             </div>
           </a>
         ))}
       </div>
+
+      <p class="empty" hidden>Geen artikels gevonden. Probeer een andere zoekterm of kies een andere tag.</p>
     </div>
   </main>
   <Footer />
 </BaseLayout>
+
+<script>
+  const root = document.querySelector('.blog-list-inner');
+  if (root) {
+    const items = Array.from(root.querySelectorAll<HTMLElement>('.post'));
+    const chips = Array.from(root.querySelectorAll<HTMLButtonElement>('.chip'));
+    const search = root.querySelector<HTMLInputElement>('#blog-search');
+    const count = root.querySelector<HTMLElement>('.count');
+    const list = root.querySelector<HTMLElement>('.posts');
+    const empty = root.querySelector<HTMLElement>('.empty');
+    const active = new Set<string>();
+
+    const params = new URLSearchParams(location.search);
+    for (const tag of (params.get('tags') || '').split(',')) {
+      if (tag && chips.some((c) => c.dataset.tag === tag)) active.add(tag);
+    }
+    if (search) search.value = params.get('q') || '';
+
+    function apply(updateUrl: boolean) {
+      const q = search ? search.value.trim().toLowerCase() : '';
+      let visible = 0;
+
+      for (const item of items) {
+        const tags = (item.dataset.tags || '').split(' ').filter(Boolean);
+        const byTag = active.size === 0 || tags.some((t) => active.has(t));
+        const byText = q === '' || (item.dataset.search || '').includes(q);
+        const show = byTag && byText;
+        item.hidden = !show;
+        if (show) visible++;
+      }
+
+      for (const chip of chips) {
+        const on = chip.dataset.tag ? active.has(chip.dataset.tag) : active.size === 0;
+        chip.setAttribute('aria-pressed', String(on));
+      }
+
+      if (count) count.textContent = visible === 1 ? '1 artikel' : `${visible} artikels`;
+      if (list) list.hidden = visible === 0;
+      if (empty) empty.hidden = visible !== 0;
+
+      if (updateUrl) {
+        const next = new URLSearchParams();
+        if (active.size) next.set('tags', [...active].join(','));
+        if (q) next.set('q', q);
+        const qs = next.toString();
+        history.replaceState(null, '', qs ? `${location.pathname}?${qs}` : location.pathname);
+      }
+    }
+
+    for (const chip of chips) {
+      chip.addEventListener('click', () => {
+        const tag = chip.dataset.tag;
+        if (!tag) active.clear();
+        else if (active.has(tag)) active.delete(tag);
+        else active.add(tag);
+        apply(true);
+      });
+    }
+
+    if (search) {
+      search.addEventListener('input', () => apply(true));
+      search.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') { search.value = ''; apply(true); }
+      });
+    }
+
+    apply(false);
+  }
+</script>
+
 <style>
-  .blog-list-inner { display: flex; flex-direction: column; gap: 44px; }
+  .blog-list-inner { display: flex; flex-direction: column; gap: 36px; }
   .head { display: flex; flex-direction: column; gap: 12px; max-width: 640px; }
   h1 { font-size: 44px; font-weight: 500; }
   .lede { margin: 0; font-size: 17px; line-height: 1.65; color: var(--muted); }
-  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; color: var(--ink); overflow: hidden; }
-  .card:hover { color: var(--ink); border-color: var(--green); }
-  .thumb { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; display: block; border-bottom: 1px solid var(--border); }
-  .card-body { padding: 26px 30px 30px; display: flex; flex-direction: column; gap: 12px; }
-  .date { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
-  .card h2 { margin: 0; font-family: var(--font-serif); font-size: 22px; font-weight: 600; line-height: 1.3; }
-  .card p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--muted); }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  [hidden] { display: none !important; }
+
+  .filters { display: flex; flex-direction: column; gap: 16px; border-bottom: 1px solid var(--border); padding-bottom: 24px; }
+  .search { position: relative; max-width: 420px; }
+  .search-icon { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+  .search input {
+    width: 100%; padding: 11px 14px 11px 38px; font-family: var(--font-sans); font-size: 15px; color: var(--ink);
+    background: var(--input-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); appearance: none;
+  }
+  .search input::placeholder { color: var(--placeholder); }
+  .search input:focus { outline: none; border-color: var(--green); }
+  .search input::-webkit-search-cancel-button { cursor: pointer; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+    font-family: var(--font-mono); font-size: 13px; line-height: 1; color: var(--ink-soft);
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px;
+  }
+  .chip:hover { border-color: var(--green); color: var(--ink); }
+  .chip .n { color: var(--muted); font-size: 12px; }
+  .chip[aria-pressed='true'] { background: var(--green); border-color: var(--green); color: #fff; }
+  .chip[aria-pressed='true'] .n { color: rgba(255, 255, 255, 0.7); }
+
+  .count { margin: 0; font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+
+  .posts { display: flex; flex-direction: column; gap: 16px; }
+  .post {
+    display: grid; grid-template-columns: 260px 1fr; gap: 26px; align-items: stretch;
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); color: var(--ink); overflow: hidden;
+  }
+  .post:hover { color: var(--ink); border-color: var(--green); }
+  .thumb { width: 100%; height: 100%; min-height: 160px; object-fit: cover; display: block; border-right: 1px solid var(--border); }
+  .post-body { padding: 24px 30px 24px 4px; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; }
+  .date { color: var(--muted); }
+  .tag { color: var(--ink-soft); background: var(--card-alt); border-radius: var(--radius-sm); padding: 3px 8px; }
+  .post h2 { margin: 0; font-family: var(--font-serif); font-size: 23px; font-weight: 600; line-height: 1.3; }
+  .post p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--muted); }
+
+  .empty { margin: 0; font-size: 16px; color: var(--muted); }
+
   @media (max-width: 768px) {
     h1 { font-size: 30px; }
-    .grid { grid-template-columns: 1fr; gap: 14px; }
-    .card-body { padding: 22px; }
+    .post { grid-template-columns: 1fr; gap: 0; }
+    .thumb { aspect-ratio: 16 / 9; height: auto; min-height: 0; border-right: none; border-bottom: 1px solid var(--border); }
+    .post-body { padding: 20px 22px 22px; }
+    .post h2 { font-size: 21px; }
   }
 </style>

@@ -2,7 +2,7 @@
 title: "Wat de EU AI Act echt vraagt van een KMO"
 date: 2026-06-28
 description: "Minder dan je vreest, meer dan niets doen. Een nuchter overzicht."
-tags: ["governance", "wetgeving"]
+tags: ["governance", "ai-adoptie"]
 image: "/media/blog/eu-ai-act-kmo.svg"
 imageAlt: "Gelaagde risicopiramide met vier niveaus"
 ---

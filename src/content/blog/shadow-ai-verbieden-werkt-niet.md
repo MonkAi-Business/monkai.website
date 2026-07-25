@@ -2,7 +2,7 @@
 title: "Shadow AI: waarom verbieden niet werkt"
 date: 2026-07-12
 description: "Je medewerkers gebruiken al AI. Geef het kattenkwaad een speelplaats."
-tags: ["governance", "adoptie"]
+tags: ["governance", "ai-adoptie"]
 image: "/media/blog/shadow-ai-verbieden-werkt-niet.svg"
 imageAlt: "Een bol half in licht, half in schaduw, binnen een begrensde speelplaats"
 ---

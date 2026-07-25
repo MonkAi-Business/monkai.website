@@ -2,7 +2,7 @@
 title: "Copilot Cowork: handig, maar geen fan van pay-as-you-go"
 date: 2026-07-25
 description: "Copilot Cowork was de voorbije maanden een van de sterkere dingen die Microsoft uitbracht. Sinds het betalend werd, zit de kost in een model dat een KMO moeilijk kan inschatten."
-tags: ["ai-adoptie", "kmo"]
+tags: ["copilot", "ai-adoptie"]
 image: "/media/blog/copilot-cowork-pay-as-you-go.svg"
 imageAlt: "Oplopende verbruiksbalken die door een gestreept budgetplafond breken, boven een vaste sokkel"
 ---

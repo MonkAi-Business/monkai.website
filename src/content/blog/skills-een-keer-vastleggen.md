@@ -2,7 +2,7 @@
 title: "Skills: leg het werk één keer vast, gebruik het overal"
 date: 2026-07-25
 description: "Een prompt gebruik je één keer. Een skill leg je één keer vast en hergebruik je overal - en het is geen Claude-truc: ChatGPT en Copilot hebben het intussen ook."
-tags: ["agents", "automatisatie", "productiviteit"]
+tags: ["agents", "automatisatie", "claude", "chatgpt", "copilot"]
 image: "/media/blog/skills.svg"
 imageAlt: "Een centraal skill-blok dat vanuit meerdere kanten wordt opgeroepen en hergebruikt"
 ---
