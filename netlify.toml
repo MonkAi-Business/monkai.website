@@ -4,3 +4,20 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+# Eén canonieke host. www.monkai.business bleek de site óók te serveren (PostHog zag
+# pageviews met $host = www.monkai.business), waardoor bezoekers en SEO-signalen over
+# twee hosts versnipperd raakten. Deze 301 maakt de apex de enige echte host.
+# Beide protocollen expliciet, zoals Netlify aanraadt wanneer je niet op force_ssl
+# vertrouwt. force = true is nodig omdat er anders bestaande bestanden matchen.
+[[redirects]]
+  from = "http://www.monkai.business/*"
+  to = "https://monkai.business/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.monkai.business/*"
+  to = "https://monkai.business/:splat"
+  status = 301
+  force = true

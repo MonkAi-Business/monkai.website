@@ -17,7 +17,20 @@ import Footer from '../components/Footer.astro';
 <script is:inline>
   // Primaire conversie: het contactformulier is verstuurd (Netlify leidt hierheen door).
   // De PostHog-stub is synchroon beschikbaar; het event wordt gequeued tot de lib geladen is.
-  window.posthog?.capture('contact_submitted');
+  //
+  // /bedankt is een statische pagina en dus ook rechtstreeks op te vragen. Meet de
+  // conversie daarom op dit event en niet op de pageview van deze pagina, en filter
+  // hier het ruis eruit:
+  // - een refresh of terug/vooruit mag de conversie niet dubbel tellen
+  // - een directe GET (geen referrer, of een referrer van buiten de site) telt niet mee
+  (function () {
+    var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    if (nav && (nav.type === 'reload' || nav.type === 'back_forward')) return;
+    var ref = document.referrer || '';
+    if (ref.indexOf(window.location.origin + '/') !== 0) return;
+    if (ref.indexOf(window.location.origin + '/bedankt') === 0) return;
+    window.posthog?.capture('contact_submitted');
+  })();
 </script>
 <style>
   .thanks-inner {
