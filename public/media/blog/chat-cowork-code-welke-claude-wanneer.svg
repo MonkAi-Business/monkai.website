@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Drie panelen naast elkaar die oplopen van één cirkel tot een dicht raster">
+  <!-- Brand-kleuren staan hier hardcoded: een via <img> geladen SVG erft geen CSS-variabelen uit tokens.css. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EDEBE3"/>
+      <stop offset="1" stop-color="#E4E2D9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+
+  <!-- paneel 1: chat, één vraag en één antwoord -->
+  <rect x="210" y="250" width="240" height="300" rx="6" fill="#FBFAF6" stroke="#D9DACE" stroke-width="2"/>
+  <circle cx="330" cy="400" r="34" fill="#4C5F3B"/>
+
+  <!-- paneel 2: cowork, de agent raakt aan bestanden en tools rondom -->
+  <rect x="480" y="250" width="240" height="300" rx="6" fill="#FBFAF6" stroke="#D9DACE" stroke-width="2"/>
+  <line x1="600" y1="400" x2="570" y2="342" stroke="#4C5F3B" stroke-width="2" opacity="0.3"/>
+  <line x1="600" y1="400" x2="646" y2="342" stroke="#4C5F3B" stroke-width="2" opacity="0.3"/>
+  <line x1="600" y1="400" x2="562" y2="470" stroke="#4C5F3B" stroke-width="2" opacity="0.3"/>
+  <line x1="600" y1="400" x2="642" y2="470" stroke="#4C5F3B" stroke-width="2" opacity="0.3"/>
+  <circle cx="600" cy="400" r="34" fill="#4C5F3B"/>
+  <rect x="542" y="316" width="30" height="22" rx="3" fill="#8FA478"/>
+  <rect x="632" y="316" width="30" height="22" rx="3" fill="#8FA478"/>
+  <rect x="534" y="468" width="30" height="22" rx="3" fill="#6E855A"/>
+  <rect x="628" y="468" width="30" height="22" rx="3" fill="#6E855A"/>
+
+  <!-- paneel 3: code, een dicht raster -->
+  <rect x="750" y="250" width="240" height="300" rx="6" fill="#FBFAF6" stroke="#D9DACE" stroke-width="2"/>
+  <g fill="#4C5F3B">
+    <rect x="791" y="321" width="22" height="22" rx="3" opacity="0.9"/>
+    <rect x="825" y="321" width="22" height="22" rx="3" opacity="0.5"/>
+    <rect x="859" y="321" width="22" height="22" rx="3" opacity="0.8"/>
+    <rect x="893" y="321" width="22" height="22" rx="3" opacity="0.4"/>
+    <rect x="927" y="321" width="22" height="22" rx="3" opacity="0.7"/>
+
+    <rect x="791" y="355" width="22" height="22" rx="3" opacity="0.45"/>
+    <rect x="825" y="355" width="22" height="22" rx="3" opacity="0.85"/>
+    <rect x="859" y="355" width="22" height="22" rx="3" opacity="0.4"/>
+    <rect x="893" y="355" width="22" height="22" rx="3" opacity="0.75"/>
+    <rect x="927" y="355" width="22" height="22" rx="3" opacity="0.5"/>
+
+    <rect x="791" y="389" width="22" height="22" rx="3" opacity="0.8"/>
+    <rect x="825" y="389" width="22" height="22" rx="3" opacity="0.4"/>
+    <rect x="859" y="389" width="22" height="22" rx="3" opacity="0.9"/>
+    <rect x="893" y="389" width="22" height="22" rx="3" opacity="0.45"/>
+    <rect x="927" y="389" width="22" height="22" rx="3" opacity="0.8"/>
+
+    <rect x="791" y="423" width="22" height="22" rx="3" opacity="0.5"/>
+    <rect x="825" y="423" width="22" height="22" rx="3" opacity="0.75"/>
+    <rect x="859" y="423" width="22" height="22" rx="3" opacity="0.4"/>
+    <rect x="893" y="423" width="22" height="22" rx="3" opacity="0.85"/>
+    <rect x="927" y="423" width="22" height="22" rx="3" opacity="0.45"/>
+
+    <rect x="791" y="457" width="22" height="22" rx="3" opacity="0.7"/>
+    <rect x="825" y="457" width="22" height="22" rx="3" opacity="0.4"/>
+    <rect x="859" y="457" width="22" height="22" rx="3" opacity="0.8"/>
+    <rect x="893" y="457" width="22" height="22" rx="3" opacity="0.5"/>
+    <rect x="927" y="457" width="22" height="22" rx="3" opacity="0.9"/>
+  </g>
+
+  <!-- grondlijn onder de drie panelen -->
+  <line x1="210" y1="586" x2="990" y2="586" stroke="#4C5F3B" stroke-width="2" opacity="0.2"/>
+</svg>
