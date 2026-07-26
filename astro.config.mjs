@@ -5,8 +5,9 @@ export default defineConfig({
   site: 'https://monkai.business',
   integrations: [
     sitemap({
-      // /bedankt en /data zijn noindex — horen niet in de sitemap
-      filter: (page) => !page.includes('/bedankt') && !page.includes('/data'),
+      // /bedankt, /data en /inspiratie zijn noindex, die horen niet in de sitemap
+      filter: (page) =>
+        !page.includes('/bedankt') && !page.includes('/data') && !page.includes('/inspiratie'),
     }),
   ],
 });
