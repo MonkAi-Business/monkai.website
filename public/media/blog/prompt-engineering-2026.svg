@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Een vraag die naar een doelwit gaat, met een vraag die eerst terugkomt">
+  <!-- Brand-kleuren staan hier hardcoded: een via <img> geladen SVG erft geen CSS-variabelen uit tokens.css. -->
+  <!-- Web-veilige font-stack: een via <img> geladen SVG erft geen webfonts. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EDEBE3"/>
+      <stop offset="1" stop-color="#E4E2D9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+
+  <!-- de opdracht -->
+  <rect x="130" y="320" width="270" height="190" rx="16" fill="#FBFAF6" stroke="#D9DACE" stroke-width="2"/>
+  <rect x="164" y="362" width="180" height="14" rx="7" fill="#24261F"/>
+  <rect x="164" y="398" width="140" height="14" rx="7" fill="#4C5F3B"/>
+  <rect x="164" y="434" width="200" height="14" rx="7" fill="#C7C8BC"/>
+  <rect x="164" y="470" width="110" height="14" rx="7" fill="#C7C8BC"/>
+
+  <!-- de wedervraag: eerst terug naar de opdrachtgever -->
+  <rect x="470" y="150" width="130" height="96" rx="18" fill="#4C5F3B"/>
+  <path d="M506 246 l0 34 l34 -34 z" fill="#4C5F3B"/>
+  <text x="535" y="216" text-anchor="middle" font-family="system-ui, 'Segoe UI', Arial, sans-serif" font-size="72" font-weight="600" fill="#F4F2EC">?</text>
+  <path d="M468 214 C 400 214 330 250 300 306" fill="none" stroke="#8FA478" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 12"/>
+  <path d="M306 280 L300 306 L326 302" fill="none" stroke="#8FA478" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- en dan pas naar het doel -->
+  <line x1="430" y1="415" x2="742" y2="415" stroke="#37472A" stroke-width="5" stroke-linecap="round"/>
+  <path d="M732 400 l18 15 l-18 15" fill="none" stroke="#37472A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <circle cx="910" cy="415" r="135" fill="#E9EADF" stroke="#D9DACE" stroke-width="2"/>
+  <circle cx="910" cy="415" r="86" fill="#8FA478"/>
+  <circle cx="910" cy="415" r="38" fill="#4C5F3B"/>
+</svg>
