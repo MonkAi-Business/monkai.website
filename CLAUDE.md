@@ -93,8 +93,8 @@ src/
     BaseLayout.astro       — shared <head>, fonts, global.css/tokens.css import, Nav + Footer slot wrapper
   components/
     Nav.astro, Footer.astro, Logo.astro       — global chrome, used on every page
-    ThemeToggle.astro                          — segmentknop met de themastanden naast elkaar (zweeft onder de navigatielijn, en staat in het mobiele menu)
-    BackToTop.astro                            — knop rechts onderaan, verschijnt na 300px scrollen (staat in BaseLayout)
+    ThemeToggle.astro                          - segmentknop met de themastanden naast elkaar (zweeft onder de navigatielijn, en staat in het mobiele menu)
+    BackToTop.astro                            - knop rechts onderaan, verschijnt na 300px scrollen (staat in BaseLayout)
     Hero.astro, Problem.astro, Approach.astro,
     Ladder.astro, Agreement.astro, Services.astro,
     BeyondChat.astro, AiAct.astro, Team.astro,
@@ -114,7 +114,7 @@ src/
     data/index.astro         — hidden /data besloten zone (client-side login + tool tabs, see below)
     inspiratie/index.astro   — verborgen /inspiratie-pagina voor sessiedeelnemers (systeemtabs + kopieerknoppen, zie onder)
     bedankt.astro            — thank-you page the contact form POSTs/redirects to
-    404.astro                — custom 404 (krabbend aapje); Netlify serveert dist/404.html vanzelf
+    404.astro                - custom 404 (krabbend aapje); Netlify serveert dist/404.html vanzelf
     blog/index.astro         — blog listing (single column + zoekveld + tagfilter, see below)
     blog/[slug].astro        — blog post detail (dynamic route, slug = entry.id)
     use-cases/index.astro    — use case listing
