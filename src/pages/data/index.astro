@@ -99,7 +99,7 @@ const byTool = Object.fromEntries(
   .gate-card input { font: inherit; font-weight: 400; padding: 11px 13px; background: var(--input-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--ink); }
   .gate-card input:focus { outline: none; border-color: var(--green); }
   .gate-card .btn { border: none; cursor: pointer; font-size: 15px; margin-top: 8px; text-align: center; }
-  .err { color: #9a3b2f; font-size: 14px; margin: 4px 0 0; }
+  .err { color: var(--danger); font-size: 14px; margin: 4px 0 0; }
 
   /* Inhoud */
   .content { max-width: var(--maxw); margin: 0 auto; }
@@ -111,9 +111,9 @@ const byTool = Object.fromEntries(
   .tools { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
   .tool { display: inline-flex; align-items: center; gap: 8px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 16px; font: inherit; font-size: 15px; font-weight: 600; color: var(--ink-soft); cursor: pointer; }
   .tool:hover { border-color: var(--green-light); }
-  .tool[aria-selected='true'] { background: var(--green); border-color: var(--green); color: #fff; }
+  .tool[aria-selected='true'] { background: var(--green); border-color: var(--green); color: var(--on-green); }
   .tool .count { font-family: var(--font-mono); font-size: 12px; font-weight: 500; background: var(--card-alt); color: var(--muted); border-radius: 999px; padding: 1px 8px; }
-  .tool[aria-selected='true'] .count { background: rgba(255, 255, 255, 0.2); color: #fff; }
+  .tool[aria-selected='true'] .count { background: color-mix(in srgb, var(--on-green) 20%, transparent); color: var(--on-green); }
 
   .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .res { display: flex; flex-direction: column; gap: 8px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; color: var(--ink); }

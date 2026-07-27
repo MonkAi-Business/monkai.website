@@ -19,6 +19,21 @@
   --input-bg: #FFFFFF;
   --placeholder: #A5A79C;
 
+  /* Tekst op een groen vlak (knoppen, actieve chips en tabs). Bestaat als token
+     omdat het groen in dark mode lichter wordt: daar leest witte tekst niet meer
+     en moet de tekst juist donker zijn. */
+  --on-green: #FFFFFF;
+
+  /* Foutmelding, vandaag alleen op /data. */
+  --danger: #9A3B2F;
+
+  /* Scheidingslijn *op* een contrastvlak (de footer). Los van --border, want die
+     is afgestemd op de lichte pagina en verdwijnt op een donker vlak. */
+  --dark-border: #3A3D33;
+
+  /* Slagschaduw. Op een donkere achtergrond moet die zwarter en sterker. */
+  --shadow: 0 6px 24px rgba(36, 38, 31, 0.14);
+
   --maxw: 1120px;
   --radius-sm: 4px;
   --radius: 6px;
