@@ -1,0 +1,175 @@
+---
+// Variant 5: een traag bewegend kleurverloop achter matglazen kaarten. Geen
+// canvas en geen script: vier zwaar geblurde vlakken die langs elkaar schuiven
+// doen het werk.
+---
+
+<div class="aurora" aria-hidden="true">
+  <span class="vlek vlek-1"></span>
+  <span class="vlek vlek-2"></span>
+  <span class="vlek vlek-3"></span>
+  <span class="vlek vlek-4"></span>
+</div>
+
+<slot name="hero" />
+<slot name="rest" />
+
+<style is:global>
+  :root[data-kickass='aurora'] {
+    --kickass-laag: 'aurora';
+
+    --bg-page: #07060E;
+    --bg-canvas: #0A0913;
+    --section-alt: #09080F;
+    /* De brief zette --card/--card-alt op een lichte, witte waas (5-8%
+       wit). Gemeten (screenshot + pixelwaarden, WCAG-formule): op het
+       lichtste punt van een vlek onder een kaart zakt de gedempte tekst
+       daarmee tot ongeveer 1,6:1 tegenover de vereiste 4,5:1, want wit
+       erbovenop maakt een al lichte plek nog lichter. De kaart moet dus naar
+       donker mengen, niet naar wit: color-mix met --bg-page op hoge
+       dekking. Dat kost een deel van het glaseffect, maar leesbaarheid gaat
+       voor op sfeer. */
+    --card: color-mix(in srgb, var(--bg-page) 82%, transparent);
+    --card-alt: color-mix(in srgb, var(--bg-page) 87%, transparent);
+    --border: rgba(255, 255, 255, 0.12);
+
+    --ink: #F4F1FF;
+    --ink-soft: #D5CFF0;
+    --muted: #9C94C0;
+
+    --green: #6BF2C4;
+    --green-hover: #9BFFDC;
+    --green-light: #6BF2C4;
+    --on-green: #04120D;
+
+    /* Zelfde reden als --card hierboven: op de donkere kaart (de "Versnellen"-
+       rij, .row-accelerate) haalde een witte waas van 9% nog maar 4,95:1 op
+       het lichtste punt, amper boven de vereiste 4,5:1. Ook hier dus naar
+       --bg-page mengen in plaats van naar wit. */
+    --dark: color-mix(in srgb, var(--bg-page) 82%, transparent);
+    --dark-text: #F4F1FF;
+    --dark-dim: #B4ADD6;
+    --dark-border: rgba(255, 255, 255, 0.16);
+    --dark-bright: #FFFFFF;
+
+    --radius: 18px;
+    --radius-sm: 12px;
+    --shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+  }
+
+  :root[data-kickass='aurora'] .aurora {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    filter: blur(90px);
+  }
+
+  :root[data-kickass='aurora'] .vlek {
+    position: absolute;
+    width: 46vw;
+    height: 46vw;
+    border-radius: 50%;
+    opacity: 0.55;
+  }
+
+  :root[data-kickass='aurora'] .vlek-1 {
+    background: #4C5F3B;
+    top: -10%;
+    left: -6%;
+    animation: aurora-drijf-a 26s ease-in-out infinite alternate;
+  }
+
+  :root[data-kickass='aurora'] .vlek-2 {
+    background: #1F8A7A;
+    top: 20%;
+    right: -12%;
+    animation: aurora-drijf-b 32s ease-in-out infinite alternate;
+  }
+
+  :root[data-kickass='aurora'] .vlek-3 {
+    background: #5B3FA8;
+    bottom: -14%;
+    left: 18%;
+    animation: aurora-drijf-c 38s ease-in-out infinite alternate;
+  }
+
+  :root[data-kickass='aurora'] .vlek-4 {
+    background: #6BF2C4;
+    top: 44%;
+    left: 40%;
+    width: 26vw;
+    height: 26vw;
+    opacity: 0.3;
+    animation: aurora-drijf-b 22s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes aurora-drijf-a {
+    to { transform: translate3d(14vw, 10vh, 0) scale(1.25); }
+  }
+  @keyframes aurora-drijf-b {
+    to { transform: translate3d(-16vw, 14vh, 0) scale(0.85); }
+  }
+  @keyframes aurora-drijf-c {
+    to { transform: translate3d(10vw, -12vh, 0) scale(1.15); }
+  }
+
+  /* De secties moeten doorschijnend zijn, anders zie je het verloop niet meer. */
+  :root[data-kickass='aurora'] .section { border-top-color: rgba(255, 255, 255, 0.08); }
+  :root[data-kickass='aurora'] .services { background: transparent; }
+
+  :root[data-kickass='aurora'] .service-card,
+  :root[data-kickass='aurora'] .ladder-row {
+    backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  }
+
+  /* De hero-tekst zit niet in een kaart in de aangeleverde brief-code, en staat
+     dus rechtstreeks op het geblurde verloop. Gemeten met een geschreven
+     contrastscript (screenshot + pixelwaarden, WCAG-formule): op het lichtste
+     punt van de vlekken zakt de gedempte tekst (--muted) tot ongeveer 2,3:1
+     tegenover de vereiste 4,5:1. Daarom hier alsnog een matglazen paneel achter
+     de hero-inhoud, zelfde idee als de kaarten verderop, zodat de tekst overal
+     leesbaar blijft ongeacht waar de vlekken staan. */
+  :root[data-kickass='aurora'] .hero-inner {
+    padding: 48px 64px;
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--bg-page) 68%, transparent);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(24px) saturate(140%);
+    box-shadow: var(--shadow);
+  }
+
+  /* De kop van de titel: een kleurverloop in de tekst zelf. Zonder
+     background-clip: text zou color:transparent de titel onzichtbaar maken,
+     dus de gradient zit achter een @supports-check. Browsers zonder steun
+     krijgen gewoon --ink, dezelfde lichte kleur als de rest van de kopjes. */
+  :root[data-kickass='aurora'] h1 {
+    font-size: 84px;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+
+  @supports (background-clip: text) or (-webkit-background-clip: text) {
+    :root[data-kickass='aurora'] h1 {
+      background: linear-gradient(120deg, #FFFFFF 20%, #6BF2C4 60%, #B79BFF 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+
+  :root[data-kickass='aurora'] h2 { font-size: 48px; letter-spacing: -0.02em; }
+
+  @media (max-width: 768px) {
+    :root[data-kickass='aurora'] h1 { font-size: 44px; }
+    :root[data-kickass='aurora'] h2 { font-size: 32px; }
+    :root[data-kickass='aurora'] .vlek { width: 80vw; height: 80vw; }
+    :root[data-kickass='aurora'] .hero-inner { padding: 28px 24px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root[data-kickass='aurora'] .vlek { animation: none; }
+  }
+</style>
