@@ -8,15 +8,17 @@ export default defineConfig({
   // hem al eerder af met een echte 301.
   redirects: {
     '/prompts': '/inspiratie',
+    '/prompt': '/inspiratie',
   },
   integrations: [
     sitemap({
-      // /bedankt, /data, /inspiratie en /prompts zijn noindex, die horen niet in de sitemap
+      // /bedankt, /data, /inspiratie en de doorstuurpaden /prompt(s) zijn noindex,
+      // die horen niet in de sitemap. '/prompt' dekt ook '/prompts'.
       filter: (page) =>
         !page.includes('/bedankt') &&
         !page.includes('/data') &&
         !page.includes('/inspiratie') &&
-        !page.includes('/prompts'),
+        !page.includes('/prompt'),
     }),
   ],
 });

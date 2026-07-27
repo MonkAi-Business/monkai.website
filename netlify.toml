@@ -66,9 +66,10 @@
     # een echte embed in komt zou een strakkere CSP die zwart laten.
     Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' https://*.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.posthog.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.posthog.com; media-src 'self'; connect-src 'self' https://*.posthog.com; worker-src 'self' blob:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com; upgrade-insecure-requests"
 
-# /prompts is een kortere URL om tijdens een sessie hardop te noemen; ze stuurt door
-# naar het echte materiaal op /inspiratie. force = true omdat de build ook een
-# /prompts/index.html neerzet (Astro's redirect-fallback) die deze regel anders schaduwt.
+# /prompts en /prompt zijn kortere URL's om tijdens een sessie hardop te noemen; ze
+# sturen door naar het echte materiaal op /inspiratie. Allebei, want wie het hoort
+# typt evengoed het enkelvoud. force = true omdat de build ook een index.html op die
+# paden neerzet (Astro's redirect-fallback) die deze regels anders schaduwt.
 [[redirects]]
   from = "/prompts"
   to = "/inspiratie"
@@ -77,6 +78,18 @@
 
 [[redirects]]
   from = "/prompts/*"
+  to = "/inspiratie"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/prompt"
+  to = "/inspiratie"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/prompt/*"
   to = "/inspiratie"
   status = 301
   force = true
