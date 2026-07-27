@@ -119,6 +119,10 @@ const icons: Record<string, string> = {
 
   .theme-toggle button:focus-visible {
     outline: 2px solid var(--green);
-    outline-offset: 2px;
+    /* .theme-toggle heeft overflow:hidden voor de afgeronde hoeken van de
+       segmentgroep. Een positieve offset tekent de outline buiten de knop,
+       waar overflow:hidden hem wegsnijdt - toetsenbordgebruikers zagen dan
+       geen focusindicator. Negatief tekent hem binnen de knop, dus zichtbaar. */
+    outline-offset: -2px;
   }
 </style>

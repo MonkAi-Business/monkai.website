@@ -93,10 +93,16 @@
   --dark-text: #E9E7DF;
   --dark-dim: #A2A597;
   --dark-border: #43463A;
-  --dark-bright: #E9E7DF;
+  /* Was gelijk aan --dark-text (#E9E7DF), wat de belofte "feller dan --dark-text"
+     uit de :root-toelichting tegensprak. Hier wel degelijk feller gemaakt, zodat
+     koppen/hoverstates op een contrastvlak (Ladder, Services, Footer, Logo) ook
+     in dark mode boven --dark-text uit springen. */
+  --dark-bright: #F6F4EC;
 
   --input-bg: #14160F;
-  --placeholder: #7B7E71;
+  /* Was #7B7E71 (4,40:1 op --input-bg, net onder de norm van 4,5:1 voor
+     placeholdertekst). Iets lichter gezet, zelfde warme grijsgroene tint. */
+  --placeholder: #7D8073;
 
   --danger: #E58C7E;
   --shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
