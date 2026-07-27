@@ -5,6 +5,7 @@ description: "Je betaalt vandaag 20 tot 30 dollar per gebruiker per maand voor A
 tags: ["ai-adoptie", "governance"]
 image: "/media/blog/ai-tokens-niet-eeuwig-gesponsord.svg"
 imageAlt: "Een vlakke prijslijn die plots omhoog springt, met een tweede pad dat vlak blijft doorlopen"
+draft: true
 ---
 
 Vraag een zaakvoerder wat AI zijn bedrijf kost en je krijgt een licentieprijs terug. Twintig dollar per gebruiker voor ChatGPT of Claude, dertig voor Microsoft 365 Copilot. Overzichtelijk, voorspelbaar, en makkelijk te verdedigen tegenover de boekhouder. Precies daarom is het een gevaarlijk getal om je planning op te bouwen. Die prijs zegt vandaag weinig over wat je gebruik werkelijk kost om te draaien.

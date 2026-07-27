@@ -5,6 +5,7 @@ description: "Claude zit intussen in drie werkvormen, en Cowork splitst nog eens
 tags: ["claude", "chatgpt", "copilot", "productiviteit"]
 image: "/media/blog/chat-cowork-code-welke-claude-wanneer.svg"
 imageAlt: "Drie panelen naast elkaar die oplopen van één cirkel tot een dicht raster"
+draft: true
 ---
 
 Wie Claude gebruikt, kent meestal het chatvenster. Je typt iets, je krijgt antwoord. Maar in diezelfde doos zitten er ondertussen drie werkvormen naast elkaar. Het verschil zit niet in hoe slim het model is, want dat is telkens hetzelfde. Het verschil zit in wat het mag aanraken en hoeveel werk je uit handen geeft.

@@ -5,6 +5,7 @@ description: "Copilot Cowork was de voorbije maanden een van de sterkere dingen 
 tags: ["copilot", "ai-adoptie"]
 image: "/media/blog/copilot-cowork-pay-as-you-go.svg"
 imageAlt: "Oplopende verbruiksbalken die door een gestreept budgetplafond breken, boven een vaste sokkel"
+draft: true
 ---
 
 Ik ben geen Microsoft-fanboy, maar ook niet het omgekeerde. Het ecosysteem is een echt voordeel: als je bedrijf al in Microsoft 365 zit, staat de AI meteen waar je werkt, met toegang tot je documenten, mails en agenda. Dat is geen detail. En de voorbije maanden was Copilot op dreef. Copilot Cowork, de functie die tijdens de preview gratis meedraaide, was een van de sterkere dingen die ik langs Microsoft-kant zag. Sinds 16 juni 2026 is het algemeen beschikbaar en betalend, en dat is het punt waar ik even wil stilstaan. Niet bij Microsoft, wel bij het prijsmodel.

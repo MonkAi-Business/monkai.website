@@ -5,6 +5,7 @@ description: "De meeste KMO's onderschatten hoeveel bruikbare kennis al in hun m
 tags: ["copilot", "kennis", "ai-adoptie"]
 image: "/media/blog/copilot-data-die-je-al-hebt.svg"
 imageAlt: "Een ijsberg met een kleine top boven water en een veel grotere massa eronder"
+draft: true
 ---
 
 Bij een klant vroeg de zaakvoerder me laatst hoe hij "een AI-dataset moest beginnen opbouwen". Hij dacht dat hij van nul begon. Maar zijn bedrijf draaide al jaren op Microsoft 365: duizenden mails, honderden Teams-vergaderingen, een SharePoint vol offertes, verslagen en procedures. Hij zat op een berg bruikbare kennis en zag alleen de top. Dat is het patroon dat ik bij de meeste KMO's zie.

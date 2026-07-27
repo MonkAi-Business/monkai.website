@@ -5,6 +5,7 @@ description: "De trucs zijn minder belangrijk geworden. Wat telt is dat het doel
 tags: ["productiviteit", "ai-adoptie"]
 image: "/media/blog/prompt-engineering-2026.svg"
 imageAlt: "Een vraag die naar een doelwit gaat, met een vraag die eerst terugkomt"
+draft: true
 ---
 
 Prompt engineering is minder belangrijk geworden. Niet omdat het niet uitmaakt wat je typt, maar omdat het gewicht verschoven is: van hoe je het vraagt naar wat je wil bereiken. Wie dat scherp heeft, heeft geen trucs meer nodig.

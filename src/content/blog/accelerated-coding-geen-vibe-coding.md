@@ -5,6 +5,7 @@ description: "Vibe coding is code laten schrijven zonder er nog naar te kijken. 
 tags: ["productiviteit", "ai-adoptie"]
 image: "/media/blog/accelerated-coding.svg"
 imageAlt: "Links code die niemand meer bekijkt, rechts dezelfde code met snelheidslijnen en een vinkje"
+draft: true
 ---
 
 Ik noem het accelerated coding en niet vibe coding, en dat is geen woordspel. De twee betekenen echt iets anders, en dat verschil bepaalt of je er als developer iets aan hebt.

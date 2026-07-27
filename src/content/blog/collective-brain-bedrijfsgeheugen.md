@@ -5,6 +5,7 @@ description: "Een second brain maakt jou slimmer. Een collective brain maakt je 
 tags: ["kennis", "ai-adoptie"]
 image: "/media/blog/collective-brain-bedrijfsgeheugen.svg"
 imageAlt: "Verbonden knooppunten rond een centraal punt, als gedeeld bedrijfsgeheugen"
+draft: true
 ---
 
 Een collective brain is het gedeelde geheugen van een bedrijf: een plek waar kennis, afspraken en ervaring worden vastgelegd zodat ze niet langer alleen in de hoofden van mensen zitten. Waar een [second brain](/blog/second-brain-een-map) jou als individu slimmer maakt, zorgt een collective brain ervoor dat je organisatie blijft weten wat ze weet - ook als iemand met vakantie is, van job verandert of met pensioen gaat.

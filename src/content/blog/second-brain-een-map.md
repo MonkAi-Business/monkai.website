@@ -5,6 +5,7 @@ description: "Kennis structureren hoeft niet groots. Zo begin je vandaag."
 tags: ["kennis", "productiviteit"]
 image: "/media/blog/second-brain-een-map.svg"
 imageAlt: "Losse notities die samenkomen in één map"
+draft: true
 ---
 
 "Second brain" klinkt als een groot project: een systeem met tientallen categorieën, kleurcodes en een app die je eerst een weekend moet leren gebruiken. Geen wonder dat de meeste KMO's er nooit aan beginnen. Nochtans is het idee erachter simpel, en de eerste stap kleiner dan je denkt. Je hebt geen systeem nodig. Je hebt één map nodig.

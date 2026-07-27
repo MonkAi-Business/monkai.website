@@ -5,6 +5,7 @@ description: "Een AI-beleid van vier pagina's kent niemand na week één. Een ge
 tags: ["governance", "agents", "claude", "chatgpt", "gemini", "copilot"]
 image: "/media/blog/governance-zit-in-je-prompts.svg"
 imageAlt: "Eén sjabloonkaart die drie keer herhaald wordt, binnen een begrensd kader"
+draft: true
 ---
 
 Bij een KMO waar ik langskwam lag er een AI-beleid klaar. Vier pagina's, netjes opgesteld, toegelicht op een teamvergadering. Drie maanden later vroeg ik een paar mensen wat erin stond. Niemand wist het nog. Het document was niet fout. Het stond alleen op de verkeerde plaats: naast het werk in plaats van erin.

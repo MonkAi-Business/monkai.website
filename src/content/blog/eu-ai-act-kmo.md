@@ -5,6 +5,7 @@ description: "Minder dan je vreest, meer dan niets doen. Een nuchter overzicht."
 tags: ["governance", "ai-adoptie"]
 image: "/media/blog/eu-ai-act-kmo.svg"
 imageAlt: "Gelaagde risicopiramide met vier niveaus"
+draft: true
 ---
 
 De EU AI Act roept bij veel KMO's twee tegengestelde reacties op. De ene groep denkt dat het hen niet aangaat - dat is iets voor techbedrijven die zelf AI-modellen bouwen. De andere groep vreest een berg papierwerk die geen enkele zaakvoerder zonder juridische dienst kan verwerken. Beide reacties kloppen niet helemaal. De waarheid ligt ertussenin, en is een pak behapbaarder dan het aanvoelt.

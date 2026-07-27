@@ -5,6 +5,7 @@ description: "Beslis vooraf samen met de AI wat er moet gebeuren, in plaats van 
 tags: ["claude", "productiviteit"]
 image: "/media/blog/plan-mode-eerst-denken-dan-doen.svg"
 imageAlt: "Een plan met aangevinkte stappen dat leidt naar een afgewerkt blok"
+draft: true
 ---
 
 Wie met een AI-assistent werkt, kent de verleiding: je typt een vraag, en de AI gaat meteen aan de slag. Vaak gaat dat goed. Maar even vaak merk je halverwege dat het de verkeerde kant opgaat - een aanpak die je niet wilde, een beslissing die de AI zelf nam en die je nu weer moet terugdraaien. Er is een betere volgorde: eerst samen een plan maken, dat plan goedkeuren, en het dan pas laten uitvoeren. In Claude Code heet dat plan mode, en het is een van de beste gewoontes die je kan overnemen.
