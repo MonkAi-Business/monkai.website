@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro';
+import ThemeToggle from './ThemeToggle.astro';
 
 const links = [
   { href: '/#aanpak', label: 'Aanpak' },
@@ -20,6 +21,7 @@ const links = [
       {links.map((link) => (
         <a href={link.href}>{link.label}</a>
       ))}
+      <ThemeToggle />
       <a href="/#contact" class="btn nav-cta">Laten we praten</a>
     </nav>
 
@@ -46,6 +48,7 @@ const links = [
       <a href={link.href}>{link.label}</a>
     ))}
     <a href="/#contact" class="btn nav-cta-mobile">Laten we praten</a>
+    <div class="nav-theme"><ThemeToggle /></div>
   </nav>
 </header>
 
@@ -150,6 +153,15 @@ const links = [
 
   .logo-mobile {
     display: none;
+  }
+
+  /* Op mobiel staat de schakelaar in het uitklapmenu, niet naast de hamburger:
+     daar is bij 390 pixels geen ruimte voor. */
+  .nav-theme {
+    display: flex;
+    justify-content: center;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
   }
 
   @media (max-width: 768px) {

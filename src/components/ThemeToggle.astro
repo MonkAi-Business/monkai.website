@@ -1,0 +1,124 @@
+---
+// De themaschakelaar. Wordt twee keer gerenderd (navigatiebalk en mobiel menu),
+// dus geen id's: alles loopt via [data-theme-set] en querySelectorAll, en bij een
+// klik worden alle instanties bijgewerkt.
+//
+// Toegankelijkheid via aria-pressed op elke knop, precies één op true. Een
+// radiogroup met aria-checked zou strikter zijn maar vraagt eigen afhandeling van
+// de pijltjestoetsen voor twee of drie knoppen. Bewuste keuze voor de eenvoud.
+import { TOGGLE_OPTIONS, DEFAULT_THEME } from '../utils/theme';
+
+const icons: Record<string, string> = {
+  light: `<circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M21.4 12h-2.2M4.8 12H2.6M18.6 5.4 17 7M7 17l-1.6 1.6M18.6 18.6 17 17M7 7 5.4 5.4"/>`,
+  dark: `<path d="M20.5 14.4A8.6 8.6 0 0 1 9.6 3.5a8.6 8.6 0 1 0 10.9 10.9Z"/>`,
+  superpowers: `<path d="M13.2 2.5 4.8 13.4h5.6l-.6 8.1 8.4-10.9h-5.6z"/>`,
+};
+---
+
+<div class="theme-toggle" role="group" aria-label="Thema">
+  {TOGGLE_OPTIONS.map((option) => (
+    <button
+      type="button"
+      data-theme-set={option.value}
+      aria-pressed={option.value === DEFAULT_THEME ? 'true' : 'false'}
+      title={option.label}
+    >
+      <svg
+        viewBox="0 0 24 24"
+        width="16"
+        height="16"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        set:html={icons[option.value]}
+      />
+      <span class="sr-only">{option.label}</span>
+    </button>
+  ))}
+</div>
+
+<script>
+  import { STORAGE_KEY, THEMES, DEFAULT_THEME } from '../utils/theme';
+
+  const root = document.documentElement;
+  const valid: readonly string[] = THEMES;
+
+  function huidig(): string {
+    const attr = root.getAttribute('data-theme');
+    return attr && valid.includes(attr) ? attr : DEFAULT_THEME;
+  }
+
+  function synchroniseer(thema: string) {
+    document.querySelectorAll<HTMLButtonElement>('[data-theme-set]').forEach((knop) => {
+      knop.setAttribute('aria-pressed', String(knop.dataset.themeSet === thema));
+    });
+  }
+
+  function pasToe(thema: string) {
+    if (!valid.includes(thema)) return;
+    root.setAttribute('data-theme', thema);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, thema);
+    } catch (e) {
+      // localStorage kan gooien in privacystanden. De stand geldt dan voor deze
+      // pagina en is na een navigatie weg. Beter dan een fout.
+    }
+    synchroniseer(thema);
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-theme-set]').forEach((knop) => {
+    knop.addEventListener('click', () => {
+      const gekozen = knop.dataset.themeSet;
+      if (gekozen) pasToe(gekozen);
+    });
+  });
+
+  // De server rendert light als actief. Zet het bij het laden gelijk met wat het
+  // head-scriptje al op <html> heeft gezet.
+  synchroniseer(huidig());
+</script>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--card);
+    flex-shrink: 0;
+  }
+
+  .theme-toggle button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+  }
+
+  .theme-toggle button + button {
+    border-left: 1px solid var(--border);
+  }
+
+  .theme-toggle button:hover {
+    color: var(--ink);
+  }
+
+  .theme-toggle button[aria-pressed='true'] {
+    background: var(--green);
+    color: var(--on-green);
+  }
+
+  .theme-toggle button:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
+  }
+</style>
