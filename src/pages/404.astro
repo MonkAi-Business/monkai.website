@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+// Astro bouwt hier dist/404.html van; Netlify serveert dat bestand vanzelf bij
+// elk pad dat niet bestaat. Geen configuratie nodig in netlify.toml.
+---
+<BaseLayout
+  title="Pagina niet gevonden - MonkAi Business"
+  description="Deze pagina bestaat niet of niet meer."
+  noindex={true}
+>
+  <Nav />
+  <main class="section notfound">
+    <div class="container nf-inner">
+      <!-- Het aapje uit het logo, groter en met een hand in zijn haar. Inline en
+           niet als los .svg-bestand, want zo erft het de tokens uit tokens.css en
+           draait het mee met dark mode (een <img>-SVG kan die variabelen niet lezen). -->
+      <svg class="nf-monkey" viewBox="0 0 220 230" role="img" aria-label="Aapje dat in zijn haar krabt">
+        <!-- vraagtekens -->
+        <text x="14" y="64" class="nf-q nf-q-big">?</text>
+        <text x="46" y="34" class="nf-q nf-q-small">?</text>
+
+        <!-- romp; geeft de arm een schouder om aan te hangen -->
+        <ellipse cx="100" cy="180" rx="42" ry="48" class="nf-face"></ellipse>
+
+        <!-- oren -->
+        <circle cx="54" cy="100" r="18" class="nf-face"></circle>
+        <circle cx="146" cy="100" r="18" class="nf-face"></circle>
+        <circle cx="54" cy="100" r="8" class="nf-accent"></circle>
+        <circle cx="146" cy="100" r="8" class="nf-accent"></circle>
+
+        <!-- kop -->
+        <circle cx="100" cy="100" r="44" class="nf-face"></circle>
+        <circle cx="82" cy="88" r="17.6" class="nf-cutout"></circle>
+        <circle cx="118" cy="88" r="17.6" class="nf-cutout"></circle>
+        <ellipse cx="100" cy="110" rx="28" ry="24" class="nf-cutout"></ellipse>
+
+        <!-- allebei de ogen kijken schuin omhoog, richting de vraagtekens -->
+        <circle cx="78" cy="85" r="6" class="nf-face"></circle>
+        <circle cx="114" cy="85" r="6" class="nf-face"></circle>
+        <circle cx="95.6" cy="110.4" r="3.6" class="nf-face"></circle>
+        <circle cx="104.4" cy="110.4" r="3.6" class="nf-face"></circle>
+
+        <!-- twijfelmondje: geen glimlach, een golfje -->
+        <path d="M 88 121 q 6 -6 12 0 t 12 0" class="nf-mouth"></path>
+
+        <!-- Hand op de kop. Eerst dezelfde vormen in de paginakleur eronder: zonder
+             die contourlijn valt de hand samen met de kop tot één donkere vlek.
+             De arm komt er ná overheen, anders knipt de contour een hap uit de arm. -->
+        <circle cx="150" cy="62" r="14" class="nf-cutout"></circle>
+        <path d="M 143 55 L 119 59" class="nf-finger-key"></path>
+        <path d="M 142 63 L 120 66" class="nf-finger-key"></path>
+        <path d="M 143 70 L 126 74" class="nf-finger-key"></path>
+
+        <circle cx="150" cy="62" r="11.5" class="nf-face"></circle>
+        <path d="M 143 55 L 119 59" class="nf-finger"></path>
+        <path d="M 142 63 L 120 66" class="nf-finger"></path>
+        <path d="M 143 70 L 126 74" class="nf-finger"></path>
+
+        <!-- arm gaat buiten het oor om, anders wordt het één donkere klomp -->
+        <path d="M 120 158 C 178 158, 192 104, 152 66" class="nf-limb"></path>
+
+        <!-- krabstreepjes -->
+        <path d="M 108 46 q 8 -7 16 -3" class="nf-scratch"></path>
+        <path d="M 100 34 q 9 -7 18 -2" class="nf-scratch"></path>
+      </svg>
+
+      <p class="eyebrow nf-code">Fout 404</p>
+      <h1>Hier is iets foutgelopen</h1>
+      <p class="nf-lead">
+        Deze pagina bestaat niet, of niet meer. Waarschijnlijk klopt het adres niet
+        helemaal of is de link waarop je klikte verouderd.
+      </p>
+      <a href="/" class="btn">Terug naar de homepage</a>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .nf-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+    padding: 40px 0 60px;
+  }
+  .nf-monkey {
+    width: 210px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 8px;
+  }
+  .nf-face { fill: var(--ink); }
+  .nf-cutout { fill: var(--bg-page); }
+  .nf-accent { fill: var(--green); }
+  .nf-limb {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 13;
+    stroke-linecap: round;
+  }
+  .nf-finger {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 6.5;
+    stroke-linecap: round;
+  }
+  .nf-finger-key {
+    fill: none;
+    stroke: var(--bg-page);
+    stroke-width: 13;
+    stroke-linecap: round;
+  }
+  .nf-mouth {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+  .nf-scratch {
+    fill: none;
+    stroke: var(--green);
+    stroke-width: 2.6;
+    stroke-linecap: round;
+  }
+  .nf-q {
+    fill: var(--green);
+    font-family: var(--font-serif);
+    font-weight: 600;
+  }
+  .nf-q-big { font-size: 34px; }
+  .nf-q-small { font-size: 22px; opacity: 0.7; }
+
+  .nf-code { margin: 0; }
+  h1 {
+    font-size: 40px;
+    font-weight: 500;
+    margin: 0;
+  }
+  .nf-lead {
+    margin: 0;
+    max-width: 46ch;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+  .nf-inner .btn { margin-top: 14px; }
+
+  @media (max-width: 768px) {
+    .nf-monkey { width: 180px; }
+    h1 { font-size: 30px; }
+  }
+</style>
