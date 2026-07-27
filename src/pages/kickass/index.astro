@@ -1,0 +1,66 @@
+---
+import '../../styles/global.css';
+import { VARIANTS } from '../../kickass/variants';
+---
+<!doctype html>
+<html lang="nl" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kickass: tien superpowers-varianten</title>
+    <meta name="robots" content="noindex, follow" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="section">
+      <div class="container galerij">
+        <div class="kop">
+          <h1>Tien varianten voor de superpowers-stand</h1>
+          <p class="lede">
+            Klik ze door en kies er één. Wat je hier ziet zijn demo's: dezelfde drie secties in tien
+            stijlen. Alleen de winnaar wordt daarna netjes gebouwd en aan de themaschakelaar gehangen.
+          </p>
+        </div>
+        <ol class="tegels">
+          {VARIANTS.map((variant) => (
+            <li>
+              <a class="tegel" href={`/kickass/${variant.slug}/`}>
+                <span class="nummer">{String(variant.nummer).padStart(2, '0')}</span>
+                <h2>{variant.naam}</h2>
+                <p>{variant.pitch}</p>
+                <span class="voet">
+                  <span class="techniek">{variant.techniek}</span>
+                  <span class={`gewicht gewicht--${variant.gewicht}`}>{variant.gewicht}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </main>
+  </body>
+</html>
+
+<style>
+  .galerij { display: flex; flex-direction: column; gap: 44px; }
+  .kop { display: flex; flex-direction: column; gap: 12px; max-width: 660px; }
+  h1 { font-size: 44px; font-weight: 500; }
+  .lede { margin: 0; font-size: 17px; line-height: 1.65; color: var(--muted); }
+  .tegels { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .tegel { display: flex; flex-direction: column; gap: 10px; height: 100%; padding: 28px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); color: var(--ink); }
+  .tegel:hover { border-color: var(--green); color: var(--ink); }
+  .nummer { font-family: var(--font-mono); font-size: 13px; color: var(--green); }
+  .tegel h2 { font-size: 24px; font-weight: 600; }
+  .tegel p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--muted); }
+  .voet { margin-top: auto; padding-top: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; }
+  .techniek { color: var(--muted); }
+  .gewicht { padding: 2px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--ink-soft); }
+  .gewicht--zwaar { border-color: var(--green); color: var(--green); }
+  @media (max-width: 768px) { h1 { font-size: 30px; } .tegels { grid-template-columns: 1fr; } }
+</style>

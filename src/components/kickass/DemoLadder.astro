@@ -1,0 +1,52 @@
+---
+// Kopie van Ladder.astro.
+---
+<section class="section ladder" id="aanpak">
+  <div class="container ladder-inner">
+    <div class="ladder-head">
+      <h2>Drie niveaus, één tempo</h2>
+      <p class="lede">Elk bedrijf start op het eerste niveau. De volgende komen pas als het vorige werkt.</p>
+    </div>
+    <div class="ladder-rows">
+      <div class="ladder-row row-automate">
+        <div class="ladder-title">Automatiseren</div>
+        <p>Repetitieve back-office taken wegnemen met AI-automatisaties in n8n, Make of vergelijkbare tools. Bijvoorbeeld: bonnetjes en facturen automatisch laten lezen, hernoemen, taggen, in de juiste map zetten en doorsturen naar de boekhouding.</p>
+      </div>
+      <div class="ladder-row row-remember">
+        <div class="ladder-title">Onthouden</div>
+        <p>Een second brain voor jezelf, een collective brain voor het bedrijf: één gedeeld bedrijfsgeheugen waar kennis niet langer alleen in hoofden zit. Kennis zo structureren dat je in minuten een eerste versie hebt in plaats van in dagen.</p>
+      </div>
+      <div class="ladder-row row-accelerate">
+        <div class="ladder-title">Versnellen</div>
+        <p>Accelerated coding: ontwikkelteams die met AI sneller en met betere kwaliteit werken, met behoud van controle en security.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .ladder-inner { display:flex; flex-direction:column; gap:44px; }
+  .ladder-head { display:flex; flex-direction:column; gap:12px; max-width:640px; }
+  h2 { font-size:40px; font-weight:500; }
+  .lede { margin:0; font-size:17px; line-height:1.65; color:var(--muted); }
+  .ladder-rows { display:flex; flex-direction:column; gap:14px; }
+  .ladder-row { border-radius:var(--radius); display:grid; grid-template-columns:220px 1fr; gap:32px; align-items:baseline; }
+  .ladder-row p { margin:0; font-size:17px; line-height:1.65; }
+  .ladder-title { font-family:var(--font-serif); }
+  .row-automate { background:var(--card); border:1px solid var(--border); padding:34px 40px; }
+  .row-automate .ladder-title { font-size:26px; font-weight:500; }
+  .row-automate p { color:var(--muted); }
+  .row-remember { background:var(--card-alt); border:1px solid var(--border); padding:38px 40px; }
+  .row-remember .ladder-title { font-size:28px; font-weight:600; }
+  .row-remember p { color:var(--ink-soft); }
+  .row-accelerate { background:var(--dark); padding:42px 40px; }
+  .row-accelerate .ladder-title { font-size:30px; font-weight:600; color:var(--dark-bright); }
+  .row-accelerate p { color:var(--dark-text); }
+  @media (max-width:768px){
+    h2{ font-size:30px; }
+    .ladder-row{ grid-template-columns:1fr; gap:8px; }
+    .ladder-row p{ font-size:16px; }
+    .row-automate{ padding:24px; }
+    .row-remember{ padding:26px 24px; }
+    .row-accelerate{ padding:28px 24px; }
+  }
+</style>

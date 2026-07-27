@@ -1,0 +1,93 @@
+---
+// Pagina-omhulsel voor de demovarianten. Bewust niet BaseLayout: die brengt
+// navigatie, footer, consent-banner, analytics en de sitewide JSON-LD mee, en
+// dat hoort geen van alle op een wegwerpdemo.
+//
+// Het blokkerende themascript uit BaseLayout zit hier niet in: de stand van een
+// demopagina ligt vast en volgt niet de voorkeur van de bezoeker.
+import '../../styles/global.css';
+import { buren, type Variant } from '../../kickass/variants';
+
+interface Props {
+  variant: Variant;
+}
+
+const { variant } = Astro.props;
+const { vorige, volgende } = buren(variant.slug);
+---
+
+<!doctype html>
+<html lang="nl" data-theme="superpowers" data-kickass={variant.slug}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{variant.nummer}. {variant.naam} - kickass</title>
+    <meta name="robots" content="noindex, follow" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="demobalk">
+      <a class="demobalk-terug" href="/kickass/">Alle varianten</a>
+      <span class="demobalk-naam">{variant.nummer}. {variant.naam}</span>
+      <span class="demobalk-nav">
+        <a href={`/kickass/${vorige.slug}/`} title={vorige.naam}>vorige</a>
+        <a href={`/kickass/${volgende.slug}/`} title={volgende.naam}>volgende</a>
+      </span>
+    </div>
+    <slot />
+  </body>
+</html>
+
+<style>
+  /* Bewust niet in tokens uitgedrukt: de balk hoort bij het keuzegereedschap en
+     moet in elke variant hetzelfde blijven, ook als die variant zijn tokens
+     helemaal omgooit. Vandaar vaste waarden. */
+  .demobalk {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 44px;
+    padding: 0 16px;
+    background: #101208;
+    color: #C9CBBF;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    border-bottom: 1px solid #3A3D33;
+  }
+
+  .demobalk a {
+    color: #C9CBBF;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  .demobalk a:hover {
+    color: #FFFFFF;
+    border-bottom-color: #FFFFFF;
+  }
+
+  .demobalk-naam {
+    color: #FFFFFF;
+  }
+
+  .demobalk-nav {
+    margin-left: auto;
+    display: flex;
+    gap: 14px;
+  }
+
+  @media (max-width: 768px) {
+    .demobalk-terug {
+      display: none;
+    }
+  }
+</style>
