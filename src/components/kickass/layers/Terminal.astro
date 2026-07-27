@@ -1,0 +1,149 @@
+---
+// Variant 4: de site als een terminal. Fosforgroen op zwart, scanlijnen, een
+// prompt voor elke sectiekop en een titel die zich uittypt.
+//
+// Patroon voor alle lagen: alle CSS staat onder :root[data-kickass='<slug>'],
+// zodat er niets kan lekken naar een andere variant. --kickass-laag is de
+// vingerafdruk waarop scripts/check-kickass.mjs de isolatie controleert.
+---
+
+<div class="scanlijnen" aria-hidden="true"></div>
+<slot name="hero" />
+<slot name="rest" />
+
+<script>
+  // Typt de hero-titel uit. Doet niets bij reduced motion: dan staat de tekst er
+  // gewoon meteen.
+  const titel = document.querySelector<HTMLElement>('.hero-titel');
+  const rustig = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (titel && !rustig) {
+    const volledig = titel.textContent ?? '';
+    titel.textContent = '';
+    titel.classList.add('typt');
+    let i = 0;
+    const stap = () => {
+      titel.textContent = volledig.slice(0, i);
+      i++;
+      if (i <= volledig.length) window.setTimeout(stap, 45);
+      else titel.classList.remove('typt');
+    };
+    stap();
+  }
+</script>
+
+<style is:global>
+  :root[data-kickass='terminal'] {
+    --kickass-laag: 'terminal';
+
+    --bg-page: #050806;
+    --bg-canvas: #050806;
+    --section-alt: #070B08;
+    --card: #080D09;
+    --card-alt: #0A1109;
+    --border: #1C3A24;
+
+    --ink: #7CFFA8;
+    --ink-soft: #5FD98A;
+    --muted: #3E8E5C;
+
+    --green: #7CFFA8;
+    --green-hover: #C6FFDA;
+    --green-light: #7CFFA8;
+    --on-green: #041008;
+
+    --dark: #0A1109;
+    --dark-text: #7CFFA8;
+    --dark-dim: #3E8E5C;
+    --dark-border: #1C3A24;
+    --dark-bright: #D6FFE6;
+
+    --radius: 0;
+    --radius-sm: 0;
+    --font-serif: 'JetBrains Mono', monospace;
+    --font-sans: 'JetBrains Mono', monospace;
+  }
+
+  :root[data-kickass='terminal'] body {
+    text-shadow: 0 0 6px rgba(124, 255, 168, 0.35);
+  }
+
+  /* De scanlijnen liggen over alles heen maar vangen geen klikken. */
+  :root[data-kickass='terminal'] .scanlijnen {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0px,
+      rgba(0, 0, 0, 0) 2px,
+      rgba(0, 0, 0, 0.28) 3px,
+      rgba(0, 0, 0, 0.28) 4px
+    );
+    animation: terminal-rol 8s linear infinite;
+  }
+
+  @keyframes terminal-rol {
+    from { background-position: 0 0; }
+    to { background-position: 0 200px; }
+  }
+
+  :root[data-kickass='terminal'] h1,
+  :root[data-kickass='terminal'] h2,
+  :root[data-kickass='terminal'] h3 {
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  :root[data-kickass='terminal'] h1 { font-size: 52px; }
+
+  /* De knipperende cursor hangt aan de titel, getypt of niet. */
+  :root[data-kickass='terminal'] .hero-titel::after {
+    content: '_';
+    animation: terminal-knipper 1s steps(1) infinite;
+  }
+
+  @keyframes terminal-knipper {
+    50% { opacity: 0; }
+  }
+
+  /* Een prompt voor elke sectiekop. */
+  :root[data-kickass='terminal'] .ladder-head h2::before,
+  :root[data-kickass='terminal'] .services-inner h2::before {
+    content: '$ ';
+    color: var(--muted);
+  }
+
+  /* Kaarten worden vensters met een titelbalk. */
+  :root[data-kickass='terminal'] .service-card {
+    position: relative;
+    padding-top: 40px;
+  }
+
+  :root[data-kickass='terminal'] .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 24px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(124, 255, 168, 0.06);
+  }
+
+  :root[data-kickass='terminal'] .service-card h3 {
+    font-size: 17px;
+  }
+
+  :root[data-kickass='terminal'] .ladder-row {
+    border-left: 3px solid var(--green);
+  }
+
+  :root[data-kickass='terminal'] .btn {
+    border: 1px solid var(--green);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root[data-kickass='terminal'] .scanlijnen { animation: none; }
+    :root[data-kickass='terminal'] .hero-titel::after { animation: none; }
+  }
+</style>
