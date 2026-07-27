@@ -33,6 +33,12 @@
      is afgestemd op de lichte pagina en verdwijnt op een donker vlak. */
   --dark-border: #3A3D33;
 
+  /* Helderste tekst op een contrastvlak: koppen en hoverstates die er echt uit
+     moeten springen, feller dan --dark-text. Bestaat als token omdat hiervoor
+     eerder --bg-page werd gebruikt, en die kantelt in dark mode naar bijna zwart
+     waardoor de tekst op het contrastvlak verdween. */
+  --dark-bright: #F4F2EC;
+
   /* Slagschaduw. Op een donkere achtergrond moet die zwarter en sterker. */
   --shadow: 0 6px 24px rgba(36, 38, 31, 0.14);
 
@@ -87,6 +93,7 @@
   --dark-text: #E9E7DF;
   --dark-dim: #A2A597;
   --dark-border: #43463A;
+  --dark-bright: #E9E7DF;
 
   --input-bg: #14160F;
   --placeholder: #7B7E71;
