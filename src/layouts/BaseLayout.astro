@@ -10,6 +10,7 @@ const {
 import '../styles/global.css';
 import Analytics from '../components/Analytics.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
+import { THEMES, DEFAULT_THEME, STORAGE_KEY } from '../utils/theme';
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(image, Astro.site).href;
@@ -102,10 +103,37 @@ const siteSchema = {
 const schemas = [siteSchema, ...(Array.isArray(schema) ? schema : [schema])];
 ---
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Zet het thema vóór de eerste verf. Zonder dit ziet wie donker koos eerst
+         een lichte pagina en dan een sprong. Moet inline en blokkerend, dus dit
+         script kan niet importeren; de waarden komen via define:vars uit
+         src/utils/theme.ts. -->
+    <script is:inline define:vars={{ themes: THEMES, key: STORAGE_KEY, fallback: DEFAULT_THEME }}>
+      (function () {
+        var chosen = null;
+        try {
+          // ?theme= in de URL wint en wordt bewaard. Dat is de achterdeur waarmee
+          // een stand te bekijken is waarvan de knop nog niet rendert.
+          var fromUrl = new URLSearchParams(window.location.search).get('theme');
+          if (fromUrl && themes.indexOf(fromUrl) !== -1) {
+            chosen = fromUrl;
+            window.localStorage.setItem(key, fromUrl);
+          }
+          if (!chosen) {
+            var stored = window.localStorage.getItem(key);
+            if (stored && themes.indexOf(stored) !== -1) chosen = stored;
+          }
+        } catch (e) {
+          // localStorage gooit in sommige privacystanden. Dan gewoon de standaard.
+        }
+        document.documentElement.setAttribute('data-theme', chosen || fallback);
+      })();
+    </script>
+
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, follow" />}
