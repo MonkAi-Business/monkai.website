@@ -1,0 +1,179 @@
+---
+// Variant 6: een lichtbundel rond de cursor onthult de pagina. De positie loopt
+// via twee CSS-variabelen op <html>, bijgewerkt met requestAnimationFrame zodat
+// er hooguit één update per frame is - hetzelfde patroon als BackToTop.astro.
+---
+
+<div class="bundel" aria-hidden="true"></div>
+
+<slot name="hero" />
+<slot name="rest" />
+
+<script>
+  const root = document.documentElement;
+  const rustig = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fijneAanwijzer = window.matchMedia('(pointer: fine)').matches;
+
+  if (!rustig && fijneAanwijzer) {
+    let x = window.innerWidth / 2;
+    let y = window.innerHeight / 2;
+    let gepland = false;
+
+    const schrijf = () => {
+      gepland = false;
+      root.style.setProperty('--sx', `${x}px`);
+      root.style.setProperty('--sy', `${y}px`);
+    };
+
+    window.addEventListener('pointermove', (e) => {
+      x = e.clientX;
+      y = e.clientY;
+      if (!gepland) {
+        gepland = true;
+        window.requestAnimationFrame(schrijf);
+      }
+    });
+
+    schrijf();
+    root.setAttribute('data-spotlight', 'aan');
+  }
+  // Geen aanraakscherm en geen rustige stand: dan blijft --sx/--sy gewoon op de
+  // startwaarde uit :root staan (zie hieronder), en zonder JavaScript al
+  // helemaal - de bundel staat dan stil in het midden, wat de opdracht vraagt.
+</script>
+
+<style is:global>
+  :root[data-kickass='spotlight'] {
+    --kickass-laag: 'spotlight';
+
+    /* Middelpunt tot het script iets anders zegt. Zonder deze twee valt de
+       bundel terug op het midden van het scherm, wat precies is wat we willen
+       op een aanraakscherm of zonder JavaScript. */
+    --sx: 50vw;
+    --sy: 45vh;
+
+    --bg-page: #060607;
+    --bg-canvas: #0A0A0B;
+    --section-alt: #08080A;
+    --card: #101012;
+    --card-alt: #16161A;
+    --border: #26262B;
+
+    --ink: #F3F2EE;
+    --ink-soft: #B9B8B2;
+    /* Opgehoogd van #7C7B76: op de donkerste plek (buiten de bundel) ligt er
+       een zwarte overlay bovenop tekst én achtergrond, en die verdonkering
+       trekt beide kleuren naar zwart - het contrast zakt daardoor sneller dan
+       je zou denken. Nagerekend (WCAG-formule, overlay meegerekend): met de
+       oorspronkelijke #7C7B76 zat .service-card p zelfs zonder enige
+       verdonkering al op 4,48:1, net onder de vereiste 4,5:1. #96958F (dezelfde
+       helderheid als --dark-dim) geeft op de donkerste plek nog altijd
+       ongeveer 4,8-5,3:1, zie de laatste regel van de bundel-gradient
+       hieronder voor het bijhorende alphaplafond. */
+    --muted: #96958F;
+
+    --green: #9CB382;
+    --green-hover: #C0D3A8;
+    --green-light: #9CB382;
+    --on-green: #10130B;
+
+    --dark: #16161A;
+    --dark-text: #F3F2EE;
+    --dark-dim: #96958F;
+    --dark-border: #2E2E34;
+    --dark-bright: #FFFFFF;
+
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  /* De bundel ligt bovenop en dempt alles buiten de cirkel. Klikken gaat er
+     gewoon doorheen. De uiterste stop staat op 0,13 in plaats van de eerst
+     voorziene 0,62: een volledig zwarte overlay bovenop tekst én achtergrond
+     trekt beide naar zwart, en dat sloopt het contrast (nagerekend: bij 0,62
+     zakt --muted-tekst op --card tot ongeveer 1,7:1). Bij 0,13 blijft er nog
+     een duidelijk merkbare vignet over, en het contrast op de donkerste plek
+     haalt overal minstens 4,5:1 (grote koppen 3:1). Zie ook de aangepaste
+     --muted hierboven, die twee wijzigingen samen lossen het op. */
+  :root[data-kickass='spotlight'] .bundel {
+    position: fixed;
+    inset: 0;
+    z-index: 400;
+    pointer-events: none;
+    background: radial-gradient(
+      circle 320px at var(--sx) var(--sy),
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.05) 55%,
+      rgba(0, 0, 0, 0.13) 100%
+    );
+  }
+
+  /* Een tweede, warmere gloed onder de inhoud, zodat het licht op de pagina
+     valt in plaats van er alleen overheen te liggen. rgba(156, 179, 130, ...)
+     is exact --green, dus color-mix in plaats van een letterlijk rgb-tripel. */
+  :root[data-kickass='spotlight'] body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      circle 420px at var(--sx) var(--sy),
+      color-mix(in srgb, var(--green) 14%, transparent) 0%,
+      transparent 70%
+    );
+  }
+
+  :root[data-kickass='spotlight'] .section { position: relative; z-index: 1; }
+
+  /* DemoServices zet op de section zelf een ondoorzichtige achtergrond
+     (var(--section-alt)). Die zit boven body::before (z-index 1 tegenover 0)
+     en zou de gloed daar dus volledig aan het zicht onttrekken. Transparant
+     maken lost dat op, net als bij Aurora - de kaarten erin blijven gewoon
+     ondoorzichtig via --card. */
+  :root[data-kickass='spotlight'] .services { background: transparent; }
+
+  /* Kaarten krijgen een rand die naar het licht wijst. */
+  :root[data-kickass='spotlight'] .service-card,
+  :root[data-kickass='spotlight'] .ladder-row {
+    position: relative;
+  }
+
+  :root[data-kickass='spotlight'] .service-card::after,
+  :root[data-kickass='spotlight'] .ladder-row::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(
+      circle 380px at var(--sx) var(--sy),
+      color-mix(in srgb, var(--green) 90%, transparent),
+      transparent 100%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  :root[data-kickass='spotlight'] h1 { font-size: 76px; letter-spacing: -0.03em; }
+
+  /* DemoHero.astro verkleint h1 zelf onder 768px (zie de terminal-laag voor
+     dezelfde valkuil): zonder dit blok wint de 76px hierboven op elke breedte. */
+  @media (max-width: 768px) {
+    :root[data-kickass='spotlight'] h1 { font-size: 40px; }
+    :root[data-kickass='spotlight'] .bundel {
+      /* Geen fijne aanwijzer op mobiel: het script slaat pointermove dan over
+         en --sx/--sy staan vast op de startwaarde uit :root hierboven. Dus
+         var(--sx) var(--sy) gebruiken in plaats van een eigen vaste positie
+         te dupliceren. */
+      background: radial-gradient(circle 220px at var(--sx) var(--sy), rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.13) 100%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root[data-kickass='spotlight'] .bundel { display: none; }
+  }
+</style>
