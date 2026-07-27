@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { readingTimeLabel } from '../../utils/readingTime';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -12,6 +13,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const fmt = (d: Date) => new Intl.DateTimeFormat('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' }).format(d);
+const readingTime = readingTimeLabel(post.body ?? '');
 
 const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
 const articleSchema = {
@@ -41,7 +43,7 @@ const breadcrumbSchema = {
   <Nav />
   <main class="section">
     <article class="container article">
-      <div class="meta"><span>{fmt(post.data.date)}</span><span class="dot">·</span><span>Door Stijn De Ketelaere</span></div>
+      <div class="meta"><span>{fmt(post.data.date)}</span><span class="dot">·</span><span>{readingTime}</span><span class="dot">·</span><span>Door Stijn De Ketelaere</span></div>
       <h1>{post.data.title}</h1>
       {post.data.image && (
         <img class="cover" src={post.data.image} alt={post.data.imageAlt ?? ''} width="1200" height="800" loading="eager" />

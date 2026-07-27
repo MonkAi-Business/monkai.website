@@ -9,17 +9,34 @@ de aankondiging van de reeks.
 
 ## Hoe geef je een post vrij
 
+Gebruik hiervoor de skill `blogpost` (`.claude/skills/blogpost/SKILL.md`), onderdeel
+"Vrijdagroutine". Die bevat de volledige tone of voice en een checklist.
+
+Alle posts hieronder zijn geschreven vóór de huisstijl van 27 juli 2026 vastlag.
+**Vrijgeven betekent dus altijd ook herschrijven**: prikkelende titel, opening met een
+echte anekdote van Stijn, onderzoeksdetails terugbrengen tot één ankerpunt, inkorten tot
+600 à 800 woorden, en een slot dat zegt wat je maandag doet.
+
 Op de vrijdag zelf, per post:
 
-1. Lees de post na en pas aan wat je wil wijzigen.
-2. Zet in de frontmatter `draft: true` → `draft: false`.
-3. Zet `date` op de vrijdag van publicatie (zie de kolom hieronder). Zo leest de blog
+1. Lees de post na. Stijn levert de anekdote voor de opening.
+2. Herschrijf de post naar de huisstijl. Pas ook de `description` aan.
+3. Check de feiten opnieuw. Deze teksten dateren van juli 2026; producten, prijzen en
+   wetgeving schuiven op.
+4. Check de interne links tegen wat al live staat (zie "Let op: interne links").
+5. Zet in de frontmatter `draft: true` → `draft: false`.
+6. Zet `date` op de vrijdag van publicatie (zie de kolom hieronder). Zo leest de blog
    als een wekelijkse reeks en staat de nieuwste bovenaan.
-4. Commit en push naar `main`. Netlify herbouwt automatisch, de post staat binnen enkele
+7. Schrijf de LinkedIn-post in `content/linkedin/<slug>.md`.
+8. `npm run build` en controleer dat de post gebouwd wordt.
+9. Commit en push naar `main`. Netlify herbouwt automatisch, de post staat binnen enkele
    minuten online op `/blog/<slug>`.
 
-Vergeet stap 3 niet: zonder aangepaste datum zakt de post meteen tussen de oudere stukken
+Vergeet stap 6 niet: zonder aangepaste datum zakt de post meteen tussen de oudere stukken
 en oogt de volgorde op `/blog` willekeurig.
+
+De leestijd hoef je nergens in te vullen. Die wordt berekend uit de tekst
+(`src/utils/readingTime.ts`) en verschijnt vanzelf op de detailpagina en in de lijst.
 
 ## De volgorde
 
@@ -43,6 +60,7 @@ agents en skills, en tot slot governance, wetgeving en kosten.
 | 13 | 23 okt 2026 | `governance-zit-in-je-prompts` | Governance in de praktijk, bovenop de wetgeving van week 12. |
 | 14 | 30 okt 2026 | `ai-tokens-niet-eeuwig-gesponsord` | De kostenkant, nu duidelijk is wat je allemaal draait. |
 | 15 | 6 nov 2026 | `n8n-automatisatie-en-ai` | Zet automatisatie, skills, governance en kosten samen. Sluit de reeks. |
+| 16 | 13 nov 2026 | `duizend-inspecties-later` | PinPoint Inspections: waarom inspectiedata in pdf's onbruikbaar is en wat AI ermee kan zodra ze gestructureerd is. Al in de huisstijl geschreven. |
 
 ## Let op: interne links
 
