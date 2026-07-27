@@ -1,4 +1,6 @@
 :root {
+  color-scheme: light;
+
   --bg-page: #F4F2EC;
   --bg-canvas: #E7E5DE;
   --ink: #24261F;
@@ -41,4 +43,54 @@
   --font-serif: 'Source Serif 4', serif;
   --font-sans: 'Work Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Dark mode.
+ *
+ * Twee dingen die tegenintuïtief zijn en die je niet moet "verbeteren":
+ *
+ * 1. --green wordt hier *lichter* dan in light mode. Het brandgroen #4C5F3B haalt
+ *    op een bijna zwarte achtergrond geen leesbaar contrast. Daardoor draait de
+ *    knop om: lichtgroen vlak met donkere tekst. Daarvoor bestaat --on-green.
+ *
+ * 2. --dark / --dark-text / --dark-dim betekent "contrastvlak", niet letterlijk
+ *    "donker". In light mode is dat een donker vlak op een lichte pagina (de
+ *    footer, de kaart Raad van advies in Services, de trede Versnellen in Ladder,
+ *    de kopieerblokken op /inspiratie). In dark mode moet zo'n vlak juist lichter
+ *    zijn dan de pagina, anders verdwijnt het. Vandaar --dark: #2C2F26, boven
+ *    --bg-page. De namen blijven zoals ze zijn: ze zitten in 14 bestanden.
+ *
+ * De superpowers-stand deelt voorlopig deze waarden, zodat een voorbeeldweergave
+ * iets samenhangends toont. Deel 2 vervangt dat door een eigen blok.
+ */
+:root[data-theme='dark'],
+:root[data-theme='superpowers'] {
+  color-scheme: dark;
+
+  --bg-page: #191B15;
+  --bg-canvas: #202219;
+  --section-alt: #1D1F18;
+  --card: #232620;
+  --card-alt: #2A2D24;
+  --border: #34372C;
+
+  --ink: #E9E7DF;
+  --ink-soft: #C4C7B8;
+  --muted: #95988A;
+
+  --green: #9CB382;
+  --green-hover: #B4C89C;
+  --green-light: #A8BE8F;
+  --on-green: #16180F;
+
+  --dark: #2C2F26;
+  --dark-text: #E9E7DF;
+  --dark-dim: #A2A597;
+  --dark-border: #43463A;
+
+  --input-bg: #14160F;
+  --placeholder: #7B7E71;
+
+  --danger: #E58C7E;
+  --shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
 }
