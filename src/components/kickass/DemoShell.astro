@@ -47,7 +47,14 @@ const { vorige, volgende } = buren(variant.slug);
 <style>
   /* Bewust niet in tokens uitgedrukt: de balk hoort bij het keuzegereedschap en
      moet in elke variant hetzelfde blijven, ook als die variant zijn tokens
-     helemaal omgooit. Vandaar vaste waarden. */
+     helemaal omgooit. Vandaar vaste waarden.
+     --demobalk-hoogte is de ene bron van waarheid voor de balkhoogte: een laag
+     die zijn achtergrond onder de balk laat beginnen (top: var(--demobalk-hoogte))
+     moet deze variabele gebruiken, niet het getal 44px overtypen. */
+  :root {
+    --demobalk-hoogte: 44px;
+  }
+
   .demobalk {
     position: sticky;
     top: 0;
@@ -55,7 +62,7 @@ const { vorige, volgende } = buren(variant.slug);
     display: flex;
     align-items: center;
     gap: 16px;
-    height: 44px;
+    height: var(--demobalk-hoogte);
     padding: 0 16px;
     background: #101208;
     color: #C9CBBF;

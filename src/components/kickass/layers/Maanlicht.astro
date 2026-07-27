@@ -60,12 +60,13 @@
 
   /* De achtergrond hangt achter de hero en schuift mee weg zodra je voorbij de
      eerste schermhoogte scrolt. Vandaar absoluut en niet fixed. De demobalk is
-     sticky en 44px hoog; de achtergrond begint op top:44px zodat ze precies
-     onder de balk aansluit in plaats van erachter te beginnen of eronder uit
-     te steken. */
+     sticky; de achtergrond begint op top:var(--demobalk-hoogte) zodat ze
+     precies onder de balk aansluit in plaats van erachter te beginnen of
+     eronder uit te steken. --demobalk-hoogte komt uit DemoShell.astro, niet
+     hier als los getal herhaald. */
   :root[data-kickass='maanlicht'] .maan-achtergrond {
     position: absolute;
-    inset: 44px 0 auto 0;
+    inset: var(--demobalk-hoogte) 0 auto 0;
     height: 100vh;
     overflow: hidden;
     z-index: 0;
