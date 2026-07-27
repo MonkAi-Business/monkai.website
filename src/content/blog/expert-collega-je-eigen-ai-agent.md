@@ -5,6 +5,7 @@ description: "Een custom agent is een AI die je maar één keer inwerkt. Daarna 
 tags: ["agents", "claude", "chatgpt", "gemini", "copilot"]
 image: "/media/blog/expert-collega-je-eigen-ai-agent.svg"
 imageAlt: "Een figuur met een kaartje met instructies, naast de logo's van vier AI-tools"
+draft: true
 ---
 
 Wie vaak met een AI werkt, kent de sleur: elke keer opnieuw uitleggen wie je bent, in welke toon je schrijft, wat belangrijk is en wat je zeker niet wil. Je typt het gesprek na gesprek opnieuw, of je vergeet het en krijgt iets terug dat je toch weer moet bijsturen. Een goede stagiair leg je het één keer uit. Daarna weet hij hoe het hoort en doet hij het zelf. Dat is precies wat een custom agent is: een collega die je één keer inwerkt.
@@ -53,3 +54,5 @@ Zelfde idee, andere knop. Wie de ene tool onder de knie heeft, vindt de rest met
 ## Begin klein
 
 Je hoeft niet meteen tien collega's te maken. Kies één taak die je elke week doet en waar je telkens hetzelfde zit uit te leggen. Zet die uitleg één keer goed op papier, giet ze in een agent, en gebruik hem een week. Werkt iets niet zoals je wil, dan pas je de instructies aan, net zoals je een echte collega bijstuurt. Na een paar keer heb je een expert-collega die je werk kent. En die je maar één keer hoefde in te werken.
+
+Zo'n collega denkt en schrijft mee, maar doet voorlopig niets buiten het gesprek. De volgende stap is hem laten aansluiten op de processen die bij jou al draaien, zodat hij een bestelling echt kan klaarzetten in plaats van ze te beschrijven. Hoe dat werkt, staat in [n8n: laat je automatisatie en je AI met elkaar praten](/blog/n8n-automatisatie-en-ai).

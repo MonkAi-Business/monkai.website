@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Links een vaste keten van automatisatiestappen, rechts een AI-cirkel, met pijlen in beide richtingen ertussen">
+  <!-- Brand-kleuren staan hier hardcoded: een via <img> geladen SVG erft geen CSS-variabelen uit tokens.css. -->
+  <!-- Web-veilige font-stack: een via <img> geladen SVG erft geen webfonts. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EDEBE3"/>
+      <stop offset="1" stop-color="#E4E2D9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+
+  <!-- de automatisatie: een vaste keten van stappen -->
+  <line x1="240" y1="415" x2="290" y2="415" stroke="#37472A" stroke-width="6" stroke-linecap="round"/>
+  <line x1="400" y1="415" x2="450" y2="415" stroke="#37472A" stroke-width="6" stroke-linecap="round"/>
+
+  <rect x="130" y="360" width="110" height="110" rx="16" fill="#FBFAF6" stroke="#D9DACE" stroke-width="2"/>
+  <rect x="156" y="394" width="60" height="11" rx="5.5" fill="#4C5F3B"/>
+  <rect x="156" y="422" width="38" height="11" rx="5.5" fill="#C7C8BC"/>
+
+  <rect x="290" y="360" width="110" height="110" rx="16" fill="#FBFAF6" stroke="#D9DACE" stroke-width="2"/>
+  <rect x="316" y="394" width="60" height="11" rx="5.5" fill="#24261F"/>
+  <rect x="316" y="422" width="38" height="11" rx="5.5" fill="#C7C8BC"/>
+
+  <rect x="450" y="360" width="110" height="110" rx="16" fill="#FBFAF6" stroke="#D9DACE" stroke-width="2"/>
+  <rect x="476" y="394" width="60" height="11" rx="5.5" fill="#24261F"/>
+  <rect x="476" y="422" width="38" height="11" rx="5.5" fill="#C7C8BC"/>
+
+  <!-- richting een: de keten roept het model op -->
+  <line x1="600" y1="358" x2="812" y2="358" stroke="#37472A" stroke-width="6" stroke-linecap="round"/>
+  <path d="M800 342 l19 16 l-19 16" fill="none" stroke="#37472A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- richting twee: het model roept de keten op -->
+  <line x1="812" y1="472" x2="600" y2="472" stroke="#8FA478" stroke-width="6" stroke-linecap="round" stroke-dasharray="11 13"/>
+  <path d="M612 456 l-19 16 l19 16" fill="none" stroke="#8FA478" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- de AI -->
+  <circle cx="960" cy="415" r="124" fill="#E9EADF" stroke="#D9DACE" stroke-width="2"/>
+  <circle cx="960" cy="415" r="80" fill="#8FA478"/>
+  <circle cx="960" cy="415" r="35" fill="#4C5F3B"/>
+</svg>
