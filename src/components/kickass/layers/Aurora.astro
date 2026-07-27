@@ -95,7 +95,7 @@
   }
 
   :root[data-kickass='aurora'] .vlek-4 {
-    background: #6BF2C4;
+    background: var(--green);
     top: 44%;
     left: 40%;
     width: 26vw;
@@ -136,7 +136,22 @@
     padding: 48px 64px;
     border-radius: var(--radius);
     background: color-mix(in srgb, var(--bg-page) 68%, transparent);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(24px) saturate(140%);
+    box-shadow: var(--shadow);
+  }
+
+  /* Zelfde probleem als bij de hero: de ladderkop (h2 + lede) heeft geen kaart
+     in de brief-code en staat rechtstreeks op het verloop. Gemeten op de
+     worst-case stand van de vlekken: de lede zakte tot 3,63-4,23:1, en zelfs
+     in rust al 4,24-4,49:1 - dus geen zeldzame samenloop maar een structureel
+     tekort. Zelfde matglazen paneel als de hero, maar krapper omdat dit een
+     sectiekop is en geen hero. */
+  :root[data-kickass='aurora'] .ladder-head {
+    padding: 28px 32px;
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--bg-page) 68%, transparent);
+    border: 1px solid var(--border);
     backdrop-filter: blur(24px) saturate(140%);
     box-shadow: var(--shadow);
   }
@@ -153,7 +168,7 @@
 
   @supports (background-clip: text) or (-webkit-background-clip: text) {
     :root[data-kickass='aurora'] h1 {
-      background: linear-gradient(120deg, #FFFFFF 20%, #6BF2C4 60%, #B79BFF 100%);
+      background: linear-gradient(120deg, var(--dark-bright) 20%, var(--green) 60%, #B79BFF 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -166,7 +181,13 @@
     :root[data-kickass='aurora'] h1 { font-size: 44px; }
     :root[data-kickass='aurora'] h2 { font-size: 32px; }
     :root[data-kickass='aurora'] .vlek { width: 80vw; height: 80vw; }
+    /* .vlek-4 heeft dezelfde specificiteit als .vlek hierboven en staat er
+       verderop in het bestand, dus zonder deze regel wordt de kleine
+       accentvlek op mobiel ook 80vw. Zelfde verhouding als op desktop
+       aanhouden (26vw op een basis van 46vw). */
+    :root[data-kickass='aurora'] .vlek-4 { width: 45vw; height: 45vw; }
     :root[data-kickass='aurora'] .hero-inner { padding: 28px 24px; }
+    :root[data-kickass='aurora'] .ladder-head { padding: 20px 22px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
