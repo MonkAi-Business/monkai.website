@@ -21,3 +21,18 @@
   to = "https://monkai.business/:splat"
   status = 301
   force = true
+
+# /prompts is een kortere URL om tijdens een sessie hardop te noemen; ze stuurt door
+# naar het echte materiaal op /inspiratie. force = true omdat de build ook een
+# /prompts/index.html neerzet (Astro's redirect-fallback) die deze regel anders schaduwt.
+[[redirects]]
+  from = "/prompts"
+  to = "/inspiratie"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/prompts/*"
+  to = "/inspiratie"
+  status = 301
+  force = true
