@@ -22,6 +22,50 @@
   status = 301
   force = true
 
+# Security headers voor alle pagina's. Netlify zet zelf al Strict-Transport-Security;
+# de rest stond er niet en kwam uit een externe scan naar boven.
+#
+# Bewust NIET gezet: X-XSS-Protection. Die header is dood (Chrome haalde hem in 2019
+# weg, Firefox heeft hem nooit gehad) en de oude filter veroorzaakte zelf lekken.
+# OWASP raadt aan hem weg te laten of op 0 te zetten. Scanners vragen er nog naar;
+# negeer dat. Ook 'Server: Netlify' kan je op Netlify niet weghalen, en die header
+# verraadt geen versienummer, dus daar valt niets aan te doen of te winnen.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Niemand mag de site in een iframe zetten (clickjacking). frame-ancestors in de
+    # CSP hieronder doet hetzelfde voor moderne browsers; deze is voor de oudere.
+    X-Frame-Options = "DENY"
+    # Browser mag het content-type niet zelf "raden" en zo een bestand als script draaien.
+    X-Content-Type-Options = "nosniff"
+    # Externe sites krijgen enkel het domein te zien, niet het volledige pad.
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Zet browser-API's uit die de site toch niet gebruikt.
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+
+    # Content-Security-Policy.
+    #
+    # Belangrijke beperking, lees dit voor je hem aanscherpt: script-src en style-src
+    # staan op 'unsafe-inline'. Dat moet, want de site draait op inline scripts met
+    # define:vars (Analytics, ConsentBanner, het filter op /blog en /inspiratie, het
+    # onderwerp-veld in Contact) en op inline style-attributen (BlogTeaser, de img-tags
+    # in blogposts). Hashes zijn geen optie: Astro's experimentele CSP hasht enkel
+    # gebundelde scripts, niet is:inline. Wie dit wil dichtzetten, moet eerst al die
+    # scripts naar losse bestanden verhuizen - dat is een echte refactor, geen tweak.
+    #
+    # Wat deze CSP dan wel doet: geen scripts van vreemde domeinen, geen eval,
+    # geen plugins, geen base-tag-injectie, formulieren kunnen enkel naar de eigen
+    # site posten, en de pagina kan nergens ingeframed worden.
+    #
+    # posthog.com staat als wildcard omdat PostHog dat zelf voorschrijft: hun
+    # subdomeinen wisselen en een verkeerde CSP breekt de meting *stil* - het script
+    # laadt, er komen gewoon geen events binnen. img-src/style-src erbij is voor de
+    # PostHog-toolbar. Die toolbar heeft daarnaast 'unsafe-eval' nodig en dat geven we
+    # niet; het meten zelf werkt zonder. frame-src houdt YouTube en Vimeo open voor
+    # VideoEmbed.astro - de use-case-video's zijn nu nog placeholders, maar zodra er
+    # een echte embed in komt zou een strakkere CSP die zwart laten.
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' https://*.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.posthog.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.posthog.com; media-src 'self'; connect-src 'self' https://*.posthog.com; worker-src 'self' blob:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com; upgrade-insecure-requests"
+
 # /prompts is een kortere URL om tijdens een sessie hardop te noemen; ze stuurt door
 # naar het echte materiaal op /inspiratie. force = true omdat de build ook een
 # /prompts/index.html neerzet (Astro's redirect-fallback) die deze regel anders schaduwt.
