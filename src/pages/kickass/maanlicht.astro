@@ -1,0 +1,19 @@
+---
+import DemoShell from '../../components/kickass/DemoShell.astro';
+import DemoHero from '../../components/kickass/DemoHero.astro';
+import DemoLadder from '../../components/kickass/DemoLadder.astro';
+import DemoServices from '../../components/kickass/DemoServices.astro';
+import Laag from '../../components/kickass/layers/Maanlicht.astro';
+import { variantBySlug } from '../../kickass/variants';
+
+const variant = variantBySlug('maanlicht');
+---
+<DemoShell variant={variant}>
+  <Laag>
+    <DemoHero slot="hero" />
+    <Fragment slot="rest">
+      <DemoLadder />
+      <DemoServices />
+    </Fragment>
+  </Laag>
+</DemoShell>

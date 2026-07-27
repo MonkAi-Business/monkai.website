@@ -1,0 +1,172 @@
+---
+// Variant 2: de avondscene vult het scherm achter de hero. Het beeld zoomt heel
+// traag in, een maan komt op en er trekt een lichtwaas overheen.
+//
+// Het oorspronkelijke idee was een videoloop. Het aangeleverde beeld toont exact
+// dezelfde scene voor een fractie van het gewicht, dus dat is het geworden. Komt
+// er later toch een echte loop, dan vervangt een <video> hier de <img> en blijft
+// de rest van de laag staan.
+---
+
+<div class="maan-achtergrond" aria-hidden="true">
+  <img
+    class="maan-beeld"
+    src="/media/superpowers/monkai.webp"
+    srcset="/media/superpowers/monkai-640.webp 640w, /media/superpowers/monkai.webp 1254w"
+    sizes="100vw"
+    alt=""
+    width="1254"
+    height="1254"
+    fetchpriority="high"
+  />
+  <div class="maan-schijf"></div>
+  <div class="maan-waas"></div>
+  <div class="maan-sluier"></div>
+</div>
+
+<slot name="hero" />
+<slot name="rest" />
+
+<style is:global>
+  :root[data-kickass='maanlicht'] {
+    --kickass-laag: 'maanlicht';
+
+    --bg-page: #080D18;
+    --bg-canvas: #0B1220;
+    --section-alt: #0A101C;
+    --card: #111A2B;
+    --card-alt: #16223A;
+    --border: #24314B;
+
+    --ink: #EAF1FF;
+    --ink-soft: #C4D2EC;
+    --muted: #8FA2C4;
+
+    --green: #8FB6FF;
+    --green-hover: #B4CEFF;
+    --green-light: #8FB6FF;
+    --on-green: #08101F;
+
+    --dark: #16223A;
+    --dark-text: #EAF1FF;
+    --dark-dim: #9FB0CE;
+    --dark-border: #2C3A57;
+    --dark-bright: #FFFFFF;
+
+    --radius: 14px;
+    --radius-sm: 10px;
+    --shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+  }
+
+  /* De achtergrond hangt achter de hero en schuift mee weg zodra je voorbij de
+     eerste schermhoogte scrolt. Vandaar absoluut en niet fixed. De demobalk is
+     sticky en 44px hoog; de achtergrond begint op top:44px zodat ze precies
+     onder de balk aansluit in plaats van erachter te beginnen of eronder uit
+     te steken. */
+  :root[data-kickass='maanlicht'] .maan-achtergrond {
+    position: absolute;
+    inset: 44px 0 auto 0;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  :root[data-kickass='maanlicht'] body {
+    position: relative;
+  }
+
+  :root[data-kickass='maanlicht'] .maan-beeld {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    animation: maan-zoom 40s ease-in-out infinite alternate;
+  }
+
+  @keyframes maan-zoom {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.18); }
+  }
+
+  /* De maan komt op vanachter de onderrand van het beeld. */
+  :root[data-kickass='maanlicht'] .maan-schijf {
+    position: absolute;
+    top: 16%;
+    right: 12%;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 34%, #FFFDF2, #D8E2F5 58%, #A8B8D6);
+    box-shadow: 0 0 90px 30px rgba(180, 205, 255, 0.35);
+    animation: maan-op 26s ease-out infinite alternate;
+  }
+
+  @keyframes maan-op {
+    from { transform: translateY(60px); opacity: 0.75; }
+    to { transform: translateY(-10px); opacity: 1; }
+  }
+
+  /* Lichtwaas die traag over het beeld trekt. */
+  :root[data-kickass='maanlicht'] .maan-waas {
+    position: absolute;
+    inset: -20% -40%;
+    background: linear-gradient(
+      104deg,
+      transparent 42%,
+      color-mix(in srgb, var(--green) 16%, transparent) 50%,
+      transparent 58%
+    );
+    animation: maan-trek 18s linear infinite;
+  }
+
+  @keyframes maan-trek {
+    from { transform: translateX(-30%); }
+    to { transform: translateX(30%); }
+  }
+
+  /* Sluier zodat de tekst leesbaar blijft op elk deel van het beeld. */
+  :root[data-kickass='maanlicht'] .maan-sluier {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--bg-page) 55%, transparent) 0%,
+      color-mix(in srgb, var(--bg-page) 72%, transparent) 55%,
+      var(--bg-page) 100%
+    );
+  }
+
+  :root[data-kickass='maanlicht'] .hero {
+    min-height: 100vh;
+    justify-content: center;
+  }
+
+  /* De hero-inhoud als glaskaart boven het beeld. */
+  :root[data-kickass='maanlicht'] .hero-inner {
+    padding: 48px 56px;
+    border-radius: 20px;
+    background: color-mix(in srgb, var(--bg-canvas) 42%, transparent);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(14px);
+    box-shadow: var(--shadow);
+  }
+
+  :root[data-kickass='maanlicht'] .service-card,
+  :root[data-kickass='maanlicht'] .ladder-row {
+    backdrop-filter: blur(8px);
+  }
+
+  @media (max-width: 768px) {
+    :root[data-kickass='maanlicht'] .hero-inner { padding: 30px 22px; }
+    :root[data-kickass='maanlicht'] .maan-schijf { width: 74px; height: 74px; right: 8%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root[data-kickass='maanlicht'] .maan-beeld,
+    :root[data-kickass='maanlicht'] .maan-schijf,
+    :root[data-kickass='maanlicht'] .maan-waas {
+      animation: none;
+    }
+    :root[data-kickass='maanlicht'] .maan-beeld { transform: scale(1.05); }
+  }
+</style>
