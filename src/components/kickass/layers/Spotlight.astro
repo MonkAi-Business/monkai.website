@@ -35,7 +35,6 @@
     });
 
     schrijf();
-    root.setAttribute('data-spotlight', 'aan');
   }
   // Geen aanraakscherm en geen rustige stand: dan blijft --sx/--sy gewoon op de
   // startwaarde uit :root staan (zie hieronder), en zonder JavaScript al
@@ -55,29 +54,38 @@
     --bg-page: #060607;
     --bg-canvas: #0A0A0B;
     --section-alt: #08080A;
-    --card: #101012;
-    --card-alt: #16161A;
+    /* Lichtjes doorschijnend in plaats van dekkend: de bundel ligt nu ONDER de
+       inhoud (zie .bundel hieronder) en moet door de kaarten heen kunnen
+       schijnen, anders blijft het effect beperkt tot de kieren tussen kaarten.
+       --bg-page is altijd donkerder dan of gelijk aan --card, dus wat er door
+       de kaart heen schemert kan de effectieve kleur alleen maar donkerder
+       maken, nooit lichter - dat verhoogt het contrast voor de lichte tekst
+       erop, het verlaagt het nooit. Zie de opmerking bij --muted. */
+    --card: color-mix(in srgb, #101012 84%, transparent);
+    --card-alt: color-mix(in srgb, #16161A 86%, transparent);
     --border: #26262B;
 
     --ink: #F3F2EE;
     --ink-soft: #B9B8B2;
-    /* Opgehoogd van #7C7B76: op de donkerste plek (buiten de bundel) ligt er
-       een zwarte overlay bovenop tekst én achtergrond, en die verdonkering
-       trekt beide kleuren naar zwart - het contrast zakt daardoor sneller dan
-       je zou denken. Nagerekend (WCAG-formule, overlay meegerekend): met de
-       oorspronkelijke #7C7B76 zat .service-card p zelfs zonder enige
-       verdonkering al op 4,48:1, net onder de vereiste 4,5:1. #96958F (dezelfde
-       helderheid als --dark-dim) geeft op de donkerste plek nog altijd
-       ongeveer 4,8-5,3:1, zie de laatste regel van de bundel-gradient
-       hieronder voor het bijhorende alphaplafond. */
-    --muted: #96958F;
+    /* Opgehoogd van #7C7B76 naar #86857F, een bescheiden stap (niet de #96958F
+       van de vorige ronde). Nu de bundel niet meer bovenop tekst ligt (zie
+       .bundel), is het enige contrastprobleem de basiswaarde zelf: zelfs
+       zonder enige verdonkering zat --muted-tekst op --card met de
+       oorspronkelijke hex op 4,48:1, net onder de vereiste 4,5:1. #86857F haalt
+       daar 5,14:1, met marge. Overal waar de kaart door de bundel gedimd wordt
+       (verder van de cursor) gaat dat cijfer alleen maar omhoog, nooit omlaag -
+       zie de opmerking bij --card. */
+    --muted: #86857F;
 
     --green: #9CB382;
     --green-hover: #C0D3A8;
     --green-light: #9CB382;
     --on-green: #10130B;
 
-    --dark: #16161A;
+    /* Zelfde redenering als --card: doorschijnend zodat de bundel ook door de
+       donkere Raad-van-advies-kaart en de rij "Versnellen" heen zichtbaar
+       blijft. */
+    --dark: color-mix(in srgb, #16161A 84%, transparent);
     --dark-text: #F3F2EE;
     --dark-dim: #96958F;
     --dark-border: #2E2E34;
@@ -87,24 +95,27 @@
     --radius-sm: 6px;
   }
 
-  /* De bundel ligt bovenop en dempt alles buiten de cirkel. Klikken gaat er
-     gewoon doorheen. De uiterste stop staat op 0,13 in plaats van de eerst
-     voorziene 0,62: een volledig zwarte overlay bovenop tekst én achtergrond
-     trekt beide naar zwart, en dat sloopt het contrast (nagerekend: bij 0,62
-     zakt --muted-tekst op --card tot ongeveer 1,7:1). Bij 0,13 blijft er nog
-     een duidelijk merkbare vignet over, en het contrast op de donkerste plek
-     haalt overal minstens 4,5:1 (grote koppen 3:1). Zie ook de aangepaste
-     --muted hierboven, die twee wijzigingen samen lossen het op. */
+  /* Fixronde 1 zette de bundel bovenop de inhoud (z-index 400) en moest de
+     opaciteit daarom fors afzwakken: een zwarte waas over lichte tekst op een
+     donkere pagina trekt tekst én achtergrond allebei naar zwart, en dat
+     sloopt het contrast sneller dan de opaciteit doet vermoeden. De bundel ligt
+     nu ONDER de secties (z-index 0, .section zit op 1), zodat hij alleen de
+     achtergrond verduistert en de tekst zelf altijd op volle helderheid blijft
+     staan. Een donkerdere achtergrond onder lichte tekst verhóógt het contrast
+     net, dus de opaciteit kan weer dicht bij de oorspronkelijke 0,62 - hier
+     0,58, met de middelste stop mee opgeschaald. Klikken gaan er sowieso
+     doorheen omdat de bundel achterin ligt, pointer-events:none staat er nog
+     bij voor de duidelijkheid. */
   :root[data-kickass='spotlight'] .bundel {
     position: fixed;
     inset: 0;
-    z-index: 400;
+    z-index: 0;
     pointer-events: none;
     background: radial-gradient(
       circle 320px at var(--sx) var(--sy),
       rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.05) 55%,
-      rgba(0, 0, 0, 0.13) 100%
+      rgba(0, 0, 0, 0.24) 55%,
+      rgba(0, 0, 0, 0.58) 100%
     );
   }
 
@@ -127,10 +138,10 @@
   :root[data-kickass='spotlight'] .section { position: relative; z-index: 1; }
 
   /* DemoServices zet op de section zelf een ondoorzichtige achtergrond
-     (var(--section-alt)). Die zit boven body::before (z-index 1 tegenover 0)
-     en zou de gloed daar dus volledig aan het zicht onttrekken. Transparant
-     maken lost dat op, net als bij Aurora - de kaarten erin blijven gewoon
-     ondoorzichtig via --card. */
+     (var(--section-alt)). Die zit boven body::before en .bundel (z-index 1
+     tegenover 0) en zou ze daar dus volledig aan het zicht onttrekken.
+     Transparant maken lost dat op, net als bij Aurora - de kaarten erin
+     blijven zelf licht doorschijnend via --card, zie hierboven. */
   :root[data-kickass='spotlight'] .services { background: transparent; }
 
   /* Kaarten krijgen een rand die naar het licht wijst. */
@@ -146,11 +157,20 @@
     inset: -1px;
     border-radius: inherit;
     padding: 1px;
+    /* Dit pseudo-element is absoluut gepositioneerd op de kaart, dus zonder
+       background-attachment:fixed wordt "at var(--sx) var(--sy)" gelezen als
+       pixels vanaf de linkerbovenhoek van de KAART zelf, niet van het
+       viewport - de rand zou dan alleen oplichten wanneer de cursor toevallig
+       vlak bij die hoek van de pagina staat, in plaats van vlak bij de kaart.
+       fixed dwingt dezelfde viewport-coördinaten af als bij .bundel
+       hierboven, dat wél goed staat omdat het zelf inset:0 op de hele
+       viewport heeft. */
     background: radial-gradient(
       circle 380px at var(--sx) var(--sy),
       color-mix(in srgb, var(--green) 90%, transparent),
       transparent 100%
     );
+    background-attachment: fixed;
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -169,7 +189,7 @@
          en --sx/--sy staan vast op de startwaarde uit :root hierboven. Dus
          var(--sx) var(--sy) gebruiken in plaats van een eigen vaste positie
          te dupliceren. */
-      background: radial-gradient(circle 220px at var(--sx) var(--sy), rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.13) 100%);
+      background: radial-gradient(circle 220px at var(--sx) var(--sy), rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.58) 100%);
     }
   }
 
