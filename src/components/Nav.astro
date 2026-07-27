@@ -21,7 +21,6 @@ const links = [
       {links.map((link) => (
         <a href={link.href}>{link.label}</a>
       ))}
-      <ThemeToggle />
       <a href="/#contact" class="btn nav-cta">Laten we praten</a>
     </nav>
 
@@ -50,6 +49,11 @@ const links = [
     <a href="/#contact" class="btn nav-cta-mobile">Laten we praten</a>
     <div class="nav-theme"><ThemeToggle /></div>
   </nav>
+
+  <!-- Op desktop hangt de schakelaar net onder de scheidingslijn, rechts uitgelijnd
+       met de balk erboven. Absoluut geplaatst, zodat de balk zijn hoogte houdt en de
+       pagina er niet door opschuift. -->
+  <div class="nav-theme-float"><ThemeToggle /></div>
 </header>
 
 <script>
@@ -72,6 +76,7 @@ const links = [
 
 <style>
   .nav {
+    position: relative;
     background: var(--bg-page);
     border-bottom: 1px solid var(--border);
   }
@@ -101,6 +106,17 @@ const links = [
 
   .nav-links a:hover {
     color: var(--green-hover);
+  }
+
+  /* Bewust klein en kleurloos: het is een hulpmiddel, geen tweede oproep tot actie.
+     top:100% is de onderkant van het opvulvak, dus net boven de rand; de 9px zetten
+     hem daar netjes onder. */
+  .nav-theme-float {
+    position: absolute;
+    top: calc(100% + 9px);
+    right: 64px;
+    z-index: 5;
+    display: flex;
   }
 
   /* De .btn-tekst is wit, maar .nav-links a / .nav-mobile a (--ink) is
@@ -187,6 +203,12 @@ const links = [
 
     .nav-mobile[data-open='true'] {
       display: flex;
+    }
+
+    /* Op mobiel zit de schakelaar in het uitklapmenu; de zwevende versie zou daar
+       over de inhoud van de pagina hangen. */
+    .nav-theme-float {
+      display: none;
     }
   }
 </style>

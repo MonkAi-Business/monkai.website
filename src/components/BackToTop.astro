@@ -1,0 +1,118 @@
+---
+// Knop rechts onderaan die terugspringt naar de bovenkant van de pagina.
+//
+// Verschijnt pas na een stukje scrollen (DREMPEL hieronder) en vervaagt weg zodra
+// je weer bovenaan bent. Staat in BaseLayout, dus op elke pagina.
+---
+
+<button type="button" class="to-top" data-to-top data-show="false" aria-label="Terug naar boven">
+  <svg
+    viewBox="0 0 24 24"
+    width="18"
+    height="18"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M12 19V6" />
+    <path d="m6 12 6-6 6 6" />
+  </svg>
+</button>
+
+<script is:inline>
+  (function () {
+    var DREMPEL = 300;
+    var knop = document.querySelector('[data-to-top]');
+    if (!knop) return;
+
+    var gepland = false;
+
+    function werkBij() {
+      gepland = false;
+      var y = window.scrollY || document.documentElement.scrollTop || 0;
+      knop.setAttribute('data-show', y > DREMPEL ? 'true' : 'false');
+    }
+
+    // Scroll vuurt vaak; één update per frame is genoeg.
+    window.addEventListener(
+      'scroll',
+      function () {
+        if (gepland) return;
+        gepland = true;
+        window.requestAnimationFrame(werkBij);
+      },
+      { passive: true }
+    );
+
+    knop.addEventListener('click', function () {
+      var zachtjes = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: zachtjes ? 'smooth' : 'auto' });
+    });
+
+    // Bij het laden kan de pagina al gescrold staan (terugknop, of een link met #anker).
+    werkBij();
+  })();
+</script>
+
+<style>
+  .to-top {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 90;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius);
+    background: var(--green);
+    color: var(--on-green);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: opacity 0.18s ease, transform 0.18s ease, background-color 0.18s ease;
+  }
+
+  .to-top:hover {
+    background: var(--green-hover);
+  }
+
+  .to-top:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 3px;
+  }
+
+  /* Verborgen stand: niet klikbaar en niet bereikbaar met tab, maar wél animeerbaar.
+     Daarom visibility in plaats van display, anders is er geen overgang. */
+  .to-top[data-show='false'] {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .to-top {
+      transition: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .to-top {
+      right: 12px;
+      bottom: 12px;
+    }
+
+    /* Op mobiel loopt de consent-banner over de volle breedte onderaan. Zolang die
+       er staat, geen knop eroverheen. Op desktop staat de banner links, dus daar
+       mogen ze naast elkaar. */
+    :global(#consent:not([hidden])) ~ .to-top {
+      display: none;
+    }
+  }
+</style>

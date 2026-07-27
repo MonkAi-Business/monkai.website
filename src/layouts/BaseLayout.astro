@@ -10,6 +10,7 @@ const {
 import '../styles/global.css';
 import Analytics from '../components/Analytics.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
+import BackToTop from '../components/BackToTop.astro';
 import { THEMES, DEFAULT_THEME, STORAGE_KEY } from '../utils/theme';
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -168,5 +169,8 @@ const schemas = [siteSchema, ...(Array.isArray(schema) ? schema : [schema])];
   <body>
     <slot />
     <ConsentBanner />
+    <!-- Na ConsentBanner, want BackToTop verbergt zichzelf op mobiel zolang die
+         banner er staat en gebruikt daarvoor de zustercombinator. -->
+    <BackToTop />
   </body>
 </html>
