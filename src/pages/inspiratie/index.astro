@@ -53,23 +53,36 @@ const countFor = (key) => bySystem[key].reduce((n, c) => n + c.items.length, 0);
 
     <div class="tabs" role="tablist" aria-label="Kies een systeem">
       {systems.map((s, i) => (
-        <button class="tab" type="button" role="tab" data-system={s.key} aria-selected={i === 0 ? 'true' : 'false'}>
+        <button class="tab" type="button" role="tab" data-system={s.key} data-label={s.label} aria-selected={i === 0 ? 'true' : 'false'}>
           {s.label}
-          <span class="count">{countFor(s.key)}</span>
+          <span class="count" data-total={countFor(s.key)}>{countFor(s.key)}</span>
         </button>
       ))}
+    </div>
+
+    <div class="filters">
+      <div class="search">
+        <label class="sr-only" for="insp-search">Zoek in het materiaal</label>
+        <svg class="search-icon" viewBox="0 0 20 20" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7">
+          <circle cx="9" cy="9" r="6" />
+          <path d="M13.5 13.5 17.5 17.5" stroke-linecap="round" />
+        </svg>
+        <input type="search" id="insp-search" placeholder="Zoek op trefwoord, bv. HR of vergadering" autocomplete="off" />
+      </div>
+      <p class="sr-only" role="status" aria-live="polite"></p>
     </div>
 
     {systems.map((s, i) => (
       <section class="panel" data-panel={s.key} hidden={i !== 0} aria-label={s.label}>
         <p class="note">{s.note}</p>
+        <p class="no-hits" hidden></p>
 
         {bySystem[s.key].length === 0 ? (
           <p class="empty">Nog geen materiaal voor {s.label}.</p>
         ) : (
           bySystem[s.key].map((c) => (
             <div class="group">
-              <h2>{c.label}<span class="group-count">{c.items.length}</span></h2>
+              <h2>{c.label}<span class="group-count" data-total={c.items.length}>{c.items.length}</span></h2>
               <p class="group-intro">{c.intro}</p>
 
               {c.items.map((item) => (
@@ -125,9 +138,10 @@ const countFor = (key) => bySystem[key].reduce((n, c) => n + c.items.length, 0);
 <style>
   /* [hidden] moet winnen van de display-regels hieronder (zie CLAUDE.md, les 11 en 19) */
   [hidden] { display: none !important; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
   .insp { background: var(--bg-page); padding: 48px 22px 80px; }
-  .head, .tabs, .panel, .foot { max-width: var(--maxw); margin-left: auto; margin-right: auto; }
+  .head, .tabs, .filters, .panel, .foot { max-width: var(--maxw); margin-left: auto; margin-right: auto; }
 
   .wordmark { font-family: var(--font-serif); font-size: 22px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
   .wordmark span { color: var(--green); margin-left: 4px; }
@@ -135,12 +149,28 @@ const countFor = (key) => bySystem[key].reduce((n, c) => n + c.items.length, 0);
   .head h1 { font-family: var(--font-serif); font-size: 38px; font-weight: 600; margin: 14px 0 10px; }
   .sub { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.65; max-width: 720px; }
 
-  .tabs { display: flex; flex-wrap: wrap; gap: 10px; margin: 34px auto 26px; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 10px; margin: 34px auto 18px; }
   .tab { display: inline-flex; align-items: center; gap: 8px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 16px; font: inherit; font-size: 15px; font-weight: 600; color: var(--ink-soft); cursor: pointer; }
   .tab:hover { border-color: var(--green-light); }
   .tab[aria-selected='true'] { background: var(--green); border-color: var(--green); color: #fff; }
   .tab .count { font-family: var(--font-mono); font-size: 12px; font-weight: 500; background: var(--card-alt); color: var(--muted); border-radius: 999px; padding: 1px 8px; }
   .tab[aria-selected='true'] .count { background: rgba(255,255,255,0.2); color: #fff; }
+  .tab.dim { opacity: 0.45; }
+
+  .filters { margin-bottom: 28px; }
+  .search { position: relative; max-width: 420px; }
+  .search-icon { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+  .search input {
+    width: 100%; padding: 11px 14px 11px 38px; font-family: var(--font-sans); font-size: 15px; color: var(--ink);
+    background: var(--input-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); appearance: none;
+  }
+  .search input::placeholder { color: var(--placeholder); }
+  .search input:focus { outline: none; border-color: var(--green); }
+  .search input::-webkit-search-cancel-button { cursor: pointer; }
+
+  .no-hits { margin: 0 0 30px; color: var(--ink-soft); font-size: 16px; line-height: 1.7; }
+  .jump { background: none; border: none; padding: 0; font: inherit; font-weight: 600; color: var(--green); cursor: pointer; text-decoration: underline; }
+  .jump:hover { color: var(--green-hover); }
 
   .note { margin: 0 0 34px; padding: 14px 18px; background: var(--section-alt); border-left: 3px solid var(--green-light); border-radius: var(--radius-sm); color: var(--ink-soft); font-size: 15px; line-height: 1.6; max-width: 760px; }
   .empty { color: var(--muted); font-size: 16px; }
@@ -190,22 +220,142 @@ const countFor = (key) => bySystem[key].reduce((n, c) => n + c.items.length, 0);
 
 <script is:inline>
   (function () {
-    var tabs = document.querySelectorAll('.tab');
-    var panels = document.querySelectorAll('.panel');
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+    var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+    var input = document.getElementById('insp-search');
+    var status = document.querySelector('.filters [role="status"]');
+    var current = 'claude';
+
+    // Zoektekst per item: titel, omschrijving, soort, brondocumenten en de tekst
+    // zelf. Knoplabels blijven eruit, anders matcht "kopieer" op alles.
+    var index = panels.map(function (panel) {
+      return {
+        key: panel.getAttribute('data-panel'),
+        panel: panel,
+        items: Array.prototype.slice.call(panel.querySelectorAll('.item')).map(function (el) {
+          var parts = [];
+          ['h3', '.desc', '.chip'].forEach(function (sel) {
+            var n = el.querySelector(sel);
+            if (n) parts.push(n.textContent);
+          });
+          el.querySelectorAll('.docs a').forEach(function (a) { parts.push(a.textContent); });
+          var code = el.querySelector('pre code');
+          if (code) parts.push(code.textContent);
+          // Woorden, geen letterreeksen: "hr" mag niet matchen op "schrijf" of "doorheen".
+          return { el: el, words: parts.join(' ').toLowerCase().split(/[^0-9a-zà-öø-ÿ]+/).filter(Boolean) };
+        }),
+        groups: Array.prototype.slice.call(panel.querySelectorAll('.group')),
+      };
+    });
+
+    function labelFor(key) {
+      var tab = document.querySelector('.tab[data-system="' + key + '"]');
+      return tab ? tab.getAttribute('data-label') : key;
+    }
+
+    function updateUrl() {
+      var params = new URLSearchParams();
+      if (current !== 'claude') params.set('systeem', current);
+      if (input && input.value.trim()) params.set('q', input.value.trim());
+      var qs = params.toString();
+      history.replaceState(null, '', qs ? location.pathname + '?' + qs : location.pathname);
+    }
+
+    // Elke zoekterm moet het begin van een woord zijn. Meerdere termen = allemaal.
+    function matches(rec, terms) {
+      return terms.every(function (term) {
+        return rec.words.some(function (w) { return w.indexOf(term) === 0; });
+      });
+    }
+
+    function render(writeUrl) {
+      var q = input ? input.value.trim().toLowerCase() : '';
+      var terms = q.split(/[^0-9a-zà-öø-ÿ]+/).filter(Boolean);
+      var hits = {};
+
+      index.forEach(function (p) {
+        var visible = 0;
+        p.items.forEach(function (rec) {
+          var show = terms.length === 0 || matches(rec, terms);
+          rec.el.hidden = !show;
+          if (show) visible++;
+        });
+        p.groups.forEach(function (g) {
+          var shown = Array.prototype.slice.call(g.querySelectorAll('.item')).filter(function (i) { return !i.hidden; });
+          g.hidden = shown.length === 0;
+          var gc = g.querySelector('.group-count');
+          if (gc) gc.textContent = terms.length ? shown.length : gc.getAttribute('data-total');
+        });
+        hits[p.key] = visible;
+      });
+
+      tabs.forEach(function (t) {
+        var key = t.getAttribute('data-system');
+        var count = t.querySelector('.count');
+        if (count) count.textContent = terms.length ? hits[key] : count.getAttribute('data-total');
+        t.setAttribute('aria-selected', String(key === current));
+        t.classList.toggle('dim', terms.length > 0 && hits[key] === 0);
+      });
+
+      index.forEach(function (p) {
+        p.panel.hidden = p.key !== current;
+        var box = p.panel.querySelector('.no-hits');
+        if (!box) return;
+        box.textContent = '';
+        if (p.key !== current || terms.length === 0 || hits[p.key] > 0) { box.hidden = true; return; }
+
+        // Wel iets gevonden bij een ander systeem? Zet er een knop naartoe.
+        var elders = index.filter(function (o) { return hits[o.key] > 0; });
+        box.appendChild(document.createTextNode(
+          'Niets gevonden voor "' + input.value.trim() + '" bij ' + labelFor(current) + '.'
+        ));
+        if (elders.length) {
+          box.appendChild(document.createTextNode(' Wel bij '));
+          elders.forEach(function (o, n) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'jump';
+            btn.textContent = labelFor(o.key) + ' (' + hits[o.key] + ')';
+            btn.addEventListener('click', function () { show(o.key); });
+            box.appendChild(btn);
+            if (n < elders.length - 2) box.appendChild(document.createTextNode(', '));
+            else if (n === elders.length - 2) box.appendChild(document.createTextNode(' en '));
+          });
+          box.appendChild(document.createTextNode('.'));
+        }
+        box.hidden = false;
+      });
+
+      if (status) {
+        status.textContent = terms.length
+          ? hits[current] + ' resultaten bij ' + labelFor(current)
+          : '';
+      }
+      if (writeUrl) updateUrl();
+    }
 
     function show(key) {
-      tabs.forEach(function (t) { t.setAttribute('aria-selected', String(t.getAttribute('data-system') === key)); });
-      panels.forEach(function (p) { p.hidden = p.getAttribute('data-panel') !== key; });
-      history.replaceState(null, '', key === 'claude' ? location.pathname : location.pathname + '?systeem=' + key);
+      current = key;
+      render(true);
     }
 
     tabs.forEach(function (t) {
       t.addEventListener('click', function () { show(t.getAttribute('data-system')); });
     });
 
-    // Deelbare link: /inspiratie?systeem=gemini opent meteen die tab
-    var wanted = new URLSearchParams(location.search).get('systeem');
-    if (wanted && document.querySelector('.tab[data-system="' + wanted + '"]')) { show(wanted); }
+    if (input) {
+      input.addEventListener('input', function () { render(true); });
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { input.value = ''; render(true); }
+      });
+    }
+
+    // Deelbare link: /inspiratie?systeem=gemini&q=hr opent meteen die tab en dat filter
+    var params = new URLSearchParams(location.search);
+    var wanted = params.get('systeem');
+    if (wanted && document.querySelector('.tab[data-system="' + wanted + '"]')) current = wanted;
+    if (input) input.value = params.get('q') || '';
+    render(false);
 
     document.querySelectorAll('.copy').forEach(function (btn) {
       btn.addEventListener('click', function () {
