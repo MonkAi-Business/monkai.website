@@ -20,13 +20,11 @@
   if (titel && !rustig) {
     const volledig = titel.textContent ?? '';
     titel.textContent = '';
-    titel.classList.add('typt');
     let i = 0;
     const stap = () => {
       titel.textContent = volledig.slice(0, i);
       i++;
       if (i <= volledig.length) window.setTimeout(stap, 45);
-      else titel.classList.remove('typt');
     };
     stap();
   }
@@ -65,7 +63,7 @@
   }
 
   :root[data-kickass='terminal'] body {
-    text-shadow: 0 0 6px rgba(124, 255, 168, 0.35);
+    text-shadow: 0 0 6px color-mix(in srgb, var(--green) 35%, transparent);
   }
 
   /* De scanlijnen liggen over alles heen maar vangen geen klikken. */
@@ -98,6 +96,15 @@
 
   :root[data-kickass='terminal'] h1 { font-size: 52px; }
 
+  /* DemoHero.astro verkleint h1 zelf onder 768px, maar die regel is een
+     scoped selector (specificiteit 0,1,1) en verliest van de attribuutselector
+     hierboven (0,2,1), ook binnen de media query van de component. Zodra een
+     laag een eigenschap overschrijft die een Demo-component per breakpoint
+     anders zet, moet de laag dus zelf de mobiele tegenhanger leveren. */
+  @media (max-width: 768px) {
+    :root[data-kickass='terminal'] h1 { font-size: 34px; }
+  }
+
   /* De knipperende cursor hangt aan de titel, getypt of niet. */
   :root[data-kickass='terminal'] .hero-titel::after {
     content: '_';
@@ -127,7 +134,7 @@
     inset: 0 0 auto 0;
     height: 24px;
     border-bottom: 1px solid var(--border);
-    background: rgba(124, 255, 168, 0.06);
+    background: color-mix(in srgb, var(--green) 6%, transparent);
   }
 
   :root[data-kickass='terminal'] .service-card h3 {
