@@ -1,0 +1,201 @@
+---
+interface Props {
+  compact?: boolean;
+  idPrefix?: string;
+}
+
+const {
+  compact = false,
+  idPrefix = 'standard',
+} = Astro.props;
+
+const fieldId = (name: string) => `${idPrefix}-${name}`;
+---
+
+<form
+  class:list={['contact-form', { 'contact-form-compact': compact }]}
+  name="contact"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  action="/bedankt"
+  data-contact-form
+>
+  <input type="hidden" name="form-name" value="contact" />
+  <input type="hidden" name="subject" value="Nieuwe aanvraag via monkai.business" />
+  <p hidden><label>Laat dit leeg: <input name="bot-field" /></label></p>
+  <div class="field-grid">
+    <div class="field">
+      <label for={fieldId('naam')}>Naam</label>
+      <input type="text" id={fieldId('naam')} name="naam" placeholder="Voor- en achternaam" required />
+    </div>
+    <div class="field">
+      <label for={fieldId('bedrijf')}>Bedrijf</label>
+      <input type="text" id={fieldId('bedrijf')} name="bedrijf" placeholder="Bedrijfsnaam" required />
+    </div>
+    <div class="field">
+      <label for={fieldId('email')}>E-mail</label>
+      <input type="email" id={fieldId('email')} name="email" placeholder="naam@bedrijf.be" required />
+    </div>
+    <div class="field">
+      <label for={fieldId('telefoon')}>Telefoon <span class="optional">(optioneel)</span></label>
+      <input type="tel" id={fieldId('telefoon')} name="telefoon" placeholder="+32" />
+    </div>
+  </div>
+  <div class="field">
+    <label for={fieldId('bericht')}>Bericht</label>
+    <textarea id={fieldId('bericht')} name="bericht" placeholder="Waar zit de monkey business bij jou?" rows="4" required></textarea>
+  </div>
+  <label class="consent" for={fieldId('akkoord')}>
+    <input id={fieldId('akkoord')} type="checkbox" name="akkoord" required />
+    <span>Ik ga akkoord dat mijn gegevens gebruikt worden om mijn vraag te beantwoorden. Meer in de <a href="/privacy" class="privacy-link">privacyverklaring</a>.</span>
+  </label>
+  <button type="submit" class="btn">Verstuur je vraag</button>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-contact-form]').forEach((form) => {
+    if (form.dataset.contactBound === 'true') return;
+    form.dataset.contactBound = 'true';
+
+    let formStarted = false;
+    form.addEventListener('focusin', () => {
+      if (formStarted) return;
+      formStarted = true;
+      window.posthog?.capture('contact_form_started');
+    });
+
+    const subjectField = form.querySelector<HTMLInputElement>('input[name="subject"]');
+    const naamField = form.querySelector<HTMLInputElement>('input[name="naam"]');
+    const bedrijfField = form.querySelector<HTMLInputElement>('input[name="bedrijf"]');
+
+    const updateSubject = () => {
+      if (!subjectField) return;
+      const naam = naamField?.value.trim();
+      const bedrijf = bedrijfField?.value.trim();
+      let subject = 'Nieuwe aanvraag via monkai.business';
+      if (naam) subject += ` van ${naam}`;
+      if (bedrijf) subject += ` (${bedrijf})`;
+      subjectField.value = subject;
+    };
+
+    naamField?.addEventListener('input', updateSubject);
+    bedrijfField?.addEventListener('input', updateSubject);
+    form.addEventListener('submit', updateSubject);
+  });
+</script>
+
+<style>
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .field label {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .field label .optional {
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--input-bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+  }
+
+  .field textarea {
+    min-height: 90px;
+    resize: vertical;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: var(--placeholder);
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--green);
+    outline-offset: 1px;
+  }
+
+  .consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+  }
+
+  .consent input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin: 2px 0 0;
+    accent-color: var(--green);
+  }
+
+  .consent span {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .privacy-link {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  .contact-form .btn {
+    align-self: flex-start;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .contact-form-compact {
+    gap: 14px;
+    padding: 24px;
+  }
+
+  .contact-form-compact .field-grid {
+    gap: 14px;
+  }
+
+  @media (max-width: 768px) {
+    .contact-form {
+      padding: 24px;
+    }
+
+    .field-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+  }
+</style>

@@ -1,0 +1,104 @@
+---
+import { faqs } from '../data/home';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<div class:list={['faq-list', { 'faq-list-compact': compact }]} data-faq-list>
+  {faqs.map((faq) => (
+    <details class="faq-item" data-faq-item>
+      <summary>{faq.q}</summary>
+      <p>{faq.a}</p>
+    </details>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLDetailsElement>('[data-faq-item]').forEach((item) => {
+    if (item.dataset.analyticsBound === 'true') return;
+    item.dataset.analyticsBound = 'true';
+    item.addEventListener('toggle', () => {
+      if (!item.open) return;
+      const question = item.querySelector('summary')?.textContent?.trim() ?? '';
+      window.posthog?.capture('faq_expanded', { question });
+    });
+  });
+</script>
+
+<style>
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .faq-item {
+    padding: 22px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-item:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    color: var(--ink);
+    font-size: 19px;
+    font-weight: 500;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary::after {
+    content: '+';
+    flex-shrink: 0;
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: 22px;
+  }
+
+  .faq-item[open] summary::after {
+    content: '−';
+  }
+
+  .faq-item p {
+    max-width: 760px;
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  .faq-list-compact .faq-item {
+    padding: 14px 0;
+  }
+
+  .faq-list-compact .faq-item summary {
+    font-size: 17px;
+  }
+
+  .faq-list-compact .faq-item p {
+    font-size: 15px;
+  }
+
+  @media (max-width: 768px) {
+    .faq-item summary {
+      font-size: 17px;
+    }
+
+    .faq-item p {
+      font-size: 16px;
+    }
+  }
+</style>

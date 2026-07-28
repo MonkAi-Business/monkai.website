@@ -39,6 +39,15 @@ if (existsSync(homeDataPath)) {
   }
 }
 
+for (const file of ['FaqList.astro', 'ContactForm.astro']) {
+  expect(existsSync(join(root, 'src', 'components', file)), `${file} ontbreekt.`);
+}
+
+const faqSection = read('src', 'components', 'Faq.astro');
+const contactSection = read('src', 'components', 'Contact.astro');
+expect(faqSection.includes('<FaqList'), 'Faq gebruikt FaqList niet.');
+expect(contactSection.includes('<ContactForm'), 'Contact gebruikt ContactForm niet.');
+
 if (failures.length) {
   console.error(failures.map((failure) => `- ${failure}`).join('\n'));
   process.exit(1);

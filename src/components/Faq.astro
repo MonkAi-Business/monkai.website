@@ -1,5 +1,6 @@
 ---
 import { faqs } from '../data/home';
+import FaqList from './FaqList.astro';
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -17,43 +18,16 @@ const faqSchema = {
       <h2>Veelgestelde vragen</h2>
       <p class="lede">Kort en nuchter, zoals de rest.</p>
     </div>
-    <div class="faq-list">
-      {faqs.map((f) => (
-        <details class="faq-item">
-          <summary>{f.q}</summary>
-          <p>{f.a}</p>
-        </details>
-      ))}
-    </div>
+    <FaqList />
   </div>
 </section>
 <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-<script is:inline>
-  document.querySelectorAll('.faq-item').forEach(function (item) {
-    item.addEventListener('toggle', function () {
-      if (item.open) {
-        var q = item.querySelector('summary')?.textContent?.trim() ?? '';
-        window.posthog?.capture('faq_expanded', { question: q });
-      }
-    });
-  });
-</script>
 <style>
   .faq-inner { display: flex; flex-direction: column; gap: 40px; }
   .head { display: flex; flex-direction: column; gap: 12px; max-width: 640px; }
   h2 { font-size: 40px; font-weight: 500; }
   .lede { margin: 0; font-size: 17px; line-height: 1.65; color: var(--muted); }
-  .faq-list { display: flex; flex-direction: column; }
-  .faq-item { border-top: 1px solid var(--border); padding: 22px 0; }
-  .faq-item:last-child { border-bottom: 1px solid var(--border); }
-  .faq-item summary { font-size: 19px; font-weight: 500; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 20px; color: var(--ink); }
-  .faq-item summary::-webkit-details-marker { display: none; }
-  .faq-item summary::after { content: '+'; font-family: var(--font-mono); font-size: 22px; color: var(--green); flex-shrink: 0; }
-  .faq-item[open] summary::after { content: '–'; }
-  .faq-item p { margin: 14px 0 0; font-size: 17px; line-height: 1.7; color: var(--muted); max-width: 760px; }
   @media (max-width: 768px) {
     h2 { font-size: 30px; }
-    .faq-item summary { font-size: 17px; }
-    .faq-item p { font-size: 16px; }
   }
 </style>
