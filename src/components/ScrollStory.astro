@@ -444,6 +444,12 @@ const chapters = [
 </section>
 
 <script>
+  import {
+    advanceAutoScroll,
+    autoplayButtonState,
+    isAutoplayScrollKey,
+    resolveAutoScrollStart,
+  } from '../utils/scrollStoryAutoplay.mjs';
   import { progressToTime } from '../utils/scrollStoryTiming.mjs';
 
   type StoryWindow = Window & {
@@ -461,6 +467,8 @@ const chapters = [
 
   if (story) {
     const video = story.querySelector<HTMLVideoElement>('[data-story-video]');
+    const autoplayButton = story.querySelector<HTMLButtonElement>('[data-story-autoplay]');
+    const contactChapter = story.querySelector<HTMLElement>('[data-chapter="contact"]');
     const sources = Array.from(
       story.querySelectorAll<HTMLSourceElement>('source[data-src]'),
     );
@@ -478,6 +486,9 @@ const chapters = [
     let animationFrame = 0;
     let lastSeek = 0;
     let storyVisible = false;
+    let autoplayFrame = 0;
+    let autoplayTimestamp = 0;
+    let autoplayPlaying = false;
 
     const clamp = (value: number, minimum: number, maximum: number) =>
       Math.min(Math.max(value, minimum), maximum);
@@ -486,6 +497,87 @@ const chapters = [
       document.documentElement.dataset.theme === 'monkey' && desktop.matches;
 
     const canScrub = () => isMonkey() && !reducedMotion.matches;
+
+    function syncAutoplayButton() {
+      if (!autoplayButton) return;
+      const state = autoplayButtonState(autoplayPlaying);
+      autoplayButton.dataset.playing = state.playing;
+      autoplayButton.setAttribute('aria-pressed', state.ariaPressed);
+      autoplayButton.setAttribute('aria-label', state.ariaLabel);
+    }
+
+    function stopAutoplay() {
+      if (autoplayFrame) window.cancelAnimationFrame(autoplayFrame);
+      autoplayFrame = 0;
+      autoplayTimestamp = 0;
+      autoplayPlaying = false;
+      syncAutoplayButton();
+    }
+
+    function autoplayBounds() {
+      if (!contactChapter) return null;
+      const storyTop = window.scrollY + story.getBoundingClientRect().top;
+      const contactTop = window.scrollY + contactChapter.getBoundingClientRect().top;
+      return {
+        start: storyTop,
+        end: contactTop,
+        chapterCount: Math.max(chapterElements.length - 1, 0),
+      };
+    }
+
+    function autoplayTick(timestamp: number) {
+      if (!autoplayPlaying || !canScrub() || document.hidden) {
+        stopAutoplay();
+        return;
+      }
+
+      const bounds = autoplayBounds();
+      if (!bounds || bounds.end <= bounds.start) {
+        stopAutoplay();
+        return;
+      }
+
+      if (!autoplayTimestamp) autoplayTimestamp = timestamp;
+      const step = advanceAutoScroll({
+        position: window.scrollY,
+        elapsedMs: timestamp - autoplayTimestamp,
+        ...bounds,
+      });
+      autoplayTimestamp = timestamp;
+      window.scrollTo({ top: step.position, behavior: 'auto' });
+
+      if (step.done) {
+        stopAutoplay();
+        return;
+      }
+
+      autoplayFrame = window.requestAnimationFrame(autoplayTick);
+    }
+
+    function startAutoplay() {
+      if (!canScrub()) return;
+      const bounds = autoplayBounds();
+      if (!bounds || bounds.end <= bounds.start) return;
+
+      const startPosition = resolveAutoScrollStart(
+        window.scrollY,
+        bounds.start,
+        bounds.end,
+      );
+      window.scrollTo({ top: startPosition, behavior: 'auto' });
+      autoplayPlaying = true;
+      autoplayTimestamp = 0;
+      syncAutoplayButton();
+      autoplayFrame = window.requestAnimationFrame(autoplayTick);
+    }
+
+    function toggleAutoplay() {
+      if (autoplayPlaying) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
+    }
 
     function setActiveChapter(activeChapter: HTMLElement) {
       story.dataset.activePanelSide = activeChapter.dataset.panelSide ?? 'left';
@@ -577,6 +669,8 @@ const chapters = [
     }
 
     function syncMode() {
+      if (!canScrub()) stopAutoplay();
+
       if (isMonkey() && reducedMotion.matches) {
         story.dataset.reduced = 'true';
         releaseVideo();
@@ -641,6 +735,20 @@ const chapters = [
         });
     };
 
+    autoplayButton?.addEventListener('click', toggleAutoplay);
+    window.addEventListener('wheel', stopAutoplay, { passive: true });
+    window.addEventListener('touchstart', stopAutoplay, { passive: true });
+    window.addEventListener('pointerdown', (event) => {
+      if (event.target instanceof Node && !autoplayButton?.contains(event.target)) {
+        stopAutoplay();
+      }
+    }, { passive: true });
+    window.addEventListener('keydown', (event) => {
+      if (isAutoplayScrollKey(event.key)) stopAutoplay();
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopAutoplay();
+    });
     window.addEventListener('scroll', () => {
       updateTarget();
       startRendering();
@@ -650,6 +758,7 @@ const chapters = [
     window.addEventListener('monkai-theme-change', syncMode);
     desktop.addEventListener('change', syncMode);
     reducedMotion.addEventListener('change', syncMode);
+    syncAutoplayButton();
     syncMode();
   }
 </script>
