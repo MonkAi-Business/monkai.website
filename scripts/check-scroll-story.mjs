@@ -3,6 +3,8 @@ import { join } from 'node:path';
 import {
   AUTO_SCROLL_CHAPTER_MS,
   advanceAutoScroll,
+  autoplayButtonState,
+  isAutoplayScrollKey,
   resolveAutoScrollStart,
 } from '../src/utils/scrollStoryAutoplay.mjs';
 import { progressToTime } from '../src/utils/scrollStoryTiming.mjs';
@@ -68,6 +70,26 @@ expect(
 expect(
   resolveAutoScrollStart(320, 0, 800) === 320,
   'Play binnen de story moet vanaf de huidige positie hervatten.',
+);
+
+const stoppedButton = autoplayButtonState(false);
+const playingButton = autoplayButtonState(true);
+
+expect(
+  stoppedButton.ariaLabel === 'Monkey-tour afspelen'
+    && stoppedButton.ariaPressed === 'false'
+    && stoppedButton.playing === 'false',
+  'De gestopte autoplayknop moet een toegankelijke Play-status geven.',
+);
+expect(
+  playingButton.ariaLabel === 'Monkey-tour pauzeren'
+    && playingButton.ariaPressed === 'true'
+    && playingButton.playing === 'true',
+  'De actieve autoplayknop moet een toegankelijke Pauze-status geven.',
+);
+expect(
+  isAutoplayScrollKey('PageDown') && !isAutoplayScrollKey('Enter'),
+  'Alleen toetsen die de pagina scrollen mogen autoplay stoppen.',
 );
 
 expect(existsSync(componentPath), 'ScrollStory.astro ontbreekt.');

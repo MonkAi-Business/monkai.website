@@ -63,6 +63,16 @@ const chapters = [
       <span>Monkey mode</span>
       <span class="monkey-progress-track"><span></span></span>
     </div>
+    <button
+      class="monkey-autoplay"
+      type="button"
+      aria-label="Monkey-tour afspelen"
+      aria-pressed="false"
+      data-story-autoplay
+      data-playing="false"
+    >
+      <span class="monkey-autoplay-icon" aria-hidden="true"></span>
+    </button>
   </div>
 
   <div class="monkey-chapters">
@@ -721,6 +731,53 @@ const chapters = [
     background: #c4e1bc;
     transform: scaleY(var(--story-progress));
     transform-origin: top;
+  }
+
+  .monkey-autoplay {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    z-index: 3;
+    display: grid;
+    width: 52px;
+    height: 52px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    border-radius: 999px;
+    background: rgba(3, 13, 19, 0.72);
+    color: #fff;
+    cursor: pointer;
+    transform: translateX(-50%);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  .monkey-autoplay:hover {
+    border-color: rgba(196, 225, 188, 0.84);
+    background: rgba(38, 64, 48, 0.82);
+  }
+
+  .monkey-autoplay:focus-visible {
+    outline: 3px solid #c4e1bc;
+    outline-offset: 4px;
+  }
+
+  .monkey-autoplay-icon {
+    width: 0;
+    height: 0;
+    margin-left: 3px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 11px solid currentColor;
+  }
+
+  .monkey-autoplay[data-playing='true'] .monkey-autoplay-icon {
+    width: 12px;
+    height: 14px;
+    margin-left: 0;
+    border: 0;
+    background:
+      linear-gradient(90deg, currentColor 0 4px, transparent 4px 8px, currentColor 8px 12px);
   }
 
   .monkey-chapters {
