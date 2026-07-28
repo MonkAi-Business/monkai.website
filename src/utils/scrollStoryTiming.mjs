@@ -8,7 +8,6 @@ export function progressToTime(progress, chapterTimings) {
     chapterTimings.length - 1,
   );
   const local = chapterPosition - chapterIndex;
-  const move = local < 0.85 ? local / 0.85 : 1;
   const chapter = chapterTimings[chapterIndex];
-  return chapter.timeStart + (chapter.timeEnd - chapter.timeStart) * move;
+  return chapter.timeStart + (chapter.timeEnd - chapter.timeStart) * local;
 }

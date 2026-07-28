@@ -25,16 +25,28 @@ const sampleTimings = [{ timeStart: 10, timeEnd: 18 }];
 const approximately = (actual, expected) => Math.abs(actual - expected) < 0.001;
 
 expect(
-  approximately(progressToTime(0.42, sampleTimings), 13.952941),
-  'Bij 42 procent mag de clip niet langer op het eindframe staan.',
+  approximately(progressToTime(0.42, sampleTimings), 13.36),
+  'Bij 42 procent moet de clip 42 procent gevorderd zijn.',
 );
 expect(
-  approximately(progressToTime(0.85, sampleTimings), 18),
-  'Bij 85 procent moet de clip het eindframe bereiken.',
+  approximately(progressToTime(0.85, sampleTimings), 16.8),
+  'Bij 85 procent moet de clip nog bewegen.',
 );
 expect(
   approximately(progressToTime(1, sampleTimings), 18),
-  'De laatste 15 procent moet het eindframe vasthouden.',
+  'Bij 100 procent moet de clip het eindframe bereiken.',
+);
+
+const boundaryTimings = [
+  { timeStart: 0, timeEnd: 8 },
+  { timeStart: 8, timeEnd: 16 },
+];
+const beforeBoundary = progressToTime(0.499999, boundaryTimings);
+const atBoundary = progressToTime(0.5, boundaryTimings);
+
+expect(
+  beforeBoundary < 8 && atBoundary === 8 && atBoundary > beforeBoundary,
+  'De videotijd mag aan een hoofdstukgrens niet teruglopen.',
 );
 
 const autoplayStep = advanceAutoScroll({
