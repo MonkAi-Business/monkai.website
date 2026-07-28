@@ -82,5 +82,11 @@
     "file": "Monkey_writing_on_page_202607281858.mp4",
     "duration": 8.0,
     "transition": 0.18
+  },
+  {
+    "id": "faq",
+    "file": "Monkeys_open_hatches_with_vines_202607281906.mp4",
+    "duration": 8.0,
+    "transition": 0.18
   }
 ]

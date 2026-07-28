@@ -62,17 +62,60 @@ if (existsSync(componentPath)) {
   expect(component.includes("removeAttribute('src')"), 'De videobronnen worden niet vrijgegeven.');
 
   expect(
-    (component.match(/footage: 'ready'/g) ?? []).length === 12,
-    'Precies twaalf storyhoofdstukken moeten eigen beeldmateriaal hebben.',
+    (component.match(/footage: 'ready'/g) ?? []).length === 13,
+    'Precies dertien storyhoofdstukken moeten eigen beeldmateriaal hebben.',
   );
   expect(
-    (component.match(/footage: 'pending'/g) ?? []).length === 2,
-    'Alleen FAQ en contact mogen nog op beeldmateriaal wachten.',
+    (component.match(/footage: 'pending'/g) ?? []).length === 1,
+    'Alleen contact mag nog op beeldmateriaal wachten.',
   );
   expect(
-    component.includes("{ id: 'faq', timeStart: 112.78, timeEnd: 112.78, footage: 'pending' }")
-      && component.includes("{ id: 'contact', timeStart: 112.78, timeEnd: 112.78, footage: 'pending' }"),
-    'FAQ en contact moeten het laatste blogframe op 112,78 seconden vasthouden.',
+    component.includes("{ id: 'faq', timeStart: 112.78, timeEnd: 120.6, footage: 'ready' }")
+      && component.includes("{ id: 'contact', timeStart: 120.6, timeEnd: 120.6, footage: 'pending' }"),
+    'FAQ moet eigen beeld hebben en contact moet het laatste FAQ-frame op 120,60 seconden vasthouden.',
+  );
+
+  const expectedPanelLayouts = {
+    hero: ['left', 'middle', 'normal'],
+    problemen: ['left', 'middle', 'normal'],
+    overdracht: ['left', 'middle', 'compact'],
+    team: ['left', 'middle', 'compact'],
+    aanpak: ['left', 'middle', 'compact'],
+    niveaus: ['right', 'middle', 'compact'],
+    'use-cases': ['left', 'bottom', 'compact'],
+    diensten: ['left', 'bottom', 'wide'],
+    'breder-dan-chat': ['right', 'bottom', 'compact'],
+    'ai-act': ['left', 'bottom', 'compact'],
+    afspraak: ['left', 'top', 'compact'],
+    blog: ['left', 'bottom', 'compact'],
+    faq: ['left', 'top', 'compact'],
+    contact: ['left', 'middle', 'compact'],
+  };
+  const chapterTags = [...component.matchAll(/<section\b[^>]*\bdata-monkey-chapter\b[^>]*>/g)]
+    .map((match) => match[0]);
+  const attribute = (tag, name) => tag.match(new RegExp(`${name}="([^"]+)"`))?.[1];
+
+  for (const [id, [side, vertical, size]] of Object.entries(expectedPanelLayouts)) {
+    const tag = chapterTags.find((candidate) => attribute(candidate, 'data-chapter') === id) ?? '';
+    expect(attribute(tag, 'data-panel-side') === side, `${id} heeft de verkeerde paneelzijde.`);
+    expect(
+      attribute(tag, 'data-panel-vertical') === vertical,
+      `${id} heeft de verkeerde verticale paneelpositie.`,
+    );
+    expect(attribute(tag, 'data-panel-size') === size, `${id} heeft het verkeerde paneelformaat.`);
+  }
+
+  expect(
+    component.includes('story.dataset.activePanelSide'),
+    'De videolaag volgt de actieve paneelzijde niet.',
+  );
+  expect(
+    component.includes('background: rgba(3, 13, 19, 0.64);'),
+    'Het paneel is niet transparant genoeg.',
+  );
+  expect(
+    component.includes('backdrop-filter: blur(16px);'),
+    'De transparantere panelen missen extra vervaging.',
   );
 }
 
@@ -114,11 +157,12 @@ if (existsSync(manifestPath)) {
     'ai-act',
     'agreement',
     'blog',
+    'faq',
   ];
 
   expect(
     manifest.map((scene) => scene.id).join(',') === expectedSceneIds.join(','),
-    'Het manifest moet de veertien filmscènes in de verhaallijnvolgorde bevatten.',
+    'Het manifest moet de vijftien filmscènes in de verhaallijnvolgorde bevatten.',
   );
 
   const expectedNewFiles = {
@@ -129,6 +173,7 @@ if (existsSync(manifestPath)) {
     'ai-act': 'Monkey_passes_safety_checkpoint_202607281857.mp4',
     agreement: 'Two_monkeys_handshake_at_table_202607281857.mp4',
     blog: 'Monkey_writing_on_page_202607281858.mp4',
+    faq: 'Monkeys_open_hatches_with_vines_202607281906.mp4',
   };
 
   for (const [id, file] of Object.entries(expectedNewFiles)) {
