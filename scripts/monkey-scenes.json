@@ -40,5 +40,47 @@
     "file": "Monkey_crosses_rope_bridge_to_202607281058.mp4",
     "duration": 8.0,
     "transition": 0.22
+  },
+  {
+    "id": "levels",
+    "file": "Monkey_climbs_three_platforms_202607281816.mp4",
+    "duration": 8.0,
+    "transition": 0.18
+  },
+  {
+    "id": "use-cases",
+    "file": "Create_this_clip_with_Veo_202607281830.mp4",
+    "duration": 8.0,
+    "transition": 0.18
+  },
+  {
+    "id": "services",
+    "file": "Monkey_selects_tools_from_wall_202607281830.mp4",
+    "duration": 8.0,
+    "transition": 0.18
+  },
+  {
+    "id": "beyond-chat",
+    "file": "Monkey_puts_on_smart_glasses_202607281833.mp4",
+    "duration": 8.0,
+    "transition": 0.18
+  },
+  {
+    "id": "ai-act",
+    "file": "Monkey_passes_safety_checkpoint_202607281857.mp4",
+    "duration": 8.0,
+    "transition": 0.18
+  },
+  {
+    "id": "agreement",
+    "file": "Two_monkeys_handshake_at_table_202607281857.mp4",
+    "duration": 8.0,
+    "transition": 0.18
+  },
+  {
+    "id": "blog",
+    "file": "Monkey_writing_on_page_202607281858.mp4",
+    "duration": 8.0,
+    "transition": 0.18
   }
 ]

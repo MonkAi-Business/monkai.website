@@ -5,6 +5,7 @@ const root = process.cwd();
 const componentPath = join(root, 'src', 'components', 'ScrollStory.astro');
 const pagePath = join(root, 'src', 'pages', 'index.astro');
 const mediaDirectory = join(root, 'public', 'media', 'scroll-story');
+const manifestPath = join(root, 'scripts', 'monkey-scenes.json');
 
 const failures = [];
 
@@ -59,6 +60,20 @@ if (existsSync(componentPath)) {
   );
   expect(component.includes('data-scroll-story'), 'De scrollstory-hook ontbreekt.');
   expect(component.includes("removeAttribute('src')"), 'De videobronnen worden niet vrijgegeven.');
+
+  expect(
+    (component.match(/footage: 'ready'/g) ?? []).length === 12,
+    'Precies twaalf storyhoofdstukken moeten eigen beeldmateriaal hebben.',
+  );
+  expect(
+    (component.match(/footage: 'pending'/g) ?? []).length === 2,
+    'Alleen FAQ en contact mogen nog op beeldmateriaal wachten.',
+  );
+  expect(
+    component.includes("{ id: 'faq', timeStart: 112.78, timeEnd: 112.78, footage: 'pending' }")
+      && component.includes("{ id: 'contact', timeStart: 112.78, timeEnd: 112.78, footage: 'pending' }"),
+    'FAQ en contact moeten het laatste blogframe op 112,78 seconden vasthouden.',
+  );
 }
 
 expect(existsSync(pagePath), 'De homepage ontbreekt.');
@@ -78,6 +93,50 @@ for (const file of [
   'monkai-scroll-story-poster.jpg',
 ]) {
   expect(existsSync(join(mediaDirectory, file)), `Media ontbreekt: ${file}`);
+}
+
+expect(existsSync(manifestPath), 'Het filmscènemanifest ontbreekt.');
+
+if (existsSync(manifestPath)) {
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  const expectedSceneIds = [
+    'desk',
+    'laptop',
+    'door',
+    'view',
+    'vine',
+    'team',
+    'approach',
+    'levels',
+    'use-cases',
+    'services',
+    'beyond-chat',
+    'ai-act',
+    'agreement',
+    'blog',
+  ];
+
+  expect(
+    manifest.map((scene) => scene.id).join(',') === expectedSceneIds.join(','),
+    'Het manifest moet de veertien filmscènes in de verhaallijnvolgorde bevatten.',
+  );
+
+  const expectedNewFiles = {
+    levels: 'Monkey_climbs_three_platforms_202607281816.mp4',
+    'use-cases': 'Create_this_clip_with_Veo_202607281830.mp4',
+    services: 'Monkey_selects_tools_from_wall_202607281830.mp4',
+    'beyond-chat': 'Monkey_puts_on_smart_glasses_202607281833.mp4',
+    'ai-act': 'Monkey_passes_safety_checkpoint_202607281857.mp4',
+    agreement: 'Two_monkeys_handshake_at_table_202607281857.mp4',
+    blog: 'Monkey_writing_on_page_202607281858.mp4',
+  };
+
+  for (const [id, file] of Object.entries(expectedNewFiles)) {
+    expect(
+      manifest.some((scene) => scene.id === id && scene.file === file),
+      `De bronvideo voor "${id}" ontbreekt of wijst naar het verkeerde bestand.`,
+    );
+  }
 }
 
 if (failures.length > 0) {
