@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import ScrollStory from '../components/ScrollStory.astro';
+import Hero from '../components/Hero.astro';
 import Problem from '../components/Problem.astro';
 import Statement from '../components/Statement.astro';
 import Ladder from '../components/Ladder.astro';
@@ -20,20 +21,49 @@ import Footer from '../components/Footer.astro';
 <BaseLayout title="AI-adoptie en Claude-sessies voor Vlaamse KMO's - MonkAi Business">
   <Nav />
   <main>
-    <ScrollStory />
-    <Problem />
-    <Statement />
-    <Ladder />
-    <Approach />
-    <UseCases />
-    <Services />
-    <BeyondChat />
-    <AiAct />
-    <Agreement />
-    <BlogTeaser />
-    <Team />
-    <Faq />
-    <Contact />
+    <div data-standard-home>
+      <Hero />
+      <Problem />
+      <Statement />
+      <Ladder />
+      <Approach />
+      <UseCases />
+      <Services />
+      <BeyondChat />
+      <AiAct />
+      <Agreement />
+      <BlogTeaser />
+      <Team />
+      <Faq />
+      <Contact />
+    </div>
+    <div data-monkey-home hidden>
+      <ScrollStory />
+    </div>
   </main>
   <Footer />
 </BaseLayout>
+
+<style>
+  [data-monkey-home] {
+    display: none;
+  }
+
+  :global(:root[data-theme='monkey']) [data-standard-home] {
+    display: none;
+  }
+
+  :global(:root[data-theme='monkey']) [data-monkey-home] {
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    [data-monkey-home] {
+      display: none !important;
+    }
+
+    [data-standard-home] {
+      display: block !important;
+    }
+  }
+</style>

@@ -48,6 +48,41 @@ const contactSection = read('src', 'components', 'Contact.astro');
 expect(faqSection.includes('<FaqList'), 'Faq gebruikt FaqList niet.');
 expect(contactSection.includes('<ContactForm'), 'Contact gebruikt ContactForm niet.');
 
+const storyPath = join(root, 'src', 'components', 'ScrollStory.astro');
+expect(existsSync(storyPath), 'ScrollStory ontbreekt.');
+
+if (existsSync(storyPath)) {
+  const story = read('src', 'components', 'ScrollStory.astro');
+  const chapterIds = [
+    'hero',
+    'problemen',
+    'overdracht',
+    'team',
+    'aanpak',
+    'niveaus',
+    'use-cases',
+    'diensten',
+    'breder-dan-chat',
+    'ai-act',
+    'afspraak',
+    'blog',
+    'faq',
+    'contact',
+  ];
+  for (const id of chapterIds) {
+    expect(story.includes(`data-chapter="${id}"`), `Hoofdstuk ${id} ontbreekt.`);
+  }
+  expect(story.includes('<FaqList compact={true}'), 'Compacte FAQ ontbreekt.');
+  expect(
+    story.includes('<ContactForm compact={true} idPrefix="monkey"'),
+    'Compact contactformulier ontbreekt.',
+  );
+}
+
+const index = read('src', 'pages', 'index.astro');
+expect(index.includes('data-standard-home'), 'De standaardhomepage-wrapper ontbreekt.');
+expect(index.includes('data-monkey-home'), 'De Monkey-homepage-wrapper ontbreekt.');
+
 if (failures.length) {
   console.error(failures.map((failure) => `- ${failure}`).join('\n'));
   process.exit(1);

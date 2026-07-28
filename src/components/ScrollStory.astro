@@ -1,312 +1,524 @@
 ---
-const storySteps = [
-  {
-    kicker: '01 / Begrijpen',
-    title: 'Van losse ideeën naar een werkbare flow.',
-    text: 'Geen AI om de AI. We zoeken waar technologie echt tijd vrijmaakt en bouwen van daaruit verder.',
-    start: 0.135,
-    side: 'right',
-  },
-  {
-    kicker: '02 / Beginnen',
-    title: 'Klein beginnen. Herhalen. Beheersen.',
-    text: 'Eerst één helder experiment. Daarna bijsturen, afspraken maken en pas dan opschalen.',
-    start: 0.275,
-    side: 'left',
-  },
-  {
-    kicker: '03 / Verder kijken',
-    title: 'AI is breder dan chat.',
-    text: 'Van kennis en automatisering tot beeldherkenning, connected workers en slimme interfaces.',
-    start: 0.405,
-    side: 'left',
-  },
-  {
-    kicker: '04 / Samenwerken',
-    title: 'Je hoeft dit niet alleen uit te zoeken.',
-    text: 'Ik werk naast je mensen, in gewone taal. Wat werkt dragen we over. Wat niet werkt laten we liggen.',
-    start: 0.57,
-    side: 'left',
-  },
-  {
-    kicker: '05 / Verankeren',
-    title: 'Een aanpak die blijft staan.',
-    text: 'Geen losse demo, wel een ritme waarmee jouw team zelf verder kan.',
-    start: 0.86,
-    side: 'left',
-    approach: true,
-  },
-];
+import { getCollection } from 'astro:content';
+import {
+  agreement,
+  approachSteps,
+  beyondChatRows,
+  ladderLevels,
+  problemCards,
+  services,
+} from '../data/home';
+import ContactForm from './ContactForm.astro';
+import FaqList from './FaqList.astro';
+
+const useCases = (await getCollection('usecases', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const formatDate = (date: Date) => new Intl.DateTimeFormat('nl-BE', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+}).format(date);
+
+const pad = (value: number) => String(value).padStart(2, '0');
+
+const chapters = [
+  { id: 'hero', timeStart: 0, timeEnd: 7.82, footage: 'ready' },
+  { id: 'problemen', timeStart: 7.82, timeEnd: 15.64, footage: 'ready' },
+  { id: 'overdracht', timeStart: 15.64, timeEnd: 32.98, footage: 'ready' },
+  { id: 'team', timeStart: 32.98, timeEnd: 50.04, footage: 'ready' },
+  { id: 'aanpak', timeStart: 50.04, timeEnd: 58.04, footage: 'ready' },
+  { id: 'niveaus', timeStart: 58.04, timeEnd: 58.04, footage: 'pending' },
+  { id: 'use-cases', timeStart: 58.04, timeEnd: 58.04, footage: 'pending' },
+  { id: 'diensten', timeStart: 58.04, timeEnd: 58.04, footage: 'pending' },
+  { id: 'breder-dan-chat', timeStart: 58.04, timeEnd: 58.04, footage: 'pending' },
+  { id: 'ai-act', timeStart: 58.04, timeEnd: 58.04, footage: 'pending' },
+  { id: 'afspraak', timeStart: 58.04, timeEnd: 58.04, footage: 'pending' },
+  { id: 'blog', timeStart: 58.04, timeEnd: 58.04, footage: 'pending' },
+  { id: 'faq', timeStart: 58.04, timeEnd: 58.04, footage: 'pending' },
+  { id: 'contact', timeStart: 58.04, timeEnd: 58.04, footage: 'pending' },
+] as const;
 ---
 
-<section class="scroll-story" id="top" data-scroll-story>
-  <div class="story-stage">
+<section class="monkey-story" data-scroll-story>
+  <div class="monkey-stage">
     <video
-      class="story-video"
+      class="monkey-video"
       muted
       playsinline
       preload="none"
-      poster="/media/scroll-story/monkai-scroll-story-poster.jpg"
       aria-hidden="true"
       tabindex="-1"
       data-story-video
     >
-      <source
-        data-src="/media/scroll-story/monkai-scroll-story.webm"
-        type="video/webm"
-        media="(min-width: 769px)"
-      />
-      <source
-        data-src="/media/scroll-story/monkai-scroll-story.mp4"
-        type="video/mp4"
-        media="(min-width: 769px)"
-      />
+      <source data-src="/media/scroll-story/monkai-scroll-story.webm" type="video/webm" />
+      <source data-src="/media/scroll-story/monkai-scroll-story.mp4" type="video/mp4" />
     </video>
-
-    <div class="story-shade" aria-hidden="true"></div>
-
-    <div class="story-overlays">
-      <div
-        class="story-overlay story-overlay-hero"
-        data-story-overlay
-        data-start="0"
-        data-active="true"
-        aria-hidden="false"
-      >
-        <p class="story-kicker">MonkAi Business</p>
-        <h1 aria-label="AI zonder apenstreken.">AI zonder apenstreken<span aria-hidden="true">.</span></h1>
-        <p class="story-lede">Ik help Vlaamse KMO's rustig en veilig starten met AI. Klein beginnen, herhalen, beheersen.</p>
-        <div class="story-cta">
-          <a class="btn story-cta-primary" href="#contact">Laten we praten</a>
-          <a class="story-link" href="#aanpak">Bekijk de aanpak</a>
-        </div>
-        <div class="story-meta">
-          <span>Inspiratiesessie</span>
-          <span aria-hidden="true">|</span>
-          <span>Sparring in kleine groepen</span>
-          <span aria-hidden="true">|</span>
-          <span>Bij jou op locatie</span>
-        </div>
-        <div class="scroll-hint" aria-hidden="true">
-          <span>Scroll om te ontdekken</span>
-          <span class="scroll-arrow">↓</span>
-        </div>
-      </div>
-
-      {storySteps.map((step) => (
-        <article
-          class={`story-overlay story-overlay-step story-overlay-${step.side}`}
-          data-story-overlay
-          data-start={step.start}
-          data-active="false"
-          aria-hidden="true"
-        >
-          <p class="story-kicker">{step.kicker}</p>
-          <h2>{step.title}</h2>
-          <p>{step.text}</p>
-          {step.approach && (
-            <div class="story-approach" aria-label="De vier stappen van onze aanpak">
-              <span>Inspireren</span>
-              <span>Kiezen</span>
-              <span>Experimenteren</span>
-              <span>Verankeren</span>
-            </div>
-          )}
-        </article>
-      ))}
-    </div>
-
-    <div class="story-progress" aria-hidden="true">
-      <span class="story-progress-label">Scroll</span>
-      <span class="story-progress-track"><span></span></span>
+    <div class="monkey-shade" aria-hidden="true"></div>
+    <div class="monkey-progress" aria-hidden="true">
+      <span>Monkey mode</span>
+      <span class="monkey-progress-track"><span></span></span>
     </div>
   </div>
 
-  <div class="story-fallback">
-    <div class="story-fallback-inner">
-      <p class="story-kicker">MonkAi Business</p>
-      <h1 aria-label="AI zonder apenstreken.">AI zonder apenstreken<span aria-hidden="true">.</span></h1>
-      <p class="story-lede">Ik help Vlaamse KMO's rustig en veilig starten met AI. Klein beginnen, herhalen, beheersen.</p>
-      <div class="story-cta">
-        <a class="btn story-cta-primary" href="#contact">Laten we praten</a>
-        <a class="story-link" href="#aanpak">Bekijk de aanpak</a>
+  <div class="monkey-chapters">
+    <section
+      class="monkey-chapter monkey-chapter-hero"
+      id="monkey-hero"
+      data-monkey-chapter
+      data-chapter="hero"
+      data-time-start={chapters[0].timeStart}
+      data-time-end={chapters[0].timeEnd}
+      data-footage={chapters[0].footage}
+    >
+      <div class="monkey-panel monkey-panel-wide">
+        <p class="monkey-kicker">MonkAi Business</p>
+        <h1>AI zonder apenstreken<span aria-hidden="true">.</span></h1>
+        <p class="monkey-lede">Ik help Vlaamse KMO's rustig en veilig starten met AI. Klein beginnen, herhalen, beheersen.</p>
+        <div class="monkey-actions">
+          <a class="btn" href="#monkey-contact">Laten we praten</a>
+          <a class="monkey-link" href="#monkey-aanpak">Bekijk de aanpak</a>
+        </div>
+        <div class="monkey-meta">
+          <span>Inspiratiesessie</span>
+          <span>Sparring in kleine groepen</span>
+          <span>Bij jou op locatie</span>
+        </div>
       </div>
-      <div class="story-meta">
-        <span>Inspiratiesessie</span>
-        <span aria-hidden="true">|</span>
-        <span>Sparring in kleine groepen</span>
-        <span aria-hidden="true">|</span>
-        <span>Bij jou op locatie</span>
+    </section>
+
+    <section
+      class="monkey-chapter monkey-chapter-right"
+      id="monkey-problemen"
+      data-monkey-chapter
+      data-chapter="problemen"
+      data-time-start={chapters[1].timeStart}
+      data-time-end={chapters[1].timeEnd}
+      data-footage={chapters[1].footage}
+    >
+      <div class="monkey-panel">
+        <p class="monkey-kicker">Het vertrekpunt</p>
+        <h2>Van losse experimenten naar echte impact</h2>
+        <div class="monkey-card-list">
+          {problemCards.map((card) => (
+            <article>
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+            </article>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
+
+    <section
+      class="monkey-chapter"
+      id="monkey-overdracht"
+      data-monkey-chapter
+      data-chapter="overdracht"
+      data-time-start={chapters[2].timeStart}
+      data-time-end={chapters[2].timeEnd}
+      data-footage={chapters[2].footage}
+    >
+      <div class="monkey-panel monkey-panel-quote">
+        <p class="monkey-kicker">De afspraak vanaf dag één</p>
+        <h2>Werk slimmer. Niet afhankelijker.</h2>
+        <blockquote>Mijn doel is dat je mij niet meer nodig hebt.</blockquote>
+        <p>Ik geef een kickstart, draag over en blijf niet plakken.</p>
+      </div>
+    </section>
+
+    <section
+      class="monkey-chapter monkey-chapter-right"
+      id="monkey-team"
+      data-monkey-chapter
+      data-chapter="team"
+      data-time-start={chapters[3].timeStart}
+      data-time-end={chapters[3].timeEnd}
+      data-footage={chapters[3].footage}
+    >
+      <div class="monkey-panel">
+        <p class="monkey-kicker">Het team</p>
+        <h2>Klein team. Korte lijnen.</h2>
+        <div class="monkey-person">
+          <img src="/media/stijn.jpg" alt="Stijn De Ketelaere" width="88" height="88" loading="lazy" />
+          <div>
+            <h3>Stijn De Ketelaere</h3>
+            <p>AI-adoptiecoach vanuit Oudenaarde, met technische ervaring en beide voeten in het Vlaamse KMO-landschap.</p>
+          </div>
+        </div>
+        <p>Je werkt rechtstreeks met mij, van de eerste sessie tot de overdracht. Het team groeit met mensen die dezelfde nuchtere aanpak delen.</p>
+        <a class="monkey-link" href="https://www.linkedin.com/in/stijndeketelaere/" target="_blank" rel="noopener">Volg Stijn op LinkedIn</a>
+      </div>
+    </section>
+
+    <section
+      class="monkey-chapter"
+      id="monkey-aanpak"
+      data-monkey-chapter
+      data-chapter="aanpak"
+      data-time-start={chapters[4].timeStart}
+      data-time-end={chapters[4].timeEnd}
+      data-footage={chapters[4].footage}
+    >
+      <div class="monkey-panel monkey-panel-wide">
+        <p class="monkey-kicker">De aanpak</p>
+        <h2>Zo pakken we het aan</h2>
+        <div class="monkey-step-grid">
+          {approachSteps.map((step) => (
+            <article>
+              <span>{step.num}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="monkey-chapter monkey-chapter-right"
+      id="monkey-niveaus"
+      data-monkey-chapter
+      data-chapter="niveaus"
+      data-time-start={chapters[5].timeStart}
+      data-time-end={chapters[5].timeEnd}
+      data-footage={chapters[5].footage}
+    >
+      <div class="monkey-panel">
+        <p class="monkey-kicker">Eén groeipad</p>
+        <h2>Drie niveaus. Eén tempo.</h2>
+        <div class="monkey-levels">
+          {ladderLevels.map((level, index) => (
+            <article>
+              <span>0{index + 1}</span>
+              <div>
+                <h3>{level.title}</h3>
+                <p>{level.text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="monkey-chapter"
+      id="monkey-use-cases"
+      data-monkey-chapter
+      data-chapter="use-cases"
+      data-time-start={chapters[6].timeStart}
+      data-time-end={chapters[6].timeEnd}
+      data-footage={chapters[6].footage}
+    >
+      <div class="monkey-panel monkey-panel-wide">
+        <p class="monkey-kicker">Uit de praktijk</p>
+        <h2>Van idee naar werkende oplossing</h2>
+        <div class="monkey-link-grid">
+          {useCases.map((item) => (
+            <a href={`/use-cases/${item.id}`}>
+              <span>{pad(item.data.order)}</span>
+              <div>
+                <h3>{item.data.title}</h3>
+                <p>{item.data.summary}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="monkey-chapter monkey-chapter-right"
+      id="monkey-diensten"
+      data-monkey-chapter
+      data-chapter="diensten"
+      data-time-start={chapters[7].timeStart}
+      data-time-end={chapters[7].timeEnd}
+      data-footage={chapters[7].footage}
+    >
+      <div class="monkey-panel monkey-panel-wide">
+        <p class="monkey-kicker">Diensten</p>
+        <h2>Wat we voor je bouwen</h2>
+        <div class="monkey-service-grid">
+          {services.map((service) => (
+            <article class:list={{ featured: service.featured }}>
+              {service.eyebrow && <span>{service.eyebrow}</span>}
+              <h3>{service.title}</h3>
+              <p>{service.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="monkey-chapter"
+      id="monkey-breder-dan-chat"
+      data-monkey-chapter
+      data-chapter="breder-dan-chat"
+      data-time-start={chapters[8].timeStart}
+      data-time-end={chapters[8].timeEnd}
+      data-footage={chapters[8].footage}
+    >
+      <div class="monkey-panel">
+        <p class="monkey-kicker">Verder dan generatieve AI</p>
+        <h2>AI is meer dan een chatbot</h2>
+        <p>Waar het past kijken we ook naar wat er op de werkvloer zelf kan.</p>
+        <div class="monkey-rows">
+          {beyondChatRows.map((row) => (
+            <div>
+              <strong>{row.title}</strong>
+              <span>{row.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="monkey-chapter monkey-chapter-right"
+      id="monkey-ai-act"
+      data-monkey-chapter
+      data-chapter="ai-act"
+      data-time-start={chapters[9].timeStart}
+      data-time-end={chapters[9].timeEnd}
+      data-footage={chapters[9].footage}
+    >
+      <div class="monkey-panel">
+        <p class="monkey-kicker">AI-geletterdheid en EU AI Act</p>
+        <h2>AI Act klaar, zonder rem op innovatie</h2>
+        <p>Wie met AI werkt, moet AI voldoende begrijpen. Ik breng in kaart waar je team staat en bouw de geletterdheid stap voor stap op, aangepast aan elke rol.</p>
+        <ul class="monkey-checks">
+          <li>Duidelijke afspraken over data en tools</li>
+          <li>Verantwoordelijkheid per rol</li>
+          <li>Veilig experimenteren in gewone taal</li>
+        </ul>
+      </div>
+    </section>
+
+    <section
+      class="monkey-chapter"
+      id="monkey-afspraak"
+      data-monkey-chapter
+      data-chapter="afspraak"
+      data-time-start={chapters[10].timeStart}
+      data-time-end={chapters[10].timeEnd}
+      data-footage={chapters[10].footage}
+    >
+      <div class="monkey-panel monkey-panel-wide">
+        <p class="monkey-kicker">Samenwerken</p>
+        <h2>Een heldere afspraak</h2>
+        <div class="monkey-agreement">
+          <article>
+            <h3>Wat ik breng</h3>
+            <ul>
+              {agreement.monkai.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+          <article>
+            <h3>Wat jij brengt</h3>
+            <ul>
+              {agreement.customer.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="monkey-chapter monkey-chapter-right"
+      id="monkey-blog"
+      data-monkey-chapter
+      data-chapter="blog"
+      data-time-start={chapters[11].timeStart}
+      data-time-end={chapters[11].timeEnd}
+      data-footage={chapters[11].footage}
+    >
+      <div class="monkey-panel">
+        <p class="monkey-kicker">Uit de blog</p>
+        <h2>Praktische AI-inzichten</h2>
+        <div class="monkey-posts">
+          {posts.map((post) => (
+            <a href={`/blog/${post.id}`}>
+              <span>{formatDate(post.data.date)}</span>
+              <h3>{post.data.title}</h3>
+              <p>{post.data.description}</p>
+            </a>
+          ))}
+        </div>
+        <a class="monkey-link" href="/blog">Bekijk alle artikels</a>
+      </div>
+    </section>
+
+    <section
+      class="monkey-chapter"
+      id="monkey-faq"
+      data-monkey-chapter
+      data-chapter="faq"
+      data-time-start={chapters[12].timeStart}
+      data-time-end={chapters[12].timeEnd}
+      data-footage={chapters[12].footage}
+    >
+      <div class="monkey-panel monkey-panel-wide">
+        <p class="monkey-kicker">Kort en nuchter</p>
+        <h2>Veelgestelde vragen</h2>
+        <FaqList compact={true} />
+      </div>
+    </section>
+
+    <section
+      class="monkey-chapter monkey-chapter-contact"
+      id="monkey-contact"
+      data-monkey-chapter
+      data-chapter="contact"
+      data-time-start={chapters[13].timeStart}
+      data-time-end={chapters[13].timeEnd}
+      data-footage={chapters[13].footage}
+    >
+      <div class="monkey-panel monkey-panel-contact">
+        <div>
+          <p class="monkey-kicker">Contact</p>
+          <h2>Klaar om iets slim te bouwen?</h2>
+          <p>Geen verkooppraatje en geen verplichtingen. We bekijken waar de monkey business bij jou zit.</p>
+        </div>
+        <ContactForm compact={true} idPrefix="monkey" />
+      </div>
+    </section>
   </div>
 </section>
 
-<script>
-  const story = document.querySelector<HTMLElement>('[data-scroll-story]');
-  const desktop = window.matchMedia('(min-width: 769px)');
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  if (story && desktop.matches && !reducedMotion.matches) {
-    const video = story.querySelector<HTMLVideoElement>('[data-story-video]');
-    const overlays = Array.from(story.querySelectorAll<HTMLElement>('[data-story-overlay]'));
-
-    if (video && overlays.length > 0) {
-      video.querySelectorAll<HTMLSourceElement>('source[data-src]').forEach((source) => {
-        source.src = source.dataset.src ?? '';
-      });
-      video.load();
-      story.dataset.enhanced = 'true';
-
-      const starts = overlays.map((overlay) => Number(overlay.dataset.start ?? 0));
-      let targetTime = 0;
-      let renderedTime = 0;
-      let activeIndex = -1;
-      let duration = 58.08;
-      let visible = true;
-      let animationFrame = 0;
-      let lastSeek = 0;
-
-      const clamp = (value: number, minimum: number, maximum: number) =>
-        Math.min(Math.max(value, minimum), maximum);
-
-      const setActiveOverlay = (progress: number) => {
-        let nextIndex = 0;
-        for (let index = 0; index < starts.length; index += 1) {
-          if (progress >= starts[index]) nextIndex = index;
-        }
-
-        if (nextIndex === activeIndex) return;
-        activeIndex = nextIndex;
-
-        overlays.forEach((overlay, index) => {
-          const isActive = index === activeIndex;
-          overlay.dataset.active = String(isActive);
-          overlay.setAttribute('aria-hidden', String(!isActive));
-        });
-      };
-
-      const updateTarget = () => {
-        const scrollableDistance = story.offsetHeight - window.innerHeight;
-        const top = story.getBoundingClientRect().top;
-        const progress = scrollableDistance > 0
-          ? clamp(-top / scrollableDistance, 0, 1)
-          : 0;
-
-        targetTime = progress * Math.max(duration - 0.04, 0);
-        story.style.setProperty('--story-progress', String(progress));
-        setActiveOverlay(progress);
-      };
-
-      const render = (time: number) => {
-        if (!visible) {
-          animationFrame = 0;
-          return;
-        }
-
-        const difference = targetTime - renderedTime;
-        if (Math.abs(difference) > 6) {
-          renderedTime = targetTime;
-        } else {
-          renderedTime += difference * 0.2;
-        }
-
-        if (
-          video.readyState >= HTMLMediaElement.HAVE_METADATA &&
-          time - lastSeek > 42 &&
-          Math.abs(video.currentTime - renderedTime) > 0.015 &&
-          !video.seeking
-        ) {
-          video.currentTime = clamp(renderedTime, 0, Math.max(duration - 0.04, 0));
-          lastSeek = time;
-        }
-
-        animationFrame = window.requestAnimationFrame(render);
-      };
-
-      const startRendering = () => {
-        if (!animationFrame) animationFrame = window.requestAnimationFrame(render);
-      };
-
-      video.addEventListener('loadedmetadata', () => {
-        duration = Number.isFinite(video.duration) ? video.duration : duration;
-        updateTarget();
-        renderedTime = targetTime;
-        video.currentTime = targetTime;
-        startRendering();
-      }, { once: true });
-
-      const observer = new IntersectionObserver((entries) => {
-        visible = entries[0]?.isIntersecting ?? false;
-        if (visible) {
-          updateTarget();
-          startRendering();
-        }
-      });
-      observer.observe(story);
-
-      window.addEventListener('scroll', updateTarget, { passive: true });
-      window.addEventListener('resize', updateTarget, { passive: true });
-      window.addEventListener('pageshow', updateTarget);
-      updateTarget();
-      startRendering();
-    }
-  }
-
-  document.querySelectorAll('.story-cta-primary').forEach((cta) => {
-    cta.addEventListener('click', () => {
-      window.posthog?.capture('hero_cta_clicked');
-    });
-  });
-</script>
-
 <style>
-  .scroll-story {
+  .monkey-story {
     --story-progress: 0;
     position: relative;
-    border-top: 0;
-  }
-
-  .story-stage {
-    display: none;
-  }
-
-  .story-fallback {
-    position: relative;
-    display: flex;
-    min-height: min(760px, calc(100svh - 84px));
-    align-items: center;
-    padding: 92px 64px;
-    overflow: hidden;
+    background: #071218;
     color: #fff;
-    background:
-      linear-gradient(90deg, rgba(4, 18, 25, 0.9) 0%, rgba(4, 18, 25, 0.6) 46%, rgba(4, 18, 25, 0.12) 78%),
-      url('/media/scroll-story/monkai-scroll-story-poster.jpg') 66% center / cover no-repeat;
   }
 
-  .story-fallback-inner {
+  .monkey-stage {
+    position: sticky;
+    top: 0;
+    z-index: 0;
+    height: 100vh;
+    min-height: 620px;
+    margin-bottom: -100vh;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 70% 30%, rgba(120, 166, 111, 0.18), transparent 32%),
+      #071218;
+  }
+
+  .monkey-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .monkey-shade {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(3, 13, 19, 0.88) 0%, rgba(3, 13, 19, 0.48) 45%, rgba(3, 13, 19, 0.18) 100%),
+      linear-gradient(0deg, rgba(3, 13, 19, 0.7) 0%, transparent 48%);
+    pointer-events: none;
+  }
+
+  .monkey-progress {
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255, 255, 255, 0.62);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transform: translateY(-50%);
+    writing-mode: vertical-rl;
+  }
+
+  .monkey-progress-track {
+    position: relative;
+    display: block;
+    width: 2px;
+    height: 112px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.24);
+  }
+
+  .monkey-progress-track span {
+    position: absolute;
+    inset: 0;
+    background: #c4e1bc;
+    transform: scaleY(var(--story-progress));
+    transform-origin: top;
+  }
+
+  .monkey-chapters {
     position: relative;
     z-index: 1;
-    display: flex;
-    width: min(680px, 100%);
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
   }
 
-  .story-kicker {
+  .monkey-chapter {
+    position: relative;
+    display: flex;
+    min-height: 100svh;
+    align-items: center;
+    padding: clamp(72px, 8vw, 120px);
+    scroll-margin-top: 0;
+  }
+
+  .monkey-chapter-right {
+    justify-content: flex-end;
+  }
+
+  .monkey-panel {
+    width: min(680px, 64vw);
+    padding: clamp(24px, 3vw, 42px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius);
+    background: rgba(3, 13, 19, 0.78);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+    backdrop-filter: blur(12px);
+  }
+
+  .monkey-panel-wide {
+    width: min(980px, 78vw);
+  }
+
+  .monkey-panel > * + * {
+    margin-top: 18px;
+  }
+
+  .monkey-kicker {
     margin: 0;
     color: #c4e1bc;
     font-family: var(--font-mono);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
 
+  h1,
+  h2,
+  h3,
+  p {
+    margin: 0;
+  }
+
   h1 {
-    max-width: 760px;
-    font-size: clamp(48px, 6vw, 82px);
+    max-width: 780px;
+    font-size: clamp(50px, 6vw, 84px);
     font-weight: 500;
     line-height: 1.02;
     text-wrap: balance;
@@ -316,267 +528,287 @@ const storySteps = [
     color: #78a66f;
   }
 
-  .story-lede {
-    max-width: 630px;
-    margin: 0;
-    color: rgba(255, 255, 255, 0.86);
+  h2 {
+    font-size: clamp(34px, 4vw, 58px);
+    font-weight: 500;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  h3 {
+    font-size: 19px;
+    font-weight: 600;
+  }
+
+  p,
+  li {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.62;
+  }
+
+  .monkey-lede {
+    max-width: 640px;
     font-size: clamp(17px, 1.6vw, 21px);
-    line-height: 1.6;
   }
 
-  .story-cta {
+  .monkey-actions,
+  .monkey-meta {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 20px;
+    gap: 12px 18px;
   }
 
-  .story-cta .btn {
+  .monkey-actions .btn {
     color: var(--on-green);
   }
 
-  .story-link {
-    padding: 14px 3px;
-    border-bottom: 1.5px solid rgba(255, 255, 255, 0.8);
+  .monkey-link {
+    align-self: flex-start;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #c4e1bc;
     color: #fff;
     font-weight: 600;
   }
 
-  .story-link:hover {
-    border-color: #c4e1bc;
+  .monkey-link:hover {
     color: #c4e1bc;
   }
 
-  .story-meta {
+  .monkey-meta {
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 14px;
+  }
+
+  .monkey-meta span + span::before {
+    content: '|';
+    margin-right: 18px;
+    color: rgba(255, 255, 255, 0.28);
+  }
+
+  .monkey-card-list,
+  .monkey-levels,
+  .monkey-posts {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px 14px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .monkey-card-list article,
+  .monkey-levels article,
+  .monkey-posts a {
+    padding: 14px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .monkey-card-list p,
+  .monkey-levels p,
+  .monkey-posts p {
+    margin-top: 5px;
+    font-size: 15px;
+  }
+
+  .monkey-panel-quote blockquote {
+    margin: 20px 0 0;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-size: clamp(28px, 3vw, 44px);
+    line-height: 1.18;
+  }
+
+  .monkey-person {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .monkey-person img {
+    flex-shrink: 0;
+    width: 88px;
+    height: 88px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius);
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .monkey-person p {
+    margin-top: 5px;
+    font-size: 15px;
+  }
+
+  .monkey-step-grid,
+  .monkey-service-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .monkey-step-grid article,
+  .monkey-service-grid article {
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .monkey-step-grid span,
+  .monkey-service-grid article > span,
+  .monkey-levels article > span,
+  .monkey-link-grid > a > span,
+  .monkey-posts > a > span {
+    color: #c4e1bc;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .monkey-step-grid h3,
+  .monkey-service-grid h3 {
+    margin-top: 8px;
+  }
+
+  .monkey-step-grid p,
+  .monkey-service-grid p {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+
+  .monkey-levels article {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 12px;
+  }
+
+  .monkey-link-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 28px;
+  }
+
+  .monkey-link-grid a {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    gap: 10px;
+    padding: 14px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    color: #fff;
+  }
+
+  .monkey-link-grid p {
+    margin-top: 4px;
+    font-size: 14px;
+  }
+
+  .monkey-service-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .monkey-service-grid .featured {
+    border-color: rgba(196, 225, 188, 0.54);
+    background: rgba(120, 166, 111, 0.16);
+  }
+
+  .monkey-rows > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .monkey-rows span {
     color: rgba(255, 255, 255, 0.68);
     font-size: 14px;
   }
 
-  @media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
-    .scroll-story[data-enhanced='true'] {
-      height: 700vh;
-      min-height: 4300px;
-      background: #071218;
+  .monkey-checks {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-left: 20px;
+  }
+
+  .monkey-checks li::marker {
+    color: #c4e1bc;
+  }
+
+  .monkey-agreement {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  .monkey-agreement article {
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .monkey-agreement ul {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin: 12px 0 0;
+    padding-left: 18px;
+  }
+
+  .monkey-agreement li {
+    font-size: 15px;
+  }
+
+  .monkey-posts a {
+    color: #fff;
+  }
+
+  .monkey-posts h3 {
+    margin-top: 5px;
+  }
+
+  .monkey-panel-contact {
+    display: grid;
+    width: min(1080px, 82vw);
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: clamp(24px, 4vw, 56px);
+    align-items: start;
+  }
+
+  .monkey-panel-contact > div > * + * {
+    margin-top: 18px;
+  }
+
+  :global(.monkey-story .faq-list) {
+    margin-top: 22px;
+  }
+
+  :global(.monkey-story .faq-item summary) {
+    color: #fff;
+  }
+
+  :global(.monkey-story .contact-form) {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  :global(.monkey-story .contact-form label),
+  :global(.monkey-story .contact-form .btn) {
+    color: #fff;
+  }
+
+  @media (max-width: 980px) {
+    .monkey-panel,
+    .monkey-panel-wide,
+    .monkey-panel-contact {
+      width: min(760px, 82vw);
     }
 
-    .scroll-story[data-enhanced='true'] .story-fallback {
-      display: none;
-    }
-
-    .scroll-story[data-enhanced='true'] .story-stage {
-      position: sticky;
-      top: 0;
-      display: block;
-      height: 100vh;
-      min-height: 620px;
-      overflow: hidden;
-      background: #071218;
-      color: #fff;
-    }
-
-    .story-video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
-
-    .story-shade {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(90deg, rgba(3, 13, 19, 0.8) 0%, rgba(3, 13, 19, 0.38) 42%, rgba(3, 13, 19, 0.08) 70%),
-        linear-gradient(0deg, rgba(3, 13, 19, 0.58) 0%, transparent 42%);
-      pointer-events: none;
-    }
-
-    .story-overlays {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      width: 100%;
-      height: 100%;
-    }
-
-    .story-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 22px;
-      padding: clamp(56px, 7vw, 112px);
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(24px);
-      transition: opacity 320ms ease, transform 420ms ease;
-    }
-
-    .story-overlay[data-active='true'] {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
-
-    .story-overlay-hero {
-      width: min(880px, 72vw);
-      justify-content: center;
-    }
-
-    .story-overlay-step {
-      width: min(700px, 58vw);
-    }
-
-    .story-overlay-right {
-      right: 0;
-      left: auto;
-      align-items: flex-end;
-      text-align: right;
-    }
-
-    .story-overlay-step h2 {
-      max-width: 650px;
-      font-size: clamp(42px, 5vw, 68px);
-      font-weight: 500;
-      line-height: 1.04;
-      text-wrap: balance;
-    }
-
-    .story-overlay-step > p:last-of-type {
-      max-width: 560px;
-      margin: 0;
-      color: rgba(255, 255, 255, 0.82);
-      font-size: clamp(17px, 1.5vw, 20px);
-      line-height: 1.6;
-    }
-
-    .story-overlay-right > p {
-      margin-left: auto;
-    }
-
-    .story-approach {
-      display: grid;
-      width: min(620px, 100%);
+    .monkey-service-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 9px;
-      margin-top: 4px;
     }
 
-    .story-approach span {
-      padding: 11px 13px;
-      border: 1px solid rgba(255, 255, 255, 0.26);
-      border-radius: var(--radius-sm);
-      background: rgba(3, 13, 19, 0.36);
-      font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.04em;
-    }
-
-    .scroll-hint {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 10px;
-      color: rgba(255, 255, 255, 0.64);
-      font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .scroll-arrow {
-      color: #c4e1bc;
-      font-size: 18px;
-    }
-
-    .story-progress {
-      position: absolute;
-      right: 28px;
-      top: 50%;
-      z-index: 3;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: rgba(255, 255, 255, 0.62);
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transform: translateY(-50%);
-      writing-mode: vertical-rl;
-    }
-
-    .story-progress-track {
-      position: relative;
-      width: 2px;
-      height: 112px;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.25);
-    }
-
-    .story-progress-track span {
-      position: absolute;
-      inset: 0;
-      background: #c4e1bc;
-      transform: scaleY(var(--story-progress));
-      transform-origin: top;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .story-fallback {
-      min-height: 720px;
-      padding: 72px 22px 58px;
-      align-items: flex-end;
-      background:
-        linear-gradient(0deg, rgba(4, 18, 25, 0.92) 0%, rgba(4, 18, 25, 0.52) 58%, rgba(4, 18, 25, 0.08) 100%),
-        url('/media/scroll-story/monkai-scroll-story-poster.jpg') 44% center / cover no-repeat;
-    }
-
-    .story-fallback-inner {
-      gap: 20px;
-    }
-
-    h1 {
-      font-size: clamp(40px, 12vw, 54px);
-    }
-
-    .story-lede {
-      font-size: 17px;
-    }
-
-    .story-cta {
-      width: 100%;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 8px;
-    }
-
-    .story-cta .btn,
-    .story-link {
-      text-align: center;
-    }
-
-    .story-meta {
-      justify-content: center;
-      font-size: 13px;
-      text-align: center;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .scroll-story {
-      height: auto;
-      min-height: 0;
-    }
-
-    .story-stage {
-      display: none;
+    .monkey-panel-contact {
+      grid-template-columns: 1fr;
     }
   }
 </style>
