@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "check:scroll-story": "node scripts/check-scroll-story.mjs",
     "preview": "astro preview"
   },
   "dependencies": {
