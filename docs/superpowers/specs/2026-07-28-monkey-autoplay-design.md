@@ -16,6 +16,9 @@ gewone handmatige scrollbediening blijft volledig beschikbaar.
 - De tour besteedt ongeveer acht seconden aan elk hoofdstuk.
 - De beweging is continu. De tour springt niet van hoofdstuk naar hoofdstuk.
 - De bestaande 85/15-verhouding voor video en leesrust blijft ongewijzigd.
+- De start van het contacthoofdstuk is de eindpositie van de tour.
+- De tour scrollt niet door tot de absolute bodem van de story of de footer.
+- Het volledige contactblok blijft daardoor zichtbaar wanneer de tour stopt.
 
 ## Handmatige overname
 
@@ -65,22 +68,23 @@ Autoplay kent twee toestanden: `playing` en `paused`. Er kan maximaal één
 animatieframe-lus actief zijn. Stoppen annuleert het geplande frame, zet de knop
 terug naar Play en laat de huidige scrollpositie ongemoeid.
 
-Als de story geen bruikbare scrollafstand heeft, start autoplay niet. Wanneer
-het einde bereikt wordt, stopt de tour automatisch en blijft de contactscene
-zichtbaar. Omdat die scene nog geen eigen filmclip heeft, blijft daar zoals nu
-het laatste FAQ-frame staan.
+Als de story geen bruikbare scrollafstand heeft, start autoplay niet. De
+eindpositie wordt afgeleid van de bovenkant van het contacthoofdstuk. Wanneer
+die positie bereikt wordt, stopt de tour automatisch met het contactblok
+volledig in beeld. Omdat die scene nog geen eigen filmclip heeft, blijft daar
+zoals nu het laatste FAQ-frame staan.
 
 ## Teststrategie
 
 De testgestuurde implementatie dekt minstens:
 
 - een volgende positie op basis van acht seconden per hoofdstuk;
-- begrenzing aan het story-einde;
+- begrenzing aan de start van het contacthoofdstuk;
 - opnieuw beginnen wanneer Play aan het einde wordt gestart;
 - markup en toegankelijke labels van de knop;
 - de bestaande Monkey-contractchecks en productiebuild;
 - browsercontrole op 1920x1080 voor start, pauze, hervatten, handmatige
-  overname en automatisch stoppen.
+  overname, automatisch stoppen en een volledig zichtbaar contactblok.
 
 ## Buiten scope
 
