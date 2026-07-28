@@ -21,6 +21,24 @@ expect(toggle.includes('@media (max-width: 768px)'), 'De mobiele verberging ontb
 expect(layout.includes("chosen === 'monkey'"), 'De mobiele Monkey-fallback ontbreekt.');
 expect(tokens.includes(":root[data-theme='monkey']"), 'Monkey gebruikt de dark tokens niet.');
 
+const homeDataPath = join(root, 'src', 'data', 'home.ts');
+expect(existsSync(homeDataPath), 'De gedeelde homepagegegevens ontbreken.');
+
+if (existsSync(homeDataPath)) {
+  const homeData = read('src', 'data', 'home.ts');
+  for (const exportName of [
+    'problemCards',
+    'ladderLevels',
+    'approachSteps',
+    'services',
+    'beyondChatRows',
+    'agreement',
+    'faqs',
+  ]) {
+    expect(homeData.includes(`export const ${exportName}`), `${exportName} ontbreekt.`);
+  }
+}
+
 if (failures.length) {
   console.error(failures.map((failure) => `- ${failure}`).join('\n'));
   process.exit(1);

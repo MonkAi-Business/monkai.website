@@ -1,10 +1,5 @@
 ---
-const bring = [
-  'Heldere uitleg, zonder jargon en zonder hype.',
-  'Een aanpak die overdraagt in plaats van bindt.',
-  'Ervaring met processen van Vlaamse KMO\'s.',
-  'Eerlijk advies, ook als AI niet het antwoord is.',
-];
+import { agreement } from '../data/home';
 ---
 <section class="section agreement">
   <div class="container agreement-inner">
@@ -16,7 +11,7 @@ const bring = [
       <div class="agreement-card">
         <h3>Wat ik breng</h3>
         <div class="agreement-list">
-          {bring.map((item) => (
+          {agreement.monkai.map((item) => (
             <div class="agreement-item"><span class="bullet">•</span><span>{item}</span></div>
           ))}
         </div>
@@ -24,10 +19,12 @@ const bring = [
       <div class="agreement-card">
         <h3>Wat jij brengt</h3>
         <div class="agreement-list">
-          <div class="agreement-item"><span class="bullet">•</span><span class="agreement-item--strong">Minstens één persoon die dit intern mee draagt. Dit is de belangrijkste voorwaarde.</span></div>
-          <div class="agreement-item"><span class="bullet">•</span><span>Tijd om te experimenteren tussen de sessies door.</span></div>
-          <div class="agreement-item"><span class="bullet">•</span><span>Toegang tot echte processen en voorbeelden.</span></div>
-          <div class="agreement-item"><span class="bullet">•</span><span>De wil om klein te beginnen.</span></div>
+          {agreement.customer.map((item, index) => (
+            <div class="agreement-item">
+              <span class="bullet">•</span>
+              <span class:list={{ 'agreement-item--strong': index === 0 }}>{item}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>

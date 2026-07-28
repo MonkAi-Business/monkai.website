@@ -1,16 +1,11 @@
 ---
-const steps = [
-  { num: '01', title: 'Inspireren', text: 'Een sessie van twee uur die toont wat AI vandaag kan, met voorbeelden uit jouw sector.' },
-  { num: '02', title: 'Kiezen', text: 'Samen de use cases selecteren met de beste verhouding tussen impact en moeite.' },
-  { num: '03', title: 'Experimenteren', text: 'Klein en veilig proberen, met echte data in een afgesproken kader. Wat werkt blijft.' },
-  { num: '04', title: 'Verankeren', text: 'Afspraken, begeleiding en overdracht. Jouw mensen nemen het over, ik stap terug.' },
-];
+import { approachSteps } from '../data/home';
 ---
 <section class="section approach">
   <div class="container approach-inner">
     <h2>De aanpak</h2>
     <div class="approach-grid">
-      {steps.map((step) => (
+      {approachSteps.map((step) => (
         <div class="approach-step">
           <div class="approach-num">{step.num}</div>
           <h3>{step.title}</h3>

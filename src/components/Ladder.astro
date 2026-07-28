@@ -1,4 +1,7 @@
 ---
+import { ladderLevels } from '../data/home';
+
+const rowClasses = ['row-automate', 'row-remember', 'row-accelerate'];
 ---
 <section class="section ladder" id="aanpak">
   <div class="container ladder-inner">
@@ -7,18 +10,12 @@
       <p class="lede">Elk bedrijf start op het eerste niveau. De volgende komen pas als het vorige werkt.</p>
     </div>
     <div class="ladder-rows">
-      <div class="ladder-row row-automate">
-        <div class="ladder-title">Automatiseren</div>
-        <p>Repetitieve back-office taken wegnemen met AI-automatisaties in n8n, Make of vergelijkbare tools. Bijvoorbeeld: bonnetjes en facturen automatisch laten lezen, hernoemen, taggen, in de juiste map zetten en doorsturen naar de boekhouding.</p>
-      </div>
-      <div class="ladder-row row-remember">
-        <div class="ladder-title">Onthouden</div>
-        <p>Een second brain voor jezelf, een collective brain voor het bedrijf: één gedeeld bedrijfsgeheugen waar kennis niet langer alleen in hoofden zit. Kennis zo structureren dat je in minuten een eerste versie hebt in plaats van in dagen. Het fundament is een eenvoudige data-architectuur: kennis op één plek, met duidelijke afspraken over wie wat ziet.</p>
-      </div>
-      <div class="ladder-row row-accelerate">
-        <div class="ladder-title">Versnellen</div>
-        <p>Accelerated coding: ontwikkelteams die met AI sneller en met betere kwaliteit werken, met behoud van controle en security.</p>
-      </div>
+      {ladderLevels.map((level, index) => (
+        <div class={`ladder-row ${rowClasses[index]}`}>
+          <div class="ladder-title">{level.title}</div>
+          <p>{level.text}</p>
+        </div>
+      ))}
     </div>
   </div>
 </section>

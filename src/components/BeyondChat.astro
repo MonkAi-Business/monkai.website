@@ -1,10 +1,5 @@
 ---
-const rows = [
-  { title: 'Augmented reality', text: 'instructies op de plek waar je werkt' },
-  { title: 'Smart glasses', text: 'handen vrij, informatie in beeld' },
-  { title: 'Computer vision', text: "camera's die controleren en tellen" },
-  { title: 'Connected worker', text: 'de werkvloer verbonden met de systemen' },
-];
+import { beyondChatRows } from '../data/home';
 ---
 <section class="section beyond-chat">
   <div class="container beyond-chat-inner">
@@ -13,7 +8,7 @@ const rows = [
       <p class="lede">Generatieve AI is het vertrekpunt, niet de grens. Waar het past kijk ik ook naar wat er op de werkvloer zelf kan.</p>
     </div>
     <div class="beyond-chat-list">
-      {rows.map((row) => (
+      {beyondChatRows.map((row) => (
         <div class="beyond-chat-row">
           <span class="beyond-chat-title">{row.title}</span>
           <span class="beyond-chat-text">{row.text}</span>

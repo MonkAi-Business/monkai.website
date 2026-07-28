@@ -1,24 +1,11 @@
 ---
-const cards = [
-  {
-    title: 'Kopiëren en plakken',
-    text: "Bestellingen uit mails overtypen in het ERP. Gegevens van het ene systeem naar het andere slepen. Elke dag opnieuw.",
-  },
-  {
-    title: 'Kennis in mailboxen',
-    text: 'De beste antwoorden zitten in de mailbox van één collega. Valt die persoon uit, dan valt de kennis uit.',
-  },
-  {
-    title: 'Stiekem experimenteren',
-    text: 'Medewerkers proberen al AI, vaak met bedrijfsdata in een privé-account. Dat is geen probleem, dat is brandstof. Het heeft alleen een veilig kader nodig.',
-  },
-];
+import { problemCards } from '../data/home';
 ---
 <section class="section problem">
   <div class="container problem-inner">
     <h2>Waar zit de monkey business bij jou?</h2>
     <div class="problem-grid">
-      {cards.map((card) => (
+      {problemCards.map((card) => (
         <div class="problem-card">
           <h3>{card.title}</h3>
           <p>{card.text}</p>
