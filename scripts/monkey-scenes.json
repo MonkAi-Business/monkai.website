@@ -1,0 +1,44 @@
+[
+  {
+    "id": "desk",
+    "file": "Clip_1_-_Monkey_working_202607281057.mp4",
+    "duration": 8.0,
+    "transition": 0.0
+  },
+  {
+    "id": "laptop",
+    "file": "Monkey_looks_at_laptop_screen_202607281058.mp4",
+    "duration": 8.0,
+    "transition": 0.18
+  },
+  {
+    "id": "door",
+    "file": "Monkey_opens_door_to_jungle_202607281058.mp4",
+    "duration": 8.0,
+    "transition": 0.18
+  },
+  {
+    "id": "view",
+    "file": "Monkey_admiring_jungle_view_202607281058.mp4",
+    "duration": 10.01,
+    "transition": 0.45
+  },
+  {
+    "id": "vine",
+    "file": "Monkey_swings_on_vine_202607281058.mp4",
+    "duration": 9.5,
+    "transition": 0.22
+  },
+  {
+    "id": "team",
+    "file": "Monkey_jumps_to_second_platform_202607281058.mp4",
+    "duration": 8.0,
+    "transition": 0.22
+  },
+  {
+    "id": "approach",
+    "file": "Monkey_crosses_rope_bridge_to_202607281058.mp4",
+    "duration": 8.0,
+    "transition": 0.22
+  }
+]

@@ -97,6 +97,22 @@ const nav = read('src', 'components', 'Nav.astro');
 expect(nav.includes('monkeyTargets'), 'De Monkey-navigatiemapping ontbreekt.');
 expect(nav.includes('scrollToMonkeyChapter'), 'De navigatie roept Monkey-hoofdstukken niet aan.');
 
+const manifestPath = join(root, 'scripts', 'monkey-scenes.json');
+expect(existsSync(manifestPath), 'Het filmscènemanifest ontbreekt.');
+if (existsSync(manifestPath)) {
+  const scenes = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  expect(scenes.length === 7, 'Het manifest moet nu de zeven bestaande clips bevatten.');
+  expect(
+    scenes.every((scene) => scene.id && scene.file && scene.duration),
+    'Een filmscène is onvolledig.',
+  );
+}
+
+const filmBuilder = read('scripts', 'build-scroll-story.ps1');
+expect(filmBuilder.includes('monkey-scenes.json'), 'De filmbouwer leest het manifest niet.');
+expect(filmBuilder.includes('ConvertFrom-Json'), 'De filmbouwer verwerkt het JSON-manifest niet.');
+expect(!filmBuilder.includes('$sourceNames'), 'De filmbouwer bevat nog een harde bronlijst.');
+
 if (failures.length) {
   console.error(failures.map((failure) => `- ${failure}`).join('\n'));
   process.exit(1);

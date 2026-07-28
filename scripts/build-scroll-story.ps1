@@ -13,18 +13,15 @@ if (-not (Test-Path -LiteralPath $ffmpeg)) {
   throw "FFmpeg ontbreekt op $ffmpeg. Installeer eerst ffmpeg-static."
 }
 
-$sourceNames = @(
-  'Clip_1_-_Monkey_working_202607281057.mp4',
-  'Monkey_looks_at_laptop_screen_202607281058.mp4',
-  'Monkey_opens_door_to_jungle_202607281058.mp4',
-  'Monkey_admiring_jungle_view_202607281058.mp4',
-  'Monkey_swings_on_vine_202607281058.mp4',
-  'Monkey_jumps_to_second_platform_202607281058.mp4',
-  'Monkey_crosses_rope_bridge_to_202607281058.mp4'
-)
+$manifestPath = Join-Path $PSScriptRoot 'monkey-scenes.json'
+$scenes = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
 
-$sources = foreach ($name in $sourceNames) {
-  $path = Join-Path $SourceDirectory $name
+if ($scenes.Count -lt 1) {
+  throw 'Het filmscènemanifest bevat geen scènes.'
+}
+
+$sources = foreach ($scene in $scenes) {
+  $path = Join-Path $SourceDirectory $scene.file
   if (-not (Test-Path -LiteralPath $path)) {
     throw "Bronvideo ontbreekt: $path"
   }
@@ -33,21 +30,31 @@ $sources = foreach ($name in $sourceNames) {
 
 New-Item -ItemType Directory -Force -Path $outputDirectory | Out-Null
 
-$filter = @'
-[0:v]trim=duration=8,setpts=PTS-STARTPTS,scale=1280:720:flags=lanczos,fps=24,format=yuv420p[v0];
-[1:v]trim=duration=8,setpts=PTS-STARTPTS,scale=1280:720:flags=lanczos,fps=24,format=yuv420p[v1];
-[2:v]trim=duration=8,setpts=PTS-STARTPTS,scale=1280:720:flags=lanczos,fps=24,format=yuv420p[v2];
-[3:v]trim=duration=10.01,setpts=PTS-STARTPTS,scale=1280:720:flags=lanczos,fps=24,format=yuv420p[v3];
-[4:v]trim=duration=9.5,setpts=PTS-STARTPTS,scale=1280:720:flags=lanczos,fps=24,format=yuv420p[v4];
-[5:v]trim=duration=8,setpts=PTS-STARTPTS,scale=1280:720:flags=lanczos,fps=24,format=yuv420p[v5];
-[6:v]trim=duration=8,setpts=PTS-STARTPTS,scale=1280:720:flags=lanczos,fps=24,format=yuv420p[v6];
-[v0][v1]xfade=transition=fade:duration=0.18:offset=7.82[x1];
-[x1][v2]xfade=transition=fade:duration=0.18:offset=15.64[x2];
-[x2][v3]xfade=transition=fade:duration=0.45:offset=23.19[x3];
-[x3][v4]xfade=transition=fade:duration=0.22:offset=32.98[x4];
-[x4][v5]xfade=transition=fade:duration=0.22:offset=42.26[x5];
-[x5][v6]xfade=transition=fade:duration=0.22:offset=50.04,format=yuv420p[story]
-'@ -replace "`r?`n", ''
+$culture = [System.Globalization.CultureInfo]::InvariantCulture
+$filterParts = @()
+
+for ($index = 0; $index -lt $scenes.Count; $index += 1) {
+  $duration = [double]$scenes[$index].duration
+  $durationText = $duration.ToString('0.##', $culture)
+  $filterParts += "[${index}:v]trim=duration=$durationText,setpts=PTS-STARTPTS,scale=1280:720:flags=lanczos,fps=24,format=yuv420p[v$index]"
+}
+
+$currentLabel = 'v0'
+$timeline = [double]$scenes[0].duration
+
+for ($index = 1; $index -lt $scenes.Count; $index += 1) {
+  $fade = [double]$scenes[$index].transition
+  $offset = $timeline - $fade
+  $nextLabel = "x$index"
+  $fadeText = $fade.ToString('0.##', $culture)
+  $offsetText = $offset.ToString('0.##', $culture)
+  $filterParts += "[$currentLabel][v$index]xfade=transition=fade:duration=$fadeText`:offset=$offsetText[$nextLabel]"
+  $timeline = $timeline + [double]$scenes[$index].duration - $fade
+  $currentLabel = $nextLabel
+}
+
+$filterParts += "[$currentLabel]format=yuv420p[story]"
+$filter = $filterParts -join ';'
 
 $inputArguments = @()
 foreach ($source in $sources) {
