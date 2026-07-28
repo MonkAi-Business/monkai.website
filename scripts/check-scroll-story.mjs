@@ -1,5 +1,10 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import {
+  AUTO_SCROLL_CHAPTER_MS,
+  advanceAutoScroll,
+  resolveAutoScrollStart,
+} from '../src/utils/scrollStoryAutoplay.mjs';
 import { progressToTime } from '../src/utils/scrollStoryTiming.mjs';
 
 const root = process.cwd();
@@ -28,6 +33,41 @@ expect(
 expect(
   approximately(progressToTime(1, sampleTimings), 18),
   'De laatste 15 procent moet het eindframe vasthouden.',
+);
+
+const autoplayStep = advanceAutoScroll({
+  position: 100,
+  elapsedMs: 4000,
+  start: 0,
+  end: 800,
+  chapterCount: 1,
+});
+
+expect(AUTO_SCROLL_CHAPTER_MS === 8000, 'Autoplay moet acht seconden per hoofdstuk gebruiken.');
+expect(
+  approximately(autoplayStep.position, 500) && autoplayStep.done === false,
+  'Autoplay moet met een constant hoofdstuktempo vooruitgaan.',
+);
+
+const autoplayEnd = advanceAutoScroll({
+  position: 750,
+  elapsedMs: 1000,
+  start: 0,
+  end: 800,
+  chapterCount: 1,
+});
+
+expect(
+  autoplayEnd.position === 800 && autoplayEnd.done === true,
+  'Autoplay moet exact aan het contacteindpunt stoppen.',
+);
+expect(
+  resolveAutoScrollStart(800, 0, 800) === 0,
+  'Play aan het einde moet opnieuw aan het begin starten.',
+);
+expect(
+  resolveAutoScrollStart(320, 0, 800) === 320,
+  'Play binnen de story moet vanaf de huidige positie hervatten.',
 );
 
 expect(existsSync(componentPath), 'ScrollStory.astro ontbreekt.');
