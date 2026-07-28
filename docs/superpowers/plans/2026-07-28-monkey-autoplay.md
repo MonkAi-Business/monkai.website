@@ -181,23 +181,46 @@ git commit -m "test: define monkey autoplay timing"
 
 **Files:**
 - Modify: `scripts/check-scroll-story.mjs`
+- Modify: `src/utils/scrollStoryAutoplay.mjs`
 - Modify: `src/components/ScrollStory.astro`
 - Test: `scripts/check-scroll-story.mjs`
 
 **Interfaces:**
-- Consumes: `data-story-autoplay` as the script hook
+- Produces: `autoplayButtonState(playing): { ariaLabel: string, ariaPressed: string, playing: string }`
+- Produces: `isAutoplayScrollKey(key): boolean`
+- Consumes: `data-story-autoplay` as the browser script hook
 - Produces: a real button with `aria-label`, `aria-pressed` and `data-playing`
 
-- [ ] **Step 1: Add failing button contract assertions**
+- [ ] **Step 1: Add failing control-state assertions**
 
-Inside the component checks in `scripts/check-scroll-story.mjs`, add:
+Extend the autoplay import in `scripts/check-scroll-story.mjs` with:
 
 ```js
-expect(component.includes('data-story-autoplay'), 'De Monkey-autoplayknop ontbreekt.');
+autoplayButtonState,
+isAutoplayScrollKey,
+```
+
+Add:
+
+```js
+const stoppedButton = autoplayButtonState(false);
+const playingButton = autoplayButtonState(true);
+
 expect(
-  component.includes('Monkey-tour afspelen')
-    && component.includes('Monkey-tour pauzeren'),
-  'De autoplayknop mist toegankelijke play- en pauzelabels.',
+  stoppedButton.ariaLabel === 'Monkey-tour afspelen'
+    && stoppedButton.ariaPressed === 'false'
+    && stoppedButton.playing === 'false',
+  'De gestopte autoplayknop moet een toegankelijke Play-status geven.',
+);
+expect(
+  playingButton.ariaLabel === 'Monkey-tour pauzeren'
+    && playingButton.ariaPressed === 'true'
+    && playingButton.playing === 'true',
+  'De actieve autoplayknop moet een toegankelijke Pauze-status geven.',
+);
+expect(
+  isAutoplayScrollKey('PageDown') && !isAutoplayScrollKey('Enter'),
+  'Alleen toetsen die de pagina scrollen mogen autoplay stoppen.',
 );
 ```
 
@@ -205,9 +228,43 @@ expect(
 
 Run: `npm.cmd run check:scroll-story`
 
-Expected: exit code 1 with the missing autoplay button and labels.
+Expected: exit code 1 because `autoplayButtonState` and `isAutoplayScrollKey` are not exported.
 
-- [ ] **Step 3: Add the button markup**
+- [ ] **Step 3: Implement the control-state functions**
+
+Add to `src/utils/scrollStoryAutoplay.mjs`:
+
+```js
+const autoplayScrollKeys = new Set([
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
+  'ArrowUp',
+  'End',
+  'Home',
+  'PageDown',
+  'PageUp',
+  ' ',
+]);
+
+export function autoplayButtonState(playing) {
+  return {
+    ariaLabel: playing ? 'Monkey-tour pauzeren' : 'Monkey-tour afspelen',
+    ariaPressed: String(playing),
+    playing: String(playing),
+  };
+}
+
+export function isAutoplayScrollKey(key) {
+  return autoplayScrollKeys.has(key);
+}
+```
+
+Run: `npm.cmd run check:scroll-story`
+
+Expected: exit code 0.
+
+- [ ] **Step 4: Add the button markup**
 
 Add this button inside `.monkey-stage`, after `.monkey-progress`:
 
@@ -224,7 +281,7 @@ Add this button inside `.monkey-stage`, after `.monkey-progress`:
 </button>
 ```
 
-- [ ] **Step 4: Add the visual states**
+- [ ] **Step 5: Add the visual states**
 
 Add styles beside the progress control:
 
@@ -276,7 +333,7 @@ Add styles beside the progress control:
 }
 ```
 
-- [ ] **Step 5: Run the focused checks and verify GREEN**
+- [ ] **Step 6: Run the focused checks and verify GREEN**
 
 Run:
 
@@ -287,10 +344,10 @@ npm.cmd run check:monkey
 
 Expected: both commands exit with code 0.
 
-- [ ] **Step 6: Commit the control**
+- [ ] **Step 7: Commit the control**
 
 ```powershell
-git add scripts/check-scroll-story.mjs src/components/ScrollStory.astro
+git add scripts/check-scroll-story.mjs src/utils/scrollStoryAutoplay.mjs src/components/ScrollStory.astro
 git commit -m "feat: add monkey tour control"
 ```
 
@@ -313,6 +370,8 @@ At the start of the client script, add:
 ```ts
 import {
   advanceAutoScroll,
+  autoplayButtonState,
+  isAutoplayScrollKey,
   resolveAutoScrollStart,
 } from '../utils/scrollStoryAutoplay.mjs';
 ```
@@ -335,12 +394,10 @@ let autoplayPlaying = false;
 
 function syncAutoplayButton() {
   if (!autoplayButton) return;
-  autoplayButton.dataset.playing = String(autoplayPlaying);
-  autoplayButton.setAttribute('aria-pressed', String(autoplayPlaying));
-  autoplayButton.setAttribute(
-    'aria-label',
-    autoplayPlaying ? 'Monkey-tour pauzeren' : 'Monkey-tour afspelen',
-  );
+  const state = autoplayButtonState(autoplayPlaying);
+  autoplayButton.dataset.playing = state.playing;
+  autoplayButton.setAttribute('aria-pressed', state.ariaPressed);
+  autoplayButton.setAttribute('aria-label', state.ariaLabel);
 }
 
 function stopAutoplay() {
@@ -428,18 +485,6 @@ function toggleAutoplay() {
 Add:
 
 ```ts
-const scrollKeys = new Set([
-  'ArrowDown',
-  'ArrowLeft',
-  'ArrowRight',
-  'ArrowUp',
-  'End',
-  'Home',
-  'PageDown',
-  'PageUp',
-  ' ',
-]);
-
 autoplayButton?.addEventListener('click', toggleAutoplay);
 window.addEventListener('wheel', stopAutoplay, { passive: true });
 window.addEventListener('touchstart', stopAutoplay, { passive: true });
@@ -449,7 +494,7 @@ window.addEventListener('pointerdown', (event) => {
   }
 }, { passive: true });
 window.addEventListener('keydown', (event) => {
-  if (scrollKeys.has(event.key)) stopAutoplay();
+  if (isAutoplayScrollKey(event.key)) stopAutoplay();
 });
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) stopAutoplay();
