@@ -83,6 +83,20 @@ const index = read('src', 'pages', 'index.astro');
 expect(index.includes('data-standard-home'), 'De standaardhomepage-wrapper ontbreekt.');
 expect(index.includes('data-monkey-home'), 'De Monkey-homepage-wrapper ontbreekt.');
 
+const story = read('src', 'components', 'ScrollStory.astro');
+expect(story.includes('monkai-theme-change'), 'ScrollStory luistert niet naar themawissels.');
+expect(story.includes('source.dataset.src'), 'Lazy videobronnen ontbreken.');
+expect(story.includes("removeAttribute('src')"), 'Videobronnen worden niet vrijgegeven.');
+expect(story.includes('IntersectionObserver'), 'Hoofdstukobservatie ontbreekt.');
+expect(story.includes('requestAnimationFrame'), 'De scrubber gebruikt geen animation frame.');
+expect(story.includes('scrollToMonkeyChapter'), 'Monkey-hoofdstuknavigatie ontbreekt.');
+expect(story.includes('prefers-reduced-motion: reduce'), 'Reduced-motiondetectie ontbreekt.');
+expect(story.includes("dataset.reduced = 'true'"), 'De statische reduced-motionstand ontbreekt.');
+
+const nav = read('src', 'components', 'Nav.astro');
+expect(nav.includes('monkeyTargets'), 'De Monkey-navigatiemapping ontbreekt.');
+expect(nav.includes('scrollToMonkeyChapter'), 'De navigatie roept Monkey-hoofdstukken niet aan.');
+
 if (failures.length) {
   console.error(failures.map((failure) => `- ${failure}`).join('\n'));
   process.exit(1);

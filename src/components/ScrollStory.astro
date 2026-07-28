@@ -391,6 +391,229 @@ const chapters = [
   </div>
 </section>
 
+<script>
+  type StoryWindow = Window & {
+    scrollToMonkeyChapter?: (id: string) => void;
+  };
+
+  type ChapterTiming = {
+    timeStart: number;
+    timeEnd: number;
+  };
+
+  const story = document.querySelector<HTMLElement>('[data-scroll-story]');
+  const desktop = window.matchMedia('(min-width: 769px)');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (story) {
+    const video = story.querySelector<HTMLVideoElement>('[data-story-video]');
+    const sources = Array.from(
+      story.querySelectorAll<HTMLSourceElement>('source[data-src]'),
+    );
+    const chapterElements = Array.from(
+      story.querySelectorAll<HTMLElement>('[data-monkey-chapter]'),
+    );
+    const timings: ChapterTiming[] = chapterElements.map((chapter) => ({
+      timeStart: Number(chapter.dataset.timeStart ?? 0),
+      timeEnd: Number(chapter.dataset.timeEnd ?? 0),
+    }));
+
+    let targetTime = 0;
+    let renderedTime = 0;
+    let duration = 58.08;
+    let animationFrame = 0;
+    let lastSeek = 0;
+    let storyVisible = false;
+
+    const clamp = (value: number, minimum: number, maximum: number) =>
+      Math.min(Math.max(value, minimum), maximum);
+
+    const isMonkey = () =>
+      document.documentElement.dataset.theme === 'monkey' && desktop.matches;
+
+    const canScrub = () => isMonkey() && !reducedMotion.matches;
+
+    function progressToTime(progress: number, chapterTimings: readonly ChapterTiming[]) {
+      const chapterPosition = Math.min(
+        Math.max(progress, 0) * chapterTimings.length,
+        chapterTimings.length - Number.EPSILON,
+      );
+      const chapterIndex = Math.min(
+        Math.floor(chapterPosition),
+        chapterTimings.length - 1,
+      );
+      const local = chapterPosition - chapterIndex;
+      const move = local < 0.42 ? local / 0.42 : 1;
+      const chapter = chapterTimings[chapterIndex];
+      return chapter.timeStart + (chapter.timeEnd - chapter.timeStart) * move;
+    }
+
+    function setActiveChapter(activeChapter: HTMLElement) {
+      chapterElements.forEach((chapter) => {
+        const active = chapter === activeChapter;
+        chapter.dataset.active = String(active);
+        chapter.inert = !active;
+        if (active) {
+          chapter.setAttribute('aria-current', 'step');
+        } else {
+          chapter.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    function showStaticChapters() {
+      chapterElements.forEach((chapter) => {
+        chapter.dataset.active = 'true';
+        chapter.inert = false;
+        chapter.removeAttribute('aria-current');
+      });
+    }
+
+    function loadVideo() {
+      if (!video) return;
+      sources.forEach((source) => {
+        if (!source.src && source.dataset.src) {
+          source.src = source.dataset.src;
+        }
+      });
+      video.load();
+    }
+
+    function releaseVideo() {
+      if (!video) return;
+      video.pause();
+      sources.forEach((source) => source.removeAttribute('src'));
+      video.removeAttribute('src');
+      video.load();
+    }
+
+    function stopRendering() {
+      if (animationFrame) {
+        window.cancelAnimationFrame(animationFrame);
+        animationFrame = 0;
+      }
+    }
+
+    function updateTarget() {
+      if (!canScrub()) return;
+      const scrollableDistance = story.offsetHeight - window.innerHeight;
+      const top = story.getBoundingClientRect().top;
+      const progress = scrollableDistance > 0
+        ? clamp(-top / scrollableDistance, 0, 1)
+        : 0;
+
+      targetTime = progressToTime(progress, timings);
+      story.style.setProperty('--story-progress', String(progress));
+    }
+
+    function render(time: number) {
+      if (!canScrub() || !storyVisible || !video) {
+        animationFrame = 0;
+        return;
+      }
+
+      const difference = targetTime - renderedTime;
+      renderedTime = Math.abs(difference) > 6
+        ? targetTime
+        : renderedTime + difference * 0.2;
+
+      if (
+        video.readyState >= HTMLMediaElement.HAVE_METADATA
+        && time - lastSeek > 42
+        && Math.abs(video.currentTime - renderedTime) > 0.015
+        && !video.seeking
+      ) {
+        video.currentTime = clamp(renderedTime, 0, Math.max(duration - 0.04, 0));
+        lastSeek = time;
+      }
+
+      animationFrame = window.requestAnimationFrame(render);
+    }
+
+    function startRendering() {
+      if (canScrub() && storyVisible && !animationFrame) {
+        animationFrame = window.requestAnimationFrame(render);
+      }
+    }
+
+    function syncMode() {
+      if (isMonkey() && reducedMotion.matches) {
+        story.dataset.reduced = 'true';
+        releaseVideo();
+        stopRendering();
+        showStaticChapters();
+        return;
+      }
+
+      delete story.dataset.reduced;
+
+      if (canScrub()) {
+        loadVideo();
+        setActiveChapter(chapterElements[0]);
+        updateTarget();
+        startRendering();
+      } else {
+        releaseVideo();
+        stopRendering();
+      }
+    }
+
+    story.dataset.enhanced = 'true';
+    setActiveChapter(chapterElements[0]);
+
+    video?.addEventListener('loadedmetadata', () => {
+      duration = Number.isFinite(video.duration) ? video.duration : duration;
+      updateTarget();
+      renderedTime = targetTime;
+      video.currentTime = clamp(targetTime, 0, Math.max(duration - 0.04, 0));
+      startRendering();
+    });
+
+    const chapterObserver = new IntersectionObserver((entries) => {
+      if (reducedMotion.matches) return;
+      const activeEntry = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (activeEntry) setActiveChapter(activeEntry.target as HTMLElement);
+    }, {
+      rootMargin: '-42% 0px -42% 0px',
+      threshold: [0, 0.25, 0.5, 0.75, 1],
+    });
+
+    chapterElements.forEach((chapter) => chapterObserver.observe(chapter));
+
+    const visibilityObserver = new IntersectionObserver((entries) => {
+      storyVisible = entries[0]?.isIntersecting ?? false;
+      if (storyVisible) {
+        updateTarget();
+        startRendering();
+      } else {
+        stopRendering();
+      }
+    });
+    visibilityObserver.observe(story);
+
+    (window as StoryWindow).scrollToMonkeyChapter = (id: string) => {
+      story.querySelector<HTMLElement>(`[data-chapter="${id}"]`)
+        ?.scrollIntoView({
+          behavior: reducedMotion.matches ? 'auto' : 'smooth',
+          block: 'start',
+        });
+    };
+
+    window.addEventListener('scroll', () => {
+      updateTarget();
+      startRendering();
+    }, { passive: true });
+    window.addEventListener('resize', updateTarget, { passive: true });
+    window.addEventListener('pageshow', updateTarget);
+    window.addEventListener('monkai-theme-change', syncMode);
+    desktop.addEventListener('change', syncMode);
+    reducedMotion.addEventListener('change', syncMode);
+    syncMode();
+  }
+</script>
+
 <style>
   .monkey-story {
     --story-progress: 0;
@@ -489,6 +712,17 @@ const chapters = [
     background: rgba(3, 13, 19, 0.78);
     box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
     backdrop-filter: blur(12px);
+  }
+
+  .monkey-story[data-enhanced='true'] .monkey-panel {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 280ms ease, transform 360ms ease;
+  }
+
+  .monkey-story[data-enhanced='true'] .monkey-chapter[data-active='true'] .monkey-panel {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .monkey-panel-wide {
@@ -794,6 +1028,20 @@ const chapters = [
   :global(.monkey-story .contact-form label),
   :global(.monkey-story .contact-form .btn) {
     color: #fff;
+  }
+
+  .monkey-story[data-reduced='true'] .monkey-stage {
+    display: none;
+  }
+
+  .monkey-story[data-reduced='true'] .monkey-chapter {
+    min-height: auto;
+    padding-block: 4.5rem;
+  }
+
+  .monkey-story[data-reduced='true'] .monkey-panel {
+    opacity: 1;
+    transform: none;
   }
 
   @media (max-width: 980px) {

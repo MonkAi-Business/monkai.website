@@ -26,17 +26,27 @@ if (existsSync(componentPath)) {
     'De MP4- en WebM-bronnen ontbreken.',
   );
   expect(
-    /media="\(min-width: 769px\)"/.test(component),
-    'De videobronnen moeten alleen op grotere schermen aangeboden worden.',
+    /data-src="\/media\/scroll-story\/monkai-scroll-story\.webm"/.test(component)
+      && /data-src="\/media\/scroll-story\/monkai-scroll-story\.mp4"/.test(component),
+    'De videobronnen moeten lazy via data-src aangeboden worden.',
   );
+  expect(!/\bposter=/.test(videoTag), 'De Monkey-video mag op mobiel geen poster aanvragen.');
 
   const requiredCopy = [
-    'AI zonder apenstreken.',
-    'Van losse ideeën naar een werkbare flow.',
-    'Klein beginnen. Herhalen. Beheersen.',
-    'AI is breder dan chat.',
-    'Je hoeft dit niet alleen uit te zoeken.',
-    'Een aanpak die blijft staan.',
+    'AI zonder apenstreken',
+    'Van losse experimenten naar echte impact',
+    'Werk slimmer. Niet afhankelijker.',
+    'Klein team. Korte lijnen.',
+    'Zo pakken we het aan',
+    'Drie niveaus. Eén tempo.',
+    'Van idee naar werkende oplossing',
+    'Wat we voor je bouwen',
+    'AI is meer dan een chatbot',
+    'AI Act klaar, zonder rem op innovatie',
+    'Een heldere afspraak',
+    'Praktische AI-inzichten',
+    'Veelgestelde vragen',
+    'Klaar om iets slim te bouwen?',
   ];
 
   for (const copy of requiredCopy) {
@@ -45,10 +55,10 @@ if (existsSync(componentPath)) {
 
   expect(
     component.includes('prefers-reduced-motion: reduce'),
-    'De reduced-motion fallback ontbreekt.',
+    'De reduced-motionstand ontbreekt.',
   );
-  expect(component.includes('@media (max-width: 768px)'), 'De mobiele fallback ontbreekt.');
   expect(component.includes('data-scroll-story'), 'De scrollstory-hook ontbreekt.');
+  expect(component.includes("removeAttribute('src')"), 'De videobronnen worden niet vrijgegeven.');
 }
 
 expect(existsSync(pagePath), 'De homepage ontbreekt.');
@@ -57,7 +67,9 @@ if (existsSync(pagePath)) {
   const page = readFileSync(pagePath, 'utf8');
   expect(page.includes("import ScrollStory from '../components/ScrollStory.astro'"), 'De homepage importeert ScrollStory niet.');
   expect(page.includes('<ScrollStory />'), 'De homepage rendert ScrollStory niet.');
-  expect(!page.includes('<Hero />'), 'De oude Hero wordt nog gerenderd.');
+  expect(page.includes('<Hero />'), 'De gewone homepage mist de klassieke Hero.');
+  expect(page.includes('data-standard-home'), 'De standaardhomepage-wrapper ontbreekt.');
+  expect(page.includes('data-monkey-home'), 'De Monkey-homepage-wrapper ontbreekt.');
 }
 
 for (const file of [

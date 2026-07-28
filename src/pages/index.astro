@@ -44,6 +44,31 @@ import Footer from '../components/Footer.astro';
   <Footer />
 </BaseLayout>
 
+<script>
+  const desktopHomepage = window.matchMedia('(min-width: 769px)');
+
+  function syncHomepageVariant() {
+    const monkey = document.documentElement.dataset.theme === 'monkey'
+      && desktopHomepage.matches;
+    const standard = document.querySelector<HTMLElement>('[data-standard-home]');
+    const story = document.querySelector<HTMLElement>('[data-monkey-home]');
+
+    if (standard) {
+      standard.hidden = monkey;
+      standard.setAttribute('aria-hidden', String(monkey));
+    }
+
+    if (story) {
+      story.hidden = !monkey;
+      story.setAttribute('aria-hidden', String(!monkey));
+    }
+  }
+
+  window.addEventListener('monkai-theme-change', syncHomepageVariant);
+  desktopHomepage.addEventListener('change', syncHomepageVariant);
+  syncHomepageVariant();
+</script>
+
 <style>
   [data-monkey-home] {
     display: none;

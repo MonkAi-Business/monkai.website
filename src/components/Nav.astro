@@ -57,8 +57,19 @@ const links = [
 </header>
 
 <script>
+  type MonkeyNavigationWindow = Window & {
+    scrollToMonkeyChapter?: (id: string) => void;
+  };
+
   const toggle = document.querySelector('[data-nav-toggle]');
   const menu = document.querySelector('[data-nav-mobile]');
+  const monkeyDesktop = window.matchMedia('(min-width: 769px)');
+  const monkeyTargets: Record<string, string> = {
+    aanpak: 'aanpak',
+    diensten: 'diensten',
+    over: 'team',
+    contact: 'contact',
+  };
 
   toggle?.addEventListener('click', () => {
     const isOpen = menu?.getAttribute('data-open') === 'true';
@@ -70,6 +81,28 @@ const links = [
     link.addEventListener('click', () => {
       menu.setAttribute('data-open', 'false');
       toggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.querySelectorAll<HTMLAnchorElement>('.nav a[href]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      if (
+        document.documentElement.dataset.theme !== 'monkey'
+        || !monkeyDesktop.matches
+        || window.location.pathname !== '/'
+      ) {
+        return;
+      }
+
+      const destination = new URL(link.href, window.location.href);
+      const fragment = destination.hash.slice(1);
+      const chapter = monkeyTargets[fragment];
+      const navigate = (window as MonkeyNavigationWindow).scrollToMonkeyChapter;
+
+      if (destination.pathname === '/' && chapter && navigate) {
+        event.preventDefault();
+        navigate(chapter);
+      }
     });
   });
 </script>
