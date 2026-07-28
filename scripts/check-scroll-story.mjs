@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { progressToTime } from '../src/utils/scrollStoryTiming.mjs';
 
 const root = process.cwd();
 const componentPath = join(root, 'src', 'components', 'ScrollStory.astro');
@@ -12,6 +13,22 @@ const failures = [];
 function expect(condition, message) {
   if (!condition) failures.push(message);
 }
+
+const sampleTimings = [{ timeStart: 10, timeEnd: 18 }];
+const approximately = (actual, expected) => Math.abs(actual - expected) < 0.001;
+
+expect(
+  approximately(progressToTime(0.42, sampleTimings), 13.952941),
+  'Bij 42 procent mag de clip niet langer op het eindframe staan.',
+);
+expect(
+  approximately(progressToTime(0.85, sampleTimings), 18),
+  'Bij 85 procent moet de clip het eindframe bereiken.',
+);
+expect(
+  approximately(progressToTime(1, sampleTimings), 18),
+  'De laatste 15 procent moet het eindframe vasthouden.',
+);
 
 expect(existsSync(componentPath), 'ScrollStory.astro ontbreekt.');
 
@@ -80,7 +97,7 @@ if (existsSync(componentPath)) {
     problemen: ['left', 'middle', 'normal'],
     overdracht: ['left', 'middle', 'compact'],
     team: ['left', 'middle', 'compact'],
-    aanpak: ['left', 'middle', 'compact'],
+    aanpak: ['right', 'middle', 'compact'],
     niveaus: ['right', 'middle', 'compact'],
     'use-cases': ['left', 'bottom', 'compact'],
     diensten: ['left', 'bottom', 'wide'],

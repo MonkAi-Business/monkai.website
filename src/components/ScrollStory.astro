@@ -172,7 +172,7 @@ const chapters = [
       id="monkey-aanpak"
       data-monkey-chapter
       data-chapter="aanpak"
-      data-panel-side="left"
+      data-panel-side="right"
       data-panel-vertical="middle"
       data-panel-size="compact"
       data-time-start={chapters[4].timeStart}
@@ -434,6 +434,8 @@ const chapters = [
 </section>
 
 <script>
+  import { progressToTime } from '../utils/scrollStoryTiming.mjs';
+
   type StoryWindow = Window & {
     scrollToMonkeyChapter?: (id: string) => void;
   };
@@ -474,21 +476,6 @@ const chapters = [
       document.documentElement.dataset.theme === 'monkey' && desktop.matches;
 
     const canScrub = () => isMonkey() && !reducedMotion.matches;
-
-    function progressToTime(progress: number, chapterTimings: readonly ChapterTiming[]) {
-      const chapterPosition = Math.min(
-        Math.max(progress, 0) * chapterTimings.length,
-        chapterTimings.length - Number.EPSILON,
-      );
-      const chapterIndex = Math.min(
-        Math.floor(chapterPosition),
-        chapterTimings.length - 1,
-      );
-      const local = chapterPosition - chapterIndex;
-      const move = local < 0.42 ? local / 0.42 : 1;
-      const chapter = chapterTimings[chapterIndex];
-      return chapter.timeStart + (chapter.timeEnd - chapter.timeStart) * move;
-    }
 
     function setActiveChapter(activeChapter: HTMLElement) {
       story.dataset.activePanelSide = activeChapter.dataset.panelSide ?? 'left';
