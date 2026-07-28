@@ -2,12 +2,13 @@
 
 ## Probleem
 
-Elke videoclip speelt momenteel volledig af tijdens de eerste 42 procent van het bijbehorende scrollhoofdstuk. Het laatste frame blijft daarna 58 procent van het hoofdstuk staan. Daardoor voelt de overgang traag, hoewel de gemonteerde crossfades zelf maar 0,18 tot 0,45 seconde duren.
+Elke videoclip speelt momenteel volledig af tijdens de eerste 85 procent van het bijbehorende scrollhoofdstuk. Het laatste frame blijft daarna nog 15 procent van het hoofdstuk staan. In combinatie met de korte crossfade voelt dit als een stilstand of een kleine herhaling.
 
 ## Gekozen gedrag
 
-- De videoclip gebruikt de eerste 85 procent van elk hoofdstuk om van `timeStart` naar `timeEnd` te bewegen.
-- De laatste 15 procent houdt het eindframe kort vast zodat de bezoeker de HTML-inhoud kan aflezen.
+- De videoclip gebruikt 100 procent van elk hoofdstuk om van `timeStart` naar `timeEnd` te bewegen.
+- Er is geen afzonderlijke stilstand op het eindframe.
+- De videotijd blijft strikt oplopend wanneer een hoofdstukgrens wordt gepasseerd.
 - De bestaande crossfades in de masterfilm veranderen niet.
 - De bestaande paneelanimaties veranderen niet.
 - De hoofdstuktimings en de lengte van de masterfilm veranderen niet.
@@ -15,14 +16,14 @@ Elke videoclip speelt momenteel volledig af tijdens de eerste 42 procent van het
 
 ## Implementatie
 
-De functie `progressToTime` in `src/components/ScrollStory.astro` blijft verantwoordelijk voor de vertaling van lokale hoofdstukvoortgang naar videotijd. Alleen de grens voor bewegende voortgang verandert van `0.42` naar `0.85`.
+De pure functie `progressToTime` in `src/utils/scrollStoryTiming.mjs` vertaalt de volledige lokale hoofdstukvoortgang rechtstreeks naar videotijd. De eerdere bewegingsgrens van `0.85` verdwijnt.
 
 ## Controle
 
-- Een contracttest controleert dat 42 procent lokale voortgang nog niet het einde van de clip bereikt.
-- De test controleert dat 85 procent en 100 procent beide het eindframe opleveren.
+- Een contracttest controleert de videotijd bij 42, 85 en 100 procent lokale voortgang.
+- De test controleert dat de videotijd aan een hoofdstukgrens nooit terugloopt.
 - De bestaande Monkey mode contracttests en Astro-build moeten slagen.
-- In een desktopbrowser wordt gecontroleerd dat de video tijdens het grootste deel van ieder hoofdstuk blijft bewegen en alleen aan het einde kort rust.
+- In een desktopbrowser wordt gecontroleerd dat de video tijdens het volledige hoofdstuk blijft bewegen.
 
 ## Buiten scope
 

@@ -8,14 +8,16 @@ gewone handmatige scrollbediening blijft volledig beschikbaar.
 
 ## Gekozen gedrag
 
-- De knop staat onderaan in het midden van de vaste Monkey-stage.
+- De knop staat direct onder de verticale voortgangsindicator rechts.
+- De knop is ongeveer 34 pixels groot, transparant en visueel ondergeschikt.
+- Alleen bij hover en toetsenbordfocus wordt de knop nadrukkelijker.
 - De eerste klik start vanaf de huidige positie in de scrollstory.
 - Tijdens de tour verandert de knop naar een pauzestand.
 - Een volgende klik pauzeert de tour op de huidige positie.
 - Als de bezoeker al aan het einde staat, begint Play opnieuw bij het begin.
-- De tour besteedt ongeveer acht seconden aan elk hoofdstuk.
+- De tour besteedt 7,5 seconden aan elk hoofdstuk.
 - De beweging is continu. De tour springt niet van hoofdstuk naar hoofdstuk.
-- De bestaande 85/15-verhouding voor video en leesrust blijft ongewijzigd.
+- De video beweegt over 100 procent van elk hoofdstuk zonder stilstand.
 - De start van het contacthoofdstuk is de eindpositie van de tour.
 - De tour scrollt niet door tot de absolute bodem van de story of de footer.
 - Het volledige contactblok blijft daardoor zichtbaar wanneer de tour stopt.
@@ -56,11 +58,12 @@ Een kleine pure module berekent de volgende scrollpositie op basis van:
 - verstreken tijd sinds het vorige animatieframe;
 - begin en einde van de story;
 - het aantal hoofdstukken;
-- acht seconden per hoofdstuk.
+- 7,5 seconden per hoofdstuk.
 
 Hierdoor kan tempo, begrenzing en het bereiken van het einde rechtstreeks
-worden getest zonder een browser na te bootsen. De bestaande videotimingmodule
-blijft ongewijzigd.
+worden getest zonder een browser na te bootsen. De videotimingmodule gebruikt
+de volledige lokale hoofdstukvoortgang en blijft strikt oplopend aan
+clipgrenzen.
 
 ## Status en foutafhandeling
 
@@ -78,7 +81,9 @@ zoals nu het laatste FAQ-frame staan.
 
 De testgestuurde implementatie dekt minstens:
 
-- een volgende positie op basis van acht seconden per hoofdstuk;
+- een volgende positie op basis van 7,5 seconden per hoofdstuk;
+- volledige videobeweging zonder stilstand;
+- strikt oplopende videotijd aan hoofdstukgrenzen;
 - begrenzing aan de start van het contacthoofdstuk;
 - opnieuw beginnen wanneer Play aan het einde wordt gestart;
 - markup en toegankelijke labels van de knop;
@@ -93,3 +98,5 @@ De testgestuurde implementatie dekt minstens:
 - Geen automatische audioweergave.
 - Geen snelheidsregelaar.
 - Geen opslag van de afspeelstatus tussen bezoeken.
+- Geen nieuwe montage van de masterfilm zolang de tijdlijn na deze wijziging
+  geen zichtbare herhaling meer toont.

@@ -2,9 +2,9 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add an accessible play and pause control that automatically moves through the desktop Monkey scrollstory at eight seconds per chapter and stops with the complete contact panel visible.
+**Goal:** Add an accessible, subtle play and pause control that moves through the desktop Monkey scrollstory at 7.5 seconds per chapter, removes all video holds and stops with the complete contact panel visible.
 
-**Architecture:** A new pure utility calculates frame-by-frame scroll positions and restart behavior. `ScrollStory.astro` owns the button, browser events, animation frame loop, theme integration and the actual scrolling. The existing video timing and master film remain unchanged.
+**Architecture:** Pure utilities calculate frame-by-frame scroll positions, restart behavior and monotonic video timing. `ScrollStory.astro` owns the button, browser events, animation frame loop, theme integration and the actual scrolling. The master film and crossfades remain unchanged.
 
 **Tech Stack:** Astro, browser JavaScript modules, requestAnimationFrame, Node.js contract checks
 
@@ -14,17 +14,97 @@
 - Autoplay is hidden when `prefers-reduced-motion: reduce` is active.
 - The tour starts from the current story position.
 - Starting at or beyond the contact endpoint restarts at the story beginning.
-- Every chapter before Contact receives eight seconds.
+- Every chapter before Contact receives 7.5 seconds.
 - The start of Contact is the autoplay endpoint, not the story or document bottom.
 - Manual wheel, touch, pointer and scroll-key input pauses autoplay.
 - Theme changes, breakpoint changes and a hidden browser tab pause autoplay.
-- The existing 85/15 video timing, chapters, film and crossfades do not change.
+- Video moves over 100 percent of every chapter without a hold.
+- Video time never moves backwards at a chapter boundary.
+- The existing chapters, film and crossfades do not change.
 - New project copy and commit messages use regular hyphens, not em dashes or en dashes.
 - No new runtime dependency is introduced.
 
 ---
 
-### Task 1: Build the pure autoplay calculation
+### Task 1: Remove video holds and protect chapter boundaries
+
+**Files:**
+- Modify: `scripts/check-scroll-story.mjs`
+- Modify: `src/utils/scrollStoryTiming.mjs`
+- Test: `scripts/check-scroll-story.mjs`
+
+**Interfaces:**
+- Consumes: normalized story progress and chapter objects with `timeStart` and `timeEnd`
+- Produces: `progressToTime(progress, chapterTimings): number`
+
+- [ ] **Step 1: Change the timing assertions first**
+
+Replace the current timing expectations with:
+
+```js
+expect(
+  approximately(progressToTime(0.42, sampleTimings), 13.36),
+  'Bij 42 procent moet de clip 42 procent gevorderd zijn.',
+);
+expect(
+  approximately(progressToTime(0.85, sampleTimings), 16.8),
+  'Bij 85 procent moet de clip nog bewegen.',
+);
+expect(
+  approximately(progressToTime(1, sampleTimings), 18),
+  'Bij 100 procent moet de clip het eindframe bereiken.',
+);
+
+const boundaryTimings = [
+  { timeStart: 0, timeEnd: 8 },
+  { timeStart: 8, timeEnd: 16 },
+];
+const beforeBoundary = progressToTime(0.499999, boundaryTimings);
+const atBoundary = progressToTime(0.5, boundaryTimings);
+
+expect(
+  beforeBoundary < 8 && atBoundary === 8 && atBoundary > beforeBoundary,
+  'De videotijd mag aan een hoofdstukgrens niet teruglopen.',
+);
+```
+
+- [ ] **Step 2: Run the check and verify RED**
+
+Run: `npm.cmd run check:scroll-story`
+
+Expected: exit code 1 on the 42 and 85 percent assertions.
+
+- [ ] **Step 3: Map the full local chapter progress**
+
+Replace the hold calculation in `src/utils/scrollStoryTiming.mjs` with:
+
+```js
+const local = chapterPosition - chapterIndex;
+const chapter = chapterTimings[chapterIndex];
+return chapter.timeStart + (chapter.timeEnd - chapter.timeStart) * local;
+```
+
+- [ ] **Step 4: Run the focused checks and verify GREEN**
+
+Run:
+
+```powershell
+npm.cmd run check:scroll-story
+npm.cmd run check:monkey
+```
+
+Expected: both commands exit with code 0.
+
+- [ ] **Step 5: Commit the timing change**
+
+```powershell
+git add scripts/check-scroll-story.mjs src/utils/scrollStoryTiming.mjs
+git commit -m "fix: remove monkey story holds"
+```
+
+---
+
+### Task 2: Build the pure autoplay calculation
 
 **Files:**
 - Create: `src/utils/scrollStoryAutoplay.mjs`
@@ -35,7 +115,7 @@
 - Consumes: absolute scroll positions, elapsed frame time, story start, contact start and the number of moving chapters
 - Produces: `advanceAutoScroll(options): { position: number, done: boolean }`
 - Produces: `resolveAutoScrollStart(current, start, end): number`
-- Produces: `AUTO_SCROLL_CHAPTER_MS: 8000`
+- Produces: `AUTO_SCROLL_CHAPTER_MS: 7500`
 
 - [ ] **Step 1: Add failing imports and hand-calculated assertions**
 
@@ -54,13 +134,13 @@ Add these assertions after the existing timing assertions:
 ```js
 const autoplayStep = advanceAutoScroll({
   position: 100,
-  elapsedMs: 4000,
+  elapsedMs: 3750,
   start: 0,
   end: 800,
   chapterCount: 1,
 });
 
-expect(AUTO_SCROLL_CHAPTER_MS === 8000, 'Autoplay moet acht seconden per hoofdstuk gebruiken.');
+expect(AUTO_SCROLL_CHAPTER_MS === 7500, 'Autoplay moet 7,5 seconden per hoofdstuk gebruiken.');
 expect(
   approximately(autoplayStep.position, 500) && autoplayStep.done === false,
   'Autoplay moet met een constant hoofdstuktempo vooruitgaan.',
@@ -99,7 +179,7 @@ Expected: exit code 1 with `ERR_MODULE_NOT_FOUND` for `scrollStoryAutoplay.mjs`.
 Create `src/utils/scrollStoryAutoplay.mjs`:
 
 ```js
-export const AUTO_SCROLL_CHAPTER_MS = 8000;
+export const AUTO_SCROLL_CHAPTER_MS = 7500;
 
 export function advanceAutoScroll() {
   return { position: 0, done: false };
@@ -119,7 +199,7 @@ Expected: exit code 1 on the constant-tempo and contact-endpoint assertions.
 Replace the stub with:
 
 ```js
-export const AUTO_SCROLL_CHAPTER_MS = 8000;
+export const AUTO_SCROLL_CHAPTER_MS = 7500;
 
 const clamp = (value, minimum, maximum) =>
   Math.min(Math.max(value, minimum), maximum);
@@ -177,7 +257,7 @@ git commit -m "test: define monkey autoplay timing"
 
 ---
 
-### Task 2: Add the accessible play and pause control
+### Task 3: Add the accessible play and pause control
 
 **Files:**
 - Modify: `scripts/check-scroll-story.mjs`
@@ -264,21 +344,27 @@ Run: `npm.cmd run check:scroll-story`
 
 Expected: exit code 0.
 
-- [ ] **Step 4: Add the button markup**
+- [ ] **Step 4: Group the progress indicator and button**
 
-Add this button inside `.monkey-stage`, after `.monkey-progress`:
+Wrap the existing progress indicator and button in:
 
 ```astro
-<button
-  class="monkey-autoplay"
-  type="button"
-  aria-label="Monkey-tour afspelen"
-  aria-pressed="false"
-  data-story-autoplay
-  data-playing="false"
->
-  <span class="monkey-autoplay-icon" aria-hidden="true"></span>
-</button>
+<div class="monkey-progress-cluster">
+  <div class="monkey-progress" aria-hidden="true">
+    <span>Monkey mode</span>
+    <span class="monkey-progress-track"><span></span></span>
+  </div>
+  <button
+    class="monkey-autoplay"
+    type="button"
+    aria-label="Monkey-tour afspelen"
+    aria-pressed="false"
+    data-story-autoplay
+    data-playing="false"
+  >
+    <span class="monkey-autoplay-icon" aria-hidden="true"></span>
+  </button>
+</div>
 ```
 
 - [ ] **Step 5: Add the visual states**
@@ -286,50 +372,65 @@ Add this button inside `.monkey-stage`, after `.monkey-progress`:
 Add styles beside the progress control:
 
 ```css
-.monkey-autoplay {
+.monkey-progress-cluster {
   position: absolute;
-  bottom: 24px;
-  left: 50%;
+  top: 50%;
+  right: 24px;
   z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  transform: translateY(-50%);
+}
+
+.monkey-progress {
+  position: static;
+  transform: none;
+}
+
+.monkey-autoplay {
   display: grid;
-  width: 52px;
-  height: 52px;
+  width: 34px;
+  height: 34px;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
-  background: rgba(3, 13, 19, 0.72);
+  background: rgba(3, 13, 19, 0.42);
   color: #fff;
   cursor: pointer;
-  transform: translateX(-50%);
+  opacity: 0.68;
   backdrop-filter: blur(12px);
 }
 
 .monkey-autoplay:hover {
-  border-color: rgba(196, 225, 188, 0.84);
-  background: rgba(38, 64, 48, 0.82);
+  border-color: rgba(196, 225, 188, 0.58);
+  background: rgba(38, 64, 48, 0.66);
+  opacity: 1;
 }
 
 .monkey-autoplay:focus-visible {
-  outline: 3px solid #c4e1bc;
-  outline-offset: 4px;
+  outline: 2px solid #c4e1bc;
+  outline-offset: 3px;
+  opacity: 1;
 }
 
 .monkey-autoplay-icon {
   width: 0;
   height: 0;
-  margin-left: 3px;
-  border-top: 7px solid transparent;
-  border-bottom: 7px solid transparent;
-  border-left: 11px solid currentColor;
+  margin-left: 2px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 8px solid currentColor;
 }
 
 .monkey-autoplay[data-playing='true'] .monkey-autoplay-icon {
-  width: 12px;
-  height: 14px;
+  width: 9px;
+  height: 11px;
   margin-left: 0;
   border: 0;
   background:
-    linear-gradient(90deg, currentColor 0 4px, transparent 4px 8px, currentColor 8px 12px);
+    linear-gradient(90deg, currentColor 0 3px, transparent 3px 6px, currentColor 6px 9px);
 }
 ```
 
@@ -353,7 +454,7 @@ git commit -m "feat: add monkey tour control"
 
 ---
 
-### Task 3: Wire continuous autoplay and manual takeover
+### Task 4: Wire continuous autoplay and manual takeover
 
 **Files:**
 - Modify: `src/components/ScrollStory.astro`
@@ -529,7 +630,7 @@ git commit -m "feat: autoplay monkey scrollstory"
 
 ---
 
-### Task 4: Verify desktop behavior and the final contact frame
+### Task 5: Verify desktop behavior and the final contact frame
 
 **Files:**
 - Verify: `src/components/ScrollStory.astro`
@@ -549,7 +650,8 @@ Expected: Astro builds all routes and exits with code 0.
 
 At 1920x1080 in Monkey mode, verify:
 
-- the play button is centered at the bottom;
+- the play button sits directly below the vertical progress indicator;
+- the button is visually subtle until hover or focus;
 - Play changes to Pause after activation;
 - the page moves continuously rather than jumping by chapter;
 - Pause leaves the current scroll position unchanged;
