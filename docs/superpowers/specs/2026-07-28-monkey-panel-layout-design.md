@@ -31,7 +31,7 @@ De donkere videolaag volgt de zijde van het actieve paneel. Daardoor blijft de t
 | Het vertrekpunt | links, midden | normaal | Het gezicht en de koptelefoon staan rechts. |
 | Overdracht | links, midden | compact | Het aapje beweegt rechts van de deur naar het balkon. |
 | Het team | links, midden | compact | De lege junglezone bevindt zich links en het hoofd blijft ook aan het begin van de scène vrij. |
-| De aanpak | links, midden | compact | De handeling blijft centraal en rechts zichtbaar. |
+| De aanpak | rechts, midden | compact | Het paneel bedekt bewust het minder geslaagde deel van de animatie terwijl de voortgangsbalk vrij blijft. |
 | Drie niveaus | rechts, midden | compact | Het klimtraject en het aapje blijven centraal en links zichtbaar. |
 | Use cases | links, onder | compact | Het aapje en de werkbank blijven rechts en centraal zichtbaar. |
 | Diensten | links, onder | breed | De keuzehandeling rechts blijft vrij en alle negen diensten passen binnen het beeld. |

@@ -38,7 +38,7 @@ const expectedPanelLayouts = {
   problemen: ['left', 'middle', 'normal'],
   overdracht: ['left', 'middle', 'compact'],
   team: ['left', 'middle', 'compact'],
-  aanpak: ['left', 'middle', 'compact'],
+  aanpak: ['right', 'middle', 'compact'],
   niveaus: ['right', 'middle', 'compact'],
   'use-cases': ['left', 'bottom', 'compact'],
   diensten: ['left', 'bottom', 'wide'],
