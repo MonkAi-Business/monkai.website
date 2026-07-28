@@ -66,11 +66,10 @@
  *    zijn dan de pagina, anders verdwijnt het. Vandaar --dark: #2C2F26, boven
  *    --bg-page. De namen blijven zoals ze zijn: ze zitten in 14 bestanden.
  *
- * De superpowers-stand deelt voorlopig deze waarden, zodat een voorbeeldweergave
- * iets samenhangends toont. Deel 2 vervangt dat door een eigen blok.
+ * Monkey mode gebruikt dezelfde donkere waarden.
  */
 :root[data-theme='dark'],
-:root[data-theme='superpowers'] {
+:root[data-theme='monkey'] {
   color-scheme: dark;
 
   --bg-page: #191B15;

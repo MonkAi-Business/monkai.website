@@ -131,7 +131,16 @@ const schemas = [siteSchema, ...(Array.isArray(schema) ? schema : [schema])];
         } catch (e) {
           // localStorage gooit in sommige privacystanden. Dan gewoon de standaard.
         }
-        document.documentElement.setAttribute('data-theme', chosen || fallback);
+        chosen = chosen || fallback;
+        if (chosen === 'monkey' && window.matchMedia('(max-width: 768px)').matches) {
+          chosen = 'dark';
+          try {
+            window.localStorage.setItem(key, chosen);
+          } catch (e) {
+            // Het gekozen thema geldt nog steeds voor deze pagina.
+          }
+        }
+        document.documentElement.setAttribute('data-theme', chosen);
       })();
     </script>
 
