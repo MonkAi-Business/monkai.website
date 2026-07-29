@@ -1,0 +1,46 @@
+---
+// Voorbeeldweergave van een post die nog niet live staat. Zelfde opmaak als
+// /blog/<slug>, met een balk erboven die zegt wat de status is.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import BlogArticle from '../../components/BlogArticle.astro';
+import { getUpcomingPosts, isScheduled } from '../../utils/posts';
+
+export async function getStaticPaths() {
+  const posts = await getUpcomingPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const scheduled = isScheduled(post);
+const fmtLong = (d: Date) => new Intl.DateTimeFormat('nl-BE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(d);
+---
+<BaseLayout title={`Prep: ${post.data.title} — MonkAi Business`} description={post.data.description} noindex={true}>
+  <Nav />
+  <main class="section">
+    <div class="container banner-wrap">
+      <div class={`banner ${scheduled ? 'is-scheduled' : ''}`}>
+        <div>
+          <strong>{scheduled ? 'Ingepland' : 'Nog niet goedgekeurd'}</strong>
+          <span>
+            {scheduled
+              ? `Verschijnt op ${fmtLong(post.data.date)}, vanaf middernacht.`
+              : `Staat op draft. Geplande datum: ${fmtLong(post.data.date)}.`}
+          </span>
+        </div>
+        <a href="/prep">Terug naar prep</a>
+      </div>
+    </div>
+    <BlogArticle post={post} backHref="/prep" backLabel="Terug naar prep" />
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+  .banner-wrap { max-width: 720px; margin-bottom: 28px; }
+  .banner { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; background: var(--card-alt); border: 1px solid var(--border); border-left: 3px solid var(--muted); border-radius: var(--radius); padding: 12px 16px; }
+  .banner.is-scheduled { border-left-color: var(--green); }
+  .banner strong { display: block; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); margin-bottom: 2px; }
+  .banner span { font-size: 14px; color: var(--ink-soft); }
+  .banner a { font-size: 14px; font-weight: 600; color: var(--green); white-space: nowrap; }
+</style>

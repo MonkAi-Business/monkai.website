@@ -1,6 +1,6 @@
 ---
 title: "Collective brain: wanneer het hele bedrijf onthoudt"
-date: 2026-07-21
+date: 2026-09-11
 description: "Een second brain maakt jou slimmer. Een collective brain maakt je bedrijf minder afhankelijk van wie er toevallig aan boord is."
 tags: ["kennis", "ai-adoptie"]
 image: "/media/blog/collective-brain-bedrijfsgeheugen.svg"

@@ -1,6 +1,6 @@
 ---
 title: "Copilot: de winst zit in data die je al hebt"
-date: 2026-07-25
+date: 2026-08-21
 description: "De meeste KMO's onderschatten hoeveel bruikbare kennis al in hun mails, Teams en SharePoint zit. Met kleine acties haal je daar via Copilot snel rendement uit."
 tags: ["copilot", "kennis", "ai-adoptie"]
 image: "/media/blog/copilot-data-die-je-al-hebt.svg"

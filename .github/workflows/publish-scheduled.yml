@@ -1,0 +1,52 @@
+name: Publiceer ingeplande blogposts
+
+# De site is statisch: een post verschijnt pas wanneer er opnieuw gebouwd wordt.
+# Deze job kijkt 's nachts of er een goedgekeurde post op vandaag staat en roept
+# dan de Netlify build hook aan. De build zelf beslist wat live gaat, via
+# src/utils/posts.ts (draft: false én de datum is aangebroken in Brusselse tijd).
+#
+# Twee tijdstippen omdat GitHub Actions in UTC draait: 22:05 UTC is middernacht
+# in de zomer (CEST), 23:05 UTC in de winter (CET). De run die er een uur naast
+# zit vindt niets en doet niets.
+#
+# Nodig: repository secret NETLIFY_BUILD_HOOK met de URL van een build hook uit
+# Netlify (Site configuration > Build & deploy > Build hooks).
+
+on:
+  schedule:
+    - cron: '5 22 * * *'
+    - cron: '5 23 * * *'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Altijd bouwen, ook als er niets ingepland staat'
+        type: boolean
+        default: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Staat er iets klaar voor vandaag?
+        id: check
+        run: node scripts/due-today.mjs
+
+      - name: Netlify laten bouwen
+        if: steps.check.outputs.due == 'true' || inputs.force
+        run: |
+          if [ -z "${{ secrets.NETLIFY_BUILD_HOOK }}" ]; then
+            echo "Secret NETLIFY_BUILD_HOOK ontbreekt."
+            exit 1
+          fi
+          curl -fsS -X POST -d '{}' "${{ secrets.NETLIFY_BUILD_HOOK }}"
+          echo "Build hook aangeroepen."
+
+      - name: Niets te doen
+        if: steps.check.outputs.due != 'true' && !inputs.force
+        run: echo "Geen post met de datum van vandaag. Geen build."

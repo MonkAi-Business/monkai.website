@@ -10,13 +10,12 @@ import {
 } from '../data/home';
 import ContactForm from './ContactForm.astro';
 import FaqList from './FaqList.astro';
+import { getPublishedPosts } from '../utils/posts';
 
 const useCases = (await getCollection('usecases', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order);
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+const posts = (await getPublishedPosts()).slice(0, 3);
 
 const formatDate = (date: Date) => new Intl.DateTimeFormat('nl-BE', {
   day: 'numeric',

@@ -1,0 +1,144 @@
+---
+// Verborgen redactiepagina: alles wat nog niet live staat, klaar om na te lezen.
+// noindex, nergens gelinkt en uit de sitemap gefilterd. Net als /data en
+// /inspiratie is dit obscurity, geen beveiliging: wie de URL heeft, leest mee.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { readingTimeLabel } from '../../utils/readingTime';
+import { getUpcomingPosts, getPublishedPosts, isScheduled, todayInBrussels, publishDay } from '../../utils/posts';
+
+const today = todayInBrussels();
+const upcoming = await getUpcomingPosts();
+const live = await getPublishedPosts();
+
+const scheduled = upcoming.filter((post) => isScheduled(post, today));
+const waiting = upcoming.filter((post) => !isScheduled(post, today));
+
+const fmtLong = (d: Date) => new Intl.DateTimeFormat('nl-BE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(d);
+const fmtShort = (d: Date) => new Intl.DateTimeFormat('nl-BE', { day: 'numeric', month: 'short', year: 'numeric' }).format(d);
+
+const daysUntil = (day: string) => Math.round((Date.parse(day) - Date.parse(today)) / 86400000);
+const inWords = (day: string) => {
+  const n = daysUntil(day);
+  if (n <= 0) return 'bij de eerstvolgende build';
+  if (n === 1) return 'vannacht';
+  return `over ${n} dagen`;
+};
+---
+<BaseLayout title="Prep — MonkAi Business" description="Redactiepagina: blogposts die nog niet gepubliceerd zijn." noindex={true}>
+  <Nav />
+  <main class="section">
+    <div class="container prep">
+      <div class="head">
+        <p class="kicker">Redactie</p>
+        <h1>Prep</h1>
+        <p class="lede">
+          Alles wat nog niet op de blog staat. Lees na, geef een seintje, en de post krijgt een
+          publicatiedatum. Vanaf middernacht op die dag verschijnt hij vanzelf: een nachtelijke
+          build zet hem live, er hoeft niemand op een knop te duwen.
+        </p>
+        <p class="note">Vandaag is {fmtLong(new Date(`${today}T12:00:00`))}. Deze pagina staat op noindex en is nergens gelinkt.</p>
+      </div>
+
+      <section class="group">
+        <h2>Ingepland <span class="count">{scheduled.length}</span></h2>
+        <p class="group-note">Goedgekeurd. Verschijnt vanzelf op de datum hieronder.</p>
+        {scheduled.length === 0 && <p class="empty">Niets ingepland.</p>}
+        <ul class="list">
+          {scheduled.map((post) => (
+            <li class="row is-scheduled">
+              <div class="when">
+                <span class="date">{fmtShort(post.data.date)}</span>
+                <span class="rel">{inWords(publishDay(post))}</span>
+              </div>
+              <div class="body">
+                <a class="title" href={`/prep/${post.id}`}>{post.data.title}</a>
+                <p class="desc">{post.data.description}</p>
+                <div class="meta">
+                  <span class="chip chip-ok">Ingepland</span>
+                  <span>{readingTimeLabel(post.body ?? '')}</span>
+                  {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="group">
+        <h2>Nog niet goedgekeurd <span class="count">{waiting.length}</span></h2>
+        <p class="group-note">Staat op <code>draft: true</code>. De datum hieronder is de geplande vrijdag, nog niet bindend.</p>
+        {waiting.length === 0 && <p class="empty">Niets in de wacht.</p>}
+        <ul class="list">
+          {waiting.map((post) => (
+            <li class="row">
+              <div class="when">
+                <span class="date">{fmtShort(post.data.date)}</span>
+                <span class="rel">gepland</span>
+              </div>
+              <div class="body">
+                <a class="title" href={`/prep/${post.id}`}>{post.data.title}</a>
+                <p class="desc">{post.data.description}</p>
+                <div class="meta">
+                  <span class="chip">Draft</span>
+                  <span>{readingTimeLabel(post.body ?? '')}</span>
+                  {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="group">
+        <h2>Live <span class="count">{live.length}</span></h2>
+        <ul class="live">
+          {live.map((post) => (
+            <li>
+              <a href={`/blog/${post.id}`}>{post.data.title}</a>
+              <span class="date">{fmtShort(post.data.date)}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+  .prep { max-width: 860px; }
+  .kicker { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; }
+  h1 { font-size: 44px; font-weight: 500; line-height: 1.15; margin: 0 0 16px; }
+  .lede { font-size: 17px; line-height: 1.7; color: var(--ink-soft); max-width: 62ch; margin: 0 0 12px; }
+  .note { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); margin: 0; }
+  .group { margin-top: 52px; }
+  .group h2 { font-family: var(--font-serif); font-size: 24px; font-weight: 600; margin: 0 0 4px; display: flex; align-items: baseline; gap: 10px; }
+  .count { font-family: var(--font-mono); font-size: 13px; color: var(--muted); font-weight: 400; }
+  .group-note { font-size: 14px; color: var(--muted); margin: 0 0 20px; }
+  .group-note code { font-family: var(--font-mono); font-size: 13px; background: var(--card-alt); padding: 1px 5px; border-radius: var(--radius-sm); }
+  .empty { color: var(--muted); font-size: 15px; }
+  .list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .row { display: grid; grid-template-columns: 140px 1fr; gap: 20px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
+  .row.is-scheduled { border-left: 3px solid var(--green); }
+  .when { display: flex; flex-direction: column; gap: 3px; }
+  .when .date { font-family: var(--font-mono); font-size: 13px; color: var(--ink); }
+  .when .rel { font-size: 12.5px; color: var(--muted); }
+  .title { display: inline-block; font-family: var(--font-serif); font-size: 19px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .title:hover { color: var(--green); }
+  .desc { font-size: 15px; line-height: 1.6; color: var(--ink-soft); margin: 6px 0 10px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+  .chip { background: var(--card-alt); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 2px 7px; color: var(--ink-soft); }
+  .chip-ok { background: var(--green); border-color: var(--green); color: var(--on-green); }
+  .tag { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 2px 7px; }
+  .live { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .live li { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px; font-size: 15px; }
+  .live a { color: var(--ink); }
+  .live a:hover { color: var(--green); }
+  .live .date { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+  @media (max-width: 768px) {
+    h1 { font-size: 30px; }
+    .row { grid-template-columns: 1fr; gap: 10px; }
+    .when { flex-direction: row; gap: 10px; align-items: baseline; }
+  }
+</style>

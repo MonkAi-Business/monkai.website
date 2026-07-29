@@ -1,6 +1,6 @@
 ---
 title: "Governance schrijf je niet op papier, je zet het in je prompts"
-date: 2026-07-25
+date: 2026-10-30
 description: "Een AI-beleid van vier pagina's kent niemand na week één. Een gedeelde prompt of agent past de afspraak elke keer opnieuw toe."
 tags: ["governance", "agents", "claude", "chatgpt", "gemini", "copilot"]
 image: "/media/blog/governance-zit-in-je-prompts.svg"

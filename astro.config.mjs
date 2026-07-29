@@ -12,13 +12,15 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      // /bedankt, /data, /inspiratie, /kickass en de doorstuurpaden /prompt(s) zijn
-      // noindex, die horen niet in de sitemap. '/prompt' dekt ook '/prompts'.
+      // /bedankt, /data, /inspiratie, /kickass, /prep en de doorstuurpaden
+      // /prompt(s) zijn noindex, die horen niet in de sitemap. '/prompt' dekt
+      // ook '/prompts'.
       filter: (page) =>
         !page.includes('/bedankt') &&
         !page.includes('/data') &&
         !page.includes('/inspiratie') &&
         !page.includes('/kickass') &&
+        !page.includes('/prep') &&
         !page.includes('/prompt'),
     }),
   ],

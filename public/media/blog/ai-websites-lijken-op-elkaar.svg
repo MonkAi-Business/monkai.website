@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Vier identieke websitesjablonen naast elkaar en een vijfde die uit het raster stapt">
+  <defs>
+    <g id="tpl">
+      <rect width="190" height="330" rx="6" fill="#FBFAF6" stroke="#D9DACE" stroke-width="2"/>
+      <rect x="24" y="30" width="54" height="12" rx="6" fill="#D9DACE"/>
+      <rect x="24" y="58" width="142" height="18" rx="4" fill="#656A5C" opacity="0.35"/>
+      <rect x="24" y="88" width="118" height="8" rx="4" fill="#D9DACE"/>
+      <rect x="24" y="106" width="96" height="8" rx="4" fill="#D9DACE"/>
+      <rect x="24" y="150" width="44" height="82" rx="4" fill="#F4F2EC" stroke="#D9DACE" stroke-width="2"/>
+      <rect x="73" y="150" width="44" height="82" rx="4" fill="#F4F2EC" stroke="#D9DACE" stroke-width="2"/>
+      <rect x="122" y="150" width="44" height="82" rx="4" fill="#F4F2EC" stroke="#D9DACE" stroke-width="2"/>
+      <rect x="24" y="256" width="130" height="8" rx="4" fill="#D9DACE"/>
+      <rect x="24" y="286" width="62" height="16" rx="4" fill="#D9DACE"/>
+    </g>
+  </defs>
+
+  <rect width="1200" height="800" fill="#F4F2EC"/>
+
+  <!-- de lijn waar alles netjes op hoort te staan -->
+  <line x1="60" y1="585" x2="1140" y2="585" stroke="#D9DACE" stroke-width="2" stroke-dasharray="8 8"/>
+
+  <!-- vier identieke sjablonen -->
+  <use href="#tpl" x="65" y="255"/>
+  <use href="#tpl" x="285" y="255"/>
+  <use href="#tpl" x="505" y="255"/>
+  <use href="#tpl" x="725" y="255"/>
+
+  <!-- de vijfde stapt uit het raster -->
+  <g transform="translate(945,187) rotate(-5 95 165)">
+    <rect x="8" y="10" width="190" height="330" rx="6" fill="#24261F" opacity="0.10"/>
+    <rect width="190" height="330" rx="6" fill="#FBFAF6" stroke="#4C5F3B" stroke-width="3"/>
+    <path d="M47 132a48 48 0 0 1 96 0" fill="none" stroke="#24261F" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="95" cy="134" r="44" fill="#4C5F3B"/>
+    <circle cx="95" cy="144" r="21" fill="#FBFAF6"/>
+    <rect x="37" y="118" width="18" height="40" rx="9" fill="#24261F"/>
+    <rect x="135" y="118" width="18" height="40" rx="9" fill="#24261F"/>
+    <rect x="34" y="216" width="122" height="14" rx="4" fill="#24261F"/>
+    <rect x="34" y="246" width="92" height="10" rx="5" fill="#8FA478"/>
+    <rect x="34" y="284" width="70" height="18" rx="4" fill="#4C5F3B"/>
+  </g>
+</svg>

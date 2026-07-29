@@ -7,6 +7,34 @@ de reeks opbouwt van basis naar diep.
 Live sinds 27 juli 2026: **Elke vrijdag een nieuw artikel** (`elke-vrijdag-een-artikel.md`),
 de aankondiging van de reeks.
 
+## Hoe publicatie werkt (sinds 29 juli 2026)
+
+Een post staat live wanneer **twee** dingen kloppen. Dat zit in `src/utils/posts.ts` en
+geldt voor `/blog`, de detailpagina's, de homepageteaser en de monkey-scrollstory.
+
+1. `draft: false` in de frontmatter. Dat is de goedkeuring van Stijn.
+2. De `date` uit de frontmatter is aangebroken, in **Brusselse tijd**.
+
+Daardoor kan je een goedgekeurde post vooruit plannen. Hij zit al in `main`, is al
+gebouwd geweest, en verschijnt pas wanneer er opnieuw gebouwd wordt op of na die dag.
+Die build komt vanzelf: `.github/workflows/publish-scheduled.yml` draait elke nacht,
+kijkt met `scripts/due-today.mjs` of er iets op vandaag staat, en roept dan de Netlify
+build hook aan. Twee tijdstippen (22:05 en 23:05 UTC) omdat GitHub in UTC draait en
+België tussen zomer- en wintertijd wisselt; de post verschijnt dus binnen enkele minuten
+na middernacht.
+
+**Eenmalig nodig:** een repository secret `NETLIFY_BUILD_HOOK` in GitHub, met de URL van
+een build hook uit Netlify (Site configuration → Build & deploy → Build hooks). Zonder
+dat secret faalt de job en verschijnt er niets vanzelf.
+
+### Nalezen op /prep
+
+Alles wat nog niet live staat, is te lezen op **`/prep`**: ingepland bovenaan, daarna wat
+nog op `draft: true` staat, met per post een voorbeeldpagina op `/prep/<slug>` die er
+exact uitziet als de echte. Die pagina is `noindex`, uit de sitemap gefilterd en nergens
+gelinkt - maar net als `/data` en `/inspiratie` is dat obscurity, geen beveiliging. Wie
+de URL heeft, leest de drafts mee.
+
 ## Hoe geef je een post vrij
 
 Gebruik hiervoor de skill `blogpost` (`.claude/skills/blogpost/SKILL.md`), onderdeel
@@ -17,23 +45,21 @@ Alle posts hieronder zijn geschreven vóór de huisstijl van 27 juli 2026 vastla
 echte anekdote van Stijn, onderzoeksdetails terugbrengen tot één ankerpunt, inkorten tot
 600 à 800 woorden, en een slot dat zegt wat je maandag doet.
 
-Op de vrijdag zelf, per post:
+Per post, ergens vóór de geplande vrijdag:
 
 1. Lees de post na. Stijn levert de anekdote voor de opening.
 2. Herschrijf de post naar de huisstijl. Pas ook de `description` aan.
 3. Check de feiten opnieuw. Deze teksten dateren van juli 2026; producten, prijzen en
    wetgeving schuiven op.
 4. Check de interne links tegen wat al live staat (zie "Let op: interne links").
-5. Zet in de frontmatter `draft: true` → `draft: false`.
-6. Zet `date` op de vrijdag van publicatie (zie de kolom hieronder). Zo leest de blog
-   als een wekelijkse reeks en staat de nieuwste bovenaan.
-7. Schrijf de LinkedIn-post in `content/linkedin/<slug>.md`.
-8. `npm run build` en controleer dat de post gebouwd wordt.
-9. Commit en push naar `main`. Netlify herbouwt automatisch, de post staat binnen enkele
-   minuten online op `/blog/<slug>`.
-
-Vergeet stap 6 niet: zonder aangepaste datum zakt de post meteen tussen de oudere stukken
-en oogt de volgorde op `/blog` willekeurig.
+5. Controleer dat `date` op de juiste vrijdag staat (zie de kolom hieronder). Die datum
+   is nu het publicatiemoment, niet alleen een sorteersleutel.
+6. Schrijf de LinkedIn-post in `content/linkedin/<slug>.md`.
+7. `npm run build` en controleer dat de post op `/prep/<slug>` staat zoals hij hoort.
+8. Laat Stijn hem nalezen op `/prep`.
+9. Na zijn akkoord: `draft: true` → `draft: false`, commit en push naar `main`. Staat de
+   vrijdag nog in de toekomst, dan blijft de post verborgen tot de nachtelijke build hem
+   die dag oppikt. Ligt de datum al in het verleden, dan staat hij meteen online.
 
 De leestijd hoef je nergens in te vullen. Die wordt berekend uit de tekst
 (`src/utils/readingTime.ts`) en verschijnt vanzelf op de detailpagina en in de lijst.
@@ -45,22 +71,26 @@ agents en skills, en tot slot governance, wetgeving en kosten.
 
 | # | Vrijdag | Slug | Waarom hier |
 |---|---|---|---|
-| 1 | 31 jul 2026 | `second-brain-een-map` | Laagste drempel: begin met één map. Goede eerste stap voor wie nog niets doet. |
-| 2 | 7 aug 2026 | `shadow-ai-verbieden-werkt-niet` | Herkenbaar probleem bij elke zaakvoerder, en het zet meteen de toon: meedoen in plaats van verbieden. |
-| 3 | 14 aug 2026 | `copilot-data-die-je-al-hebt` | Je zit al op bruikbare data. Geen investering nodig om te starten. |
-| 4 | 21 aug 2026 | `plan-mode-eerst-denken-dan-doen` | Eerste echte werkgewoonte: eerst een plan, dan uitvoeren. |
-| 5 | 28 aug 2026 | `expert-collega-je-eigen-ai-agent` | Van losse vragen naar een AI die je één keer inwerkt. |
-| 6 | 4 sep 2026 | `collective-brain-bedrijfsgeheugen` | Tilt het second brain van week 1 naar bedrijfsniveau. |
-| 7 | 11 sep 2026 | `copilot-cowork-pay-as-you-go` | Introduceert Cowork en meteen de prijsvraag die eraan hangt. |
-| 8 | 18 sep 2026 | `chat-cowork-code-welke-claude-wanneer` | Overzicht van de werkvormen, nu de lezer Cowork kent. |
-| 9 | 25 sep 2026 | `skills-een-keer-vastleggen` | Bindt agents, werkvormen en herhaalwerk samen. Kan pas als die stukken online staan. |
-| 10 | 2 okt 2026 | `prompt-engineering-2026-uitkomst` | "De trucs zijn ingehaald" landt beter zodra plan mode, agents en skills bekend zijn. |
-| 11 | 9 okt 2026 | `accelerated-coding-geen-vibe-coding` | Technischer stuk, gericht op developers. |
-| 12 | 16 okt 2026 | `eu-ai-act-kmo` | Start van het governanceblok. |
-| 13 | 23 okt 2026 | `governance-zit-in-je-prompts` | Governance in de praktijk, bovenop de wetgeving van week 12. |
-| 14 | 30 okt 2026 | `ai-tokens-niet-eeuwig-gesponsord` | De kostenkant, nu duidelijk is wat je allemaal draait. |
-| 15 | 6 nov 2026 | `n8n-automatisatie-en-ai` | Zet automatisatie, skills, governance en kosten samen. Sluit de reeks. |
-| 16 | 13 nov 2026 | `duizend-inspecties-later` | PinPoint Inspections: waarom inspectiedata in pdf's onbruikbaar is en wat AI ermee kan zodra ze gestructureerd is. Al in de huisstijl geschreven. |
+| 1 | 31 jul 2026 | `ai-websites-lijken-op-elkaar` | **Goedgekeurd, `draft: false`.** De bouw van deze site zelf: waarom AI-sites op elkaar lijken en wat kiezen in plaats van bestellen oplevert. Naar voren gehaald op vraag van Stijn; de rest van de reeks schoof daardoor een week op. |
+| 2 | 7 aug 2026 | `second-brain-een-map` | Laagste drempel: begin met één map. Goede eerste stap voor wie nog niets doet. |
+| 3 | 14 aug 2026 | `shadow-ai-verbieden-werkt-niet` | Herkenbaar probleem bij elke zaakvoerder, en het zet meteen de toon: meedoen in plaats van verbieden. |
+| 4 | 21 aug 2026 | `copilot-data-die-je-al-hebt` | Je zit al op bruikbare data. Geen investering nodig om te starten. |
+| 5 | 28 aug 2026 | `plan-mode-eerst-denken-dan-doen` | Eerste echte werkgewoonte: eerst een plan, dan uitvoeren. |
+| 6 | 4 sep 2026 | `expert-collega-je-eigen-ai-agent` | Van losse vragen naar een AI die je één keer inwerkt. |
+| 7 | 11 sep 2026 | `collective-brain-bedrijfsgeheugen` | Tilt het second brain van week 2 naar bedrijfsniveau. |
+| 8 | 18 sep 2026 | `copilot-cowork-pay-as-you-go` | Introduceert Cowork en meteen de prijsvraag die eraan hangt. |
+| 9 | 25 sep 2026 | `chat-cowork-code-welke-claude-wanneer` | Overzicht van de werkvormen, nu de lezer Cowork kent. |
+| 10 | 2 okt 2026 | `skills-een-keer-vastleggen` | Bindt agents, werkvormen en herhaalwerk samen. Kan pas als die stukken online staan. |
+| 11 | 9 okt 2026 | `prompt-engineering-2026-uitkomst` | "De trucs zijn ingehaald" landt beter zodra plan mode, agents en skills bekend zijn. |
+| 12 | 16 okt 2026 | `accelerated-coding-geen-vibe-coding` | Technischer stuk, gericht op developers. Week 1 verwijst er inhoudelijk naar, zonder link. |
+| 13 | 23 okt 2026 | `eu-ai-act-kmo` | Start van het governanceblok. |
+| 14 | 30 okt 2026 | `governance-zit-in-je-prompts` | Governance in de praktijk, bovenop de wetgeving van week 13. |
+| 15 | 6 nov 2026 | `ai-tokens-niet-eeuwig-gesponsord` | De kostenkant, nu duidelijk is wat je allemaal draait. |
+| 16 | 13 nov 2026 | `n8n-automatisatie-en-ai` | Zet automatisatie, skills, governance en kosten samen. Sluit de reeks. |
+| 17 | 20 nov 2026 | `duizend-inspecties-later` | PinPoint Inspections: waarom inspectiedata in pdf's onbruikbaar is en wat AI ermee kan zodra ze gestructureerd is. Al in de huisstijl geschreven. |
+
+De `date` in de frontmatter van elke post hierboven staat op de vrijdag uit deze tabel.
+Verschuif je een post, pas dan **beide** aan, anders publiceert de cron op de oude datum.
 
 ## Let op: interne links
 
