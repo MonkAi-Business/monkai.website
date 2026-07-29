@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>MonkAi transition editor</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">MonkAi · lokale montagetool</p>
+          <h1>Kies de knip. Bekijk de beweging.</h1>
+          <p class="intro">
+            Stel het laatste bruikbare frame van clip 1 en het eerste bruikbare
+            frame van clip 2 in. Je originele video’s blijven onaangeraakt.
+          </p>
+        </div>
+        <label class="boundary-picker">
+          <span>Overgang</span>
+          <select data-boundary-select aria-label="Kies een scèneovergang"></select>
+        </label>
+      </header>
+
+      <section class="sources" aria-label="Bronclips">
+        <article class="clip-card">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">Clip 1</p>
+              <h2 data-left-name>—</h2>
+            </div>
+            <output data-left-cut>0.000 s</output>
+          </div>
+          <video data-left-video controls muted playsinline preload="metadata"></video>
+          <div class="frame-controls" aria-label="Clip 1 framebediening">
+            <button type="button" class="button button-quiet" data-left-back>
+              ← 1 frame
+            </button>
+            <button type="button" class="button button-quiet" data-left-forward>
+              1 frame →
+            </button>
+            <button type="button" class="button button-accent" data-capture-left>
+              Eindpunt instellen
+            </button>
+          </div>
+        </article>
+
+        <article class="clip-card">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">Clip 2</p>
+              <h2 data-right-name>—</h2>
+            </div>
+            <output data-right-cut>0.000 s</output>
+          </div>
+          <video data-right-video controls muted playsinline preload="metadata"></video>
+          <div class="frame-controls" aria-label="Clip 2 framebediening">
+            <button type="button" class="button button-quiet" data-right-back>
+              ← 1 frame
+            </button>
+            <button type="button" class="button button-quiet" data-right-forward>
+              1 frame →
+            </button>
+            <button type="button" class="button button-accent" data-capture-right>
+              Startpunt instellen
+            </button>
+          </div>
+        </article>
+      </section>
+
+      <section class="preview-card" aria-labelledby="preview-title">
+        <div class="preview-copy">
+          <div>
+            <p class="eyebrow">Doorlopende preview</p>
+            <h2 id="preview-title">Harde knip zonder dubbele beelden</h2>
+          </div>
+          <p data-preview-label>—</p>
+        </div>
+        <div class="preview-stage">
+          <video data-preview-left muted playsinline preload="metadata"></video>
+          <video data-preview-right muted playsinline preload="metadata" hidden></video>
+          <span class="preview-badge" data-preview-phase>Clip 1</span>
+        </div>
+        <div class="preview-actions">
+          <button type="button" class="button button-preview" data-preview-toggle>
+            ▶ Preview afspelen
+          </button>
+          <label class="loop-toggle">
+            <input type="checkbox" data-preview-loop checked>
+            Automatisch herhalen
+          </label>
+          <span class="spacer"></span>
+          <button type="button" class="button button-quiet" data-reset>Reset</button>
+          <button type="button" class="button button-save" data-save>Knippunten opslaan</button>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>
+          Opslaan wijzigt alleen <code>scripts/monkey-scenes.json</code>.
+          De masterfilm wordt niet automatisch opnieuw opgebouwd.
+        </p>
+        <p class="status" data-status aria-live="polite">Kies een overgang om te beginnen.</p>
+      </footer>
+    </main>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
