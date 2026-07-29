@@ -1,4 +1,4 @@
-export const AUTO_SCROLL_CHAPTER_MS = 8000;
+export const AUTO_SCROLL_CHAPTER_MS = 7500;
 
 const clamp = (value, minimum, maximum) =>
   Math.min(Math.max(value, minimum), maximum);

@@ -59,20 +59,25 @@ const chapters = [
       <source data-src="/media/scroll-story/monkai-scroll-story.mp4" type="video/mp4" />
     </video>
     <div class="monkey-shade" aria-hidden="true"></div>
-    <div class="monkey-progress" aria-hidden="true">
-      <span>Monkey mode</span>
-      <span class="monkey-progress-track"><span></span></span>
+  </div>
+
+  <div class="monkey-progress-anchor">
+    <div class="monkey-progress-cluster">
+      <div class="monkey-progress" aria-hidden="true">
+        <span>Monkey mode</span>
+        <span class="monkey-progress-track"><span></span></span>
+      </div>
+      <button
+        class="monkey-autoplay"
+        type="button"
+        aria-label="Monkey-tour afspelen"
+        aria-pressed="false"
+        data-story-autoplay
+        data-playing="false"
+      >
+        <span class="monkey-autoplay-icon" aria-hidden="true"></span>
+      </button>
     </div>
-    <button
-      class="monkey-autoplay"
-      type="button"
-      aria-label="Monkey-tour afspelen"
-      aria-pressed="false"
-      data-story-autoplay
-      data-playing="false"
-    >
-      <span class="monkey-autoplay-icon" aria-hidden="true"></span>
-    </button>
   </div>
 
   <div class="monkey-chapters">
@@ -94,7 +99,7 @@ const chapters = [
         <p class="monkey-lede">Ik help Vlaamse KMO's rustig en veilig starten met AI. Klein beginnen, herhalen, beheersen.</p>
         <div class="monkey-actions">
           <a class="btn" href="#monkey-contact">Laten we praten</a>
-          <a class="monkey-link" href="#monkey-aanpak">Bekijk de aanpak</a>
+          <a class="monkey-link monkey-link-outline" href="#monkey-aanpak">Bekijk de aanpak</a>
         </div>
         <div class="monkey-meta">
           <span>Inspiratiesessie</span>
@@ -808,11 +813,25 @@ const chapters = [
       linear-gradient(0deg, rgba(3, 13, 19, 0.45) 0%, transparent 42%);
   }
 
-  .monkey-progress {
-    position: absolute;
+  .monkey-progress-anchor {
+    position: sticky;
     top: 50%;
-    right: 24px;
-    z-index: 2;
+    z-index: 3;
+    width: 34px;
+    height: 0;
+    margin-right: 24px;
+    margin-left: auto;
+  }
+
+  .monkey-progress-cluster {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    transform: translateY(-50%);
+  }
+
+  .monkey-progress {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -821,7 +840,6 @@ const chapters = [
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    transform: translateY(-50%);
     writing-mode: vertical-rl;
   }
 
@@ -843,50 +861,48 @@ const chapters = [
   }
 
   .monkey-autoplay {
-    position: absolute;
-    bottom: 24px;
-    left: 50%;
-    z-index: 3;
     display: grid;
-    width: 52px;
-    height: 52px;
+    width: 34px;
+    height: 34px;
     place-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.34);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 999px;
-    background: rgba(3, 13, 19, 0.72);
+    background: rgba(3, 13, 19, 0.42);
     color: #fff;
     cursor: pointer;
-    transform: translateX(-50%);
+    opacity: 0.68;
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
   }
 
   .monkey-autoplay:hover {
-    border-color: rgba(196, 225, 188, 0.84);
-    background: rgba(38, 64, 48, 0.82);
+    border-color: rgba(196, 225, 188, 0.58);
+    background: rgba(38, 64, 48, 0.66);
+    opacity: 1;
   }
 
   .monkey-autoplay:focus-visible {
-    outline: 3px solid #c4e1bc;
-    outline-offset: 4px;
+    outline: 2px solid #c4e1bc;
+    outline-offset: 3px;
+    opacity: 1;
   }
 
   .monkey-autoplay-icon {
     width: 0;
     height: 0;
-    margin-left: 3px;
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
-    border-left: 11px solid currentColor;
+    margin-left: 2px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 8px solid currentColor;
   }
 
   .monkey-autoplay[data-playing='true'] .monkey-autoplay-icon {
-    width: 12px;
-    height: 14px;
+    width: 9px;
+    height: 11px;
     margin-left: 0;
     border: 0;
     background:
-      linear-gradient(90deg, currentColor 0 4px, transparent 4px 8px, currentColor 8px 12px);
+      linear-gradient(90deg, currentColor 0 3px, transparent 3px 6px, currentColor 6px 9px);
   }
 
   .monkey-chapters {
@@ -1023,6 +1039,7 @@ const chapters = [
 
   .monkey-actions .btn {
     color: var(--on-green);
+    cursor: pointer;
   }
 
   .monkey-link {
@@ -1035,6 +1052,30 @@ const chapters = [
 
   .monkey-link:hover {
     color: #c4e1bc;
+  }
+
+  .monkey-link-outline {
+    align-self: auto;
+    display: inline-flex;
+    padding: 15px 22px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(196, 225, 188, 0.54);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .monkey-link-outline:hover {
+    border-color: rgba(196, 225, 188, 0.86);
+    background: rgba(196, 225, 188, 0.08);
+    color: #fff;
+  }
+
+  .monkey-link-outline:focus-visible {
+    outline: 2px solid #c4e1bc;
+    outline-offset: 3px;
   }
 
   .monkey-meta {

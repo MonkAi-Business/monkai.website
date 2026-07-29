@@ -51,13 +51,13 @@ expect(
 
 const autoplayStep = advanceAutoScroll({
   position: 100,
-  elapsedMs: 4000,
+  elapsedMs: 3750,
   start: 0,
   end: 800,
   chapterCount: 1,
 });
 
-expect(AUTO_SCROLL_CHAPTER_MS === 8000, 'Autoplay moet acht seconden per hoofdstuk gebruiken.');
+expect(AUTO_SCROLL_CHAPTER_MS === 7500, 'Autoplay moet 7,5 seconden per hoofdstuk gebruiken.');
 expect(
   approximately(autoplayStep.position, 500) && autoplayStep.done === false,
   'Autoplay moet met een constant hoofdstuktempo vooruitgaan.',
@@ -151,6 +151,26 @@ if (existsSync(componentPath)) {
   );
   expect(component.includes('data-scroll-story'), 'De scrollstory-hook ontbreekt.');
   expect(component.includes("removeAttribute('src')"), 'De videobronnen worden niet vrijgegeven.');
+  expect(
+    component.includes('class="monkey-link monkey-link-outline" href="#monkey-aanpak"'),
+    'De hero-link naar de aanpak mist de outline-stijl.',
+  );
+  expect(
+    /\.monkey-link-outline\s*\{[\s\S]*display:\s*inline-flex;[\s\S]*padding:\s*15px 22px;[\s\S]*cursor:\s*pointer;/.test(component),
+    'De hero outline-knop mist de gekozen afmetingen of handcursor.',
+  );
+  expect(
+    /class="monkey-progress-cluster"[\s\S]*class="monkey-progress"[\s\S]*data-story-autoplay/.test(component),
+    'De autoplayknop moet direct onder de voortgangsindicator gegroepeerd zijn.',
+  );
+  expect(
+    /<\/div>\s*<div class="monkey-progress-anchor">[\s\S]*class="monkey-progress-cluster"[\s\S]*<div class="monkey-chapters">/.test(component),
+    'De voortgangsbediening moet als klikbare laag tussen de stage en hoofdstukken staan.',
+  );
+  expect(
+    /\.monkey-autoplay\s*\{[\s\S]*width:\s*34px;[\s\S]*height:\s*34px;[\s\S]*opacity:\s*0\.68;/.test(component),
+    'De autoplayknop moet compact en visueel subtiel zijn.',
+  );
 
   expect(
     (component.match(/footage: 'ready'/g) ?? []).length === 13,
