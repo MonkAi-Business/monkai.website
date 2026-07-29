@@ -7,6 +7,7 @@
     "build": "astro build",
     "check:scroll-story": "node scripts/check-scroll-story.mjs",
     "check:monkey": "node scripts/check-monkey-mode.mjs",
+    "edit:transitions": "node scripts/transition-editor/server.mjs",
     "preview": "astro preview"
   },
   "dependencies": {
