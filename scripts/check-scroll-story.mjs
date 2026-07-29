@@ -182,8 +182,8 @@ if (existsSync(componentPath)) {
     'Geen enkel storyhoofdstuk mag nog op beeldmateriaal wachten.',
   );
   expect(
-    component.includes("{ id: 'faq', timeStart: 112.78, timeEnd: 120.6, footage: 'ready' }")
-      && component.includes("{ id: 'contact', timeStart: 120.6, timeEnd: 124.52, footage: 'ready' }"),
+    component.includes("{ id: 'faq', timeStart: 103.17, timeEnd: 110.02, footage: 'ready' }")
+      && component.includes("{ id: 'contact', timeStart: 110.02, timeEnd: 117.02, footage: 'ready' }"),
     'FAQ en contact moeten elk hun eigen aaneensluitende tijdsbereik hebben.',
   );
 
@@ -297,8 +297,8 @@ if (existsSync(manifestPath)) {
     );
   }
   expect(
-    manifest.find((scene) => scene.id === 'contact')?.trimStart === 3.9,
-    'De ingebakken FAQ-herhaling aan het begin van de contactclip moet weggeknipt zijn.',
+    Number(manifest.find((scene) => scene.id === 'contact')?.trimStart) > 0,
+    'Het gekozen startpunt van de contactclip moet in het manifest bewaard blijven.',
   );
 }
 

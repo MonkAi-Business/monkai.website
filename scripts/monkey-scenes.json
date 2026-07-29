@@ -3,97 +3,126 @@
     "id": "desk",
     "file": "Clip_1_-_Monkey_working_202607281057.mp4",
     "duration": 8.0,
-    "transition": 0.0
+    "transition": 0.0,
+    "trimEnd": 8
   },
   {
     "id": "laptop",
     "file": "Monkey_looks_at_laptop_screen_202607281058.mp4",
     "duration": 8.0,
-    "transition": 0.18
+    "transition": 0.18,
+    "trimStart": 0.988635,
+    "trimEnd": 8
   },
   {
     "id": "door",
     "file": "Monkey_opens_door_to_jungle_202607281058.mp4",
     "duration": 8.0,
-    "transition": 0.18
+    "transition": 0.18,
+    "trimStart": 0.374994,
+    "trimEnd": 8
   },
   {
     "id": "view",
     "file": "Monkey_admiring_jungle_view_202607281058.mp4",
     "duration": 10.01,
-    "transition": 0.45
+    "transition": 0.45,
+    "trimStart": 0,
+    "trimEnd": 10.005
   },
   {
     "id": "vine",
     "file": "Monkey_swings_on_vine_202607281058.mp4",
     "duration": 9.5,
-    "transition": 0.22
+    "transition": 0.22,
+    "trimStart": 0,
+    "trimEnd": 9.5
   },
   {
     "id": "team",
     "file": "Monkey_jumps_to_second_platform_202607281058.mp4",
     "duration": 8.0,
-    "transition": 0.22
+    "transition": 0.22,
+    "trimStart": 0.112184,
+    "trimEnd": 8
   },
   {
     "id": "approach",
     "file": "Monkey_crosses_rope_bridge_to_202607281058.mp4",
     "duration": 8.0,
-    "transition": 0.22
+    "transition": 0.22,
+    "trimStart": 0.999984,
+    "trimEnd": 8
   },
   {
     "id": "levels",
     "file": "Monkey_climbs_three_platforms_202607281816.mp4",
     "duration": 8.0,
-    "transition": 0.18
+    "transition": 0.18,
+    "trimStart": 0.979744,
+    "trimEnd": 8
   },
   {
     "id": "use-cases",
     "file": "Create_this_clip_with_Veo_202607281830.mp4",
     "duration": 8.0,
-    "transition": 0.18
+    "transition": 0.18,
+    "trimStart": 0.959798,
+    "trimEnd": 8
   },
   {
     "id": "services",
     "file": "Monkey_selects_tools_from_wall_202607281830.mp4",
     "duration": 8.0,
-    "transition": 0.18
+    "transition": 0.18,
+    "trimStart": 1.033158,
+    "trimEnd": 6.985
   },
   {
     "id": "beyond-chat",
     "file": "Monkey_puts_on_smart_glasses_202607281833.mp4",
     "duration": 8.0,
-    "transition": 0.18
+    "transition": 0.18,
+    "trimStart": 0.041663,
+    "trimEnd": 8
   },
   {
     "id": "ai-act",
     "file": "Monkey_passes_safety_checkpoint_202607281857.mp4",
     "duration": 8.0,
-    "transition": 0.18
+    "transition": 0.18,
+    "trimStart": 0.969772,
+    "trimEnd": 8
   },
   {
     "id": "agreement",
     "file": "Two_monkeys_handshake_at_table_202607281857.mp4",
     "duration": 8.0,
-    "transition": 0.18
+    "transition": 0.18,
+    "trimStart": 0.966214,
+    "trimEnd": 8
   },
   {
     "id": "blog",
     "file": "Monkey_writing_on_page_202607281858.mp4",
     "duration": 8.0,
-    "transition": 0.18
+    "transition": 0.18,
+    "trimStart": 0.981521,
+    "trimEnd": 8
   },
   {
     "id": "faq",
     "file": "Monkeys_open_hatches_with_vines_202607281906.mp4",
     "duration": 8.0,
-    "transition": 0.18
+    "transition": 0.18,
+    "trimStart": 0.969772,
+    "trimEnd": 8
   },
   {
     "id": "contact",
     "file": "Monkey_bumps_tree,_finds_card_202607290832.mp4",
     "duration": 8.0,
-    "trimStart": 3.9,
+    "trimStart": 0.999688,
     "transition": 0.18
   }
 ]
