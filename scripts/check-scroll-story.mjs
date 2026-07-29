@@ -132,7 +132,7 @@ if (existsSync(componentPath)) {
     'Zo pakken we het aan',
     'Drie niveaus. Eén tempo.',
     'Van idee naar werkende oplossing',
-    'Wat we voor je bouwen',
+    'Wat we voor je doen',
     'AI is meer dan een chatbot',
     'AI Act klaar, zonder rem op innovatie',
     'Een heldere afspraak',
