@@ -195,7 +195,7 @@ if (existsSync(componentPath)) {
     aanpak: ['right', 'middle', 'compact'],
     niveaus: ['right', 'middle', 'compact'],
     'use-cases': ['left', 'bottom', 'compact'],
-    diensten: ['left', 'bottom', 'wide'],
+    diensten: ['left', 'middle', 'wide'],
     'breder-dan-chat': ['right', 'bottom', 'compact'],
     'ai-act': ['left', 'bottom', 'compact'],
     afspraak: ['left', 'top', 'compact'],

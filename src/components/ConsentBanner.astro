@@ -184,13 +184,15 @@
     z-index: 100;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    width: min(360px, calc(100vw - 40px));
-    padding: 20px;
-    background: var(--card);
+    gap: 8px;
+    width: min(320px, calc(100vw - 32px));
+    padding: 16px;
+    background: color-mix(in srgb, var(--card) 90%, transparent);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
     font-family: var(--font-sans);
     animation: consent-in 180ms ease-out;
   }
@@ -203,24 +205,24 @@
   }
   .consent-body {
     margin: 0;
-    font-size: 13px;
-    line-height: 1.6;
+    font-size: 12px;
+    line-height: 1.5;
     color: var(--muted);
   }
   .consent-body a { color: inherit; text-decoration: underline; }
   .consent-actions {
     display: flex;
-    gap: 10px;
-    margin-top: 4px;
+    gap: 8px;
+    margin-top: 2px;
   }
   /* Gelijke grootte en gelijk gewicht: weigeren mag niet moeilijker zijn dan accepteren. */
   .consent-actions button {
     flex: 1;
-    padding: 11px 14px;
+    padding: 9px 12px;
     border: none;
     border-radius: var(--radius-sm);
     font-family: var(--font-sans);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--card);
     cursor: pointer;
@@ -230,6 +232,11 @@
   .consent-actions button[data-consent='granted'] { background: var(--green); }
   .consent-actions button[data-consent='granted']:hover { background: var(--green-hover); }
   .consent-actions button:focus-visible { outline: 2px solid var(--green-light); outline-offset: 2px; }
+
+  :global(html[data-theme='monkey']) .consent {
+    right: 20px;
+    left: auto;
+  }
 
   @keyframes consent-in {
     from { opacity: 0; transform: translateY(8px); }

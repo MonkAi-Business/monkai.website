@@ -273,13 +273,13 @@ const chapters = [
       data-monkey-chapter
       data-chapter="diensten"
       data-panel-side="left"
-      data-panel-vertical="bottom"
+      data-panel-vertical="middle"
       data-panel-size="wide"
       data-time-start={chapters[7].timeStart}
       data-time-end={chapters[7].timeEnd}
       data-footage={chapters[7].footage}
     >
-      <div class="monkey-panel">
+      <div class="monkey-panel monkey-panel-services">
         <p class="monkey-kicker">Diensten</p>
         <h2>Wat we voor je doen</h2>
         <div class="monkey-service-grid">
@@ -1246,6 +1246,39 @@ const chapters = [
   .monkey-service-grid .featured {
     border-color: rgba(196, 225, 188, 0.54);
     background: rgba(120, 166, 111, 0.16);
+  }
+
+  .monkey-panel-services {
+    width: min(900px, 66vw);
+    padding: clamp(18px, 1.8vw, 26px);
+  }
+
+  .monkey-panel-services > * + * {
+    margin-top: 12px;
+  }
+
+  .monkey-panel-services h2 {
+    font-size: clamp(30px, 3vw, 44px);
+  }
+
+  .monkey-panel-services .monkey-service-grid {
+    gap: 8px;
+  }
+
+  .monkey-panel-services .monkey-service-grid article {
+    padding: 10px 12px;
+  }
+
+  .monkey-panel-services .monkey-service-grid h3 {
+    margin-top: 5px;
+    font-size: 16px;
+    line-height: 1.22;
+  }
+
+  .monkey-panel-services .monkey-service-grid p {
+    margin-top: 4px;
+    font-size: 12.5px;
+    line-height: 1.38;
   }
 
   .monkey-rows > div {

@@ -67,12 +67,30 @@ for (const file of ['FaqList.astro', 'ContactForm.astro']) {
 const faqSection = read('src', 'components', 'Faq.astro');
 const contactSection = read('src', 'components', 'Contact.astro');
 const teamSection = read('src', 'components', 'Team.astro');
+const aiActSection = read('src', 'components', 'AiAct.astro');
+const consentBanner = read('src', 'components', 'ConsentBanner.astro');
 expect(faqSection.includes('<FaqList'), 'Faq gebruikt FaqList niet.');
 expect(contactSection.includes('<ContactForm'), 'Contact gebruikt ContactForm niet.');
 expect(
   teamSection.includes('heel Oost- en West-Vlaanderen')
     && !/Gent[^<\r\n]*Kortrijk|Kortrijk[^<\r\n]*Gent/.test(teamSection),
   'De teampagina moet Oost- en West-Vlaanderen noemen zonder stedencorridor.',
+);
+expect(
+  teamSection.includes("thuis experimenteer ik nog altijd met Raspberry Pi's en IoT.")
+    && !teamSection.includes('thuis prutst ik'),
+  'De teamtekst moet correct en positief over experimenteren spreken.',
+);
+expect(
+  aiActSection.includes('href="/blog/eu-ai-act-kmo"'),
+  'De AI-geletterdheidslink moet naar het bestaande EU AI Act-artikel verwijzen.',
+);
+expect(
+  consentBanner.includes('width: min(320px, calc(100vw - 32px));')
+    && consentBanner.includes('padding: 16px;')
+    && consentBanner.includes('backdrop-filter: blur(14px);')
+    && consentBanner.includes(":global(html[data-theme='monkey']) .consent"),
+  'De cookiemelding moet compact en licht transparant zijn.',
 );
 
 const llms = read('public', 'llms.txt');
@@ -110,6 +128,11 @@ if (existsSync(storyPath)) {
   expect(
     story.includes('<ContactForm compact={true} idPrefix="monkey"'),
     'Compact contactformulier ontbreekt.',
+  );
+  expect(
+    /data-chapter="diensten"[\s\S]*?data-panel-vertical="middle"[\s\S]*?<div class="monkey-panel monkey-panel-services">/.test(story)
+      && story.includes('.monkey-panel-services {'),
+    'Het dienstenpaneel moet compact en verticaal gecentreerd zijn.',
   );
 }
 
