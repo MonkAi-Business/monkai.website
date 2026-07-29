@@ -10,12 +10,28 @@ const expect = (condition, message) => {
 
 const theme = read('src', 'utils', 'theme.ts');
 const toggle = read('src', 'components', 'ThemeToggle.astro');
+const logo = read('src', 'components', 'Logo.astro');
 const layout = read('src', 'layouts', 'BaseLayout.astro');
 const tokens = read('src', 'styles', 'tokens.css');
+const monkeyMarkPath = join(root, 'src', 'components', 'MonkeyMark.astro');
 
 expect(theme.includes("['light', 'dark', 'monkey']"), 'Monkey ontbreekt in THEMES.');
 expect(!theme.includes('superpowers'), 'De oude superpowers-stand bestaat nog.');
-expect(toggle.includes('src="/favicon.svg"'), 'Het favicon ontbreekt in de Monkey-knop.');
+expect(existsSync(monkeyMarkPath), 'De gedeelde MonkeyMark-component ontbreekt.');
+expect(
+  toggle.includes("import MonkeyMark from './MonkeyMark.astro'")
+    && toggle.includes('<MonkeyMark'),
+  'De themaschakelaar gebruikt MonkeyMark niet.',
+);
+expect(
+  logo.includes("import MonkeyMark from './MonkeyMark.astro'")
+    && logo.includes('<MonkeyMark'),
+  'Het logo gebruikt MonkeyMark niet.',
+);
+expect(
+  !toggle.includes('src="/favicon.svg"'),
+  'De Monkey-knop mag de favicon met achtergrondtegel niet gebruiken.',
+);
 expect(toggle.includes('monkai-theme-change'), 'De thema-event ontbreekt.');
 expect(toggle.includes('@media (max-width: 768px)'), 'De mobiele verberging ontbreekt.');
 expect(layout.includes("chosen === 'monkey'"), 'De mobiele Monkey-fallback ontbreekt.');
