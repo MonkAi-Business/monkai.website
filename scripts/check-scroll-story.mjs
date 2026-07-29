@@ -3,11 +3,15 @@ import { join } from 'node:path';
 import {
   AUTO_SCROLL_CHAPTER_MS,
   advanceAutoScroll,
+  autoplayPlaybackRate,
   autoplayButtonState,
   isAutoplayScrollKey,
   resolveAutoScrollStart,
 } from '../src/utils/scrollStoryAutoplay.mjs';
-import { progressToTime } from '../src/utils/scrollStoryTiming.mjs';
+import {
+  progressToTime,
+  timeToProgress,
+} from '../src/utils/scrollStoryTiming.mjs';
 
 const root = process.cwd();
 const componentPath = join(root, 'src', 'components', 'ScrollStory.astro');
@@ -35,6 +39,22 @@ expect(
 expect(
   approximately(progressToTime(1, sampleTimings), 18),
   'Bij 100 procent moet de clip het eindframe bereiken.',
+);
+expect(
+  approximately(timeToProgress(14, sampleTimings), 0.5),
+  'De inverse timing moet een videotijd terug naar hoofdstukprogressie vertalen.',
+);
+expect(
+  approximately(timeToProgress(10, sampleTimings), 0)
+    && approximately(timeToProgress(18, sampleTimings), 1),
+  'De inverse timing moet begin en einde exact begrenzen.',
+);
+expect(
+  approximately(
+    autoplayPlaybackRate(119.542, 13),
+    119.542 / 97.5,
+  ),
+  'Autoplay moet de bestaande tourduur via playbackRate behouden.',
 );
 
 const boundaryTimings = [

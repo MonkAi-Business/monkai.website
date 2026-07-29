@@ -23,6 +23,20 @@ export function autoplayButtonState(playing) {
   };
 }
 
+export function autoplayPlaybackRate(videoDuration, chapterCount) {
+  const tourDurationSeconds = chapterCount * AUTO_SCROLL_CHAPTER_MS / 1000;
+  if (
+    !Number.isFinite(videoDuration)
+    || videoDuration <= 0
+    || !Number.isFinite(tourDurationSeconds)
+    || tourDurationSeconds <= 0
+  ) {
+    return 1;
+  }
+
+  return clamp(videoDuration / tourDurationSeconds, 0.25, 4);
+}
+
 export function isAutoplayScrollKey(key) {
   return autoplayScrollKeys.has(key);
 }
