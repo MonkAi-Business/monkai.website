@@ -5,7 +5,7 @@
 MonkAi Business helpt kleine en middelgrote ondernemingen in Vlaanderen om AI concreet en verantwoord in te zetten. De aanpak vertrekt van een AI-inspiratiesessie (2 uur, 10 deelnemers, bij de klant op locatie) en bouwt op in drie niveaus: automatiseren, onthouden (second brain en collective brain) en versnellen.
 
 - Coach: Stijn De Ketelaere, AI-adoptiecoach. Je werkt rechtstreeks met hem, zonder tussenlagen.
-- Werkgebied: op locatie bij KMO's in heel Oost-Vlaanderen en West-Vlaanderen. Basis in Oudenaarde (Vlaamse Ardennen), snel in o.a. Gent en Kortrijk.
+- Werkgebied: op locatie bij KMO's in heel Oost-Vlaanderen en West-Vlaanderen. Basis in Oudenaarde (Vlaamse Ardennen).
 - Specialisaties: AI-adoptie, Claude-sessies (inspiratie en sparring in kleine groepen, voor kenniswerkers en developers), second brain en collective brain (kennisstructuur), AI-governance en de EU AI Act, Microsoft 365 Copilot, modelkeuze.
 
 ## Kernpagina's

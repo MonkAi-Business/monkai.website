@@ -53,6 +53,11 @@ if (existsSync(homeDataPath)) {
   ]) {
     expect(homeData.includes(`export const ${exportName}`), `${exportName} ontbreekt.`);
   }
+  expect(
+    homeData.includes('heel Oost-Vlaanderen en West-Vlaanderen')
+      && !/Gent[^'"\r\n]*Kortrijk|Kortrijk[^'"\r\n]*Gent/.test(homeData),
+    'De FAQ moet het werkgebied als Oost- en West-Vlaanderen omschrijven zonder stedencorridor.',
+  );
 }
 
 for (const file of ['FaqList.astro', 'ContactForm.astro']) {
@@ -61,8 +66,21 @@ for (const file of ['FaqList.astro', 'ContactForm.astro']) {
 
 const faqSection = read('src', 'components', 'Faq.astro');
 const contactSection = read('src', 'components', 'Contact.astro');
+const teamSection = read('src', 'components', 'Team.astro');
 expect(faqSection.includes('<FaqList'), 'Faq gebruikt FaqList niet.');
 expect(contactSection.includes('<ContactForm'), 'Contact gebruikt ContactForm niet.');
+expect(
+  teamSection.includes('heel Oost- en West-Vlaanderen')
+    && !/Gent[^<\r\n]*Kortrijk|Kortrijk[^<\r\n]*Gent/.test(teamSection),
+  'De teampagina moet Oost- en West-Vlaanderen noemen zonder stedencorridor.',
+);
+
+const llms = read('public', 'llms.txt');
+expect(
+  llms.includes('heel Oost-Vlaanderen en West-Vlaanderen')
+    && !/Gent[^\r\n]*Kortrijk|Kortrijk[^\r\n]*Gent/.test(llms),
+  'De AI-sitebeschrijving moet Oost- en West-Vlaanderen noemen zonder stedencorridor.',
+);
 
 const storyPath = join(root, 'src', 'components', 'ScrollStory.astro');
 expect(existsSync(storyPath), 'ScrollStory ontbreekt.');

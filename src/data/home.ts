@@ -136,7 +136,7 @@ export const agreement = {
 export const faqs: Faq[] = [
   {
     q: 'In welke regio geef je AI-training en AI-adoptiecoaching?',
-    a: "Ik werk op locatie bij KMO's in heel Oost-Vlaanderen en West-Vlaanderen. Vanuit Oudenaarde, in de Vlaamse Ardennen, ben ik snel in Gent, Kortrijk en alles daartussen. Voor bedrijven net buiten die regio bekijken we het per geval.",
+    a: "Ik werk op locatie bij KMO's in heel Oost-Vlaanderen en West-Vlaanderen, vanuit mijn basis in Oudenaarde. Voor bedrijven net buiten die regio bekijken we het per geval.",
   },
   {
     q: 'Wat is AI-adoptie precies?',
