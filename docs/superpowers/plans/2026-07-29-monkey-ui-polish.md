@@ -214,8 +214,9 @@ expect(
   'De hero-link naar de aanpak mist de outline-stijl.',
 );
 expect(
-  /\.monkey-link-outline\s*\{[\s\S]*display:\s*inline-flex;[\s\S]*padding:\s*15px 22px;[\s\S]*cursor:\s*pointer;/.test(component),
-  'De hero outline-knop mist de gekozen afmetingen of handcursor.',
+  /\.monkey-actions \.btn\s*\{[\s\S]*height:\s*50px;[\s\S]*cursor:\s*pointer;/.test(component)
+    && /\.monkey-link-outline\s*\{[\s\S]*height:\s*50px;[\s\S]*cursor:\s*pointer;/.test(component),
+  'De hero-acties moeten exact even hoog zijn en een handcursor gebruiken.',
 );
 ```
 
@@ -239,6 +240,11 @@ Add a handcursor to the existing primary-action rule:
 
 ```css
 .monkey-actions .btn {
+  display: inline-flex;
+  height: 50px;
+  padding-block: 0;
+  align-items: center;
+  justify-content: center;
   color: var(--on-green);
   cursor: pointer;
 }
@@ -250,7 +256,8 @@ Add after the general `.monkey-link:hover` rule:
 .monkey-link-outline {
   align-self: auto;
   display: inline-flex;
-  padding: 15px 22px;
+  height: 50px;
+  padding: 0 22px;
   align-items: center;
   justify-content: center;
   border: 1px solid rgba(196, 225, 188, 0.54);
@@ -272,8 +279,9 @@ Add after the general `.monkey-link:hover` rule:
 }
 ```
 
-The full `border` declaration replaces the general link's bottom border.
-The 15 pixel vertical padding matches the global `.btn` padding.
+The full `border` declaration replaces the general link's bottom border. Both
+actions use an explicit 50 pixel height so the secondary border cannot make
+the outline action taller.
 
 - [ ] **Step 5: Run focused checks and verify GREEN**
 

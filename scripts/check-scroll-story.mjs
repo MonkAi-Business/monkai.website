@@ -156,8 +156,9 @@ if (existsSync(componentPath)) {
     'De hero-link naar de aanpak mist de outline-stijl.',
   );
   expect(
-    /\.monkey-link-outline\s*\{[\s\S]*display:\s*inline-flex;[\s\S]*padding:\s*15px 22px;[\s\S]*cursor:\s*pointer;/.test(component),
-    'De hero outline-knop mist de gekozen afmetingen of handcursor.',
+    /\.monkey-actions \.btn\s*\{[\s\S]*height:\s*50px;[\s\S]*cursor:\s*pointer;/.test(component)
+      && /\.monkey-link-outline\s*\{[\s\S]*height:\s*50px;[\s\S]*cursor:\s*pointer;/.test(component),
+    'De hero-acties moeten exact even hoog zijn en een handcursor gebruiken.',
   );
   expect(
     /class="monkey-progress-cluster"[\s\S]*class="monkey-progress"[\s\S]*data-story-autoplay/.test(component),
