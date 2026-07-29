@@ -55,10 +55,35 @@ const chapters = [
       tabindex="-1"
       data-story-video
     >
-      <source data-src="/media/scroll-story/monkai-scroll-story.webm" type="video/webm" />
       <source data-src="/media/scroll-story/monkai-scroll-story.mp4" type="video/mp4" />
+      <source data-src="/media/scroll-story/monkai-scroll-story.webm" type="video/webm" />
     </video>
     <div class="monkey-shade" aria-hidden="true"></div>
+    <div
+      class="monkey-loader"
+      role="status"
+      aria-live="polite"
+      aria-hidden="true"
+      data-story-loader
+    >
+      <svg class="monkey-loader-tail" viewBox="0 0 72 72" aria-hidden="true">
+        <path
+          class="monkey-loader-tail-track"
+          pathLength="100"
+          d="M52 16c-16-8-34 4-32 22 2 17 24 24 36 12 10-10 5-26-8-27-10-1-16 10-10 16 6 7 17 2 15-6"
+        ></path>
+        <path
+          class="monkey-loader-tail-progress"
+          pathLength="100"
+          data-story-loader-tail
+          d="M52 16c-16-8-34 4-32 22 2 17 24 24 36 12 10-10 5-26-8-27-10-1-16 10-10 16 6 7 17 2 15-6"
+        ></path>
+      </svg>
+      <span class="monkey-loader-copy">
+        <span data-story-loader-label>Junglefilm laden</span>
+        <strong data-story-loader-value>0%</strong>
+      </span>
+    </div>
   </div>
 
   <div class="monkey-progress-anchor">
@@ -72,8 +97,10 @@ const chapters = [
         type="button"
         aria-label="Monkey-tour afspelen"
         aria-pressed="false"
+        aria-disabled="true"
         data-story-autoplay
         data-playing="false"
+        disabled
       >
         <span class="monkey-autoplay-icon" aria-hidden="true"></span>
       </button>
@@ -459,6 +486,10 @@ const chapters = [
     progressToTime,
     timeToProgress,
   } from '../utils/scrollStoryTiming.mjs';
+  import {
+    bufferedEnd,
+    bufferStatus,
+  } from '../utils/scrollStoryBuffer.mjs';
 
   type StoryWindow = Window & {
     scrollToMonkeyChapter?: (id: string) => void;
@@ -476,6 +507,9 @@ const chapters = [
   if (story) {
     const video = story.querySelector<HTMLVideoElement>('[data-story-video]');
     const autoplayButton = story.querySelector<HTMLButtonElement>('[data-story-autoplay]');
+    const loader = story.querySelector<HTMLElement>('[data-story-loader]');
+    const loaderLabel = story.querySelector<HTMLElement>('[data-story-loader-label]');
+    const loaderValue = story.querySelector<HTMLElement>('[data-story-loader-value]');
     const contactChapter = story.querySelector<HTMLElement>('[data-chapter="contact"]');
     const sources = Array.from(
       story.querySelectorAll<HTMLSourceElement>('source[data-src]'),
@@ -496,6 +530,8 @@ const chapters = [
     let storyVisible = false;
     let autoplayFrame = 0;
     let autoplayPlaying = false;
+    let bufferReady = false;
+    let bufferFailed = false;
 
     const clamp = (value: number, minimum: number, maximum: number) =>
       Math.min(Math.max(value, minimum), maximum);
@@ -508,9 +544,47 @@ const chapters = [
     function syncAutoplayButton() {
       if (!autoplayButton) return;
       const state = autoplayButtonState(autoplayPlaying);
+      const ready = bufferReady && !bufferFailed;
       autoplayButton.dataset.playing = state.playing;
       autoplayButton.setAttribute('aria-pressed', state.ariaPressed);
       autoplayButton.setAttribute('aria-label', state.ariaLabel);
+      autoplayButton.disabled = !ready;
+      autoplayButton.setAttribute('aria-disabled', String(!ready));
+    }
+
+    function updateBufferState() {
+      if (!video || bufferFailed || !isMonkey()) return;
+      const status = bufferStatus({
+        duration: video.duration,
+        bufferedUntil: bufferedEnd(video.buffered),
+        readyState: video.readyState,
+        requiredSeconds: 8,
+      });
+
+      story.style.setProperty('--buffer-progress', String(status.progress));
+      if (loaderValue) loaderValue.textContent = `${status.progress}%`;
+
+      if (status.ready) {
+        bufferReady = true;
+        story.dataset.bufferState = 'ready';
+        if (loader) loader.setAttribute('aria-hidden', 'true');
+      } else {
+        story.dataset.bufferState = 'loading';
+        if (loader) loader.setAttribute('aria-hidden', 'false');
+      }
+
+      syncAutoplayButton();
+    }
+
+    function showBufferError() {
+      bufferFailed = true;
+      bufferReady = false;
+      story.dataset.bufferState = 'error';
+      if (loader) loader.setAttribute('aria-hidden', 'false');
+      if (loaderLabel) loaderLabel.textContent = 'Video kon niet laden';
+      if (loaderValue) loaderValue.textContent = '';
+      stopAutoplay();
+      syncAutoplayButton();
     }
 
     function stopAutoplay() {
@@ -564,7 +638,7 @@ const chapters = [
     }
 
     function startAutoplay() {
-      if (!canScrub() || !video) return;
+      if (!canScrub() || !video || !bufferReady || bufferFailed) return;
       const bounds = autoplayBounds();
       if (!bounds || bounds.end <= bounds.start) return;
 
@@ -637,6 +711,15 @@ const chapters = [
 
     function loadVideo() {
       if (!video) return;
+      bufferFailed = false;
+      bufferReady = false;
+      story.dataset.bufferState = 'loading';
+      video.preload = 'auto';
+      if (loader) loader.setAttribute('aria-hidden', 'false');
+      if (loaderLabel) loaderLabel.textContent = 'Junglefilm laden';
+      if (loaderValue) loaderValue.textContent = '0%';
+      story.style.setProperty('--buffer-progress', '0');
+      syncAutoplayButton();
       sources.forEach((source) => {
         if (!source.src && source.dataset.src) {
           source.src = source.dataset.src;
@@ -648,9 +731,15 @@ const chapters = [
     function releaseVideo() {
       if (!video) return;
       video.pause();
+      video.preload = 'none';
       sources.forEach((source) => source.removeAttribute('src'));
       video.removeAttribute('src');
       video.load();
+      bufferReady = false;
+      bufferFailed = false;
+      story.dataset.bufferState = 'idle';
+      if (loader) loader.setAttribute('aria-hidden', 'true');
+      syncAutoplayButton();
     }
 
     function stopRendering() {
@@ -732,6 +821,7 @@ const chapters = [
 
     video?.addEventListener('loadedmetadata', () => {
       duration = Number.isFinite(video.duration) ? video.duration : duration;
+      updateBufferState();
       updateTarget();
       renderedTime = targetTime;
       if (!autoplayPlaying) {
@@ -739,6 +829,10 @@ const chapters = [
       }
       startRendering();
     });
+    video?.addEventListener('progress', updateBufferState);
+    video?.addEventListener('canplay', updateBufferState);
+    video?.addEventListener('canplaythrough', updateBufferState);
+    video?.addEventListener('error', showBufferError);
 
     const chapterObserver = new IntersectionObserver((entries) => {
       if (reducedMotion.matches) return;
@@ -803,6 +897,7 @@ const chapters = [
 <style>
   .monkey-story {
     --story-progress: 0;
+    --buffer-progress: 0;
     position: relative;
     background: #071218;
     color: #fff;
@@ -843,6 +938,98 @@ const chapters = [
     background:
       linear-gradient(270deg, rgba(3, 13, 19, 0.78) 0%, rgba(3, 13, 19, 0.3) 42%, rgba(3, 13, 19, 0.08) 100%),
       linear-gradient(0deg, rgba(3, 13, 19, 0.45) 0%, transparent 42%);
+  }
+
+  .monkey-loader {
+    position: absolute;
+    top: clamp(112px, 15vh, 160px);
+    right: clamp(48px, 7vw, 112px);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 156px;
+    padding: 9px 13px 9px 9px;
+    border: 1px solid rgba(196, 225, 188, 0.2);
+    border-radius: 999px;
+    background: rgba(3, 13, 19, 0.58);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    color: rgba(255, 255, 255, 0.76);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition:
+      opacity 240ms ease,
+      transform 240ms ease,
+      visibility 240ms;
+    visibility: hidden;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  .monkey-story[data-buffer-state='loading'] .monkey-loader,
+  .monkey-story[data-buffer-state='error'] .monkey-loader {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  .monkey-loader-tail {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 auto;
+    overflow: visible;
+  }
+
+  .monkey-loader-tail-track,
+  .monkey-loader-tail-progress {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 6;
+  }
+
+  .monkey-loader-tail-track {
+    stroke: rgba(255, 255, 255, 0.12);
+  }
+
+  .monkey-loader-tail-progress {
+    stroke: #c4e1bc;
+    stroke-dasharray: 100;
+    stroke-dashoffset: calc(100 - var(--buffer-progress));
+    transition: stroke-dashoffset 220ms ease;
+    animation: monkey-tail-glow 1.4s ease-in-out infinite;
+  }
+
+  .monkey-loader-copy {
+    display: grid;
+    gap: 1px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    line-height: 1.2;
+  }
+
+  .monkey-loader-copy strong {
+    color: #c4e1bc;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .monkey-story[data-buffer-state='error'] .monkey-loader-tail-progress {
+    stroke: rgba(255, 255, 255, 0.42);
+    animation: none;
+  }
+
+  @keyframes monkey-tail-glow {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 0 rgba(196, 225, 188, 0));
+    }
+
+    50% {
+      filter: drop-shadow(0 0 5px rgba(196, 225, 188, 0.42));
+    }
   }
 
   .monkey-progress-anchor {
@@ -917,6 +1104,17 @@ const chapters = [
     outline: 2px solid #c4e1bc;
     outline-offset: 3px;
     opacity: 1;
+  }
+
+  .monkey-autoplay:disabled {
+    cursor: wait;
+    opacity: 0.32;
+  }
+
+  .monkey-autoplay:disabled:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(3, 13, 19, 0.42);
+    opacity: 0.32;
   }
 
   .monkey-autoplay-icon {
@@ -1424,6 +1622,14 @@ const chapters = [
   .monkey-story[data-reduced='true'] .monkey-panel {
     opacity: 1;
     transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .monkey-loader,
+    .monkey-loader-tail-progress {
+      animation: none;
+      transition: none;
+    }
   }
 
   @media (max-width: 980px) {

@@ -83,10 +83,12 @@ $concatInputs = (0..($scenes.Count - 1) | ForEach-Object { "[v$_]" }) -join ''
 $filterParts += "${concatInputs}concat=n=$($scenes.Count):v=1:a=0[story]"
 $timeline = ($effectiveDurations | Measure-Object -Sum).Sum
 $filter = $filterParts -join ';'
+$keyframeInterval = 3
 
 if ($PlanOnly) {
   [ordered]@{
     filter = $filter
+    keyframeInterval = $keyframeInterval
     effectiveDurations = @($effectiveDurations | ForEach-Object {
       [math]::Round([double]$_, 6)
     })
@@ -114,8 +116,8 @@ $mp4Arguments = @(
   '-c:v', 'libx264',
   '-preset', 'medium',
   '-crf', '23',
-  '-g', '24',
-  '-keyint_min', '24',
+  '-g', "$keyframeInterval",
+  '-keyint_min', "$keyframeInterval",
   '-sc_threshold', '0',
   '-movflags', '+faststart',
   $mp4Path
@@ -136,7 +138,7 @@ $webmArguments = @(
   '-c:v', 'libvpx-vp9',
   '-crf', '34',
   '-b:v', '0',
-  '-g', '24',
+  '-g', "$keyframeInterval",
   '-row-mt', '1',
   '-cpu-used', '4',
   $webmPath

@@ -110,6 +110,11 @@ if (existsSync(componentPath)) {
     'De MP4- en WebM-bronnen ontbreken.',
   );
   expect(
+    component.indexOf('monkai-scroll-story.mp4')
+      < component.indexOf('monkai-scroll-story.webm'),
+    'MP4/H.264 moet voor hardwareversnelde scrubbing de voorkeursbron zijn.',
+  );
+  expect(
     /data-src="\/media\/scroll-story\/monkai-scroll-story\.webm"/.test(component)
       && /data-src="\/media\/scroll-story\/monkai-scroll-story\.mp4"/.test(component),
     'De videobronnen moeten lazy via data-src aangeboden worden.',
@@ -155,6 +160,22 @@ if (existsSync(componentPath)) {
   expect(
     /class="monkey-progress-cluster"[\s\S]*class="monkey-progress"[\s\S]*data-story-autoplay/.test(component),
     'De autoplayknop moet direct onder de voortgangsindicator gegroepeerd zijn.',
+  );
+  expect(
+    /data-story-loader[\s\S]*data-story-loader-tail[\s\S]*data-story-loader-value/.test(component),
+    'De Monkey-video moet een loader met staart en echte voortgang hebben.',
+  );
+  expect(
+    /data-story-autoplay/.test(component)
+      && /aria-disabled="true"/.test(component)
+      && component.includes("autoplayButton.disabled = !ready"),
+    'Autoplay moet vergrendeld blijven tot de eerste videoscène gebufferd is.',
+  );
+  expect(
+    component.includes("video?.addEventListener('progress'")
+      && component.includes("video?.addEventListener('error'")
+      && component.includes("story.dataset.bufferState = 'error'"),
+    'De loader moet bufferupdates en videofouten verwerken.',
   );
   expect(
     component.includes('video.play()')

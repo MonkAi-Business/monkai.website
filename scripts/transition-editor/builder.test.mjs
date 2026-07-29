@@ -66,6 +66,7 @@ test('build plan joins trimmed scenes with an exact hard cut without encoding', 
   assert.match(plan.filter, /\[1:v\]trim=start=0\.2:end=7\.8/);
   assert.match(plan.filter, /\[v0\]\[v1\]concat=n=2:v=1:a=0\[story\]/);
   assert.doesNotMatch(plan.filter, /xfade=/);
+  assert.equal(plan.keyframeInterval, 3);
   assert.equal(plan.effectiveDurations[0], 7.2);
   assert.equal(plan.effectiveDurations[1], 7.6);
   assert.equal(plan.timeline, 14.8);
