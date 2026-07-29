@@ -1,11 +1,13 @@
-export const bufferedEnd = (ranges) => {
-  let furthest = 0;
+export const initialBufferedEnd = (ranges) => {
+  let contiguousEnd = 0;
 
   for (let index = 0; index < ranges.length; index += 1) {
-    furthest = Math.max(furthest, ranges.end(index));
+    const start = ranges.start(index);
+    if (start > contiguousEnd + 0.05) break;
+    contiguousEnd = Math.max(contiguousEnd, ranges.end(index));
   }
 
-  return furthest;
+  return contiguousEnd;
 };
 
 export const bufferStatus = ({

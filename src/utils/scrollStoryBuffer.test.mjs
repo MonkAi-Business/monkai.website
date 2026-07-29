@@ -1,18 +1,33 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { bufferedEnd, bufferStatus } from './scrollStoryBuffer.mjs';
+import { initialBufferedEnd, bufferStatus } from './scrollStoryBuffer.mjs';
 
-test('bufferedEnd returns the furthest buffered point', () => {
+test('initialBufferedEnd returns the end of the range that starts at zero', () => {
   const ranges = {
     length: 3,
-    end: (index) => [4, 11, 9][index],
+    start: (index) => [0, 64, 119.375][index],
+    end: (index) => [4, 71, 119.5][index],
   };
 
-  assert.equal(bufferedEnd(ranges), 11);
+  assert.equal(initialBufferedEnd(ranges), 4);
 });
 
-test('bufferedEnd handles an empty buffer', () => {
-  assert.equal(bufferedEnd({ length: 0, end: () => 0 }), 0);
+test('initialBufferedEnd ignores a distant range left by a previous seek', () => {
+  const ranges = {
+    length: 2,
+    start: (index) => [0, 119.375][index],
+    end: (index) => [0.083333, 119.5][index],
+  };
+
+  assert.equal(initialBufferedEnd(ranges), 0.083333);
+});
+
+test('initialBufferedEnd handles an empty buffer', () => {
+  assert.equal(initialBufferedEnd({
+    length: 0,
+    start: () => 0,
+    end: () => 0,
+  }), 0);
 });
 
 test('bufferStatus reports real full-video progress', () => {

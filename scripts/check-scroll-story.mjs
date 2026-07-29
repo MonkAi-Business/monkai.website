@@ -13,6 +13,7 @@ import {
 
 const root = process.cwd();
 const componentPath = join(root, 'src', 'components', 'ScrollStory.astro');
+const contactFormPath = join(root, 'src', 'components', 'ContactForm.astro');
 const pagePath = join(root, 'src', 'pages', 'index.astro');
 const mediaDirectory = join(root, 'public', 'media', 'scroll-story');
 const manifestPath = join(root, 'scripts', 'monkey-scenes.json');
@@ -100,6 +101,7 @@ expect(existsSync(componentPath), 'ScrollStory.astro ontbreekt.');
 
 if (existsSync(componentPath)) {
   const component = readFileSync(componentPath, 'utf8');
+  const contactForm = readFileSync(contactFormPath, 'utf8');
   const videoTag = component.match(/<video\b[\s\S]*?>/i)?.[0] ?? '';
 
   expect(/\bmuted\b/i.test(videoTag), 'De storyvideo moet muted zijn.');
@@ -181,6 +183,13 @@ if (existsSync(componentPath)) {
     component.includes('video.play()')
       && component.includes('timeToProgress(video.currentTime, timings)'),
     'Autoplay moet de video sequentieel afspelen en de scrollpositie uit de videotijd afleiden.',
+  );
+  expect(
+    contactForm.includes('class="field field-name"')
+      && contactForm.includes('class="field field-company"')
+      && /contact-form-compact \.field-name[\s\S]*grid-column:\s*1\s*\/\s*-1/.test(component)
+      && /contact-form-compact \.field-company[\s\S]*grid-column:\s*1\s*\/\s*-1/.test(component),
+    'Naam en bedrijf moeten in het compacte Monkey-contactformulier elk een volledige rij krijgen.',
   );
   expect(
     /if\s*\(\s*!autoplayPlaying\s*&&[\s\S]{0,500}?video\.currentTime\s*=\s*clamp/.test(component),

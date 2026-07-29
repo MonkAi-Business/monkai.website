@@ -487,7 +487,7 @@ const chapters = [
     timeToProgress,
   } from '../utils/scrollStoryTiming.mjs';
   import {
-    bufferedEnd,
+    initialBufferedEnd,
     bufferStatus,
   } from '../utils/scrollStoryBuffer.mjs';
 
@@ -556,7 +556,7 @@ const chapters = [
       if (!video || bufferFailed || !isMonkey()) return;
       const status = bufferStatus({
         duration: video.duration,
-        bufferedUntil: bufferedEnd(video.buffered),
+        bufferedUntil: initialBufferedEnd(video.buffered),
         readyState: video.readyState,
         requiredSeconds: 8,
       });
@@ -564,8 +564,14 @@ const chapters = [
       story.style.setProperty('--buffer-progress', String(status.progress));
       if (loaderValue) loaderValue.textContent = `${status.progress}%`;
 
-      if (status.ready) {
+      if (status.ready && !bufferReady) {
         bufferReady = true;
+        if (!autoplayPlaying && Number.isFinite(targetTime)) {
+          video.currentTime = clamp(targetTime, 0, Math.max(duration - 0.04, 0));
+        }
+      }
+
+      if (bufferReady) {
         story.dataset.bufferState = 'ready';
         if (loader) loader.setAttribute('aria-hidden', 'true');
       } else {
@@ -825,7 +831,9 @@ const chapters = [
       updateTarget();
       renderedTime = targetTime;
       if (!autoplayPlaying) {
-        video.currentTime = clamp(targetTime, 0, Math.max(duration - 0.04, 0));
+        video.currentTime = bufferReady
+          ? clamp(targetTime, 0, Math.max(duration - 0.04, 0))
+          : 0;
       }
       startRendering();
     });
@@ -1162,6 +1170,10 @@ const chapters = [
   .monkey-chapter[data-panel-vertical='bottom'] {
     align-items: flex-end;
     padding-bottom: clamp(72px, 8vw, 112px);
+  }
+
+  .monkey-chapter-contact {
+    padding-left: clamp(28px, 3vw, 52px);
   }
 
   .monkey-panel {
@@ -1585,7 +1597,7 @@ const chapters = [
   }
 
   .monkey-chapter[data-panel-size='compact'] .monkey-panel-contact {
-    width: min(760px, 56vw);
+    width: min(700px, 54vw);
     gap: clamp(20px, 3vw, 36px);
   }
 
@@ -1603,6 +1615,19 @@ const chapters = [
 
   :global(.monkey-story .contact-form) {
     background: rgba(255, 255, 255, 0.06);
+  }
+
+  :global(.monkey-story .contact-form-compact .field-name),
+  :global(.monkey-story .contact-form-compact .field-company) {
+    grid-column: 1 / -1;
+  }
+
+  :global(.monkey-story .contact-form-compact .field-grid) {
+    row-gap: 10px;
+  }
+
+  :global(.monkey-story .contact-form-compact .field input) {
+    padding-block: 10px;
   }
 
   :global(.monkey-story .contact-form label),
