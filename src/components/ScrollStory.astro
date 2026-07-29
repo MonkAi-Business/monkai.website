@@ -450,12 +450,15 @@ const chapters = [
 
 <script>
   import {
-    advanceAutoScroll,
+    autoplayPlaybackRate,
     autoplayButtonState,
     isAutoplayScrollKey,
     resolveAutoScrollStart,
   } from '../utils/scrollStoryAutoplay.mjs';
-  import { progressToTime } from '../utils/scrollStoryTiming.mjs';
+  import {
+    progressToTime,
+    timeToProgress,
+  } from '../utils/scrollStoryTiming.mjs';
 
   type StoryWindow = Window & {
     scrollToMonkeyChapter?: (id: string) => void;
@@ -492,7 +495,6 @@ const chapters = [
     let lastSeek = 0;
     let storyVisible = false;
     let autoplayFrame = 0;
-    let autoplayTimestamp = 0;
     let autoplayPlaying = false;
 
     const clamp = (value: number, minimum: number, maximum: number) =>
@@ -514,7 +516,13 @@ const chapters = [
     function stopAutoplay() {
       if (autoplayFrame) window.cancelAnimationFrame(autoplayFrame);
       autoplayFrame = 0;
-      autoplayTimestamp = 0;
+      if (video) {
+        video.pause();
+        if (Number.isFinite(video.currentTime)) {
+          targetTime = video.currentTime;
+          renderedTime = video.currentTime;
+        }
+      }
       autoplayPlaying = false;
       syncAutoplayButton();
     }
@@ -542,16 +550,12 @@ const chapters = [
         return;
       }
 
-      if (!autoplayTimestamp) autoplayTimestamp = timestamp;
-      const step = advanceAutoScroll({
-        position: window.scrollY,
-        elapsedMs: timestamp - autoplayTimestamp,
-        ...bounds,
-      });
-      autoplayTimestamp = timestamp;
-      window.scrollTo({ top: step.position, behavior: 'auto' });
+      const progress = timeToProgress(video.currentTime, timings);
+      const position = bounds.start + (bounds.end - bounds.start) * progress;
+      window.scrollTo({ top: position, behavior: 'auto' });
 
-      if (step.done) {
+      if (video.ended || video.currentTime >= duration - 0.05) {
+        window.scrollTo({ top: bounds.end, behavior: 'auto' });
         stopAutoplay();
         return;
       }
@@ -560,7 +564,7 @@ const chapters = [
     }
 
     function startAutoplay() {
-      if (!canScrub()) return;
+      if (!canScrub() || !video) return;
       const bounds = autoplayBounds();
       if (!bounds || bounds.end <= bounds.start) return;
 
@@ -570,10 +574,35 @@ const chapters = [
         bounds.end,
       );
       window.scrollTo({ top: startPosition, behavior: 'auto' });
+      const progress = (startPosition - bounds.start) / (bounds.end - bounds.start);
+      targetTime = progressToTime(progress, timings);
+      renderedTime = targetTime;
       autoplayPlaying = true;
-      autoplayTimestamp = 0;
       syncAutoplayButton();
-      autoplayFrame = window.requestAnimationFrame(autoplayTick);
+
+      const beginPlayback = () => {
+        if (!autoplayPlaying) return;
+        duration = Number.isFinite(video.duration) ? video.duration : duration;
+        video.currentTime = clamp(targetTime, 0, Math.max(duration - 0.04, 0));
+        video.playbackRate = autoplayPlaybackRate(
+          duration,
+          bounds.chapterCount,
+        );
+        video.play()
+          .then(() => {
+            if (autoplayPlaying && !autoplayFrame) {
+              autoplayFrame = window.requestAnimationFrame(autoplayTick);
+            }
+          })
+          .catch(stopAutoplay);
+      };
+
+      if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
+        beginPlayback();
+      } else {
+        video.addEventListener('loadedmetadata', beginPlayback, { once: true });
+        loadVideo();
+      }
     }
 
     function toggleAutoplay() {
@@ -655,7 +684,8 @@ const chapters = [
         : renderedTime + difference * 0.2;
 
       if (
-        video.readyState >= HTMLMediaElement.HAVE_METADATA
+        !autoplayPlaying
+        && video.readyState >= HTMLMediaElement.HAVE_METADATA
         && time - lastSeek > 42
         && Math.abs(video.currentTime - renderedTime) > 0.015
         && !video.seeking
@@ -704,7 +734,9 @@ const chapters = [
       duration = Number.isFinite(video.duration) ? video.duration : duration;
       updateTarget();
       renderedTime = targetTime;
-      video.currentTime = clamp(targetTime, 0, Math.max(duration - 0.04, 0));
+      if (!autoplayPlaying) {
+        video.currentTime = clamp(targetTime, 0, Math.max(duration - 0.04, 0));
+      }
       startRendering();
     });
 

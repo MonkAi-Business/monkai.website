@@ -1,8 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
-  AUTO_SCROLL_CHAPTER_MS,
-  advanceAutoScroll,
   autoplayPlaybackRate,
   autoplayButtonState,
   isAutoplayScrollKey,
@@ -69,32 +67,6 @@ expect(
   'De videotijd mag aan een hoofdstukgrens niet teruglopen.',
 );
 
-const autoplayStep = advanceAutoScroll({
-  position: 100,
-  elapsedMs: 3750,
-  start: 0,
-  end: 800,
-  chapterCount: 1,
-});
-
-expect(AUTO_SCROLL_CHAPTER_MS === 7500, 'Autoplay moet 7,5 seconden per hoofdstuk gebruiken.');
-expect(
-  approximately(autoplayStep.position, 500) && autoplayStep.done === false,
-  'Autoplay moet met een constant hoofdstuktempo vooruitgaan.',
-);
-
-const autoplayEnd = advanceAutoScroll({
-  position: 750,
-  elapsedMs: 1000,
-  start: 0,
-  end: 800,
-  chapterCount: 1,
-});
-
-expect(
-  autoplayEnd.position === 800 && autoplayEnd.done === true,
-  'Autoplay moet exact aan het contacteindpunt stoppen.',
-);
 expect(
   resolveAutoScrollStart(800, 0, 800) === 0,
   'Play aan het einde moet opnieuw aan het begin starten.',
@@ -183,6 +155,15 @@ if (existsSync(componentPath)) {
   expect(
     /class="monkey-progress-cluster"[\s\S]*class="monkey-progress"[\s\S]*data-story-autoplay/.test(component),
     'De autoplayknop moet direct onder de voortgangsindicator gegroepeerd zijn.',
+  );
+  expect(
+    component.includes('video.play()')
+      && component.includes('timeToProgress(video.currentTime, timings)'),
+    'Autoplay moet de video sequentieel afspelen en de scrollpositie uit de videotijd afleiden.',
+  );
+  expect(
+    /if\s*\(\s*!autoplayPlaying\s*&&[\s\S]{0,500}?video\.currentTime\s*=\s*clamp/.test(component),
+    'Handmatige videoseeks moeten tijdens sequentiële autoplay uitgeschakeld zijn.',
   );
   expect(
     /<\/div>\s*<div class="monkey-progress-anchor">[\s\S]*class="monkey-progress-cluster"[\s\S]*<div class="monkey-chapters">/.test(component),
