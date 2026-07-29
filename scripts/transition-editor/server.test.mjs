@@ -16,10 +16,22 @@ async function fixture() {
   await writeFile(join(sourceDirectory, 'desk.mp4'), '0123456789');
   await writeFile(join(sourceDirectory, 'laptop.mp4'), 'abcdefghij');
   await writeFile(join(staticDirectory, 'index.html'), '<h1>Editor</h1>');
-  await writeFile(manifestPath, `${JSON.stringify([
-    { id: 'desk', file: 'desk.mp4', duration: 8, transition: 0 },
-    { id: 'laptop', file: 'laptop.mp4', duration: 8, transition: 0.18 },
-  ], null, 2)}\n`);
+  const originalManifest = `[
+  {
+    "id": "desk",
+    "file": "desk.mp4",
+    "duration": 8.0,
+    "transition": 0.0
+  },
+  {
+    "id": "laptop",
+    "file": "laptop.mp4",
+    "duration": 8.0,
+    "transition": 0.18
+  }
+]
+`;
+  await writeFile(manifestPath, originalManifest);
 
   const server = createTransitionEditorServer({
     manifestPath,
@@ -36,6 +48,7 @@ async function fixture() {
   return {
     baseUrl,
     manifestPath,
+    originalManifest,
     server,
     close: () => new Promise((resolve) => server.close(resolve)),
   };
@@ -97,6 +110,28 @@ test('invalid boundary updates return 400 and preserve the manifest', async (con
   assert.equal(response.status, 400);
   assert.match((await response.json()).error, /trim/i);
   assert.equal(await readFile(app.manifestPath, 'utf8'), before);
+});
+
+test('reset restores the original manifest formatting after a saved boundary', async (context) => {
+  const app = await fixture();
+  context.after(app.close);
+
+  await fetch(`${app.baseUrl}/api/boundaries/1`, {
+    method: 'PUT',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      leftTrimEnd: 7.7,
+      rightTrimStart: 0.35,
+    }),
+  });
+  const response = await fetch(`${app.baseUrl}/api/boundaries/1`, {
+    method: 'PUT',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ reset: true }),
+  });
+
+  assert.equal(response.status, 200);
+  assert.equal(await readFile(app.manifestPath, 'utf8'), app.originalManifest);
 });
 
 test('media endpoint supports byte ranges and rejects unknown scene ids', async (context) => {

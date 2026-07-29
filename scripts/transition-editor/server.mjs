@@ -73,8 +73,11 @@ async function readJsonBody(request) {
 
 async function saveManifestAtomically(manifestPath, scenes) {
   const temporaryPath = `${manifestPath}.${process.pid}.${Date.now()}.tmp`;
+  const serialized = JSON.stringify(scenes, null, 2)
+    .replace(/("duration": )(-?\d+)(,)/g, '$1$2.0$3')
+    .replace(/("transition": )(-?\d+)([,\n])/g, '$1$2.0$3');
   try {
-    await writeFile(temporaryPath, `${JSON.stringify(scenes, null, 2)}\n`, 'utf8');
+    await writeFile(temporaryPath, `${serialized}\n`, 'utf8');
     await rename(temporaryPath, manifestPath);
   } catch (error) {
     await unlink(temporaryPath).catch(() => {});
