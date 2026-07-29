@@ -24,3 +24,6 @@ Thumbs.db
 
 # Terminal Paste Image folder
 .cp-images/
+
+# local visual brainstorming sessions
+.superpowers/
