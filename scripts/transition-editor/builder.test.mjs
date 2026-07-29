@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 
-test('build plan applies trim ranges and effective durations without encoding', async (context) => {
+test('build plan joins trimmed scenes with an exact hard cut without encoding', async (context) => {
   const root = await mkdtemp(join(tmpdir(), 'monkai-build-plan-'));
   const sourceDirectory = join(root, 'clips');
   const outputDirectory = join(root, 'output');
@@ -64,8 +64,10 @@ test('build plan applies trim ranges and effective durations without encoding', 
   const plan = JSON.parse(result.stdout);
   assert.match(plan.filter, /\[0:v\]trim=start=0\.5:end=7\.7/);
   assert.match(plan.filter, /\[1:v\]trim=start=0\.2:end=7\.8/);
+  assert.match(plan.filter, /\[v0\]\[v1\]concat=n=2:v=1:a=0\[story\]/);
+  assert.doesNotMatch(plan.filter, /xfade=/);
   assert.equal(plan.effectiveDurations[0], 7.2);
   assert.equal(plan.effectiveDurations[1], 7.6);
-  assert.equal(plan.timeline, 14.62);
+  assert.equal(plan.timeline, 14.8);
   assert.deepEqual(await readdir(outputDirectory), []);
 });

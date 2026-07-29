@@ -79,21 +79,9 @@ for ($index = 0; $index -lt $scenes.Count; $index += 1) {
   $filterParts += "[${index}:v]trim=start=$trimStartText`:end=$trimEndText,setpts=PTS-STARTPTS,scale=1280:720:flags=lanczos,fps=24,format=yuv420p[v$index]"
 }
 
-$currentLabel = 'v0'
-$timeline = [double]$effectiveDurations[0]
-
-for ($index = 1; $index -lt $scenes.Count; $index += 1) {
-  $fade = [double]$scenes[$index].transition
-  $offset = $timeline - $fade
-  $nextLabel = "x$index"
-  $fadeText = $fade.ToString('0.##', $culture)
-  $offsetText = $offset.ToString('0.##', $culture)
-  $filterParts += "[$currentLabel][v$index]xfade=transition=fade:duration=$fadeText`:offset=$offsetText[$nextLabel]"
-  $timeline = $timeline + [double]$effectiveDurations[$index] - $fade
-  $currentLabel = $nextLabel
-}
-
-$filterParts += "[$currentLabel]format=yuv420p[story]"
+$concatInputs = (0..($scenes.Count - 1) | ForEach-Object { "[v$_]" }) -join ''
+$filterParts += "${concatInputs}concat=n=$($scenes.Count):v=1:a=0[story]"
+$timeline = ($effectiveDurations | Measure-Object -Sum).Sum
 $filter = $filterParts -join ';'
 
 if ($PlanOnly) {
