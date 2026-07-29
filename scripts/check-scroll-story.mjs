@@ -174,17 +174,17 @@ if (existsSync(componentPath)) {
   );
 
   expect(
-    (component.match(/footage: 'ready'/g) ?? []).length === 13,
-    'Precies dertien storyhoofdstukken moeten eigen beeldmateriaal hebben.',
+    (component.match(/footage: 'ready'/g) ?? []).length === 14,
+    'Alle veertien storyhoofdstukken moeten eigen beeldmateriaal hebben.',
   );
   expect(
-    (component.match(/footage: 'pending'/g) ?? []).length === 1,
-    'Alleen contact mag nog op beeldmateriaal wachten.',
+    (component.match(/footage: 'pending'/g) ?? []).length === 0,
+    'Geen enkel storyhoofdstuk mag nog op beeldmateriaal wachten.',
   );
   expect(
     component.includes("{ id: 'faq', timeStart: 112.78, timeEnd: 120.6, footage: 'ready' }")
-      && component.includes("{ id: 'contact', timeStart: 120.6, timeEnd: 120.6, footage: 'pending' }"),
-    'FAQ moet eigen beeld hebben en contact moet het laatste FAQ-frame op 120,60 seconden vasthouden.',
+      && component.includes("{ id: 'contact', timeStart: 120.6, timeEnd: 124.52, footage: 'ready' }"),
+    'FAQ en contact moeten elk hun eigen aaneensluitende tijdsbereik hebben.',
   );
 
   const expectedPanelLayouts = {
@@ -270,11 +270,12 @@ if (existsSync(manifestPath)) {
     'agreement',
     'blog',
     'faq',
+    'contact',
   ];
 
   expect(
     manifest.map((scene) => scene.id).join(',') === expectedSceneIds.join(','),
-    'Het manifest moet de vijftien filmscènes in de verhaallijnvolgorde bevatten.',
+    'Het manifest moet de zestien filmscènes in de verhaallijnvolgorde bevatten.',
   );
 
   const expectedNewFiles = {
@@ -286,6 +287,7 @@ if (existsSync(manifestPath)) {
     agreement: 'Two_monkeys_handshake_at_table_202607281857.mp4',
     blog: 'Monkey_writing_on_page_202607281858.mp4',
     faq: 'Monkeys_open_hatches_with_vines_202607281906.mp4',
+    contact: 'Monkey_bumps_tree,_finds_card_202607290832.mp4',
   };
 
   for (const [id, file] of Object.entries(expectedNewFiles)) {
@@ -294,6 +296,10 @@ if (existsSync(manifestPath)) {
       `De bronvideo voor "${id}" ontbreekt of wijst naar het verkeerde bestand.`,
     );
   }
+  expect(
+    manifest.find((scene) => scene.id === 'contact')?.trimStart === 3.9,
+    'De ingebakken FAQ-herhaling aan het begin van de contactclip moet weggeknipt zijn.',
+  );
 }
 
 if (failures.length > 0) {

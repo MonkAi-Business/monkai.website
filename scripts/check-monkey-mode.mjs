@@ -117,7 +117,7 @@ const manifestPath = join(root, 'scripts', 'monkey-scenes.json');
 expect(existsSync(manifestPath), 'Het filmscènemanifest ontbreekt.');
 if (existsSync(manifestPath)) {
   const scenes = JSON.parse(readFileSync(manifestPath, 'utf8'));
-  expect(scenes.length === 15, 'Het manifest moet de vijftien beschikbare clips bevatten.');
+  expect(scenes.length === 16, 'Het manifest moet de zestien beschikbare clips bevatten.');
   expect(
     scenes.every((scene) => scene.id && scene.file && scene.duration),
     'Een filmscène is onvolledig.',
