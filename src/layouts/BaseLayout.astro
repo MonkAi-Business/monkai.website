@@ -11,7 +11,14 @@ import '../styles/global.css';
 import Analytics from '../components/Analytics.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
 import BackToTop from '../components/BackToTop.astro';
-import { THEMES, DEFAULT_THEME, STORAGE_KEY } from '../utils/theme';
+import {
+  THEMES,
+  DEFAULT_THEME,
+  MOBILE_FALLBACK_THEME,
+  MOBILE_DEFAULT_THEME,
+  NO_JS_THEME,
+  STORAGE_KEY,
+} from '../utils/theme';
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(image, Astro.site).href;
@@ -104,7 +111,7 @@ const siteSchema = {
 const schemas = [siteSchema, ...(Array.isArray(schema) ? schema : [schema])];
 ---
 <!DOCTYPE html>
-<html lang="nl" data-theme="light">
+<html lang="nl" data-theme={NO_JS_THEME}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -113,7 +120,13 @@ const schemas = [siteSchema, ...(Array.isArray(schema) ? schema : [schema])];
          een lichte pagina en dan een sprong. Moet inline en blokkerend, dus dit
          script kan niet importeren; de waarden komen via define:vars uit
          src/utils/theme.ts. -->
-    <script is:inline define:vars={{ themes: THEMES, key: STORAGE_KEY, fallback: DEFAULT_THEME }}>
+    <script is:inline define:vars={{
+      themes: THEMES,
+      key: STORAGE_KEY,
+      fallback: DEFAULT_THEME,
+      mobileFallback: MOBILE_FALLBACK_THEME,
+      mobileDefault: MOBILE_DEFAULT_THEME,
+    }}>
       (function () {
         var chosen = null;
         try {
@@ -131,13 +144,19 @@ const schemas = [siteSchema, ...(Array.isArray(schema) ? schema : [schema])];
         } catch (e) {
           // localStorage gooit in sommige privacystanden. Dan gewoon de standaard.
         }
+        // Onthouden of dit een echte keuze is. De standaard is Monkey, en die
+        // mag op een smal scherm niet als keuze bewaard worden: anders zit
+        // iemand die één keer op zijn gsm langskwam ook op zijn laptop vast.
+        var explicit = chosen !== null;
         chosen = chosen || fallback;
         if (chosen === 'monkey' && window.matchMedia('(max-width: 768px)').matches) {
-          chosen = 'dark';
-          try {
-            window.localStorage.setItem(key, chosen);
-          } catch (e) {
-            // Het gekozen thema geldt nog steeds voor deze pagina.
+          chosen = explicit ? mobileFallback : mobileDefault;
+          if (explicit) {
+            try {
+              window.localStorage.setItem(key, chosen);
+            } catch (e) {
+              // Het gekozen thema geldt nog steeds voor deze pagina.
+            }
           }
         }
         document.documentElement.setAttribute('data-theme', chosen);

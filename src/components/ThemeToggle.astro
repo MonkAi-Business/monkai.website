@@ -6,7 +6,7 @@
 // Toegankelijkheid via aria-pressed op elke knop, precies een op true. Een
 // radiogroup met aria-checked zou strikter zijn maar vraagt eigen afhandeling van
 // de pijltjestoetsen voor twee of drie knoppen. Bewuste keuze voor de eenvoud.
-import { TOGGLE_OPTIONS, DEFAULT_THEME } from '../utils/theme';
+import { TOGGLE_OPTIONS, NO_JS_THEME } from '../utils/theme';
 import MonkeyMark from './MonkeyMark.astro';
 
 const icons = {
@@ -20,7 +20,7 @@ const icons = {
     <button
       type="button"
       data-theme-set={option.value}
-      aria-pressed={option.value === DEFAULT_THEME ? 'true' : 'false'}
+      aria-pressed={option.value === NO_JS_THEME ? 'true' : 'false'}
       title={option.label}
     >
       {option.value === 'monkey' ? (
@@ -51,7 +51,13 @@ const icons = {
 </div>
 
 <script>
-  import { STORAGE_KEY, THEMES, DEFAULT_THEME } from '../utils/theme';
+  import {
+    STORAGE_KEY,
+    THEMES,
+    DEFAULT_THEME,
+    MOBILE_FALLBACK_THEME,
+    MOBILE_DEFAULT_THEME,
+  } from '../utils/theme';
 
   const root = document.documentElement;
   const valid: readonly string[] = THEMES;
@@ -68,11 +74,22 @@ const icons = {
     });
   }
 
-  function pasToe(thema: string) {
+  function gekozenStand(): string | null {
+    try {
+      const stored = window.localStorage.getItem(STORAGE_KEY);
+      return stored && valid.includes(stored) ? stored : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // bewaar staat op false wanneer de stand uit de standaard volgt en niet uit een
+  // klik. Zo wordt het versmallen van een venster geen keuze die blijft plakken.
+  function pasToe(thema: string, bewaar = true) {
     if (!valid.includes(thema)) return;
     root.setAttribute('data-theme', thema);
     try {
-      window.localStorage.setItem(STORAGE_KEY, thema);
+      if (bewaar) window.localStorage.setItem(STORAGE_KEY, thema);
     } catch (e) {
       // localStorage kan gooien in privacystanden. De stand geldt dan voor deze
       // pagina en is na een navigatie weg. Beter dan een fout.
@@ -90,12 +107,19 @@ const icons = {
     });
   });
 
-  // De server rendert light als actief. Zet het bij het laden gelijk met wat het
-  // head-scriptje al op <html> heeft gezet.
+  // De server rendert light als actief, want zonder JavaScript is dat de stand.
+  // Zet het bij het laden gelijk met wat het head-scriptje op <html> heeft gezet.
   synchroniseer(huidig());
 
   mobile.addEventListener('change', () => {
-    if (mobile.matches && huidig() === 'monkey') pasToe('dark');
+    const keuze = gekozenStand();
+    if (mobile.matches && huidig() === 'monkey') {
+      // Een echte keuze voor Monkey wordt Dark, een standaard wordt Light.
+      pasToe(keuze ? MOBILE_FALLBACK_THEME : MOBILE_DEFAULT_THEME, Boolean(keuze));
+    } else if (!mobile.matches && !keuze && huidig() !== DEFAULT_THEME) {
+      // Terug breed genoeg en nog niets gekozen: terug naar de standaard.
+      pasToe(DEFAULT_THEME, false);
+    }
   });
 </script>
 
