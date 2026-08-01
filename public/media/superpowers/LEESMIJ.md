@@ -1,17 +1,20 @@
 # Media voor de superpowers-varianten
 
-Deze bestanden zijn afgeleid van wat Stijn aanleverde in `public/media/`. De
-originelen blijven daar staan en worden niet gebruikt op een pagina: ze zijn
-samen 32 MB.
+Deze bestanden zijn afgeleid van wat Stijn aanleverde in `public/media/`
+(`monkai.png`, 2,0 MB, en `monkai.glb`, 30,6 MB). **Die originelen staan niet
+meer in de repo**, opgeruimd op 1 augustus 2026. De bestanden hieronder zijn
+dus zelf de bron: er valt niets meer uit af te leiden.
 
-| Bestand | Bron | Hoe gemaakt |
+| Bestand | Ooit afgeleid uit | Hoe gemaakt |
 |---|---|---|
-| `monkai.webp` | `monkai.png` | `node scripts/media-webp.mjs` (sharp, kwaliteit 82) |
-| `monkai-640.webp` | `monkai.png` | idem, 640 px breed |
-| `monkai-web.glb` | `monkai.glb` | `npx @gltf-transform/cli optimize` (zie het plan, taak 1) |
+| `monkai.webp` | `monkai.png` | sharp, kwaliteit 82 |
+| `monkai-640.webp` | `monkai.png` | sharp, kwaliteit 80, 640 px breed |
+| `monkai-web.glb` | `monkai.glb` | `npx @gltf-transform/cli optimize` (zie hieronder) |
 
-Vervangt Stijn een origineel, draai die twee opdrachten opnieuw. De paden in de
-componenten wijzen naar deze map, dus er hoeft geen code te wijzigen.
+`scripts/media-webp.mjs`, dat de twee webp-versies maakte, is samen met de PNG
+verdwenen. Wil je een variant opnieuw maken of vervangen, lever dan eerst een
+nieuw origineel aan. De paden in de componenten wijzen naar deze map, dus er
+hoeft dan geen code te wijzigen.
 
 ## Gemeten resultaten (2026-07-27)
 
