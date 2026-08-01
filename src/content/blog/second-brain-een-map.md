@@ -1,6 +1,6 @@
 ---
 title: "Second brain: begin met één map"
-date: 2026-08-07
+date: 2026-08-14
 description: "Kennis structureren hoeft niet groots. Zo begin je vandaag."
 tags: ["kennis", "productiviteit"]
 image: "/media/blog/second-brain-een-map.svg"

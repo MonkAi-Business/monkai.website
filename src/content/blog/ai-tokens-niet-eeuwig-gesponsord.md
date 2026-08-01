@@ -1,6 +1,6 @@
 ---
 title: "AI-tokens worden niet eeuwig gesponsord"
-date: 2026-11-06
+date: 2026-11-13
 description: "Je betaalt vandaag 20 tot 30 dollar per gebruiker per maand voor AI die veel meer kost om te draaien. Wat gebeurt er met je factuur als die rekening wél doorgerekend wordt, en hoe zorg je dat je kan wisselen?"
 tags: ["ai-adoptie", "governance"]
 image: "/media/blog/ai-tokens-niet-eeuwig-gesponsord.svg"

@@ -1,6 +1,6 @@
 ---
 title: "Chat, Cowork of Code: welke Claude gebruik je wanneer?"
-date: 2026-09-25
+date: 2026-10-02
 description: "Claude zit intussen in drie werkvormen, en Cowork splitst nog eens tussen desktop en browser. Wat gebruik je waarvoor, en wat doen ChatGPT en Copilot ondertussen?"
 tags: ["claude", "chatgpt", "copilot", "productiviteit"]
 image: "/media/blog/chat-cowork-code-welke-claude-wanneer.svg"
