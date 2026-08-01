@@ -41,6 +41,17 @@ const chapters = [
   { id: 'faq', timeStart: 106.08, timeEnd: 113.11, footage: 'ready' },
   { id: 'contact', timeStart: 113.11, timeEnd: 119.71, footage: 'ready' },
 ] as const;
+
+// De film heeft zestien scènes op veertien hoofdstukken: 'overdracht' en 'team'
+// dragen er elk twee. Kregen zij evenveel scrollhoogte als de rest, dan liep de
+// film daar 2,5 keer zo snel. Ze krijgen daarom scrollruimte naar rato van hun
+// stuk film, gemeten in schermen van ongeveer zeven seconden.
+const secondsPerScreen = 7;
+const chapterSpan = (index: number) => {
+  const chapter = chapters[index];
+  const span = (chapter.timeEnd - chapter.timeStart) / secondsPerScreen;
+  return `--monkey-span:${Math.max(span, 1).toFixed(3)}`;
+};
 ---
 
 <section class="monkey-story" data-scroll-story>
@@ -172,12 +183,16 @@ const chapters = [
       data-time-start={chapters[2].timeStart}
       data-time-end={chapters[2].timeEnd}
       data-footage={chapters[2].footage}
+      data-extended="true"
+      style={chapterSpan(2)}
     >
-      <div class="monkey-panel monkey-panel-quote">
-        <p class="monkey-kicker">De afspraak vanaf dag één</p>
-        <h2>Werk slimmer. Niet afhankelijker.</h2>
-        <blockquote>Mijn doel is dat je mij niet meer nodig hebt.</blockquote>
-        <p>Ik geef een kickstart, draag over en blijf niet plakken.</p>
+      <div class="monkey-chapter-inner">
+        <div class="monkey-panel monkey-panel-quote">
+          <p class="monkey-kicker">De afspraak vanaf dag één</p>
+          <h2>Werk slimmer. Niet afhankelijker.</h2>
+          <blockquote>Mijn doel is dat je mij niet meer nodig hebt.</blockquote>
+          <p>Ik geef een kickstart, draag over en blijf niet plakken.</p>
+        </div>
       </div>
     </section>
 
@@ -192,19 +207,23 @@ const chapters = [
       data-time-start={chapters[3].timeStart}
       data-time-end={chapters[3].timeEnd}
       data-footage={chapters[3].footage}
+      data-extended="true"
+      style={chapterSpan(3)}
     >
-      <div class="monkey-panel">
-        <p class="monkey-kicker">Het team</p>
-        <h2>Klein team. Korte lijnen.</h2>
-        <div class="monkey-person">
-          <img src="/media/stijn.jpg" alt="Stijn De Ketelaere" width="88" height="88" loading="lazy" />
-          <div>
-            <h3>Stijn De Ketelaere</h3>
-            <p>AI-adoptiecoach vanuit Oudenaarde, met technische ervaring en beide voeten in het Vlaamse KMO-landschap.</p>
+      <div class="monkey-chapter-inner">
+        <div class="monkey-panel">
+          <p class="monkey-kicker">Het team</p>
+          <h2>Klein team. Korte lijnen.</h2>
+          <div class="monkey-person">
+            <img src="/media/stijn.jpg" alt="Stijn De Ketelaere" width="88" height="88" loading="lazy" />
+            <div>
+              <h3>Stijn De Ketelaere</h3>
+              <p>AI-adoptiecoach vanuit Oudenaarde, met technische ervaring en beide voeten in het Vlaamse KMO-landschap.</p>
+            </div>
           </div>
+          <p>Je werkt rechtstreeks met mij, van de eerste sessie tot de overdracht. Het team groeit met mensen die dezelfde nuchtere aanpak delen.</p>
+          <a class="monkey-link" href="https://www.linkedin.com/in/stijndeketelaere/" target="_blank" rel="noopener">Volg Stijn op LinkedIn</a>
         </div>
-        <p>Je werkt rechtstreeks met mij, van de eerste sessie tot de overdracht. Het team groeit met mensen die dezelfde nuchtere aanpak delen.</p>
-        <a class="monkey-link" href="https://www.linkedin.com/in/stijndeketelaere/" target="_blank" rel="noopener">Volg Stijn op LinkedIn</a>
       </div>
     </section>
 
@@ -497,6 +516,7 @@ const chapters = [
   type ChapterTiming = {
     timeStart: number;
     timeEnd: number;
+    weight: number;
   };
 
   const story = document.querySelector<HTMLElement>('[data-scroll-story]');
@@ -519,7 +539,18 @@ const chapters = [
     const timings: ChapterTiming[] = chapterElements.map((chapter) => ({
       timeStart: Number(chapter.dataset.timeStart ?? 0),
       timeEnd: Number(chapter.dataset.timeEnd ?? 0),
+      weight: 1,
     }));
+
+    // Het scrollaandeel van een hoofdstuk is zijn echte hoogte op de pagina.
+    // Hoofdstukken die twee filmscènes dragen zijn ruim twee schermen hoog en
+    // krijgen zo ook twee keer zoveel scrollruimte, waardoor de film overal
+    // even snel loopt. Meten kost layout, dus alleen bij opbouw en herschaling.
+    function measureChapterWeights() {
+      chapterElements.forEach((chapter, index) => {
+        timings[index].weight = chapter.offsetHeight || 1;
+      });
+    }
 
     let targetTime = 0;
     let renderedTime = 0;
@@ -766,6 +797,11 @@ const chapters = [
       story.style.setProperty('--story-progress', String(progress));
     }
 
+    function remeasure() {
+      measureChapterWeights();
+      updateTarget();
+    }
+
     function render(time: number) {
       if (!canScrub() || !storyVisible || !video) {
         animationFrame = 0;
@@ -813,7 +849,7 @@ const chapters = [
       if (canScrub()) {
         loadVideo();
         setActiveChapter(chapterElements[0]);
-        updateTarget();
+        remeasure();
         startRendering();
       } else {
         releaseVideo();
@@ -891,8 +927,9 @@ const chapters = [
       updateTarget();
       startRendering();
     }, { passive: true });
-    window.addEventListener('resize', updateTarget, { passive: true });
-    window.addEventListener('pageshow', updateTarget);
+    window.addEventListener('resize', remeasure, { passive: true });
+    window.addEventListener('load', remeasure);
+    window.addEventListener('pageshow', remeasure);
     window.addEventListener('monkai-theme-change', syncMode);
     desktop.addEventListener('change', syncMode);
     reducedMotion.addEventListener('change', syncMode);
@@ -1167,6 +1204,40 @@ const chapters = [
   }
 
   .monkey-chapter[data-panel-vertical='bottom'] {
+    align-items: flex-end;
+    padding-bottom: clamp(72px, 8vw, 112px);
+  }
+
+  /* Een hoofdstuk dat twee filmscènes draagt, krijgt scrollruimte naar rato van
+     zijn stuk film (--monkey-span). De layout verhuist dan naar de binnenlaag,
+     die één scherm hoog blijft plakken zodat het paneel leesbaar blijft terwijl
+     beide scènes doorlopen. */
+  .monkey-chapter[data-extended='true'] {
+    display: block;
+    min-height: calc(var(--monkey-span, 1) * 100svh);
+    padding-block: 0;
+  }
+
+  .monkey-chapter[data-extended='true'] .monkey-chapter-inner {
+    position: sticky;
+    top: 0;
+    display: flex;
+    min-height: 100svh;
+    align-items: center;
+    justify-content: flex-start;
+    padding-block: clamp(72px, 8vw, 120px);
+  }
+
+  .monkey-chapter[data-extended='true'][data-panel-side='right'] .monkey-chapter-inner {
+    justify-content: flex-end;
+  }
+
+  .monkey-chapter[data-extended='true'][data-panel-vertical='top'] .monkey-chapter-inner {
+    align-items: flex-start;
+    padding-top: clamp(132px, 10vw, 168px);
+  }
+
+  .monkey-chapter[data-extended='true'][data-panel-vertical='bottom'] .monkey-chapter-inner {
     align-items: flex-end;
     padding-bottom: clamp(72px, 8vw, 112px);
   }
@@ -1646,6 +1717,15 @@ const chapters = [
   .monkey-story[data-reduced='true'] .monkey-panel {
     opacity: 1;
     transform: none;
+  }
+
+  /* Zonder film is er niets om scrollruimte voor te maken: de binnenlaag valt
+     terug op gewone doorstroom. */
+  .monkey-story[data-reduced='true'] .monkey-chapter-inner {
+    position: static;
+    display: block;
+    min-height: 0;
+    padding-block: 0;
   }
 
   @media (prefers-reduced-motion: reduce) {

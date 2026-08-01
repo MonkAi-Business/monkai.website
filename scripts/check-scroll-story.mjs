@@ -68,6 +68,26 @@ expect(
   'De videotijd mag aan een hoofdstukgrens niet teruglopen.',
 );
 
+// Een hoofdstuk dat twee filmscènes draagt, krijgt dubbel zoveel scrollruimte.
+// De film moet dan in beide hoofdstukken even snel lopen.
+const weightedTimings = [
+  { timeStart: 0, timeEnd: 7, weight: 1 },
+  { timeStart: 7, timeEnd: 21, weight: 2 },
+];
+const shortChapterRate = progressToTime(1 / 3, weightedTimings)
+  - progressToTime(0, weightedTimings);
+const longChapterRate = progressToTime(1, weightedTimings)
+  - progressToTime(2 / 3, weightedTimings);
+
+expect(
+  approximately(shortChapterRate, longChapterRate),
+  'Een hoofdstuk met meer scrollruimte moet de film even snel laten lopen als de rest.',
+);
+expect(
+  approximately(timeToProgress(14, weightedTimings), 2 / 3),
+  'De inverse timing moet hetzelfde scrollaandeel per hoofdstuk gebruiken.',
+);
+
 expect(
   resolveAutoScrollStart(800, 0, 800) === 0,
   'Play aan het einde moet opnieuw aan het begin starten.',
@@ -247,6 +267,40 @@ if (existsSync(componentPath)) {
     );
     expect(attribute(tag, 'data-panel-size') === size, `${id} heeft het verkeerde paneelformaat.`);
   }
+
+  // De film heeft zestien scènes op veertien hoofdstukken. Wie meer film draagt
+  // dan de rest, moet daar ook scrollruimte voor krijgen, anders racet het beeld
+  // door dat hoofdstuk terwijl de rest normaal loopt.
+  const chapterDefinitions = [...component.matchAll(
+    /\{ id: '([a-z-]+)', timeStart: ([\d.]+), timeEnd: ([\d.]+), footage: '\w+' \}/g,
+  )].map(([, id, start, end]) => ({ id, segment: Number(end) - Number(start) }));
+
+  expect(
+    chapterDefinitions.length === 14,
+    'De veertien hoofdstuktijden moeten leesbaar blijven voor deze controle.',
+  );
+
+  const shortestSegment = Math.min(...chapterDefinitions.map((one) => one.segment));
+
+  for (const chapter of chapterDefinitions) {
+    const tag = chapterTags.find((candidate) => attribute(candidate, 'data-chapter') === chapter.id) ?? '';
+    const needsRoom = chapter.segment > shortestSegment * 1.4;
+    expect(
+      (attribute(tag, 'data-extended') === 'true') === needsRoom,
+      needsRoom
+        ? `"${chapter.id}" draagt ${chapter.segment.toFixed(2)} seconden film en heeft scrollruimte naar rato nodig.`
+        : `"${chapter.id}" past binnen één scherm en mag geen extra scrollruimte claimen.`,
+    );
+  }
+
+  expect(
+    component.includes('return `--monkey-span:${Math.max(span, 1).toFixed(3)}`;'),
+    'De scrollruimte van een verlengd hoofdstuk moet uit zijn eigen filmduur volgen.',
+  );
+  expect(
+    component.includes('timings[index].weight = chapter.offsetHeight'),
+    'De scrolltoewijzing moet de echte hoofdstukhoogte als gewicht gebruiken.',
+  );
 
   expect(
     component.includes('story.dataset.activePanelSide'),

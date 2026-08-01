@@ -1,15 +1,29 @@
+// Elk hoofdstuk krijgt een scrollaandeel dat evenredig is met zijn eigen gewicht.
+// Zonder gewicht valt een hoofdstuk terug op 1, en dan zijn alle stukken weer gelijk.
+function chapterWeights(chapterTimings) {
+  return chapterTimings.map((chapter) => (
+    Number.isFinite(chapter.weight) && chapter.weight > 0 ? chapter.weight : 1
+  ));
+}
+
 export function progressToTime(progress, chapterTimings) {
-  const chapterPosition = Math.min(
-    Math.max(progress, 0) * chapterTimings.length,
-    chapterTimings.length - Number.EPSILON,
-  );
-  const chapterIndex = Math.min(
-    Math.floor(chapterPosition),
-    chapterTimings.length - 1,
-  );
-  const local = chapterPosition - chapterIndex;
-  const chapter = chapterTimings[chapterIndex];
-  return chapter.timeStart + (chapter.timeEnd - chapter.timeStart) * local;
+  if (chapterTimings.length === 0) return 0;
+
+  const weights = chapterWeights(chapterTimings);
+  const total = weights.reduce((sum, weight) => sum + weight, 0);
+  let remaining = Math.min(Math.max(progress, 0), 1) * total;
+
+  for (let index = 0; index < chapterTimings.length; index += 1) {
+    const last = index === chapterTimings.length - 1;
+    if (remaining < weights[index] || last) {
+      const chapter = chapterTimings[index];
+      const local = Math.min(remaining / weights[index], 1);
+      return chapter.timeStart + (chapter.timeEnd - chapter.timeStart) * local;
+    }
+    remaining -= weights[index];
+  }
+
+  return chapterTimings[chapterTimings.length - 1].timeEnd;
 }
 
 export function timeToProgress(time, chapterTimings) {
@@ -32,8 +46,14 @@ export function timeToProgress(time, chapterTimings) {
     ? (time - chapter.timeStart) / chapterDuration
     : 0;
 
+  const weights = chapterWeights(chapterTimings);
+  const total = weights.reduce((sum, weight) => sum + weight, 0);
+  const before = weights
+    .slice(0, safeIndex)
+    .reduce((sum, weight) => sum + weight, 0);
+
   return Math.min(
-    Math.max((safeIndex + local) / chapterTimings.length, 0),
+    Math.max((before + local * weights[safeIndex]) / total, 0),
     1,
   );
 }
