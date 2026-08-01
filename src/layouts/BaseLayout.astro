@@ -77,8 +77,17 @@ const siteSchema = {
       jobTitle: 'AI-adoptiecoach',
       description:
         "Stijn De Ketelaere is AI-adoptiecoach voor KMO's in Vlaanderen. Hij begeleidt bedrijven bij AI-adoptie, Claude-sessies en het opzetten van een second brain en collective brain.",
-      url: 'https://monkai.business/#over',
-      sameAs: ['https://www.linkedin.com/in/stijndeketelaere/'],
+      url: 'https://monkai.business/stijn-de-ketelaere/',
+      mainEntityOfPage: 'https://monkai.business/stijn-de-ketelaere/',
+      image: 'https://monkai.business/media/stijn.jpg',
+      // sameAs hoort pagina's te bevatten die déze persoon identificeren, zodat
+      // Google ze als één entiteit ziet. Het bedrijf PinPoint staat daarom niet
+      // hier maar als affiliation hieronder (zie les 29).
+      sameAs: [
+        'https://www.linkedin.com/in/stijndeketelaere/',
+        'https://x.com/sdeketelaere',
+        'https://www.odum.digital/nl/challenger/stijn-de-ketelaere/',
+      ],
       worksFor: { '@id': 'https://monkai.business/#business' },
       affiliation: { '@id': 'https://pinpointinspections.eu/#organization' },
       knowsAbout: [

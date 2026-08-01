@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { getPublishedPosts } from '../utils/posts';
+
+const posts = (await getPublishedPosts()).slice(0, 3);
+
+const formatDate = (date: Date) => new Intl.DateTimeFormat('nl-BE', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+}).format(date);
+
+// ProfilePage is het type dat Google gebruikt voor een pagina die over één
+// persoon gaat. Het knoopt deze pagina vast aan de Person-node uit BaseLayout,
+// zodat er één entiteit overblijft in plaats van twee losse beschrijvingen.
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    '@id': 'https://monkai.business/stijn-de-ketelaere/',
+    url: 'https://monkai.business/stijn-de-ketelaere/',
+    name: 'Stijn De Ketelaere',
+    inLanguage: 'nl-BE',
+    mainEntity: { '@id': 'https://monkai.business/#stijn' },
+    isPartOf: { '@id': 'https://monkai.business/#business' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://monkai.business/' },
+      { '@type': 'ListItem', position: 2, name: 'Stijn De Ketelaere' },
+    ],
+  },
+];
+---
+<BaseLayout
+  title="Stijn De Ketelaere - AI-adoptiecoach uit Oudenaarde"
+  description="Stijn De Ketelaere is AI-adoptiecoach voor KMO's in Vlaanderen en oprichter van MonkAi Business. Achtergrond, loopbaan, artikels en contact."
+  schema={schema}
+>
+  <Nav />
+  <main class="section">
+    <article class="container profile">
+      <header class="profile-head">
+        <img
+          src="/media/stijn.jpg"
+          alt="Foto van Stijn De Ketelaere"
+          width="220"
+          height="255"
+          class="profile-photo"
+        />
+        <div>
+          <p class="kicker">Over</p>
+          <h1>Stijn De Ketelaere</h1>
+          <p class="role">AI-adoptiecoach - MonkAi Business - Oudenaarde</p>
+          <p class="lede">Ik help KMO's in Oost- en West-Vlaanderen rustig en veilig starten met AI. Klein beginnen, alles uitleggen in gewone taal, en pas vertrekken als jouw mensen het zelf kunnen.</p>
+        </div>
+      </header>
+
+      <div class="prose">
+        <p>Ik ben AI-adoptiecoach voor KMO's in Vlaanderen. Vanuit Oudenaarde, in de Vlaamse Ardennen, werk ik op locatie in heel Oost- en West-Vlaanderen. Vandaag werk je rechtstreeks met mij, van de eerste sessie tot de overdracht.</p>
+
+        <h2>Waar ik vandaan kom</h2>
+        <p>Mijn achtergrond is technisch. Bij <strong>VSK Electronics</strong> raakte ik gebeten door de interactie tussen mens en machine. Dat is nooit overgegaan: thuis experimenteer ik nog altijd met Raspberry Pi's en IoT.</p>
+        <p>Bij <strong>S&amp;V Management Consultants</strong>, later onderdeel van <strong>PwC</strong>, bouwde ik mee aan de Business Cockpit. Daar leerde ik data en business aan elkaar knopen: cijfers zijn pas iets waard als er een beslissing uit volgt.</p>
+        <p>Bij <strong>Proceedix</strong>, later onderdeel van <strong>SymphonyAI</strong>, was ik eerst technical lead en daarna customer success lead. Daar kwam ik AI in de praktijk tegen: anomaliedetectie, preventief onderhoud, state tracking. Vanaf 2022 kwam daar generatieve AI bij, en werd pas goed duidelijk hoe groot het verschil is tussen een demo en iets dat op de werkvloer blijft draaien.</p>
+        <p>Bij bedrijf na bedrijf hoorde ik dezelfde vraag: we willen wel iets met AI, maar waar beginnen we, en hoe houden we het veilig? Daarom ben ik in 2025 zelfstandig gestart met <a href="/">MonkAi Business</a>, de AI-offering van SDK Solutions BV.</p>
+
+        <h2>PinPoint Inspections</h2>
+        <p>Daarnaast ben ik medeoprichter van <strong><a href="https://pinpointinspections.eu" target="_blank" rel="noopener">PinPoint Inspections</a></strong>, een digitale inspectietool. Inspecteurs duiden hun vaststellingen aan op een visuele voorstelling van het toestel, de machine of de werf, op tablet of smartphone, en het rapport met foto's en tijdstippen rolt er automatisch uit. Denk aan asset management, HSE-inspecties, 5S-audits en werfinspecties.</p>
+        <p>Dat is geen zijproject. Het houdt me met beide voeten in de industrie en het houdt me ondernemer: een bedrijf leiden, klanten bedienen, keuzes maken die geld kosten. En het is mijn eigen proeftuin. Precies daar zie ik welke use cases je met AI kan automatiseren, en kan ik ze eerst zelf uitproberen voor ik ze bij jou voorstel. Eat your own dogfood: wat ik je vertel, heb ik in de praktijk afgetoetst en niet ergens gelezen.</p>
+
+        <h2>Waar ik voor sta</h2>
+        <p>Ik geloof niet in technologie omdat het kan. Innovatie telt pas als ze gebruikt wordt. Daarom begin ik klein, leg ik alles uit in gewone taal en vertrek ik pas als jouw mensen het zelf kunnen.</p>
+        <p>Wat dat concreet is, staat bij <a href="/#aanpak">de aanpak</a> en <a href="/#diensten">de diensten</a>: inspiratiesessies en sparring in kleine groepen, begeleiding bij automatiseren, onthouden en versnellen, en AI-geletterdheid met de EU AI Act erbij. Voor formele opleidingen verwijs ik door naar partners.</p>
+      </div>
+
+      {posts.length > 0 && (
+        <section class="block">
+          <h2>Wat ik schrijf</h2>
+          <ul class="posts">
+            {posts.map((post) => (
+              <li>
+                <a href={`/blog/${post.id}`}>{post.data.title}</a>
+                <span>{formatDate(post.data.date)}</span>
+              </li>
+            ))}
+          </ul>
+          <a class="more" href="/blog">Alle artikels</a>
+        </section>
+      )}
+
+      <section class="block">
+        <h2>Waar je me nog vindt</h2>
+        <ul class="links">
+          <li><a href="https://www.linkedin.com/in/stijndeketelaere/" target="_blank" rel="noopener">LinkedIn</a> <span>het snelst om me te bereiken</span></li>
+          <li><a href="https://x.com/sdeketelaere" target="_blank" rel="noopener">X</a> <span>ouder account, ik post er weinig</span></li>
+          <li><a href="https://pinpointinspections.eu" target="_blank" rel="noopener">PinPoint Inspections</a> <span>het bedrijf dat ik mee oprichtte</span></li>
+          <li><a href="https://www.odum.digital/nl/challenger/stijn-de-ketelaere/" target="_blank" rel="noopener">ODUM.digital</a> <span>waar ik in onderaanneming voor werk</span></li>
+          <li><a href="https://www.bemas.org/en/calendar/how-generative-and-predictive-ai-shaping-future-industry-operations-maintenance" target="_blank" rel="noopener">BEMAS</a> <span>talk over generatieve en voorspellende AI in onderhoud</span></li>
+        </ul>
+      </section>
+
+      <section class="cta">
+        <h2>Iets bespreken?</h2>
+        <p>Geen verkooppraatje en geen verplichtingen. We bekijken gewoon waar bij jou de winst zit.</p>
+        <a class="btn" href="/#contact">Laten we praten</a>
+      </section>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .profile { max-width: 760px; }
+
+  .profile-head { display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: start; margin-bottom: 40px; }
+  .profile-photo { width: 220px; height: 255px; border-radius: var(--radius); object-fit: cover; object-position: center top; }
+  .kicker { font-family: var(--font-mono); font-size: 13px; color: var(--green); margin: 0 0 8px; }
+  h1 { font-size: 44px; font-weight: 500; line-height: 1.15; margin: 0 0 10px; text-wrap: pretty; }
+  .role { font-family: var(--font-mono); font-size: 14px; color: var(--muted); margin: 0 0 16px; }
+  .lede { font-size: 18px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+
+  .prose { line-height: 1.7; font-size: 17px; color: var(--ink-soft); }
+  .prose h2 { font-family: var(--font-serif); font-size: 26px; font-weight: 600; color: var(--ink); margin: 40px 0 16px; }
+  .prose p { margin: 0 0 20px; }
+  .prose a { color: var(--green); text-decoration: underline; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+
+  .block { margin-top: 48px; }
+  .block h2 { font-family: var(--font-serif); font-size: 26px; font-weight: 600; margin: 0 0 20px; }
+
+  .posts, .links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+  .posts li, .links li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+  .posts a, .links a { font-weight: 600; color: var(--ink); }
+  .posts a:hover, .links a:hover { color: var(--green); text-decoration: underline; }
+  .posts span, .links span { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+  .more { display: inline-block; margin-top: 20px; font-weight: 600; color: var(--green); }
+  .more::after { content: ' \2192'; }
+  .more:hover { text-decoration: underline; }
+
+  .cta { margin-top: 56px; padding: 32px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); }
+  .cta h2 { font-family: var(--font-serif); font-size: 26px; font-weight: 600; margin: 0 0 10px; }
+  .cta p { margin: 0 0 20px; color: var(--muted); line-height: 1.7; }
+
+  @media (max-width: 768px) {
+    .profile-head { grid-template-columns: 1fr; gap: 20px; }
+    .profile-photo { width: 160px; height: 186px; }
+    h1 { font-size: 32px; }
+    .lede { font-size: 16px; }
+    .prose { font-size: 16px; }
+    .cta { padding: 24px; }
+  }
+</style>

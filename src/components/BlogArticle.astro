@@ -15,7 +15,7 @@ const fmt = (d: Date) => new Intl.DateTimeFormat('nl-BE', { day: 'numeric', mont
 const readingTime = readingTimeLabel(post.body ?? '');
 ---
 <article class="container article">
-  <div class="meta"><span>{fmt(post.data.date)}</span><span class="dot">·</span><span>{readingTime}</span><span class="dot">·</span><span>Door Stijn De Ketelaere</span></div>
+  <div class="meta"><span>{fmt(post.data.date)}</span><span class="dot">·</span><span>{readingTime}</span><span class="dot">·</span><span>Door <a rel="author" href="/stijn-de-ketelaere">Stijn De Ketelaere</a></span></div>
   <h1>{post.data.title}</h1>
   {post.data.image && (
     <img class="cover" src={post.data.image} alt={post.data.imageAlt ?? ''} width="1200" height="800" loading="eager" />
@@ -27,6 +27,8 @@ const readingTime = readingTimeLabel(post.body ?? '');
   .article { max-width: 720px; }
   .meta { font-family: var(--font-mono); font-size: 13px; color: var(--muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
   .meta .dot { color: var(--border); }
+  .meta a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+  .meta a:hover { color: var(--green); }
   h1 { font-size: 44px; font-weight: 500; line-height: 1.2; margin: 12px 0 24px; text-wrap: pretty; }
   .cover { width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--border); margin: 0 0 36px; }
   .prose { line-height: 1.7; font-size: 17px; color: var(--ink-soft); }

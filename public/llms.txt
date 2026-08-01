@@ -10,6 +10,7 @@ MonkAi Business helpt kleine en middelgrote ondernemingen in Vlaanderen om AI co
 
 ## Kernpagina's
 - [Homepage](https://monkai.business/): aanpak, diensten, use cases en contact
+- [Stijn De Ketelaere](https://monkai.business/stijn-de-ketelaere): wie hij is, zijn loopbaan, PinPoint Inspections en waar hij nog te vinden is
 - [Blog](https://monkai.business/blog): nuchtere artikels over AI-adoptie, governance en kennis
 - [Use cases](https://monkai.business/use-cases): concrete AI-toepassingen die vandaag al werken bij KMO's
 
