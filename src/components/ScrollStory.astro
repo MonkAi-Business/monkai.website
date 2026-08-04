@@ -96,6 +96,13 @@ const chapterSpan = (index: number) => {
     </div>
   </div>
 
+  <div class="monkey-scroll-hint" aria-hidden="true" data-story-scroll-hint>
+    <span class="monkey-scroll-hint-label">Scroll</span>
+    <svg class="monkey-scroll-hint-arrow" viewBox="0 0 16 26" aria-hidden="true">
+      <path d="M8 2v20M2 16l6 6 6-6" />
+    </svg>
+  </div>
+
   <div class="monkey-progress-anchor">
     <div class="monkey-progress-cluster">
       <div class="monkey-progress" aria-hidden="true">
@@ -562,6 +569,7 @@ const chapterSpan = (index: number) => {
     let autoplayPlaying = false;
     let bufferReady = false;
     let bufferFailed = false;
+    let hintDismissed = window.scrollY > 24;
 
     const clamp = (value: number, minimum: number, maximum: number) =>
       Math.min(Math.max(value, minimum), maximum);
@@ -778,6 +786,18 @@ const chapterSpan = (index: number) => {
       syncAutoplayButton();
     }
 
+    // De hint is een eenmalige nudge: eens gescrold blijft hij weg, ook wanneer
+    // je terugkeert naar de top. Anders zou hij bij elke scroll terug knipperen.
+    function updateScrollHint() {
+      story.dataset.scrollHint = !hintDismissed && canScrub() ? 'visible' : 'hidden';
+    }
+
+    function dismissScrollHint() {
+      if (hintDismissed) return;
+      hintDismissed = true;
+      updateScrollHint();
+    }
+
     function stopRendering() {
       if (animationFrame) {
         window.cancelAnimationFrame(animationFrame);
@@ -835,6 +855,7 @@ const chapterSpan = (index: number) => {
 
     function syncMode() {
       if (!canScrub()) stopAutoplay();
+      updateScrollHint();
 
       if (isMonkey() && reducedMotion.matches) {
         story.dataset.reduced = 'true';
@@ -924,6 +945,7 @@ const chapterSpan = (index: number) => {
       if (document.hidden) stopAutoplay();
     });
     window.addEventListener('scroll', () => {
+      if (window.scrollY > 24) dismissScrollHint();
       updateTarget();
       startRendering();
     }, { passive: true });
@@ -1073,6 +1095,69 @@ const chapterSpan = (index: number) => {
 
     50% {
       filter: drop-shadow(0 0 5px rgba(196, 225, 188, 0.42));
+    }
+  }
+
+  /* Nudge onderaan het eerste beeld: zonder scrollen gebeurt er niets in Monkey
+     mode, dus wie stil blijft staan ziet de film nooit. Verdwijnt bij de eerste
+     scroll en komt daarna niet terug. Vast aan de viewport en niet aan de stage:
+     die begint onder de navigatiebalk en loopt bovenaan de pagina dus net onder
+     de vouw door, waardoor de hint daar onzichtbaar zou staan. */
+  .monkey-scroll-hint {
+    position: fixed;
+    bottom: clamp(16px, 3vh, 32px);
+    left: 50%;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.72);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 8px);
+    transition:
+      opacity 320ms ease,
+      transform 320ms ease,
+      visibility 320ms;
+    visibility: hidden;
+  }
+
+  .monkey-story[data-scroll-hint='visible'] .monkey-scroll-hint {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    visibility: visible;
+  }
+
+  .monkey-scroll-hint-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-indent: 0.28em;
+    text-transform: uppercase;
+  }
+
+  .monkey-scroll-hint-arrow {
+    width: 15px;
+    height: 22px;
+    animation: monkey-scroll-hint-bob 1.8s ease-in-out infinite;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.6;
+  }
+
+  @keyframes monkey-scroll-hint-bob {
+    0%,
+    100% {
+      transform: translateY(-3px);
+      opacity: 0.72;
+    }
+
+    50% {
+      transform: translateY(3px);
+      opacity: 1;
     }
   }
 
@@ -1266,6 +1351,19 @@ const chapterSpan = (index: number) => {
   .monkey-story[data-enhanced='true'] .monkey-chapter[data-active='true'] .monkey-panel {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* Het eerste hoofdstuk begint onder de navigatiebalk, dus het gecentreerde
+     kader hangt een halve balkhoogte te laag en duwt de scroll-hint uit beeld.
+     Met `top` in plaats van een marge blijft de hoogte van het hoofdstuk gelijk,
+     en botst het niet met de transform van de intro-animatie. */
+  .monkey-chapter-hero .monkey-panel {
+    position: relative;
+    top: clamp(-52px, -6vh, -32px);
+  }
+
+  .monkey-story[data-reduced='true'] .monkey-chapter-hero .monkey-panel {
+    top: 0;
   }
 
   .monkey-chapter[data-panel-size='compact'] .monkey-panel {
@@ -1730,7 +1828,9 @@ const chapterSpan = (index: number) => {
 
   @media (prefers-reduced-motion: reduce) {
     .monkey-loader,
-    .monkey-loader-tail-progress {
+    .monkey-loader-tail-progress,
+    .monkey-scroll-hint,
+    .monkey-scroll-hint-arrow {
       animation: none;
       transition: none;
     }
