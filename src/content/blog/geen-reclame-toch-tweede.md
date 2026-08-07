@@ -5,7 +5,7 @@ description: "Wij maken geen reclame. Toch stonden we tweede in een lijstje van 
 tags: ["ai-adoptie", "chatgpt"]
 image: "/media/blog/geen-reclame-toch-tweede.svg"
 imageAlt: "Een lijstje van vijf met de tweede regel opgelicht, en een lege grafiek ernaast"
-draft: true
+draft: false
 ---
 
 Ik stelde die vraag tijdens een online meeting aan de CEO van een bedrijf dat interesse had in [PinPoint Inspections](https://pinpointinspections.eu), de inspectiesoftware die ik mee heb opgericht. Het was geen beleefdheidsvraag. Wij maken namelijk geen reclame. Geen advertenties, geen campagnes, geen wekelijkse LinkedIn-posts. Dat is een bewuste keuze: we zijn jong, we willen eerst kwaliteit leveren en pas daarna luid worden.

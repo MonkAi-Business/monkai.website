@@ -76,7 +76,7 @@ agents en skills, en tot slot governance, wetgeving en kosten.
 | # | Vrijdag | Slug | Waarom hier |
 |---|---|---|---|
 | 1 | 31 jul 2026 | `ai-websites-lijken-op-elkaar` | **Goedgekeurd, `draft: false`.** De bouw van deze site zelf: waarom AI-sites op elkaar lijken en wat kiezen in plaats van bestellen oplevert. Naar voren gehaald op vraag van Stijn; de rest van de reeks schoof daardoor een week op. |
-| 2 | 7 aug 2026 | `geen-reclame-toch-tweede` | Nieuw geschreven op vraag van Stijn. Een prospect vond PinPoint via een top vijf in ChatGPT, terwijl er nog geen reclame en zelfs geen meting stond. Naar voren gehaald omdat het van onderwerp switcht en meteen kan linken naar week 1. |
+| 2 | 7 aug 2026 | `geen-reclame-toch-tweede` | **Live sinds 7 augustus 2026.** Titel: "Hoe hebben jullie ons eigenlijk gevonden?" Nieuw geschreven op vraag van Stijn. Een prospect vond PinPoint via een top vijf in ChatGPT, terwijl er nog geen reclame en zelfs geen meting stond. Naar voren gehaald omdat het van onderwerp switcht en meteen kan linken naar week 1. |
 | 3 | 14 aug 2026 | `en-dan-gaat-het-over-ai` | Nieuw geschreven op vraag van Stijn: overal waar hij voor iets anders binnenkomt kantelt het gesprek naar AI, en daar zit vraag naar ondersteuning. Staat op zichzelf, geen interne links, dus veilig vooraan te zetten. De rest van de reeks schoof daardoor opnieuw een week op. |
 | 4 | 21 aug 2026 | `second-brain-een-map` | Laagste drempel: begin met één map. Goede eerste stap voor wie nog niets doet. |
 | 5 | 28 aug 2026 | `shadow-ai-verbieden-werkt-niet` | Herkenbaar probleem bij elke zaakvoerder, en het zet meteen de toon: meedoen in plaats van verbieden. |
