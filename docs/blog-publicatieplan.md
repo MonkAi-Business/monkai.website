@@ -56,8 +56,12 @@ Per post, ergens vóór de geplande vrijdag:
    is nu het publicatiemoment, niet alleen een sorteersleutel.
 6. Schrijf de LinkedIn-post in `content/linkedin/<slug>.md`.
 7. `npm run build` en controleer dat de post op `/prep/<slug>` staat zoals hij hoort.
-8. Laat Stijn hem nalezen op `/prep`.
-9. Na zijn akkoord: `draft: true` → `draft: false`, commit en push naar `main`. Staat de
+8. **Commit en push de draft meteen naar `main`**, ook al staat `draft: true`. Stijn leest
+   na op de live `/prep`, niet op een lokale server, en die pagina bestaat pas na een
+   build. Zolang de draft alleen in je working tree staat, ziet hij niets. Pushen is
+   veilig: `draft: true` houdt de post van `/blog`, de homepage en de sitemap.
+9. Laat Stijn hem nalezen op `/prep`.
+10. Na zijn akkoord: `draft: true` → `draft: false`, commit en push naar `main`. Staat de
    vrijdag nog in de toekomst, dan blijft de post verborgen tot de nachtelijke build hem
    die dag oppikt. Ligt de datum al in het verleden, dan staat hij meteen online.
 

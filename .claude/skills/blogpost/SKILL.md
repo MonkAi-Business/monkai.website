@@ -174,6 +174,9 @@ Vorm:
    moet linken.
 10. Zet de post in de tabel van `docs/blog-publicatieplan.md`, op de eerstvolgende vrije
     vrijdag of tussenin waar hij past.
+11. **Commit en push meteen naar `main`.** Dat is geen publicatie: `draft: true` houdt de
+    post van `/blog`, de homepage en de sitemap. Het zorgt er alleen voor dat hij op de
+    live `/prep/<slug>` verschijnt, en dat is waar Stijn naleest.
 
 Nieuwe posts staan standaard op `draft: true`. Ze gaan pas live via de vrijdagroutine.
 
@@ -203,8 +206,9 @@ staan in `docs/blog-publicatieplan.md`. Lees dat bestand eerst.
    anders zakt de post tussen de oudere stukken.
 7. **Schrijf de LinkedIn-post** in `content/linkedin/<slug>.md`.
 8. **`npm run build`** en controleer dat de post gebouwd wordt en de leestijd klopt.
-9. **Commit en push naar `main`.** Netlify herbouwt automatisch. Push alleen als Stijn het
-   gelezen heeft.
+9. **Commit en push naar `main`.** Netlify herbouwt automatisch. Zet `draft: false` pas
+   nadat Stijn de post op `/prep` gelezen heeft - de herschreven versie zelf push je wel
+   meteen, want anders staat ze daar niet.
 10. **Werk `docs/blog-publicatieplan.md` bij**: zet de post op live en noteer de datum.
 
 ## Nalezen voor je oplevert
