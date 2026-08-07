@@ -18,7 +18,7 @@ const tags = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeComp
 const labels: Record<string, string> = { 'ai-adoptie': 'AI-adoptie', chatgpt: 'ChatGPT' };
 const label = (t: string) => labels[t] ?? t.charAt(0).toUpperCase() + t.slice(1);
 ---
-<BaseLayout title="Blog — MonkAi Business" description="Artikels over AI-adoptie, governance en kennis voor Vlaamse KMO's.">
+<BaseLayout title="Blog - MonkAi Business" description="Artikels over AI-adoptie, governance en kennis voor Vlaamse KMO's.">
   <Nav />
   <main class="section blog-list">
     <div class="container blog-list-inner">

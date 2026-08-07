@@ -16,7 +16,7 @@ const { post } = Astro.props;
 const scheduled = isScheduled(post);
 const fmtLong = (d: Date) => new Intl.DateTimeFormat('nl-BE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(d);
 ---
-<BaseLayout title={`Prep: ${post.data.title} — MonkAi Business`} description={post.data.description} noindex={true}>
+<BaseLayout title={`Prep: ${post.data.title} - MonkAi Business`} description={post.data.description} noindex={true}>
   <Nav />
   <main class="section">
     <div class="container banner-wrap">

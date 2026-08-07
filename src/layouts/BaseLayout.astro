@@ -117,7 +117,31 @@ const siteSchema = {
   ],
 };
 
-const schemas = [siteSchema, ...(Array.isArray(schema) ? schema : [schema])];
+// De sitenaam die Google in de zoekresultaten toont. Zonder deze node valt hij
+// terug op het domein ("monkai.business") in plaats van op de merknaam.
+// Google gebruikt hiervoor, in deze volgorde: WebSite-structured-data,
+// og:site_name, de <title> en de koppen van de homepage. Die vier moeten
+// exact dezelfde schrijfwijze dragen, anders wint het domein weer.
+// Belangrijk: deze node hoort volgens Google ALLEEN op de homepage te staan
+// (het root-adres van het domein), niet op elke pagina.
+// https://developers.google.com/search/docs/appearance/site-names
+const isHome = Astro.url.pathname === '/';
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': 'https://monkai.business/#website',
+  name: 'MonkAi Business',
+  alternateName: 'MonkAi',
+  url: 'https://monkai.business/',
+  inLanguage: 'nl-BE',
+  publisher: { '@id': 'https://monkai.business/#business' },
+};
+
+const schemas = [
+  siteSchema,
+  ...(isHome ? [websiteSchema] : []),
+  ...(Array.isArray(schema) ? schema : [schema]),
+];
 ---
 <!DOCTYPE html>
 <html lang="nl" data-theme={NO_JS_THEME}>
