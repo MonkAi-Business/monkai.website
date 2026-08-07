@@ -1,6 +1,6 @@
 ---
 title: "n8n: laat je automatisatie en je AI met elkaar praten"
-date: 2026-11-20
+date: 2026-11-27
 description: "Automatisatie doet wat je afspreekt, AI beoordeelt wat niet vastligt. Interessant wordt het pas wanneer die twee elkaar kunnen oproepen - in beide richtingen."
 tags: ["automatisatie", "agents", "ai-adoptie"]
 image: "/media/blog/n8n-automatisatie-en-ai.svg"

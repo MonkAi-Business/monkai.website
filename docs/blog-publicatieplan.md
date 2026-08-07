@@ -72,23 +72,24 @@ agents en skills, en tot slot governance, wetgeving en kosten.
 | # | Vrijdag | Slug | Waarom hier |
 |---|---|---|---|
 | 1 | 31 jul 2026 | `ai-websites-lijken-op-elkaar` | **Goedgekeurd, `draft: false`.** De bouw van deze site zelf: waarom AI-sites op elkaar lijken en wat kiezen in plaats van bestellen oplevert. Naar voren gehaald op vraag van Stijn; de rest van de reeks schoof daardoor een week op. |
-| 2 | 7 aug 2026 | `en-dan-gaat-het-over-ai` | Nieuw geschreven op vraag van Stijn: overal waar hij voor iets anders binnenkomt kantelt het gesprek naar AI, en daar zit vraag naar ondersteuning. Staat op zichzelf, geen interne links, dus veilig vooraan te zetten. De rest van de reeks schoof daardoor opnieuw een week op. |
-| 3 | 14 aug 2026 | `second-brain-een-map` | Laagste drempel: begin met één map. Goede eerste stap voor wie nog niets doet. |
-| 4 | 21 aug 2026 | `shadow-ai-verbieden-werkt-niet` | Herkenbaar probleem bij elke zaakvoerder, en het zet meteen de toon: meedoen in plaats van verbieden. |
-| 5 | 28 aug 2026 | `copilot-data-die-je-al-hebt` | Je zit al op bruikbare data. Geen investering nodig om te starten. |
-| 6 | 4 sep 2026 | `plan-mode-eerst-denken-dan-doen` | Eerste echte werkgewoonte: eerst een plan, dan uitvoeren. |
-| 7 | 11 sep 2026 | `expert-collega-je-eigen-ai-agent` | Van losse vragen naar een AI die je één keer inwerkt. |
-| 8 | 18 sep 2026 | `collective-brain-bedrijfsgeheugen` | Tilt het second brain van week 3 naar bedrijfsniveau. |
-| 9 | 25 sep 2026 | `copilot-cowork-pay-as-you-go` | Introduceert Cowork en meteen de prijsvraag die eraan hangt. |
-| 10 | 2 okt 2026 | `chat-cowork-code-welke-claude-wanneer` | Overzicht van de werkvormen, nu de lezer Cowork kent. |
-| 11 | 9 okt 2026 | `skills-een-keer-vastleggen` | Bindt agents, werkvormen en herhaalwerk samen. Kan pas als die stukken online staan. |
-| 12 | 16 okt 2026 | `prompt-engineering-2026-uitkomst` | "De trucs zijn ingehaald" landt beter zodra plan mode, agents en skills bekend zijn. |
-| 13 | 23 okt 2026 | `accelerated-coding-geen-vibe-coding` | Technischer stuk, gericht op developers. Week 1 verwijst er inhoudelijk naar, zonder link. |
-| 14 | 30 okt 2026 | `eu-ai-act-kmo` | Start van het governanceblok. |
-| 15 | 6 nov 2026 | `governance-zit-in-je-prompts` | Governance in de praktijk, bovenop de wetgeving van week 14. |
-| 16 | 13 nov 2026 | `ai-tokens-niet-eeuwig-gesponsord` | De kostenkant, nu duidelijk is wat je allemaal draait. |
-| 17 | 20 nov 2026 | `n8n-automatisatie-en-ai` | Zet automatisatie, skills, governance en kosten samen. Sluit de reeks. |
-| 18 | 27 nov 2026 | `duizend-inspecties-later` | PinPoint Inspections: waarom inspectiedata in pdf's onbruikbaar is en wat AI ermee kan zodra ze gestructureerd is. Al in de huisstijl geschreven. |
+| 2 | 7 aug 2026 | `geen-reclame-toch-tweede` | Nieuw geschreven op vraag van Stijn. Een prospect vond PinPoint via een top vijf in ChatGPT, terwijl er nog geen reclame en zelfs geen meting stond. Naar voren gehaald omdat het van onderwerp switcht en meteen kan linken naar week 1. |
+| 3 | 14 aug 2026 | `en-dan-gaat-het-over-ai` | Nieuw geschreven op vraag van Stijn: overal waar hij voor iets anders binnenkomt kantelt het gesprek naar AI, en daar zit vraag naar ondersteuning. Staat op zichzelf, geen interne links, dus veilig vooraan te zetten. De rest van de reeks schoof daardoor opnieuw een week op. |
+| 4 | 21 aug 2026 | `second-brain-een-map` | Laagste drempel: begin met één map. Goede eerste stap voor wie nog niets doet. |
+| 5 | 28 aug 2026 | `shadow-ai-verbieden-werkt-niet` | Herkenbaar probleem bij elke zaakvoerder, en het zet meteen de toon: meedoen in plaats van verbieden. |
+| 6 | 4 sep 2026 | `copilot-data-die-je-al-hebt` | Je zit al op bruikbare data. Geen investering nodig om te starten. |
+| 7 | 11 sep 2026 | `plan-mode-eerst-denken-dan-doen` | Eerste echte werkgewoonte: eerst een plan, dan uitvoeren. |
+| 8 | 18 sep 2026 | `expert-collega-je-eigen-ai-agent` | Van losse vragen naar een AI die je één keer inwerkt. |
+| 9 | 25 sep 2026 | `collective-brain-bedrijfsgeheugen` | Tilt het second brain van week 3 naar bedrijfsniveau. |
+| 10 | 2 okt 2026 | `copilot-cowork-pay-as-you-go` | Introduceert Cowork en meteen de prijsvraag die eraan hangt. |
+| 11 | 9 okt 2026 | `chat-cowork-code-welke-claude-wanneer` | Overzicht van de werkvormen, nu de lezer Cowork kent. |
+| 12 | 16 okt 2026 | `skills-een-keer-vastleggen` | Bindt agents, werkvormen en herhaalwerk samen. Kan pas als die stukken online staan. |
+| 13 | 23 okt 2026 | `prompt-engineering-2026-uitkomst` | "De trucs zijn ingehaald" landt beter zodra plan mode, agents en skills bekend zijn. |
+| 14 | 30 okt 2026 | `accelerated-coding-geen-vibe-coding` | Technischer stuk, gericht op developers. Week 1 verwijst er inhoudelijk naar, zonder link. |
+| 15 | 6 nov 2026 | `eu-ai-act-kmo` | Start van het governanceblok. |
+| 16 | 13 nov 2026 | `governance-zit-in-je-prompts` | Governance in de praktijk, bovenop de wetgeving van week 14. |
+| 17 | 20 nov 2026 | `ai-tokens-niet-eeuwig-gesponsord` | De kostenkant, nu duidelijk is wat je allemaal draait. |
+| 18 | 27 nov 2026 | `n8n-automatisatie-en-ai` | Zet automatisatie, skills, governance en kosten samen. Sluit de reeks. |
+| 19 | 4 dec 2026 | `duizend-inspecties-later` | PinPoint Inspections: waarom inspectiedata in pdf's onbruikbaar is en wat AI ermee kan zodra ze gestructureerd is. Al in de huisstijl geschreven. |
 
 De `date` in de frontmatter van elke post hierboven staat op de vrijdag uit deze tabel.
 Verschuif je een post, pas dan **beide** aan, anders publiceert de cron op de oude datum.

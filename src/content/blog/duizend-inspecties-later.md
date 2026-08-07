@@ -1,6 +1,6 @@
 ---
 title: "Duizend inspecties later weet je nog niets"
-date: 2026-11-27
+date: 2026-12-04
 description: "De inspecties van het voorbije jaar staan bij de meeste bedrijven in een map met rapporten. Daar leest niemand nog in, en je AI al helemaal niet. Waarom ik daarvoor mijn eigen software ben beginnen bouwen."
 tags: ["kennis", "automatisatie", "ai-adoptie"]
 image: "/media/blog/duizend-inspecties-later.svg"

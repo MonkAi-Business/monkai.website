@@ -1,6 +1,6 @@
 ---
 title: "De expert-collega: een AI die weet hoe jouw werk hoort"
-date: 2026-09-11
+date: 2026-09-18
 description: "Een custom agent is een AI die je maar één keer inwerkt. Daarna doet hij het werk zoals jij het wil. Zo maak je er zelf een in Claude, ChatGPT, Gemini en Copilot."
 tags: ["agents", "claude", "chatgpt", "gemini", "copilot"]
 image: "/media/blog/expert-collega-je-eigen-ai-agent.svg"

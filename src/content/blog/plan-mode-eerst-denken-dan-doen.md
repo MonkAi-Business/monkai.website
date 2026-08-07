@@ -1,6 +1,6 @@
 ---
 title: "Maak samen met AI een plan, en zet het dan aan het werk"
-date: 2026-09-04
+date: 2026-09-11
 description: "Beslis vooraf samen met de AI wat er moet gebeuren, in plaats van achteraf terug te komen op wat ze zelf besliste. Dat bespaart tokens, tijd en frustratie."
 tags: ["claude", "productiviteit"]
 image: "/media/blog/plan-mode-eerst-denken-dan-doen.svg"

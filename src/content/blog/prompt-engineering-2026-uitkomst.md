@@ -1,6 +1,6 @@
 ---
 title: "Prompt engineering in 2026: zeg wat je wil bereiken"
-date: 2026-10-16
+date: 2026-10-23
 description: "De trucs zijn minder belangrijk geworden. Wat telt is dat het doel vooraf duidelijk is, en dat je de AI expliciet toelating geeft om te vragen wat ze niet weet."
 tags: ["productiviteit", "ai-adoptie"]
 image: "/media/blog/prompt-engineering-2026.svg"

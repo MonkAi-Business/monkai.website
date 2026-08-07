@@ -1,6 +1,6 @@
 ---
 title: "Accelerated coding: geen vibe coding, wel veel sneller"
-date: 2026-10-23
+date: 2026-10-30
 description: "Vibe coding is code laten schrijven zonder er nog naar te kijken. Accelerated coding is hetzelfde werk als altijd, veel sneller en met minder fouten, en je kijkt er wel naar."
 tags: ["productiviteit", "ai-adoptie"]
 image: "/media/blog/accelerated-coding.svg"
