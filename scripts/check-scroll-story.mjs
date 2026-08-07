@@ -147,7 +147,9 @@ if (existsSync(componentPath)) {
     'AI zonder apenstreken',
     'Van losse experimenten naar echte impact',
     'Werk slimmer. Niet afhankelijker.',
+    'Wat er blijft als ik weg ben',
     'Klein team. Korte lijnen.',
+    'Jouw naam hier',
     'Zo pakken we het aan',
     'Drie niveaus. Eén tempo.',
     'Van idee naar werkende oplossing',
@@ -225,8 +227,8 @@ if (existsSync(componentPath)) {
   );
 
   expect(
-    (component.match(/footage: 'ready'/g) ?? []).length === 14,
-    'Alle veertien storyhoofdstukken moeten eigen beeldmateriaal hebben.',
+    (component.match(/footage: 'ready'/g) ?? []).length === 16,
+    'Alle zestien storyhoofdstukken moeten eigen beeldmateriaal hebben.',
   );
   expect(
     (component.match(/footage: 'pending'/g) ?? []).length === 0,
@@ -242,9 +244,11 @@ if (existsSync(componentPath)) {
     hero: ['left', 'middle', 'normal'],
     problemen: ['left', 'middle', 'normal'],
     overdracht: ['left', 'middle', 'compact'],
+    'overdracht-blijft': ['left', 'middle', 'compact'],
     team: ['left', 'middle', 'compact'],
+    'team-groeit': ['left', 'middle', 'compact'],
     aanpak: ['right', 'middle', 'compact'],
-    niveaus: ['right', 'middle', 'compact'],
+    niveaus: ['left', 'middle', 'compact'],
     'use-cases': ['left', 'bottom', 'compact'],
     diensten: ['left', 'middle', 'wide'],
     'breder-dan-chat': ['right', 'bottom', 'compact'],
@@ -268,34 +272,39 @@ if (existsSync(componentPath)) {
     expect(attribute(tag, 'data-panel-size') === size, `${id} heeft het verkeerde paneelformaat.`);
   }
 
-  // De film heeft zestien scènes op veertien hoofdstukken. Wie meer film draagt
-  // dan de rest, moet daar ook scrollruimte voor krijgen, anders racet het beeld
-  // door dat hoofdstuk terwijl de rest normaal loopt.
+  // De film heeft zestien scènes en de story zestien hoofdstukken: elke
+  // scènewissel valt op een hoofdstukgrens. Droeg één hoofdstuk twee scènes, dan
+  // had het 2,5 scherm scrollhoogte nodig om de film niet te laten racen, en
+  // stond het kader daar anderhalf scherm lang stil. Dat las als het einde van
+  // de pagina en is precies wat deze controle moet tegenhouden.
   const chapterDefinitions = [...component.matchAll(
     /\{ id: '([a-z-]+)', timeStart: ([\d.]+), timeEnd: ([\d.]+), footage: '\w+' \}/g,
   )].map(([, id, start, end]) => ({ id, segment: Number(end) - Number(start) }));
 
   expect(
-    chapterDefinitions.length === 14,
-    'De veertien hoofdstuktijden moeten leesbaar blijven voor deze controle.',
+    chapterDefinitions.length === 16,
+    'De zestien hoofdstuktijden moeten leesbaar blijven voor deze controle.',
   );
 
-  const shortestSegment = Math.min(...chapterDefinitions.map((one) => one.segment));
+  const segments = chapterDefinitions.map((one) => one.segment);
+  const shortestSegment = Math.min(...segments);
+  const longestSegment = Math.max(...segments);
 
-  for (const chapter of chapterDefinitions) {
-    const tag = chapterTags.find((candidate) => attribute(candidate, 'data-chapter') === chapter.id) ?? '';
-    const needsRoom = chapter.segment > shortestSegment * 1.4;
-    expect(
-      (attribute(tag, 'data-extended') === 'true') === needsRoom,
-      needsRoom
-        ? `"${chapter.id}" draagt ${chapter.segment.toFixed(2)} seconden film en heeft scrollruimte naar rato nodig.`
-        : `"${chapter.id}" past binnen één scherm en mag geen extra scrollruimte claimen.`,
-    );
-  }
+  // Boven ongeveer 2x per hoofdstuk werd het scrubben zichtbaar schokkerig; de
+  // spreiding die uit de filmscènes zelf volgt is 1,7x. 1,8 laat die staan en
+  // vangt een hoofdstuk dat er stilletjes een tweede scène bij krijgt.
+  expect(
+    longestSegment <= shortestSegment * 1.8,
+    `Het langste hoofdstuk draagt ${longestSegment.toFixed(2)} seconden film tegenover ${shortestSegment.toFixed(2)} voor het kortste: de film racet daar door.`,
+  );
 
   expect(
-    component.includes('return `--monkey-span:${Math.max(span, 1).toFixed(3)}`;'),
-    'De scrollruimte van een verlengd hoofdstuk moet uit zijn eigen filmduur volgen.',
+    !component.includes('data-extended'),
+    'Geen enkel hoofdstuk mag extra scrollhoogte claimen: dan staat het kader stil en leest dat als het einde van de pagina.',
+  );
+  expect(
+    !component.includes('monkey-chapter-inner'),
+    'Een vastgeplakte binnenlaag zet het kader stil; elk hoofdstuk hoort gewoon mee te scrollen.',
   );
   expect(
     component.includes('timings[index].weight = chapter.offsetHeight'),

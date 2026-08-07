@@ -43,7 +43,7 @@ Gebruik hiervoor de skill `blogpost` (`.claude/skills/blogpost/SKILL.md`), onder
 Alle posts hieronder zijn geschreven vóór de huisstijl van 27 juli 2026 vastlag.
 **Vrijgeven betekent dus altijd ook herschrijven**: prikkelende titel, opening met een
 echte anekdote van Stijn, onderzoeksdetails terugbrengen tot één ankerpunt, inkorten tot
-600 à 800 woorden, en een slot dat zegt wat je maandag doet.
+400 à 600 woorden, en een slot dat zegt wat je maandag doet.
 
 Per post, ergens vóór de geplande vrijdag:
 

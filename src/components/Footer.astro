@@ -48,7 +48,17 @@ const sitemap = [
 </footer>
 
 <style>
+  /* De scrollfilm in Monkey mode is een sticky laag met een eigen stapelpositie
+     (`.monkey-stage`, z-index 0). Een footer zonder stapelpositie verliest het
+     daarvan: hij scrollt wel binnen, maar het beeld blijft eroverheen liggen en
+     je ziet hem nooit. Daarom een eigen z-index, hoog genoeg om boven elke laag
+     van de story te komen (beeld 0, hoofdstukken 1, loader 2, voortgang 3,
+     scroll-hint 4) en laag genoeg om onder de navigatie (5) en de vaste knoppen
+     (90, 100) te blijven. Bij gelijke z-index wint de footer omdat hij later in
+     de DOM staat. */
   .footer {
+    position: relative;
+    z-index: 4;
     background: var(--dark);
     color: var(--dark-text);
     padding: 64px;

@@ -41,8 +41,10 @@ een verzonnen opening. Verzin geen klantverhalen.
 
 ## De structuur
 
-600 tot 800 woorden. Dat is ongeveer 4 minuten lezen. Drie tot vier `##`-koppen, nooit een
-kop boven de openingsalinea's.
+400 tot 600 woorden. Dat is 2 tot 3 minuten lezen. Twee tot drie `##`-koppen, nooit een
+kop boven de openingsalinea's. Zit je erboven, schrap dan een sectie in plaats van overal
+een zin weg te halen: een post die één ding goed doet leest beter dan een post die vier
+dingen aanstipt.
 
 1. **Haak** (1 tot 2 alinea's, ik-vorm). Het moment zelf. Plaats, mens, wat er misging of
    opviel. Meteen erin, geen aanloop. De eerste zin mag kort en concreet zijn.
@@ -192,7 +194,8 @@ staan in `docs/blog-publicatieplan.md`. Lees dat bestand eerst.
    - Nieuwe titel, prikkelend in plaats van beschrijvend.
    - Nieuwe opening: het verhaal ervoor, de definitie eruit.
    - Cijfers en onderzoeksdetails terugbrengen tot hooguit één ankerpunt.
-   - Inkorten tot 600 à 800 woorden.
+   - Inkorten tot 400 à 600 woorden. Deze drafts zijn bijna allemaal te lang; er gaat
+     meestal een hele sectie uit.
    - Een slot dat zegt wat je maandag doet.
    - De `description` herschrijven zodat ze bij de nieuwe titel past.
 4. **Check de feiten opnieuw.** Deze posts zijn geschreven in juli 2026. Producten,
@@ -218,7 +221,7 @@ Loop dit af en zeg per punt wat je vond. Niet "ziet er goed uit".
 - [ ] Staat er in de eerste twee zinnen een plaats of een mens, geen definitie?
 - [ ] Is het verhaal in de opening echt van Stijn, en niet door mij verzonnen?
 - [ ] Slaat de tekst ergens om van "ik" naar "jij", en blijft dat daarna consequent?
-- [ ] Tussen 600 en 800 woorden?
+- [ ] Tussen 400 en 600 woorden?
 - [ ] Hooguit één onderzoeksankerpunt, en staat dat in gewone taal?
 - [ ] Eindigt de post met één ding dat je maandag kan doen?
 - [ ] Maakt de titel waar wat hij belooft?

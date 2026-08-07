@@ -25,11 +25,19 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('nl-BE', {
 
 const pad = (value: number) => String(value).padStart(2, '0');
 
+// Zestien filmscènes, zestien hoofdstukken: elke scènewissel valt samen met een
+// nieuw kader, en elk hoofdstuk blijft één scherm hoog. Droegen twee scènes één
+// kader, dan moest dat hoofdstuk 2,5 scherm hoog worden om de film niet te laten
+// racen, en stond het kader anderhalf scherm lang stil - wat als het einde van
+// de pagina leest. De grenzen hieronder zijn de echte snijpunten uit
+// scripts/monkey-scenes.json (cumulatieve som van trimEnd - trimStart).
 const chapters = [
   { id: 'hero', timeStart: 0, timeEnd: 8, footage: 'ready' },
   { id: 'problemen', timeStart: 8, timeEnd: 15.01, footage: 'ready' },
-  { id: 'overdracht', timeStart: 15.01, timeEnd: 32.64, footage: 'ready' },
-  { id: 'team', timeStart: 32.64, timeEnd: 50.03, footage: 'ready' },
+  { id: 'overdracht', timeStart: 15.01, timeEnd: 22.64, footage: 'ready' },
+  { id: 'overdracht-blijft', timeStart: 22.64, timeEnd: 32.64, footage: 'ready' },
+  { id: 'team', timeStart: 32.64, timeEnd: 42.14, footage: 'ready' },
+  { id: 'team-groeit', timeStart: 42.14, timeEnd: 50.03, footage: 'ready' },
   { id: 'aanpak', timeStart: 50.03, timeEnd: 57.03, footage: 'ready' },
   { id: 'niveaus', timeStart: 57.03, timeEnd: 64.05, footage: 'ready' },
   { id: 'use-cases', timeStart: 64.05, timeEnd: 71.09, footage: 'ready' },
@@ -41,17 +49,6 @@ const chapters = [
   { id: 'faq', timeStart: 106.08, timeEnd: 113.11, footage: 'ready' },
   { id: 'contact', timeStart: 113.11, timeEnd: 119.71, footage: 'ready' },
 ] as const;
-
-// De film heeft zestien scènes op veertien hoofdstukken: 'overdracht' en 'team'
-// dragen er elk twee. Kregen zij evenveel scrollhoogte als de rest, dan liep de
-// film daar 2,5 keer zo snel. Ze krijgen daarom scrollruimte naar rato van hun
-// stuk film, gemeten in schermen van ongeveer zeven seconden.
-const secondsPerScreen = 7;
-const chapterSpan = (index: number) => {
-  const chapter = chapters[index];
-  const span = (chapter.timeEnd - chapter.timeStart) / secondsPerScreen;
-  return `--monkey-span:${Math.max(span, 1).toFixed(3)}`;
-};
 ---
 
 <section class="monkey-story" data-scroll-story>
@@ -190,16 +187,32 @@ const chapterSpan = (index: number) => {
       data-time-start={chapters[2].timeStart}
       data-time-end={chapters[2].timeEnd}
       data-footage={chapters[2].footage}
-      data-extended="true"
-      style={chapterSpan(2)}
     >
-      <div class="monkey-chapter-inner">
-        <div class="monkey-panel monkey-panel-quote">
-          <p class="monkey-kicker">De afspraak vanaf dag één</p>
-          <h2>Werk slimmer. Niet afhankelijker.</h2>
-          <blockquote>Mijn doel is dat je mij niet meer nodig hebt.</blockquote>
-          <p>Ik geef een kickstart, draag over en blijf niet plakken.</p>
-        </div>
+      <div class="monkey-panel monkey-panel-quote">
+        <p class="monkey-kicker">De afspraak vanaf dag één</p>
+        <h2>Werk slimmer. Niet afhankelijker.</h2>
+        <blockquote>Mijn doel is dat je mij niet meer nodig hebt.</blockquote>
+        <p>Ik geef een kickstart, draag over en blijf niet plakken.</p>
+      </div>
+    </section>
+
+    <section
+      class="monkey-chapter"
+      id="monkey-overdracht-blijft"
+      data-monkey-chapter
+      data-chapter="overdracht-blijft"
+      data-panel-side="left"
+      data-panel-vertical="middle"
+      data-panel-size="compact"
+      data-time-start={chapters[3].timeStart}
+      data-time-end={chapters[3].timeEnd}
+      data-footage={chapters[3].footage}
+    >
+      <div class="monkey-panel">
+        <p class="monkey-kicker">De overdracht</p>
+        <h2>Wat er blijft als ik weg ben</h2>
+        <p>Je houdt iets over dat van jou is: je eigen prompts en werkwijzen, collega's die ze zelf aanpassen, en afspraken die op papier staan in plaats van in mijn hoofd.</p>
+        <p>Geen abonnement op mijn aanwezigheid.</p>
       </div>
     </section>
 
@@ -211,26 +224,43 @@ const chapterSpan = (index: number) => {
       data-panel-side="left"
       data-panel-vertical="middle"
       data-panel-size="compact"
-      data-time-start={chapters[3].timeStart}
-      data-time-end={chapters[3].timeEnd}
-      data-footage={chapters[3].footage}
-      data-extended="true"
-      style={chapterSpan(3)}
+      data-time-start={chapters[4].timeStart}
+      data-time-end={chapters[4].timeEnd}
+      data-footage={chapters[4].footage}
     >
-      <div class="monkey-chapter-inner">
-        <div class="monkey-panel">
-          <p class="monkey-kicker">Het team</p>
-          <h2>Klein team. Korte lijnen.</h2>
-          <div class="monkey-person">
-            <img src="/media/stijn.jpg" alt="Stijn De Ketelaere" width="88" height="88" loading="lazy" />
-            <div>
-              <h3>Stijn De Ketelaere</h3>
-              <p>AI-adoptiecoach vanuit Oudenaarde, met technische ervaring en beide voeten in het Vlaamse KMO-landschap.</p>
-            </div>
+      <div class="monkey-panel">
+        <p class="monkey-kicker">Het team</p>
+        <h2>Klein team. Korte lijnen.</h2>
+        <div class="monkey-person">
+          <img src="/media/stijn.jpg" alt="Stijn De Ketelaere" width="88" height="88" loading="lazy" />
+          <div>
+            <h3>Stijn De Ketelaere</h3>
+            <p>AI-adoptiecoach vanuit Oudenaarde, met technische ervaring en beide voeten in het Vlaamse KMO-landschap.</p>
           </div>
-          <p>Je werkt rechtstreeks met mij, van de eerste sessie tot de overdracht. Het team groeit met mensen die dezelfde nuchtere aanpak delen.</p>
-          <a class="monkey-link" href="https://www.linkedin.com/in/stijndeketelaere/" target="_blank" rel="noopener">Volg Stijn op LinkedIn</a>
         </div>
+        <p>Je werkt rechtstreeks met mij, van de eerste sessie tot de overdracht.</p>
+        <a class="monkey-link" href="https://www.linkedin.com/in/stijndeketelaere/" target="_blank" rel="noopener">Volg Stijn op LinkedIn</a>
+      </div>
+    </section>
+
+    <section
+      class="monkey-chapter"
+      id="monkey-team-groeit"
+      data-monkey-chapter
+      data-chapter="team-groeit"
+      data-panel-side="left"
+      data-panel-vertical="middle"
+      data-panel-size="compact"
+      data-time-start={chapters[5].timeStart}
+      data-time-end={chapters[5].timeEnd}
+      data-footage={chapters[5].footage}
+    >
+      <div class="monkey-panel">
+        <p class="monkey-kicker">Het team groeit</p>
+        <h2>Jouw naam hier</h2>
+        <p>Binnenkort komen er mensen bij die dezelfde nuchtere aanpak delen: klein beginnen, alles uitleggen in gewone taal, en pas vertrekken als de klant het zelf kan.</p>
+        <p>Zie jij jezelf hier staan? Of ken je iemand die hier thuishoort? Laat het weten.</p>
+        <a class="monkey-link" href="#monkey-contact">Laten we praten</a>
       </div>
     </section>
 
@@ -242,9 +272,9 @@ const chapterSpan = (index: number) => {
       data-panel-side="right"
       data-panel-vertical="middle"
       data-panel-size="compact"
-      data-time-start={chapters[4].timeStart}
-      data-time-end={chapters[4].timeEnd}
-      data-footage={chapters[4].footage}
+      data-time-start={chapters[6].timeStart}
+      data-time-end={chapters[6].timeEnd}
+      data-footage={chapters[6].footage}
     >
       <div class="monkey-panel">
         <p class="monkey-kicker">De aanpak</p>
@@ -266,12 +296,12 @@ const chapterSpan = (index: number) => {
       id="monkey-niveaus"
       data-monkey-chapter
       data-chapter="niveaus"
-      data-panel-side="right"
+      data-panel-side="left"
       data-panel-vertical="middle"
       data-panel-size="compact"
-      data-time-start={chapters[5].timeStart}
-      data-time-end={chapters[5].timeEnd}
-      data-footage={chapters[5].footage}
+      data-time-start={chapters[7].timeStart}
+      data-time-end={chapters[7].timeEnd}
+      data-footage={chapters[7].footage}
     >
       <div class="monkey-panel">
         <p class="monkey-kicker">Eén groeipad</p>
@@ -298,9 +328,9 @@ const chapterSpan = (index: number) => {
       data-panel-side="left"
       data-panel-vertical="bottom"
       data-panel-size="compact"
-      data-time-start={chapters[6].timeStart}
-      data-time-end={chapters[6].timeEnd}
-      data-footage={chapters[6].footage}
+      data-time-start={chapters[8].timeStart}
+      data-time-end={chapters[8].timeEnd}
+      data-footage={chapters[8].footage}
     >
       <div class="monkey-panel">
         <p class="monkey-kicker">Uit de praktijk</p>
@@ -327,9 +357,9 @@ const chapterSpan = (index: number) => {
       data-panel-side="left"
       data-panel-vertical="middle"
       data-panel-size="wide"
-      data-time-start={chapters[7].timeStart}
-      data-time-end={chapters[7].timeEnd}
-      data-footage={chapters[7].footage}
+      data-time-start={chapters[9].timeStart}
+      data-time-end={chapters[9].timeEnd}
+      data-footage={chapters[9].footage}
     >
       <div class="monkey-panel monkey-panel-services">
         <p class="monkey-kicker">Diensten</p>
@@ -354,9 +384,9 @@ const chapterSpan = (index: number) => {
       data-panel-side="right"
       data-panel-vertical="bottom"
       data-panel-size="compact"
-      data-time-start={chapters[8].timeStart}
-      data-time-end={chapters[8].timeEnd}
-      data-footage={chapters[8].footage}
+      data-time-start={chapters[10].timeStart}
+      data-time-end={chapters[10].timeEnd}
+      data-footage={chapters[10].footage}
     >
       <div class="monkey-panel">
         <p class="monkey-kicker">Verder dan generatieve AI</p>
@@ -381,9 +411,9 @@ const chapterSpan = (index: number) => {
       data-panel-side="left"
       data-panel-vertical="bottom"
       data-panel-size="compact"
-      data-time-start={chapters[9].timeStart}
-      data-time-end={chapters[9].timeEnd}
-      data-footage={chapters[9].footage}
+      data-time-start={chapters[11].timeStart}
+      data-time-end={chapters[11].timeEnd}
+      data-footage={chapters[11].footage}
     >
       <div class="monkey-panel">
         <p class="monkey-kicker">AI-geletterdheid en EU AI Act</p>
@@ -405,9 +435,9 @@ const chapterSpan = (index: number) => {
       data-panel-side="left"
       data-panel-vertical="top"
       data-panel-size="compact"
-      data-time-start={chapters[10].timeStart}
-      data-time-end={chapters[10].timeEnd}
-      data-footage={chapters[10].footage}
+      data-time-start={chapters[12].timeStart}
+      data-time-end={chapters[12].timeEnd}
+      data-footage={chapters[12].footage}
     >
       <div class="monkey-panel">
         <p class="monkey-kicker">Samenwerken</p>
@@ -437,9 +467,9 @@ const chapterSpan = (index: number) => {
       data-panel-side="left"
       data-panel-vertical="bottom"
       data-panel-size="compact"
-      data-time-start={chapters[11].timeStart}
-      data-time-end={chapters[11].timeEnd}
-      data-footage={chapters[11].footage}
+      data-time-start={chapters[13].timeStart}
+      data-time-end={chapters[13].timeEnd}
+      data-footage={chapters[13].footage}
     >
       <div class="monkey-panel">
         <p class="monkey-kicker">Uit de blog</p>
@@ -465,9 +495,9 @@ const chapterSpan = (index: number) => {
       data-panel-side="left"
       data-panel-vertical="top"
       data-panel-size="compact"
-      data-time-start={chapters[12].timeStart}
-      data-time-end={chapters[12].timeEnd}
-      data-footage={chapters[12].footage}
+      data-time-start={chapters[14].timeStart}
+      data-time-end={chapters[14].timeEnd}
+      data-footage={chapters[14].footage}
     >
       <div class="monkey-panel">
         <p class="monkey-kicker">Kort en nuchter</p>
@@ -484,9 +514,9 @@ const chapterSpan = (index: number) => {
       data-panel-side="left"
       data-panel-vertical="middle"
       data-panel-size="compact"
-      data-time-start={chapters[13].timeStart}
-      data-time-end={chapters[13].timeEnd}
-      data-footage={chapters[13].footage}
+      data-time-start={chapters[15].timeStart}
+      data-time-end={chapters[15].timeEnd}
+      data-footage={chapters[15].footage}
     >
       <div class="monkey-panel monkey-panel-contact">
         <div>
@@ -1293,40 +1323,6 @@ const chapterSpan = (index: number) => {
     padding-bottom: clamp(72px, 8vw, 112px);
   }
 
-  /* Een hoofdstuk dat twee filmscènes draagt, krijgt scrollruimte naar rato van
-     zijn stuk film (--monkey-span). De layout verhuist dan naar de binnenlaag,
-     die één scherm hoog blijft plakken zodat het paneel leesbaar blijft terwijl
-     beide scènes doorlopen. */
-  .monkey-chapter[data-extended='true'] {
-    display: block;
-    min-height: calc(var(--monkey-span, 1) * 100svh);
-    padding-block: 0;
-  }
-
-  .monkey-chapter[data-extended='true'] .monkey-chapter-inner {
-    position: sticky;
-    top: 0;
-    display: flex;
-    min-height: 100svh;
-    align-items: center;
-    justify-content: flex-start;
-    padding-block: clamp(72px, 8vw, 120px);
-  }
-
-  .monkey-chapter[data-extended='true'][data-panel-side='right'] .monkey-chapter-inner {
-    justify-content: flex-end;
-  }
-
-  .monkey-chapter[data-extended='true'][data-panel-vertical='top'] .monkey-chapter-inner {
-    align-items: flex-start;
-    padding-top: clamp(132px, 10vw, 168px);
-  }
-
-  .monkey-chapter[data-extended='true'][data-panel-vertical='bottom'] .monkey-chapter-inner {
-    align-items: flex-end;
-    padding-bottom: clamp(72px, 8vw, 112px);
-  }
-
   .monkey-chapter-contact {
     padding-left: clamp(28px, 3vw, 52px);
   }
@@ -1815,15 +1811,6 @@ const chapterSpan = (index: number) => {
   .monkey-story[data-reduced='true'] .monkey-panel {
     opacity: 1;
     transform: none;
-  }
-
-  /* Zonder film is er niets om scrollruimte voor te maken: de binnenlaag valt
-     terug op gewone doorstroom. */
-  .monkey-story[data-reduced='true'] .monkey-chapter-inner {
-    position: static;
-    display: block;
-    min-height: 0;
-    padding-block: 0;
   }
 
   @media (prefers-reduced-motion: reduce) {
