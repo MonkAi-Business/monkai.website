@@ -16,7 +16,7 @@ Die man is zelf founder van meerdere bedrijven, dus het gesprek liep daarna vanz
 
 Vraag jezelf eens af waar je laatste vijf klanten vandaan kwamen. Je kan er waarschijnlijk drie noemen: een doorverwijzing, iemand van een beurs, een oud-collega. Die andere twee weet je niet echt. Je vermoedt iets, en dat vermoeden is meestal het kanaal waar je zelf geld in steekt, want dat is het kanaal waar je aan denkt.
 
-Dat is precies waar het misloopt. Er is een kanaal bij gekomen dat je niet ziet omdat je er niets in doet. Mensen stellen hun vraag niet meer aan Google om vervolgens tien links af te gaan. Ze vragen AI om een antwoord, en ze krijgen een lijstje van vijf. Wie op dat lijstje staat, staat in de running. Wie er niet op staat, bestaat voor die persoon gewoon niet, want er is geen tweede pagina om naar door te klikken.
+Dat is precies waar het misloopt. Er is een kanaal bij gekomen dat je niet ziet omdat je er niets in doet. Mensen stellen hun vraag niet meer aan Google om vervolgens tien links af te gaan. Ze vragen AI om een antwoord, en ze krijgen een lijstje van vijf mogelijkheden. Wie op dat lijstje staat, staat in de running. Wie er niet op staat, bestaat voor die persoon gewoon niet, want er is geen tweede pagina om naar door te klikken.
 
 ## Waarom stonden we nu in dat lijstje?
 
