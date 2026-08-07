@@ -1,6 +1,6 @@
 ---
 slug: geen-reclame-toch-tweede
-title: "We maken geen reclame. Toch stonden we tweede."
+title: "Hoe hebben jullie ons eigenlijk gevonden?"
 url: https://monkai.business/blog/geen-reclame-toch-tweede
 date: 2026-08-07
 ---

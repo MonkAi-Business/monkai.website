@@ -1,5 +1,5 @@
 ---
-title: "We maken geen reclame. Toch stonden we tweede."
+title: "Hoe hebben jullie ons eigenlijk gevonden?"
 date: 2026-08-07
 description: "Ik vroeg een prospect hoe hij ons gevonden had. Zijn antwoord legde een verkoopkanaal bloot waar ik zelf nog nooit een euro in had gestoken, en dat ik ook niet kon meten."
 tags: ["ai-adoptie", "chatgpt"]
