@@ -36,14 +36,16 @@ const siteSchema = {
         "AI-adoptiecoaching voor Vlaamse KMO's, geleverd door Stijn De Ketelaere. Rustig en veilig starten met AI, Claude-sessies en kennisstructuur.",
       url: 'https://monkai.business/',
       image: 'https://monkai.business/og-image.png',
+      logo: 'https://monkai.business/favicon.svg',
       email: 'stijn@monkai.business',
       priceRange: '€€',
       founder: { '@id': 'https://monkai.business/#stijn' },
-      parentOrganization: {
-        '@type': 'Organization',
-        name: 'SDK Solutions BV',
-        vatID: 'BE1027019469',
-      },
+      // MonkAi Business is een handelsnaam van SDK Solutions BV, geen dochter.
+      // Daarom legalName op deze node en niet parentOrganization: dat laatste
+      // suggereerde twee organisaties en hing het BTW-nummer aan een node die
+      // nergens aan vastzat.
+      legalName: 'SDK Solutions BV',
+      vatID: 'BE1027019469',
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Robert De Preesterstraat 55',
@@ -83,10 +85,13 @@ const siteSchema = {
       // sameAs hoort pagina's te bevatten die déze persoon identificeren, zodat
       // Google ze als één entiteit ziet. Het bedrijf PinPoint staat daarom niet
       // hier maar als affiliation hieronder (zie les 29).
+      // ODUM stond hier tot 9 augustus 2026 en is er bewust uit: Google's
+      // AI-overzicht beschreef Stijn als "consultant bij ODUM.digital", en
+      // sameAs bevestigde precies die koppeling. Niet terugzetten.
       sameAs: [
         'https://www.linkedin.com/in/stijndeketelaere/',
         'https://x.com/sdeketelaere',
-        'https://www.odum.digital/nl/challenger/stijn-de-ketelaere/',
+        'https://www.vaia.be/nl/experts/stijn-de-ketelaere',
       ],
       worksFor: { '@id': 'https://monkai.business/#business' },
       affiliation: { '@id': 'https://pinpointinspections.eu/#organization' },

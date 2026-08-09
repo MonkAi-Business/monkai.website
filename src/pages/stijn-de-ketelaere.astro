@@ -61,7 +61,14 @@ const schema = [
       </header>
 
       <div class="prose">
-        <p>Ik ben AI-adoptiecoach voor KMO's in Vlaanderen. Vanuit Oudenaarde, in de Vlaamse Ardennen, werk ik op locatie in heel Oost- en West-Vlaanderen. Vandaag werk je rechtstreeks met mij, van de eerste sessie tot de overdracht.</p>
+        {/* Bewust in de derde persoon, en bewust vooraan. Zoekmachines en
+            AI-samenvattingen halen definierende zinnen op ("X is een Y die Z
+            doet"); de ik-vorm van de rest van deze pagina levert dat niet. Zonder
+            deze alinea beschreven Google en Bing Stijn met de tekst van een
+            derde partij. Laat de vorm dus staan bij een herschrijving. */}
+        <p class="summary">Stijn De Ketelaere is AI-adoptiecoach voor KMO's in Oost- en West-Vlaanderen en oprichter van MonkAi Business, de AI-offering van SDK Solutions BV. Vanuit Oudenaarde begeleidt hij bedrijven bij het invoeren van AI op de werkvloer: inspiratiesessies en sparring in kleine groepen, en begeleiding rond automatisatie, kennisopbouw en de EU AI Act. Zijn achtergrond is technisch, met een loopbaan bij VSK Electronics, S&amp;V Management Consultants (later PwC) en Proceedix (later SymphonyAI). Daarnaast is hij medeoprichter van PinPoint Inspections.</p>
+
+        <p>Vanuit Oudenaarde, in de Vlaamse Ardennen, werk ik op locatie in heel Oost- en West-Vlaanderen. Vandaag werk je rechtstreeks met mij, van de eerste sessie tot de overdracht.</p>
 
         <h2>Waar ik vandaan kom</h2>
         <p>Mijn achtergrond is technisch. Bij <strong>VSK Electronics</strong> raakte ik gebeten door de interactie tussen mens en machine. Dat is nooit overgegaan: thuis experimenteer ik nog altijd met Raspberry Pi's en IoT.</p>
@@ -98,7 +105,7 @@ const schema = [
         <ul class="links">
           <li><a href="https://www.linkedin.com/in/stijndeketelaere/" target="_blank" rel="noopener">LinkedIn</a> <span>het snelst om me te bereiken</span></li>
           <li><a href="https://pinpointinspections.eu" target="_blank" rel="noopener">PinPoint Inspections</a> <span>het bedrijf dat ik mee oprichtte</span></li>
-          <li><a href="https://www.odum.digital/nl/challenger/stijn-de-ketelaere/" target="_blank" rel="noopener">ODUM.digital</a> <span>waar ik deel uitmaak van het netwerk van digital challengers</span></li>
+          <li><a href="https://www.vaia.be/nl/experts/stijn-de-ketelaere" target="_blank" rel="noopener">VAIA</a> <span>expert bij de Vlaamse AI Academie</span></li>
           <li><a href="https://www.bemas.org/en/calendar/how-generative-and-predictive-ai-shaping-future-industry-operations-maintenance" target="_blank" rel="noopener">BEMAS</a> <span>talk over generatieve en voorspellende AI in onderhoud</span></li>
         </ul>
       </section>
@@ -126,6 +133,9 @@ const schema = [
   .prose { line-height: 1.7; font-size: 17px; color: var(--ink-soft); }
   .prose h2 { font-family: var(--font-serif); font-size: 26px; font-weight: 600; color: var(--ink); margin: 40px 0 16px; }
   .prose p { margin: 0 0 20px; }
+  /* Zet de samenvatting apart, zodat de wissel naar de derde persoon voor een
+     lezer verantwoord oogt en niet als een stijlbreuk. */
+  .prose .summary { border-left: 3px solid var(--green); padding-left: 18px; color: var(--ink); }
   .prose a { color: var(--green); text-decoration: underline; }
   .prose strong { color: var(--ink); font-weight: 600; }
 
