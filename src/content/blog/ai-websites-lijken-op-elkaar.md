@@ -1,7 +1,7 @@
 ---
 title: "Elke AI-website lijkt op elkaar. Die van mij mocht dat niet."
 date: 2026-07-31
-description: "Eind jaren 90 maakte ik een one-pager over Salvador Dalí. Dertig jaar later stond er in twee dagen een volledige site. Het verschil zit niet in de snelheid, maar in wie beslist hoe ze eruitziet."
+description: "Eind jaren 90 maakte ik een one-pager over Salvador Dalí. Dertig jaar later stond er in twee dagen een site. Het verschil zit in wie beslist hoe ze eruitziet."
 tags: ["ai-adoptie", "productiviteit"]
 image: "/media/blog/ai-websites-lijken-op-elkaar.svg"
 imageAlt: "Vijf identieke websitesjablonen naast elkaar, waarvan er één uit het raster stapt"

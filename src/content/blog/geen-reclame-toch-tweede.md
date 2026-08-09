@@ -1,7 +1,7 @@
 ---
 title: "Hoe hebben jullie ons eigenlijk gevonden?"
 date: 2026-08-07
-description: "Wij maken geen reclame. Toch stonden we tweede in een lijstje van vijf, opgesteld door iets waar we geen enkele afspraak mee hebben. Over het kanaal dat je niet ziet omdat je er zelf niets in doet."
+description: "Wij maken geen reclame. Toch stonden we tweede in een lijstje van vijf, opgesteld door iets waar we geen afspraak mee hebben. Over het kanaal dat je niet ziet."
 tags: ["ai-adoptie", "chatgpt"]
 image: "/media/blog/geen-reclame-toch-tweede.svg"
 imageAlt: "Een lijstje van vijf met de tweede regel opgelicht, en een lege grafiek ernaast"
