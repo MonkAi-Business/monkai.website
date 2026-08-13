@@ -5,7 +5,7 @@ description: "Twee gesprekken die over iets anders gingen, kantelden allebei naa
 tags: ["ai-adoptie", "productiviteit"]
 image: "/media/blog/fractie-van-je-abonnement.svg"
 imageAlt: "Een gedeeld scherm met een rapport, waaruit kringen uitwaaieren naar drie figuurtjes die één voor één oplichten"
-draft: true
+draft: false
 ---
 
 Vorige week zat ik in een online call om [PinPoint Inspections](https://pinpointinspections.eu) voor te stellen, de inspectiesoftware die ik mee heb opgericht. We lieten niet alleen zien hoe je inspecteert, maar ook wat er daarna met die data gebeurt. We koppelden ChatGPT en Claude aan de inspectiegegevens en bouwden ter plekke een rapport en een dashboard die er vijf minuten eerder nog niet waren.
