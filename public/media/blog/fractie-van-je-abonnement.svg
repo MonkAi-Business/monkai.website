@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Een gedeeld scherm met een rapport, waaruit kringen uitwaaieren naar drie figuurtjes die een voor een oplichten">
+  <rect width="1200" height="800" fill="#F4F2EC"/>
+
+  <!-- gedeeld scherm -->
+  <rect x="130" y="250" width="440" height="320" rx="10" fill="#FBFAF6" stroke="#D9DACE" stroke-width="3"/>
+  <line x1="130" y1="300" x2="570" y2="300" stroke="#D9DACE" stroke-width="3"/>
+  <circle cx="156" cy="275" r="7" fill="#D9DACE"/>
+  <circle cx="180" cy="275" r="7" fill="#D9DACE"/>
+  <circle cx="204" cy="275" r="7" fill="#D9DACE"/>
+
+  <!-- rapport op het scherm -->
+  <rect x="172" y="330" width="196" height="14" rx="7" fill="#656A5C"/>
+  <rect x="172" y="358" width="118" height="12" rx="6" fill="#D9DACE"/>
+  <rect x="172" y="466" width="40" height="60" rx="4" fill="#8FA478"/>
+  <rect x="228" y="432" width="40" height="94" rx="4" fill="#8FA478"/>
+  <rect x="284" y="404" width="40" height="122" rx="4" fill="#4C5F3B"/>
+  <rect x="340" y="446" width="40" height="80" rx="4" fill="#8FA478"/>
+  <rect x="396" y="386" width="40" height="140" rx="4" fill="#4C5F3B"/>
+  <line x1="172" y1="526" x2="452" y2="526" stroke="#D9DACE" stroke-width="3"/>
+  <!-- voetstuk -->
+  <rect x="300" y="570" width="100" height="14" rx="6" fill="#D9DACE"/>
+  <rect x="248" y="584" width="204" height="12" rx="6" fill="#D9DACE"/>
+
+  <!-- de olievlek: kringen die uitwaaieren -->
+  <g fill="none" stroke="#4C5F3B" stroke-linecap="round" stroke-width="6">
+    <path d="M 616 330 A 100 100 0 0 1 616 490" opacity="0.85"/>
+    <path d="M 660 296 A 160 160 0 0 1 660 524" opacity="0.55"/>
+    <path d="M 704 262 A 220 220 0 0 1 704 558" opacity="0.3"/>
+  </g>
+
+  <!-- drie mensen, een voor een mee -->
+  <g fill="#4C5F3B">
+    <circle cx="812" cy="382" r="27"/>
+    <path d="M 772 462 a 40 40 0 0 1 80 0 Z"/>
+  </g>
+  <g fill="#8FA478">
+    <circle cx="952" cy="382" r="27"/>
+    <path d="M 912 462 a 40 40 0 0 1 80 0 Z"/>
+  </g>
+  <g fill="none" stroke="#656A5C" stroke-width="5">
+    <circle cx="1092" cy="382" r="24.5"/>
+    <path d="M 1054 462 a 38 38 0 0 1 76 0 Z"/>
+  </g>
+</svg>
