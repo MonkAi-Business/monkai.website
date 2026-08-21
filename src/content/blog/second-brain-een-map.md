@@ -10,9 +10,11 @@ draft: true
 
 "Second brain" klinkt als een groot project: een systeem met tientallen categorieën, kleurcodes en een app die je eerst een weekend moet leren gebruiken. Geen wonder dat de meeste KMO's er nooit aan beginnen. Nochtans is het idee erachter simpel, en de eerste stap kleiner dan je denkt. Je hebt geen systeem nodig. Je hebt één map nodig.
 
-## Waarom kennis wegsijpelt
+## Waarom je dit eerst voor jezelf doet
 
-In veel bedrijven zit de kennis in hoofden, niet op papier. De verkoper die weet welke klant welke voorkeur heeft. De zaakvoerder die uit ervaring aanvoelt welke offerte werkt. De medewerker die na drie jaar exact weet waarom een bepaald proces zo werkt als het werkt. Zolang die mensen er zijn, draait alles. Zodra iemand vertrekt - met vakantie, met pensioen, of gewoon naar een andere job - verdwijnt die kennis mee. Dat is geen kwestie van slechte wil, het is een gebrek aan structuur om kennis vast te leggen op het moment dat ze ontstaat.
+Begin bij jezelf, niet bij het bedrijf. Je hoofd is een slechte archiefkast. Wat een klant je maandag vertelde, weet je donderdag nog half, en drie weken later weet je alleen nog dát er iets belangrijks gezegd is. Een second brain is in de eerste plaats een geheugensteun voor jezelf: het staat er zodat jij het niet hoeft te onthouden.
+
+Zet er ook je meeting notes in. Geen nette notulen, gewoon wat er gezegd is en wat jij moet doen. Voor je aan het volgende gesprek met die klant begint, lees je die twee minuten door en je bent weer helemaal mee. Dat betaalt zichzelf al terug voor iemand anders je notities ooit gezien heeft. En wat je voor jezelf bijhoudt, is precies het materiaal dat je later kan delen.
 
 ## Eén map, geen systeem
 
@@ -22,12 +24,12 @@ Geen structuur, geen categorieën, geen perfectionisme. Alleen het vastleggen ze
 
 ## Waar AI hier bij helpt
 
-Dit is ook precies waar AI een KMO vooruit kan helpen zonder dat het ingewikkeld wordt. Een tool als Claude kan die losse notities voor je doorzoeken, samenvatten of structureren zodra de map wat gevuld is - zonder dat jij zelf een systeem hoeft te bedenken. Je stelt gewoon een vraag als "wat weten we over klant X" en krijgt een antwoord gebaseerd op wat er in de map staat. De discipline zit in het optekenen; de structuur mag je aan AI overlaten.
+Een tool als Claude kan die losse notities voor je doorzoeken, samenvatten of structureren zodra de map wat gevuld is, zonder dat jij zelf een systeem hoeft te bedenken. Je stelt gewoon een vraag als "wat weet ik over klant X" en krijgt een antwoord gebaseerd op wat er in de map staat. De discipline zit in het optekenen; de structuur mag je aan AI overlaten.
 
 ## Van second brain naar collective brain
 
-Een second brain is van jou alleen. Dat is prima om te beginnen, maar de kennis zit dan nog altijd bij één persoon; ze staat alleen op schijf in plaats van in een hoofd. De volgende stap is die map delen. Zodra je collega's erin kunnen lezen én er zelf hun eigen notities in kwijt kunnen, spreek je van een collective brain: het geheugen van het bedrijf in plaats van dat van één medewerker.
+Een second brain is van jou alleen. De volgende stap is die map delen. Zodra je collega's erin kunnen lezen én er zelf hun notities in kwijt kunnen, spreek je van een collective brain: het geheugen van het bedrijf in plaats van dat van één medewerker. Alle data en alle kennis op één plek, waar iedereen op werkt en waar AI overheen kan lezen. Vertrekt er iemand, dan vertrekt zijn werk niet mee.
 
-Dat is wat je moet nastreven. Alle data en alle kennis van het bedrijf op één plek, waar iedereen op werkt en waar AI overheen kan lezen. De verkoper die iets leert over een klant, de technieker die een terugkerend probleem oplost, jij die uitschrijft waarom een bepaalde offerte wél werkte: het komt in dezelfde bron terecht. Vertrekt er iemand, dan vertrekt zijn werk niet mee.
+Dat is wat je moet nastreven, en daar kom ik in een volgend stuk uitgebreid op terug: hoe je kennis deelt zonder dat het een dumpplaats wordt.
 
 Begin niet met het systeem. Begin met de map, en met de eerste drie zinnen. De rest volgt vanzelf.
