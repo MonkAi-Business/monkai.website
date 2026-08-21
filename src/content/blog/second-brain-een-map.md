@@ -24,4 +24,10 @@ Geen structuur, geen categorieën, geen perfectionisme. Alleen het vastleggen ze
 
 Dit is ook precies waar AI een KMO vooruit kan helpen zonder dat het ingewikkeld wordt. Een tool als Claude kan die losse notities voor je doorzoeken, samenvatten of structureren zodra de map wat gevuld is - zonder dat jij zelf een systeem hoeft te bedenken. Je stelt gewoon een vraag als "wat weten we over klant X" en krijgt een antwoord gebaseerd op wat er in de map staat. De discipline zit in het optekenen; de structuur mag je aan AI overlaten.
 
+## Van second brain naar collective brain
+
+Een second brain is van jou alleen. Dat is prima om te beginnen, maar de kennis zit dan nog altijd bij één persoon; ze staat alleen op schijf in plaats van in een hoofd. De volgende stap is die map delen. Zodra je collega's erin kunnen lezen én er zelf hun eigen notities in kwijt kunnen, spreek je van een collective brain: het geheugen van het bedrijf in plaats van dat van één medewerker.
+
+Dat is wat je moet nastreven. Alle data en alle kennis van het bedrijf op één plek, waar iedereen op werkt en waar AI overheen kan lezen. De verkoper die iets leert over een klant, de technieker die een terugkerend probleem oplost, jij die uitschrijft waarom een bepaalde offerte wél werkte: het komt in dezelfde bron terecht. Vertrekt er iemand, dan vertrekt zijn werk niet mee.
+
 Begin niet met het systeem. Begin met de map, en met de eerste drie zinnen. De rest volgt vanzelf.
