@@ -16,7 +16,7 @@ In veel bedrijven zit de kennis in hoofden, niet op papier. De verkoper die weet
 
 ## Eén map, geen systeem
 
-Het second brain-idee, populair gemaakt door schrijvers als Tiago Forte, draait om één principe: leg kennis vast op het moment dat je ze tegenkomt, in plaats van erop te vertrouwen dat je ze je later nog herinnert. Maar je hoeft niet meteen een volledig systeem met categorieën en tags te bouwen. Begin met één map - digitaal, in een tool die je toch al gebruikt - en noem hem gewoon "Notities". Elke keer dat je iets leert wat de moeite waard is om te onthouden - een klantvraag die vaker terugkomt, een oplossing voor een terugkerend probleem, een inzicht uit een gesprek - schrijf je er drie zinnen over in een nieuw document in die map.
+Het second brain-idee draait om één principe: leg kennis vast op het moment dat je ze tegenkomt, in plaats van erop te vertrouwen dat je ze je later nog herinnert. Maar je hoeft niet meteen een volledig systeem met categorieën en tags te bouwen. Begin met één map - digitaal, in een tool die je toch al gebruikt - en noem hem gewoon "Notities". Elke keer dat je iets leert wat de moeite waard is om te onthouden - een klantvraag die vaker terugkomt, een oplossing voor een terugkerend probleem, een inzicht uit een gesprek - schrijf je er drie zinnen over in een nieuw document in die map.
 
 Geen structuur, geen categorieën, geen perfectionisme. Alleen het vastleggen zelf is de oefening. Na een paar weken zul je merken dat er vanzelf patronen ontstaan, en dan pas is het tijd om na te denken over submappen of tags - niet ervoor.
 
