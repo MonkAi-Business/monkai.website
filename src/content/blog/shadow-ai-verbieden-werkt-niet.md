@@ -5,7 +5,7 @@ description: "Je medewerkers gebruiken al AI. Geef het kattenkwaad een speelplaa
 tags: ["governance", "ai-adoptie"]
 image: "/media/blog/shadow-ai-verbieden-werkt-niet.svg"
 imageAlt: "Een bol half in licht, half in schaduw, binnen een begrensde speelplaats"
-draft: true
+draft: false
 ---
 
 Vorige maand vroeg een klant me om een lijstje op te stellen van AI-tools die verboden moesten worden. Begrijpelijk: er waren verhalen opgedoken over medewerkers die klantengegevens in ChatGPT plakten, en de zaakvoerder wilde dat stoppen. Mijn antwoord verraste hem. Een verbod gaat het probleem niet oplossen. Het gaat het alleen onzichtbaar maken.
