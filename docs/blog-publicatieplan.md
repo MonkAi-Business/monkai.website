@@ -80,7 +80,7 @@ agents en skills, en tot slot governance, wetgeving en kosten.
 | 3 | 14 aug 2026 | `fractie-van-je-abonnement` | **Goedgekeurd, `draft: false`.** Titel: "Ik gebruik maar een fractie van mijn abonnement". Nieuw geschreven, uitgewerkt uit Stijns LinkedIn-post "De onzichtbare AI-olievlek" van dezelfde week. Overal waar hij voor iets anders binnenkomt kantelt het gesprek naar AI, en dat gebeurt telkens op het moment dat mensen het zien draaien op hun eigen data. Stond eerder in dit plan als `en-dan-gaat-het-over-ai`. Geen interne links, dus veilig vooraan te zetten. De rest van de reeks schoof daardoor opnieuw een week op. |
 | 4 | 21 aug 2026 | `second-brain-een-map` | **Live sinds 21 augustus 2026.** Laagste drempel: begin met één map. Goede eerste stap voor wie nog niets doet. |
 | 5 | 28 aug 2026 | `shadow-ai-verbieden-werkt-niet` | Herkenbaar probleem bij elke zaakvoerder, en het zet meteen de toon: meedoen in plaats van verbieden. |
-| 6 | 4 sep 2026 | `copilot-data-die-je-al-hebt` | Je zit al op bruikbare data. Geen investering nodig om te starten. |
+| 6 | 4 sep 2026 | `copilot-data-die-je-al-hebt` | **Live sinds 11 september 2026, met `date` op 4 september (Stijns keuze, zodat de reeks op volgorde blijft).** Je zit al op bruikbare data. Geen investering nodig om te starten. |
 | 7 | 11 sep 2026 | `plan-mode-eerst-denken-dan-doen` | Eerste echte werkgewoonte: eerst een plan, dan uitvoeren. |
 | 8 | 18 sep 2026 | `expert-collega-je-eigen-ai-agent` | Van losse vragen naar een AI die je één keer inwerkt. |
 | 9 | 25 sep 2026 | `collective-brain-bedrijfsgeheugen` | Tilt het second brain van week 3 naar bedrijfsniveau. |
