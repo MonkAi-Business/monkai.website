@@ -8,7 +8,7 @@ imageAlt: "Een ijsberg met een kleine top boven water en een veel grotere massa 
 draft: true
 ---
 
-Bij een klant vroeg de zaakvoerder me laatst hoe hij "een AI-dataset moest beginnen opbouwen". Hij dacht dat hij van nul begon. Maar zijn bedrijf draaide al jaren op Microsoft 365: duizenden mails, honderden Teams-vergaderingen, een SharePoint vol offertes, verslagen en procedures. Hij zat op een berg bruikbare kennis en zag alleen de top. Dat is het patroon dat ik bij de meeste KMO's zie.
+Vaak komen we bij een klant binnen en vraagt de zaakvoerder ons hoe ze met AI kunnen beginnen werken en hoe ze de "AI-dataset" moeten beginnen opbouwen. Hij denkt dat hij van nul begint. Maar zijn bedrijf draaide al jaren op Microsoft 365: duizenden mails, honderden Teams-vergaderingen, een SharePoint vol offertes, verslagen en procedures. Hij zat op een berg bruikbare kennis en zag alleen de top. Dat is het patroon dat ik bij de meeste KMO's zie.
 
 ## Je zit al op de data
 
@@ -24,12 +24,18 @@ Elk van die acties bespaart een paar minuten. Dat lijkt weinig, tot je het verme
 
 ## Copilot is niet meer de Copilot van vorig jaar
 
-Wie Copilot een jaar geleden probeerde en teleurgesteld was, mag opnieuw kijken. Onder de motorkap is er veel veranderd. Copilot draait vandaag standaard op de nieuwste GPT-modellen van OpenAI - dezelfde familie die ook ChatGPT aandrijft. Microsoft kiest daarbij per taak welk model het best past in plaats van overal hetzelfde te gebruiken. Sinds eind 2025 kunnen daar ook de Claude-modellen van Anthropic bij, in bepaalde onderdelen zoals de Researcher-agent.
+Wie Copilot een jaar geleden probeerde en teleurgesteld was, mag opnieuw kijken. Onder de motorkap is er veel veranderd. Copilot draait vandaag standaard op de nieuwste GPT-modellen van OpenAI. Microsoft kiest daarbij per taak welk model het best past in plaats van overal hetzelfde te gebruiken. Sinds eind 2025 kunnen daar ook de Claude-modellen van Anthropic bij, in bepaalde onderdelen zoals de Researcher-agent.
 
 Het verschil met de gratis chatbots zit in de afspraken eromheen. Je prompts, de antwoorden en de bedrijfsdata die Copilot raadpleegt worden niet gebruikt om die modellen te trainen. Copilot respecteert bovendien de rechten die je al hebt ingesteld: iemand ziet via Copilot niets waar hij zonder Copilot ook niet bij kon. Dezelfde gevoeligheidslabels en bewaarregels blijven gelden. Het zijn dezelfde sterke modellen, maar met hekken die op een bedrijfsomgeving passen.
 
-## Één nuance voor Belgische bedrijven
+## Één nuance voor Belgische bedrijven (EU AI Act)
 
 De Claude-modellen draaien buiten de EU Data Boundary: schakel je ze in, dan verlaat je data de Europese omgeving. Daarom staan ze voor Belgische en Europese tenants standaard uit. Dat is geen detail om te negeren. Wie ermee aan de slag wil, laat een beheerder die knop bewust omzetten en weegt eerst af of het bij de eigen data-afspraken past. De GPT-modellen blijven wel binnen de gewone Microsoft-omgeving.
 
-Je hoeft dus niet te wachten tot je "genoeg data" hebt of tot alles perfect gestructureerd staat. Je zit er al op. De vraag is niet of je genoeg hebt. De vraag is of je het laat liggen.
+## Hybride
+
+Copilot is zeker niet de heilige graal, maar wel een ideaal startpunt. Je medewerkers worden vertrouwd met AI in hun dagelijkse processen en zullen snel met nieuwe ideeën komen, waar andere modellen mogelijks beter zijn. Zorg dat je architectuur daar klaar voor staat door LLM, data, tools en skills duidelijk te scheiden.
+
+## Conclusie
+
+Je hoeft dus niet te wachten tot je "genoeg data" hebt of tot alles perfect gestructureerd staat. Je zit er al op. De vraag is niet of je genoeg data hebt, de vraag is of je het niet laat liggen.
