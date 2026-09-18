@@ -5,7 +5,7 @@ description: "Een custom agent is een AI die je maar één keer inwerkt. Daarna 
 tags: ["agents", "claude", "chatgpt", "gemini", "copilot"]
 image: "/media/blog/expert-collega-je-eigen-ai-agent.svg"
 imageAlt: "Een figuur met een kaartje met instructies, naast de logo's van vier AI-tools"
-draft: true
+draft: false
 ---
 
 Wie vaak met een AI werkt, kent de sleur: elke keer opnieuw uitleggen wie je bent, in welke toon je schrijft, wat belangrijk is en wat je zeker niet wil. Je typt het gesprek na gesprek opnieuw, of je vergeet het en krijgt iets terug dat je toch weer moet bijsturen. Een goede stagiair leg je het één keer uit. Daarna weet hij hoe het hoort en doet hij het zelf. Dat is precies wat een custom agent is: een collega die je één keer inwerkt.
@@ -45,14 +45,14 @@ Vanaf dan plak je gewoon een tekst en krijg je meteen bruikbaar advies, elke kee
 Het mooie is: je hebt hier geen extra software voor nodig. Elke grote AI-tool heeft deze functie, alleen onder een eigen naam.
 
 - **Claude** noemt het **Projects**. Je maakt een project, geeft het instructies en zet er je vaste documenten in. Alles wat je in dat project doet, volgt die lijn.
-- **ChatGPT** noemt het **Custom GPTs**. Je bouwt er een via een gesprek: je beschrijft wat hij moet doen en ChatGPT stelt de instructies mee op.
+- **ChatGPT** noemt het **Custom GPTs**\*. Je bouwt er een via een gesprek: je beschrijft wat hij moet doen en ChatGPT stelt de instructies mee op.
 - **Gemini** noemt het **Gems**. Je klikt op "Nieuwe Gem", geeft een naam en instructies, en hij staat klaar. Gems zitten gratis in elk Gemini-plan.
 - **Copilot** noemt het **declaratieve agents**, die je bouwt via de Agent Builder in Microsoft 365 Copilot. Handig als je collega ook je bedrijfsdata in SharePoint of Teams mag gebruiken.
 
 Zelfde idee, andere knop. Wie de ene tool onder de knie heeft, vindt de rest meteen terug.
 
+\* Bij ChatGPT verhuist die knop net deze maand. OpenAI faseert Custom GPTs uit: met een persoonlijk account (Free, Go, Plus of Pro) maak je er sinds september 2026 geen nieuwe meer, en in bedrijfsomgevingen stopt dat volgens de planning op 25 september. Wat al bestaat blijft nog even werken; voor bedrijfsomgevingen staat het einde gepland op 11 december 2026. De opvolger heet plugins: je vaste instructies worden daarin een skill, samen met de apps waar hij bij mag. Het idee blijft hetzelfde.
+
 ## Begin klein
 
 Je hoeft niet meteen tien collega's te maken. Kies één taak die je elke week doet en waar je telkens hetzelfde zit uit te leggen. Zet die uitleg één keer goed op papier, giet ze in een agent, en gebruik hem een week. Werkt iets niet zoals je wil, dan pas je de instructies aan, net zoals je een echte collega bijstuurt. Na een paar keer heb je een expert-collega die je werk kent. En die je maar één keer hoefde in te werken.
-
-Zo'n collega denkt en schrijft mee, maar doet voorlopig niets buiten het gesprek. De volgende stap is hem laten aansluiten op de processen die bij jou al draaien, zodat hij een bestelling echt kan klaarzetten in plaats van ze te beschrijven. Hoe dat werkt, staat in [n8n: laat je automatisatie en je AI met elkaar praten](/blog/n8n-automatisatie-en-ai).
