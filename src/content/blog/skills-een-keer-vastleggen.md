@@ -30,7 +30,7 @@ Het kan zelfs zonder tikwerk. Bij Claude kan je een skill opnemen in [Cowork](/b
 
 ## Niet één tool: skills worden een standaard
 
-Skills zijn geen Claude-truc. In 2026 hebben de drie grote AI-assistenten er allemaal een versie van. Anthropic bracht Skills uit voor Claude. OpenAI lanceerde Skills in ChatGPT, uitdrukkelijk als opvolger van de custom GPT's. En Microsoft bouwde ze in Copilot Cowork, met net hetzelfde mapformaat als Claude - een mapje dat je in OneDrive zet en dat je AI voortaan kent.
+Skills zijn geen Claude-truc. In 2026 hebben de drie grote AI-assistenten er allemaal een versie van. Anthropic bracht Skills uit voor Claude. OpenAI lanceerde Skills in ChatGPT als opvolger van de custom GPT's, die het sinds september 2026 uitfaseert: een skill zit daar in een plugin, samen met de apps waar hij bij mag. En Microsoft bouwde ze in Copilot Cowork, met net hetzelfde mapformaat als Claude - een mapje dat je in OneDrive zet en dat je AI voortaan kent.
 
 Dat maakt dit meer dan een functie van één product. De manier waarop je een terugkerende taak vastlegt, begint op elkaar te lijken over de tools heen. Wat je bij de ene leert, neem je mee naar de andere. De precieze beschikbaarheid verschilt wel per tool en per abonnement, dus kijk even na wat jouw versie ondersteunt. Voor een Belgisch bedrijf zit er bij Copilot nog een addertje onder het gras: Copilot Cowork draait op Claude-modellen buiten de EU Data Boundary en staat voor Europese tenants standaard uit, dus daar komt het er niet vanzelf bij. Over dat prijs- en beschikbaarheidsverhaal schreef ik apart, in [Copilot Cowork: handig, maar geen fan van pay-as-you-go](/blog/copilot-cowork-pay-as-you-go).
 

@@ -26,9 +26,9 @@ Daar zitten vier afspraken in: welke bron telt, wat er niet in mag, wat er gebeu
 
 ## Van losse prompt naar gedeelde bibliotheek
 
-Zo'n prompt op de laptop van één iemand is nog niets waard. Hij begint pas te tellen wanneer je hem deelt. Een Claude-project, een custom GPT, een Gem of een Copilot-agent maak je in de eerste plaats voor jezelf, maar in de zakelijke abonnementen zit er een deellaag omheen die vaak over het hoofd wordt gezien. En net daar zit de governance.
+Zo'n prompt op de laptop van één iemand is nog niets waard. Hij begint pas te tellen wanneer je hem deelt. Een Claude-project, een ChatGPT-plugin, een Gem of een Copilot-agent maak je in de eerste plaats voor jezelf, maar in de zakelijke abonnementen zit er een deellaag omheen die vaak over het hoofd wordt gezien. En net daar zit de governance.
 
-Gedeelde Projects in Claude bestaan op de Team- en Enterprise-abonnementen, met per persoon het onderscheid tussen het project mogen gebruiken en de instructies ook mogen aanpassen. Beheerders kunnen daarbovenop richtlijnen zetten die over de hele organisatie gelden. In ChatGPT bepaalt de beheerder hoe breed een custom GPT gedeeld mag worden: enkel binnen de werkruimte, of ook daarbuiten. En het delen van Gems staat of valt met één schakelaar in de Google Admin console.
+Gedeelde Projects in Claude bestaan op de Team- en Enterprise-abonnementen, met per persoon het onderscheid tussen het project mogen gebruiken en de instructies ook mogen aanpassen. Beheerders kunnen daarbovenop richtlijnen zetten die over de hele organisatie gelden. In ChatGPT zitten je vaste instructies sinds het uitfaseren van de custom GPT's in een plugin, en daar bepaalt de beheerder per rol wie plugins mag delen en wie ze in de gids van de werkruimte mag zetten. En het delen van Gems staat of valt met één schakelaar in de Google Admin console.
 
 De techniek is dus het probleem niet. Het onderhoud wel: een bibliotheek waar iedereen in dumpt en niemand eigenaar van is, wordt binnen het jaar een rommelbak. Kies een handvol prompts die er echt toe doen, zet er een naam bij van wie ze bijhoudt, en gooi de rest weg.
 
