@@ -12,16 +12,25 @@ Een collective brain is het gedeelde geheugen van een bedrijf: een plek waar ken
 
 ## Waarom een second brain alleen niet volstaat
 
-Steeds meer mensen leggen hun eigen kennis vast in notities, mappen of een tool naar keuze. Dat is winst, maar het lost het grootste risico van een KMO niet op: kennis die in silo's blijft steken. De verkoper weet dingen die de boekhouding niet weet. De zaakvoerder heeft context die nergens staat opgeschreven. Zolang die kennis privé blijft, is elke medewerker een single point of failure. Een collective brain haalt die kennis uit de individuele hoofden en zet ze op één gedeelde plek.
+Steeds meer mensen leggen hun eigen kennis vast in notities, mappen of een tool naar keuze. Dat is winst, maar het lost het grootste risico van een KMO niet op: kennis die in silo's blijft steken. De verkoper weet dingen die de boekhouding niet weet. De zaakvoerder heeft context die nergens staat opgeschreven. Zolang die kennis privé blijft, is elke medewerker een single point of failure.
 
-## Wat een collective brain concreet is
+## Zo zet je het op, bijvoorbeeld in Notion
 
-Het is geen dure software en geen jarenlang project. In de kern is het drie dingen: één plek waar bedrijfskennis samenkomt, duidelijke afspraken over wie wat mag zien en aanvullen, en de gewoonte om kennis vast te leggen op het moment dat ze ontstaat. De vorm mag simpel zijn - een gedeelde mappenstructuur of een wiki volstaat om te beginnen. Wat telt is dat de kennis vindbaar is voor wie ze nodig heeft, en niet begraven in iemands mailbox.
+Het is geen dure software en geen jarenlang project. Notion is een goede plek om te beginnen, omdat pagina's, databases en rechten er in één tool zitten. Een opzet die werkt:
+
+- **Eén teamspace per domein, niet per persoon.** Klanten, Processen, Afspraken. Elke teamspace heeft eigen leden en rechten, dus niet iedereen ziet alles.
+- **Een database in plaats van losse pagina's.** Eén rij per klant, procedure of beslissing, met een paar vaste velden: eigenaar, laatst nagekeken, status. Zo zie je meteen wat verouderd is.
+- **Een sjabloon per soort pagina.** Een klantfiche heeft altijd dezelfde koppen. Dat maakt vastleggen sneller, en AI leest het makkelijker.
+- **Eén eigenaar per teamspace**, die elk kwartaal opruimt. Zonder eigenaar wordt het precies de dumpplaats waar ik in het [stuk over het second brain](/blog/second-brain-een-map) voor waarschuwde.
+
+Eén ding om te weten: Notion bewaart je data standaard in de Verenigde Staten. Opslag in Frankfurt kan, maar enkel op het Enterprise-plan. Voor klantdossiers weeg je dat af. Werk je al volledig in Microsoft 365, dan ligt SharePoint meer voor de hand. Het principe blijft hetzelfde: domeinen, vaste structuur, een eigenaar.
 
 ## Waar AI het verschil maakt
 
-Een gedeelde kennisbasis wordt pas echt krachtig zodra je hem kan bevragen in gewone taal. Een AI zoals Claude kan door je verzamelde kennis zoeken en een onderbouwd antwoord geven op een vraag als "wat spraken we vorig jaar af met deze leverancier" of "hoe pakten we dit type project eerder aan". De medewerker hoeft niet te weten in welke map het staat; hij stelt gewoon de vraag. Zo wordt jarenlange bedrijfservaring iets wat je op elk moment kan raadplegen, in plaats van iets wat verdwijnt zodra de juiste persoon niet bereikbaar is.
+Een gedeelde kennisbasis wordt pas echt krachtig zodra je hem in gewone taal kan bevragen. In Notion kan dat op twee manieren. Op het Business-plan zit Notion AI inbegrepen: je stelt een vraag en het antwoord verwijst naar de pagina's waar het vandaan komt. Of je koppelt Notion aan Claude via de Notion-connector, en dan kan Claude er ook in schrijven, bijvoorbeeld een verslag na een klantgesprek meteen op de juiste klantfiche zetten.
 
-## Begin klein, net als bij een second brain
+In beide gevallen ziet de AI niet meer dan de persoon die de vraag stelt. De rechten die je per teamspace instelt, gelden dus ook voor de AI. De medewerker hoeft niet te weten in welke map iets staat. Hij vraagt "wat spraken we vorig jaar af met deze leverancier" en krijgt een antwoord met de bron erbij.
 
-Je bouwt geen collective brain in één keer. Begin met één team of één domein - bijvoorbeeld alles rond klanten, of alles rond een terugkerend proces. Spreek af wat erin komt en wie het bijhoudt. Laat het een paar weken groeien voor je nadenkt over structuur, precies zoals bij een persoonlijk second brain. De discipline zit in het vastleggen; de rest volgt vanzelf. Het doel is niet perfectie, maar een bedrijf dat onthoudt.
+## Begin klein
+
+Maak maandag één teamspace aan voor één domein, bijvoorbeeld alles rond klanten, met één database en één sjabloon. Spreek af wie hem bijhoudt. Laat het een paar weken groeien voor je een tweede domein toevoegt. De discipline zit in het vastleggen; de rest volgt vanzelf. Het doel is niet perfectie, maar een bedrijf dat onthoudt.
