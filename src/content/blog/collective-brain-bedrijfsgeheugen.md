@@ -23,7 +23,7 @@ Het is geen dure software en geen jarenlang project. Notion is een goede plek om
 - **Een sjabloon per soort pagina.** Een klantfiche heeft altijd dezelfde koppen. Dat maakt vastleggen sneller, en AI leest het makkelijker.
 - **Eén eigenaar per teamspace**, die elk kwartaal opruimt. Zonder eigenaar wordt het precies de dumpplaats waar ik in het [stuk over het second brain](/blog/second-brain-een-map) voor waarschuwde.
 
-Eén ding om te weten: Notion bewaart je data standaard in de Verenigde Staten. Opslag in Frankfurt kan, maar enkel op het Enterprise-plan. Voor klantdossiers weeg je dat af. Werk je al volledig in Microsoft 365, dan ligt SharePoint meer voor de hand. Het principe blijft hetzelfde: domeinen, vaste structuur, een eigenaar.
+Eén ding om te weten: Notion bewaart je data standaard in de Verenigde Staten. Opslag in Frankfurt kan, maar enkel op het Enterprise-plan. Voor klantdossiers weeg je dat af.
 
 ## Waar AI het verschil maakt
 
