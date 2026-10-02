@@ -84,7 +84,7 @@ agents en skills, en tot slot governance, wetgeving en kosten.
 | 7 | 11 sep 2026 | `plan-mode-eerst-denken-dan-doen` | **Live sinds 11 september 2026.** Eerste echte werkgewoonte: eerst een plan, dan uitvoeren. Door Stijn goedgekeurd in de bestaande vorm, zonder herschrijf naar de anekdote-opening. |
 | 8 | 18 sep 2026 | `expert-collega-je-eigen-ai-agent` | **Live sinds 18 september 2026.** Van losse vragen naar een AI die je één keer inwerkt. Door Stijn goedgekeurd in de bestaande vorm. De slotalinea met de link naar n8n is op zijn vraag geschrapt, en er staat een voetnoot bij over het uitfaseren van Custom GPTs. |
 | 9 | 25 sep 2026 | `collective-brain-bedrijfsgeheugen` | **Live sinds 25 september 2026.** Kreeg op vraag van Stijn een sectie over de opzet in Notion (teamspaces, database, sjabloon, eigenaar) en de EU-opslagnuance. Goedgekeurd zonder anekdote-opening. Tilt het second brain van week 3 naar bedrijfsniveau. |
-| 10 | 2 okt 2026 | `copilot-cowork-pay-as-you-go` | Introduceert Cowork en meteen de prijsvraag die eraan hangt. |
+| 10 | 2 okt 2026 | `copilot-prijs-op-voorhand` | Titel: "Copilot wordt elke maand beter. Wat het kost, weet je pas achteraf." Vervangt `copilot-cowork-pay-as-you-go`, op 2 oktober 2026 op vraag van Stijn geschrapt. Gaat over de nieuwe Copilot van 25 september (Home, Code, Autopilot, de naamswijziging) en over het verbruiksmodel achter Cowork, Code en Autopilot. Introduceert Cowork voor week 11. |
 | 11 | 9 okt 2026 | `chat-cowork-code-welke-claude-wanneer` | Overzicht van de werkvormen, nu de lezer Cowork kent. |
 | 12 | 16 okt 2026 | `skills-een-keer-vastleggen` | Bindt agents, werkvormen en herhaalwerk samen. Kan pas als die stukken online staan. |
 | 13 | 23 okt 2026 | `prompt-engineering-2026-uitkomst` | "De trucs zijn ingehaald" landt beter zodra plan mode, agents en skills bekend zijn. |
@@ -114,8 +114,8 @@ grep -o '(/blog/[a-z0-9-]*)' src/content/blog/*.md
 De afhankelijkheden vandaag:
 
 - `collective-brain-bedrijfsgeheugen` → `second-brain-een-map`
-- `chat-cowork-code-welke-claude-wanneer` → `copilot-cowork-pay-as-you-go`
-- `skills-een-keer-vastleggen` → `second-brain-een-map`, `collective-brain-bedrijfsgeheugen`, `expert-collega-je-eigen-ai-agent`, `plan-mode-eerst-denken-dan-doen`, `copilot-cowork-pay-as-you-go`, `chat-cowork-code-welke-claude-wanneer`, `n8n-automatisatie-en-ai`
+- `chat-cowork-code-welke-claude-wanneer` → `copilot-prijs-op-voorhand`
+- `skills-een-keer-vastleggen` → `second-brain-een-map`, `collective-brain-bedrijfsgeheugen`, `expert-collega-je-eigen-ai-agent`, `plan-mode-eerst-denken-dan-doen`, `copilot-prijs-op-voorhand`, `chat-cowork-code-welke-claude-wanneer`, `n8n-automatisatie-en-ai`
 - `prompt-engineering-2026-uitkomst` → `expert-collega-je-eigen-ai-agent`, `plan-mode-eerst-denken-dan-doen`, `skills-een-keer-vastleggen`
 - `accelerated-coding-geen-vibe-coding` → `plan-mode-eerst-denken-dan-doen`, `skills-een-keer-vastleggen`
 - `n8n-automatisatie-en-ai` → `skills-een-keer-vastleggen`, `ai-tokens-niet-eeuwig-gesponsord`, `governance-zit-in-je-prompts`
