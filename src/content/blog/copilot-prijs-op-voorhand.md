@@ -5,7 +5,7 @@ description: "Op weg naar een klant werd mijn YouTube overspoeld met filmpjes ov
 tags: ["copilot", "ai-adoptie"]
 image: "/media/blog/copilot-prijs-op-voorhand.svg"
 imageAlt: "Oplopende verbruiksbalken die door een gestreept budgetplafond breken, boven een vaste sokkel"
-draft: true
+draft: false
 ---
 
 Deze week zat ik op de trein naar een klant die met Copilot werkt. Ik scrolde nog wat door YouTube om de rit te vullen, en het algoritme had zijn keuze al gemaakt: filmpje na filmpje over "Copilot Wave 4". Nieuwe startpagina, Word en Excel binnen Copilot, apps bouwen in gewone taal, een agent die doorwerkt terwijl jij weg bent.
