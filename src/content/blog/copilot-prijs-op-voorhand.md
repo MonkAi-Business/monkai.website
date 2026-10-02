@@ -14,8 +14,6 @@ Dat zegt iets: Copilot wordt meer en meer omarmd.
 
 ## Wat er echt nieuw is
 
-"Wave 4" is trouwens de naam die YouTube eraan geeft. Microsoft spreekt op 25 september gewoon van "de nieuwe Copilot". Werk je in Microsoft 365, dan verandert er een en ander.
-
 Eerst: er is nog maar één Copilot. Microsoft 365 Copilot heet nu Microsoft Copilot, en Chat en Cowork zitten samen op één startpagina, Home. Wat een paar maanden geleden een aparte functie was, schuift zo het hoofdproduct in. Word-, Excel- en PowerPoint-bestanden maak je er nu ook rechtstreeks in.
 
 Daarnaast komen er twee nieuwe dingen. Met Code bouw je kleine apps, trackers en dashboards door te beschrijven wat je wil. Autopilot is een agent die je een naam, een rol en een doel geeft, en die blijft opvolgen terwijl jij in een vergadering zit. Beide zijn nog niet voor iedereen: Autopilot zit in een beperkte preview, Code komt later dit jaar. Reken er dus nog niet op voor je volgende kwartaal.
@@ -33,5 +31,3 @@ Ik begrijp waarom het zo gaat. Rekenkracht voor AI is duur, en een vaste prijs v
 Eén verbetering verdient wel een vermelding: beheerders kunnen nu een maandplafond zetten, voor de hele organisatie en per gebruiker. Wie zijn plafond bereikt, valt tot de eerste van de volgende maand zonder. Je weet dan nog altijd niet wat het gaat kosten, maar wel wat het maximaal kost.
 
 Nog een kanttekening voor Belgische bedrijven: niet elk model in Copilot valt onder dezelfde Europese afspraken. De Claude-modellen draaien buiten de EU Data Boundary, en beheerders kunnen die modelfamilie uitzetten zonder Cowork kwijt te raken. Laat dat bewust beslissen, niet per toeval.
-
-Maandag zet je in het Microsoft 365 admin center, bij het kostenbeheer van Copilot, een maandlimiet. Ook als je nog geen credits gebruikt. Laag beginnen en optrekken wanneer het nut bewezen is, is makkelijker dan achteraf een factuur uitleggen.
