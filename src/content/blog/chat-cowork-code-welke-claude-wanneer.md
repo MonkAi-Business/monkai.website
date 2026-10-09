@@ -1,39 +1,35 @@
 ---
-title: "Chat, Cowork of Code: welke Claude gebruik je wanneer?"
+title: "Chat of Cowork? Die keuze maakt Claude nu zelf."
 date: 2026-10-09
-description: "Claude zit intussen in drie werkvormen, en Cowork splitst nog eens tussen desktop en browser. Wat gebruik je waarvoor, en wat doen ChatGPT en Copilot ondertussen?"
+description: "Tot half september moest je in Claude eerst kiezen tussen chatten en werk uitbesteden. Nu zit alles in één gesprek. Welke keuze blijft er dan nog over voor jou?"
 tags: ["claude", "chatgpt", "copilot", "productiviteit"]
 image: "/media/blog/chat-cowork-code-welke-claude-wanneer.svg"
 imageAlt: "Drie panelen naast elkaar die oplopen van één cirkel tot een dicht raster"
 draft: true
 ---
 
-Wie Claude gebruikt, kent meestal het chatvenster. Je typt iets, je krijgt antwoord. Maar in diezelfde doos zitten er ondertussen drie werkvormen naast elkaar. Het verschil zit niet in hoe slim het model is, want dat is telkens hetzelfde. Het verschil zit in wat het mag aanraken en hoeveel werk je uit handen geeft.
+Tot half september moest je in Claude eerst een knop kiezen. Chat als je wou sparren, Cowork als je werk wou uitbesteden. Wie die tweede knop nooit gevonden had, wist ook niet dat hij bestond. Sinds 16 september rolt Anthropic één gesprek uit waarin Claude dat zelf inschat: een vraag krijgt een antwoord, een opdracht wordt uitgevoerd.
 
-## Chat: samen nadenken
+Dat lijkt een detail, maar het verschuift de vraag. Je hoeft niet meer te weten welke versie van Claude je nodig hebt. Je moet wel weten hoeveel werk je uit handen geeft, en of je opdracht scherp genoeg staat om dat te doen.
 
-Vraag en antwoord. Jij blijft aan het stuur, jij doet uiteindelijk het werk. Ideaal om te sparren, een moeilijke mail te herschrijven, een contract te laten uitleggen of een idee af te kloppen. Het is snel, het verbruikt weinig, en je ziet elke stap. De grens is het knippen en plakken: alles wat eruit komt, moet jij ergens naartoe verhuizen.
+## Vragen of delegeren
 
-## Cowork: werk delegeren
+Een vraag is snel en goedkoop. Je herschrijft een moeilijke mail, laat een contract uitleggen of klopt een idee af. Jij blijft aan het stuur, en jij verhuist het resultaat naar waar het moet.
 
-Cowork verscheen in januari 2026 als desktop-app en draait sinds begin juli ook op het web en op je gsm, eerst voor Max-abonnees. Hier beschrijf je geen vraag maar een uitkomst. Je geeft toegang tot bepaalde mappen en tools, je legt uit wat je wil, en je gaat weg. Als je terugkomt ligt er werk: een Excel met echte formules, een presentatie, een onderzoeksrapport met bronnen. Onder de motorkap is het dezelfde agent die Claude Code aanstuurt, maar zonder terminal. Het zit in Pro, Max, Team en Enterprise.
+Delegeren is iets anders. Je beschrijft een uitkomst: een Excel met echte formules, een presentatie, een rapport met bronnen. Je geeft toegang tot de mappen en tools die nodig zijn, en je gaat weg. Als je terugkomt, ligt er werk. Dat verbruikt fors meer van je abonnement dan een gewone chat, en een vage opdracht levert na twintig minuten vaag werk op. Wie goed kan briefen, wint hier het meest. Cowork zit in elk betaald abonnement, niet in de gratis versie.
 
-De keerzijde mag je niet wegmoffelen. Cowork verbruikt fors meer dan gewone chat, het onthoudt niets tussen sessies (behalve binnen een project), en het vraagt een andere vaardigheid van jou. Een vage opdracht levert na twintig minuten vaag werk op. Wie goed kan briefen, wint hier het meest.
+## Waar het werk draait
 
-## Cowork op je pc of in je browser
+Sinds 6 oktober draaien nieuwe Cowork-taken op Pro en Max in de cloud, op de servers van Anthropic. Dat heeft een groot voordeel: de taak loopt door als je je laptop dichtklapt, en geplande taken draaien ook als geen enkel toestel aanstaat. Sinds eind augustus deelt Cowork daar ook het geheugen met je gewone gesprekken, al staat dat bij Team en Enterprise standaard uit.
 
-Dat onderscheid missen de meesten, en het is net het belangrijkste. De desktop-app mag aan je lokale bestanden, kan je browser bedienen en je computer gebruiken. De web- en mobiele versie kan dat niet: die draait op de servers van Anthropic en raakt alleen aan je lokale mappen zolang de desktop-app op die computer openstaat.
+De keerzijde: je eigen bestanden blijven op je computer. Claude kan er alleen aan via de desktop-app, en alleen zolang die openstaat. Hetzelfde geldt voor je browser laten bedienen. Moet het werk aan bestanden op je eigen machine, laat de desktop-app dan open. Moet het doorlopen terwijl jij in de auto zit, dan maakt het niet uit waar je het start.
 
-Daar staat iets tegenover. Een taak die je op het web start, loopt door als je je laptop dichtklapt, en geplande taken draaien ook wanneer je toestel uit staat. Vuistregel: staat het werk op je eigen machine, gebruik de desktop-app. Moet er iets doorlopen terwijl jij in de auto zit of slaapt, start het op het web.
+Wie software bouwt, heeft daarnaast nog Claude Code: dezelfde agent, gericht op codebases, in de terminal of in je editor. Voor de meeste kenniswerkers is dat niet de juiste deur.
 
-## Code: voor wie bouwt
+## Iedereen gaat dezelfde kant op
 
-Claude Code is dezelfde agent, maar toegespitst op codebases. Het draait in de terminal, in VS Code en JetBrains, op het web en in de desktop-app. Voor de meeste kenniswerkers is dit niet de juiste deur. Toch is het goed om te weten waar Cowork vandaan komt: het is in essentie Claude Code voor werk zonder code.
+ChatGPT heeft sinds juli naast Chat ook Work: je geeft een opdracht, het werkt door, en je krijgt een afgewerkt document, rekenblad of presentatie terug. Microsoft zette eind september Chat en Cowork samen onder Home in de nieuwe Copilot. De hele markt schuift van chatten naar delegeren, en de knoppen verdwijnen.
 
-## Iedereen bouwt nu hetzelfde
+Eén nuance voor Belgische bedrijven. Cowork in Copilot draait deels op de Claude-modellen van Anthropic, en die vallen buiten de EU Data Boundary. Een beheerder kan die modellen uitzetten zonder Cowork kwijt te raken. Laat dat dus bewust beslissen. Wat het kost, schreef ik vorige week in [Copilot wordt elke maand beter. Wat het kost, weet je pas achteraf.](/blog/copilot-prijs-op-voorhand)
 
-Dit is geen Anthropic-hebbeding. OpenAI lanceerde op 9 juli 2026 "ChatGPT Work", een derde modus naast Chat en Codex, met dezelfde belofte: je geeft een opdracht, het ding werkt uren door en levert een afgewerkt bestand. Microsoft ging in juni 2026 algemeen beschikbaar met Copilot Cowork. De hele markt kantelt van chatten naar delegeren.
-
-Eén nuance voor Belgische bedrijven. Copilot Cowork draaide bij de start op de Claude-modellen van Anthropic, en die vallen buiten de EU Data Boundary. Intussen kan je er ook OpenAI-modellen in kiezen, en kan een beheerder de Claude-familie uitzetten zonder Cowork kwijt te raken. Laat dat dus bewust beslissen. Wat Cowork kost en waarom ik daar niet gerust in ben, schreef ik apart, in [Copilot wordt elke maand beter. Wat het kost, weet je pas achteraf.](/blog/copilot-prijs-op-voorhand)
-
-De vraag is dus niet welke van de drie de beste is. Het is telkens hetzelfde model. De vraag is hoeveel werk je durft loslaten, en of je opdracht scherp genoeg staat om los te laten.
+Maandag: neem één taak die je deze week toch moet doen en die meer is dan een vraag. Schrijf in vijf zinnen op wat er moet liggen als het klaar is: welk bestand, voor wie, wat erin moet en wat niet. Geef dat aan Claude en ga een koffie halen. Wat terugkomt, zegt meer over je opdracht dan over Claude.
