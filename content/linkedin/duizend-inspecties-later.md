@@ -2,7 +2,7 @@
 slug: duizend-inspecties-later
 title: "Duizend inspecties later weet je nog niets"
 url: https://monkai.business/blog/duizend-inspecties-later
-date: 2026-11-13
+date: 2026-12-11
 ---
 
 "Welk defect komt bij jullie het vaakst terug?"

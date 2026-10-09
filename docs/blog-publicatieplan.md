@@ -86,14 +86,15 @@ agents en skills, en tot slot governance, wetgeving en kosten.
 | 9 | 25 sep 2026 | `collective-brain-bedrijfsgeheugen` | **Live sinds 25 september 2026.** Kreeg op vraag van Stijn een sectie over de opzet in Notion (teamspaces, database, sjabloon, eigenaar) en de EU-opslagnuance. Goedgekeurd zonder anekdote-opening. Tilt het second brain van week 3 naar bedrijfsniveau. |
 | 10 | 2 okt 2026 | `copilot-prijs-op-voorhand` | **Live sinds 2 oktober 2026.** Titel: "Copilot wordt elke maand beter. Wat het kost, weet je pas achteraf." Vervangt `copilot-cowork-pay-as-you-go`, op 2 oktober 2026 op vraag van Stijn geschrapt. Gaat over de nieuwe Copilot van 25 september (Home, Code, Autopilot, de naamswijziging) en over het verbruiksmodel achter Cowork, Code en Autopilot. Introduceert Cowork voor week 11. |
 | 11 | 9 okt 2026 | `chat-cowork-code-welke-claude-wanneer` | Overzicht van de werkvormen, nu de lezer Cowork kent. |
-| 12 | 16 okt 2026 | `skills-een-keer-vastleggen` | Bindt agents, werkvormen en herhaalwerk samen. Kan pas als die stukken online staan. |
-| 13 | 23 okt 2026 | `prompt-engineering-2026-uitkomst` | "De trucs zijn ingehaald" landt beter zodra plan mode, agents en skills bekend zijn. |
-| 14 | 30 okt 2026 | `accelerated-coding-geen-vibe-coding` | Technischer stuk, gericht op developers. Week 1 verwijst er inhoudelijk naar, zonder link. |
-| 15 | 6 nov 2026 | `eu-ai-act-kmo` | Start van het governanceblok. |
-| 16 | 13 nov 2026 | `governance-zit-in-je-prompts` | Governance in de praktijk, bovenop de wetgeving van week 14. |
-| 17 | 20 nov 2026 | `ai-tokens-niet-eeuwig-gesponsord` | De kostenkant, nu duidelijk is wat je allemaal draait. |
-| 18 | 27 nov 2026 | `n8n-automatisatie-en-ai` | Zet automatisatie, skills, governance en kosten samen. Sluit de reeks. |
-| 19 | 4 dec 2026 | `duizend-inspecties-later` | PinPoint Inspections: waarom inspectiedata in pdf's onbruikbaar is en wat AI ermee kan zodra ze gestructureerd is. Al in de huisstijl geschreven. |
+| 12 | 16 okt 2026 | `zwaarste-model-niet-nodig` | Titel: "Ik draaide alles op het zwaarste model. Vier op de vijf vragen hadden dat niet nodig." Nieuw geschreven op 9 oktober 2026, uit Stijns eigen LinkedIn-tekst over Jev, het kleine beslissingsmodel dat per vraag kiest tussen Haiku, Sonnet en Opus. Volgt logisch op de werkvormen van week 11. Geen interne links. De rest van de reeks schoof daardoor een week op. |
+| 13 | 23 okt 2026 | `skills-een-keer-vastleggen` | Bindt agents, werkvormen en herhaalwerk samen. Kan pas als die stukken online staan. |
+| 14 | 30 okt 2026 | `prompt-engineering-2026-uitkomst` | "De trucs zijn ingehaald" landt beter zodra plan mode, agents en skills bekend zijn. |
+| 15 | 6 nov 2026 | `accelerated-coding-geen-vibe-coding` | Technischer stuk, gericht op developers. Week 1 verwijst er inhoudelijk naar, zonder link. |
+| 16 | 13 nov 2026 | `eu-ai-act-kmo` | Start van het governanceblok. |
+| 17 | 20 nov 2026 | `governance-zit-in-je-prompts` | Governance in de praktijk, bovenop de wetgeving van week 16. |
+| 18 | 27 nov 2026 | `ai-tokens-niet-eeuwig-gesponsord` | De kostenkant, nu duidelijk is wat je allemaal draait. |
+| 19 | 4 dec 2026 | `n8n-automatisatie-en-ai` | Zet automatisatie, skills, governance en kosten samen. Sluit de reeks. |
+| 20 | 11 dec 2026 | `duizend-inspecties-later` | PinPoint Inspections: waarom inspectiedata in pdf's onbruikbaar is en wat AI ermee kan zodra ze gestructureerd is. Al in de huisstijl geschreven. |
 
 De `date` in de frontmatter van elke post hierboven staat op de vrijdag uit deze tabel.
 Verschuif je een post, pas dan **beide** aan, anders publiceert de cron op de oude datum.
