@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { getPublishedPosts } from '../utils/posts';
+import { PAGE_DATES } from '../utils/lastmod.mjs';
 
 const posts = (await getPublishedPosts()).slice(0, 3);
 
@@ -23,6 +24,7 @@ const schema = [
     url: 'https://monkai.business/stijn-de-ketelaere/',
     name: 'Stijn De Ketelaere',
     inLanguage: 'nl-BE',
+    dateModified: PAGE_DATES['/stijn-de-ketelaere/'],
     mainEntity: { '@id': 'https://monkai.business/#stijn' },
     isPartOf: { '@id': 'https://monkai.business/#business' },
   },
@@ -91,12 +93,12 @@ const schema = [
           <ul class="posts">
             {posts.map((post) => (
               <li>
-                <a href={`/blog/${post.id}`}>{post.data.title}</a>
+                <a href={`/blog/${post.id}/`}>{post.data.title}</a>
                 <span>{formatDate(post.data.date)}</span>
               </li>
             ))}
           </ul>
-          <a class="more" href="/blog">Alle artikels</a>
+          <a class="more" href="/blog/">Alle artikels</a>
         </section>
       )}
 

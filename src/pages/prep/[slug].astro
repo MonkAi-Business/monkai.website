@@ -29,10 +29,10 @@ const fmtLong = (d: Date) => new Intl.DateTimeFormat('nl-BE', { weekday: 'long',
               : `Staat op draft. Geplande datum: ${fmtLong(post.data.date)}.`}
           </span>
         </div>
-        <a href="/prep">Terug naar prep</a>
+        <a href="/prep/">Terug naar prep</a>
       </div>
     </div>
-    <BlogArticle post={post} backHref="/prep" backLabel="Terug naar prep" />
+    <BlogArticle post={post} backHref="/prep/" backLabel="Terug naar prep" />
   </main>
   <Footer />
 </BaseLayout>

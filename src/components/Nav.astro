@@ -6,7 +6,7 @@ const links = [
   { href: '/#aanpak', label: 'Aanpak' },
   { href: '/#diensten', label: 'Diensten' },
   { href: '/#over', label: 'Het team' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/blog/', label: 'Blog' },
 ];
 ---
 
@@ -21,7 +21,7 @@ const links = [
       {links.map((link) => (
         <a href={link.href}>{link.label}</a>
       ))}
-      <a href="/#contact" class="btn nav-cta">Laten we praten</a>
+      <a href="/contact/" class="btn nav-cta">Laten we praten</a>
     </nav>
 
     <button
@@ -46,7 +46,7 @@ const links = [
     {links.map((link) => (
       <a href={link.href}>{link.label}</a>
     ))}
-    <a href="/#contact" class="btn nav-cta-mobile">Laten we praten</a>
+    <a href="/contact/" class="btn nav-cta-mobile">Laten we praten</a>
     <div class="nav-theme"><ThemeToggle /></div>
   </nav>
 

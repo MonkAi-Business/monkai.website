@@ -18,7 +18,7 @@ Eerst: er is nog maar één Copilot. Microsoft 365 Copilot heet nu Microsoft Cop
 
 Daarnaast komen er twee nieuwe dingen. Met Code bouw je kleine apps, trackers en dashboards door te beschrijven wat je wil. Autopilot is een agent die je een naam, een rol en een doel geeft, en die blijft opvolgen terwijl jij in een vergadering zit. Beide zijn nog niet voor iedereen: Autopilot zit in een beperkte preview, Code komt later dit jaar. Reken er dus nog niet op voor je volgende kwartaal.
 
-Zit je al in Microsoft 365, dan is dit goed nieuws. Ik schreef eerder dat je met Copilot al op [data zit die je kan gebruiken](/blog/copilot-data-die-je-al-hebt). Daar komt nu meer gereedschap bij.
+Zit je al in Microsoft 365, dan is dit goed nieuws. Ik schreef eerder dat je met Copilot al op [data zit die je kan gebruiken](/blog/copilot-data-die-je-al-hebt/). Daar komt nu meer gereedschap bij.
 
 ## Waar ik afhaak
 

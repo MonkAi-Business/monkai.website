@@ -36,8 +36,8 @@ Dat kostte allemaal een half uur of een namiddag, en nu vaak minuten. Het echte 
 
 ## Snel gaan zonder blind te worden
 
-Vier gewoonten volstaan. Lees elke diff voor je hem aanvaardt, ook de saaie. Werk in kleine stappen, zodat een fout klein blijft en je nog weet waar hij vandaan komt. Laat tests, typechecks en je linter het vangnet zijn, want die schrijft de AI trouwens ook graag. En [vraag eerst een plan](/blog/plan-mode-eerst-denken-dan-doen) in plaats van meteen code: beslissen vooraf is goedkoper dan terugdraaien achteraf.
+Vier gewoonten volstaan. Lees elke diff voor je hem aanvaardt, ook de saaie. Werk in kleine stappen, zodat een fout klein blijft en je nog weet waar hij vandaan komt. Laat tests, typechecks en je linter het vangnet zijn, want die schrijft de AI trouwens ook graag. En [vraag eerst een plan](/blog/plan-mode-eerst-denken-dan-doen/) in plaats van meteen code: beslissen vooraf is goedkoper dan terugdraaien achteraf.
 
-Werk dat terugkeert leg je één keer vast als een [skill](/blog/skills-een-keer-vastleggen), zodat je stijl, je conventies en je checks er elke keer opnieuw in zitten. En hou de regel van Simon Willison aan: commit niets wat je niet aan iemand anders zou kunnen uitleggen. Dat is precies de lijn tussen accelerated coding en vibe coding.
+Werk dat terugkeert leg je één keer vast als een [skill](/blog/skills-een-keer-vastleggen/), zodat je stijl, je conventies en je checks er elke keer opnieuw in zitten. En hou de regel van Simon Willison aan: commit niets wat je niet aan iemand anders zou kunnen uitleggen. Dat is precies de lijn tussen accelerated coding en vibe coding.
 
 Dus ja: omarm het als developer. Dat klinkt klef, maar wie de code kan lezen, haalt hier meer uit dan wie dan ook. De vraag is niet of de AI het beter kan dan jij, maar hoeveel van je dag nu nog naar werk gaat dat niemand zal missen.

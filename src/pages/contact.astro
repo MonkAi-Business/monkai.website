@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { CONTACT } from '../utils/contact';
+import { PAGE_DATES } from '../utils/lastmod.mjs';
+
+// Het bedrijf zelf staat al sitewide als ProfessionalService in BaseLayout.
+// Een tweede kopie hier zou twee entiteiten maken, dus deze pagina verwijst ernaar.
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  '@id': 'https://monkai.business/contact/',
+  url: 'https://monkai.business/contact/',
+  name: 'Contact - MonkAi Business',
+  inLanguage: 'nl-BE',
+  dateModified: PAGE_DATES['/contact/'],
+  mainEntity: { '@id': 'https://monkai.business/#business' },
+};
+---
+<BaseLayout
+  title="Contact - MonkAi Business | AI-begeleiding voor Vlaamse KMO's"
+  description="Contact met MonkAi Business: e-mail, adres en werkgebied. Een eerste gesprek is vrijblijvend."
+  schema={schema}
+>
+  <Nav />
+  <main class="section contact-page">
+    <div class="container contact-inner">
+      <div class="contact-copy">
+        <h1>Laten we praten</h1>
+        <p class="lede">Een eerste gesprek is vrijblijvend. Vertel waar de monkey business bij jou zit, dan kijken we samen of een inspiratiesessie past.</p>
+        <dl class="details">
+          <div>
+            <dt>E-mail</dt>
+            <dd><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></dd>
+          </div>
+          <div>
+            <dt>Adres</dt>
+            <dd>{CONTACT.company}<br />{CONTACT.street}<br />{CONTACT.postalCode} {CONTACT.city}</dd>
+          </div>
+          <div>
+            <dt>Werkgebied</dt>
+            <dd>{CONTACT.region}</dd>
+          </div>
+        </dl>
+      </div>
+      <ContactForm idPrefix="contact" />
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .contact-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  h1 {
+    font-size: 44px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .lede {
+    margin: 0;
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 12px 0 0;
+  }
+
+  dt {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  dd {
+    margin: 4px 0 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  dd a {
+    color: var(--ink);
+    border-bottom: 1.5px solid var(--green);
+  }
+
+  @media (max-width: 768px) {
+    .contact-inner {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    h1 {
+      font-size: 30px;
+    }
+  }
+</style>

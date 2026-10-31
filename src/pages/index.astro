@@ -17,8 +17,20 @@ import Team from '../components/Team.astro';
 import Faq from '../components/Faq.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import { getPublishedPosts } from '../utils/posts';
+
+// De homepage toont de nieuwste posts, dus ze wijzigt mee met de nieuwste post.
+const [newestPost] = await getPublishedPosts();
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': 'https://monkai.business/#webpage',
+  url: 'https://monkai.business/',
+  inLanguage: 'nl-BE',
+  ...(newestPost ? { dateModified: newestPost.data.date.toISOString() } : {}),
+};
 ---
-<BaseLayout title="AI-adoptie en Claude-sessies voor Vlaamse KMO's - MonkAi Business">
+<BaseLayout title="AI-adoptie en Claude-sessies voor Vlaamse KMO's - MonkAi Business" schema={pageSchema}>
   <Nav />
   <main>
     <div data-standard-home>

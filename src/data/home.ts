@@ -104,6 +104,10 @@ export const services: Service[] = [
     text: 'Niet gebonden aan één leverancier. Ook ChatGPT, Gemini en Chinese modellen zoals Z.Ai en KIMI komen op tafel als ze beter passen.',
   },
   {
+    title: 'Vibe coding, 1-op-1',
+    text: 'Persoonlijke training om te leren vibe coden, van start tot finish. Tips en tricks, geen gebabbel: je gebruikt het echt en je ontwikkelt iets. Volledig op maat.',
+  },
+  {
     eyebrow: 'Langlopend engagement',
     title: 'Raad van advies',
     text: 'Zetelen in je raad van advies rond AI, digitale transformatie en innovatie in de brede zin. Geen project, wel een vaste kritische stem aan tafel.',
@@ -144,7 +148,7 @@ export const faqs: Faq[] = [
   },
   {
     q: 'Doe je Claude-training voor bedrijven?',
-    a: 'Ik werk met inspiratiesessies en sparringsessies in kleine groepen, waarin je team leert om veilig en slim met Claude te werken op de eigen taken. Zoek je een uitgebreide, formele opleiding? Dan verwijs ik je gericht door naar de juiste partner. Zo krijg je altijd de aanpak die bij je vraag past.',
+    a: 'Ik werk met inspiratiesessies en sparringsessies in kleine groepen, waarin je team leert om veilig en slim met Claude te werken op de eigen taken. Zoek je een uitgebreide, formele opleiding? Dan verwijs ik je gericht door naar de juiste partner. Wil je zelf leren vibe coden, dan kan dat wel bij mij, in een 1-op-1 training op maat.',
   },
   {
     q: 'Wat is het verschil tussen een second brain en een collective brain?',

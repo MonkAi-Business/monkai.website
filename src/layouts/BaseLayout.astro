@@ -19,6 +19,7 @@ import {
   NO_JS_THEME,
   STORAGE_KEY,
 } from '../utils/theme';
+import { CONTACT } from '../utils/contact';
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(image, Astro.site).href;
@@ -37,7 +38,7 @@ const siteSchema = {
       url: 'https://monkai.business/',
       image: 'https://monkai.business/og-image.png',
       logo: 'https://monkai.business/favicon.svg',
-      email: 'stijn@monkai.business',
+      email: CONTACT.email,
       priceRange: '€€',
       founder: { '@id': 'https://monkai.business/#stijn' },
       // MonkAi Business is een handelsnaam van SDK Solutions BV, geen dochter.
@@ -48,9 +49,9 @@ const siteSchema = {
       vatID: 'BE1027019469',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Robert De Preesterstraat 55',
-        postalCode: '9700',
-        addressLocality: 'Oudenaarde',
+        streetAddress: CONTACT.street,
+        postalCode: CONTACT.postalCode,
+        addressLocality: CONTACT.city,
         addressRegion: 'Oost-Vlaanderen',
         addressCountry: 'BE',
       },

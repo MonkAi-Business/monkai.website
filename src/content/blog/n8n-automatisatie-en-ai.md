@@ -26,7 +26,7 @@ Die stap is het scharnier. Alles ervoor en erna is logistiek, en dat is werk voo
 
 In n8n zet je daarvoor een AI-stap midden in de flow. Er is een AI Agent-blok waar je een taalmodel aan hangt plus een of meer gereedschappen, en het model beslist zelf welk gereedschap het nodig heeft om de taak af te maken. Het document lezen, het type bepalen, de leverancier opzoeken in je eigen database, en het resultaat teruggeven aan de volgende stap in de keten.
 
-Wat je daarmee wint, is dat het proces niet meer stukloopt op variatie. De omkadering blijft strak - vaste trigger, vaste bestemming, alles gelogd - maar het stukje waar denkwerk nodig is, wordt aan het model overgelaten. Dat is dezelfde redenering als bij een [skill](/blog/skills-een-keer-vastleggen): je legt de manier van werken vast, niet elke uitzondering apart.
+Wat je daarmee wint, is dat het proces niet meer stukloopt op variatie. De omkadering blijft strak - vaste trigger, vaste bestemming, alles gelogd - maar het stukje waar denkwerk nodig is, wordt aan het model overgelaten. Dat is dezelfde redenering als bij een [skill](/blog/skills-een-keer-vastleggen/): je legt de manier van werken vast, niet elke uitzondering apart.
 
 ## Richting twee: je automatisatie in je AI
 
@@ -38,6 +38,6 @@ Dat werkt ook naar buiten toe: omgekeerd kan een agent in n8n gereedschap gebrui
 
 ## Nuchter blijven
 
-Twee kanttekeningen. Niet elke stap hoeft AI te zijn - een model inzetten op werk dat een simpele regel ook aankan, is geld uitgeven aan traagheid, en elke AI-stap in een workflow is een oproep die je [betaalt per gebruik](/blog/ai-tokens-niet-eeuwig-gesponsord). En zodra een AI je workflows kan oproepen, wordt het belangrijk welke workflows dat zijn en wie erbij kan. Publiceer niet je hele lijst omdat het kan. Dat is [governance die in het artefact zelf zit](/blog/governance-zit-in-je-prompts), niet in een document.
+Twee kanttekeningen. Niet elke stap hoeft AI te zijn - een model inzetten op werk dat een simpele regel ook aankan, is geld uitgeven aan traagheid, en elke AI-stap in een workflow is een oproep die je [betaalt per gebruik](/blog/ai-tokens-niet-eeuwig-gesponsord/). En zodra een AI je workflows kan oproepen, wordt het belangrijk welke workflows dat zijn en wie erbij kan. Publiceer niet je hele lijst omdat het kan. Dat is [governance die in het artefact zelf zit](/blog/governance-zit-in-je-prompts/), niet in een document.
 
 Begin dus niet bij de tool maar bij één proces dat elke week terugkomt en waar iemand telkens hetzelfde beslist. Bouw de logistiek eromheen vast, laat de beoordeling aan het model, en kijk daarna pas of je die flow ook vanuit een gesprek wil kunnen oproepen.

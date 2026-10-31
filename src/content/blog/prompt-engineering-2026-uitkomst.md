@@ -36,6 +36,6 @@ Onderaan elke opdracht zet ik één zin: stel mij vragen als je niet zeker bent.
 
 Zonder die zin gokt het model. Het vult je ontbrekende context zelf in, meestal plausibel, soms volledig verkeerd, en je merkt het pas als je het resultaat leest. Met die zin krijg je twee vragen terug, geef je in tien seconden antwoord, en zit de rest wel juist. Dat gedrag is stuurbaar: in Anthropics eigen richtlijnen staan voorbeeldinstructies om een model juist terughoudend te maken en bij een dubbelzinnige vraag eerst uit te zoeken en aan te raden in plaats van te doen. Jij bepaalt aan welke kant het staat.
 
-Voor wat langer duurt, ga je een stap verder en [laat je eerst een plan maken](/blog/plan-mode-eerst-denken-dan-doen) dat je goedkeurt. Voor wat terugkeert leg je het één keer vast als een [skill](/blog/skills-een-keer-vastleggen) of een [expert-collega](/blog/expert-collega-je-eigen-ai-agent), zodat het doel en de eisen er al in zitten en je ze niet elke keer opnieuw moet uitleggen.
+Voor wat langer duurt, ga je een stap verder en [laat je eerst een plan maken](/blog/plan-mode-eerst-denken-dan-doen/) dat je goedkeurt. Voor wat terugkeert leg je het één keer vast als een [skill](/blog/skills-een-keer-vastleggen/) of een [expert-collega](/blog/expert-collega-je-eigen-ai-agent/), zodat het doel en de eisen er al in zitten en je ze niet elke keer opnieuw moet uitleggen.
 
 Je moet dus geen prompt engineer worden. Je moet kunnen zeggen wat je wil bereiken, en toelaten dat er iets gevraagd wordt. De rest is de laatste twee jaar in het model gekropen.

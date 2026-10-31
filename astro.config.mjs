@@ -1,5 +1,8 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { createLastmodLookup } from './src/utils/lastmod.mjs';
+
+const lastmodFor = createLastmodLookup();
 
 export default defineConfig({
   site: 'https://monkai.business',
@@ -22,6 +25,10 @@ export default defineConfig({
         !page.includes('/kickass') &&
         !page.includes('/prep') &&
         !page.includes('/prompt'),
+      serialize: (item) => {
+        const lastmod = lastmodFor(new URL(item.url).pathname);
+        return lastmod ? { ...item, lastmod } : item;
+      },
     }),
   ],
 });

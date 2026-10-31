@@ -82,7 +82,7 @@ expect(
   'De teamtekst moet correct en positief over experimenteren spreken.',
 );
 expect(
-  aiActSection.includes('href="/blog/eu-ai-act-kmo"'),
+  aiActSection.includes('href="/blog/eu-ai-act-kmo/"'),
   'De AI-geletterdheidslink moet naar het bestaande EU AI Act-artikel verwijzen.',
 );
 expect(

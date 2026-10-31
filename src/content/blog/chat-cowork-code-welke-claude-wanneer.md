@@ -30,6 +30,6 @@ Wie software bouwt, heeft daarnaast nog Claude Code: dezelfde agent, gericht op 
 
 ChatGPT heeft sinds juli naast Chat ook Work: je geeft een opdracht, het werkt door, en je krijgt een afgewerkt document, rekenblad of presentatie terug. Microsoft zette eind september Chat en Cowork samen onder Home in de nieuwe Copilot. De hele markt schuift van chatten naar delegeren, en de knoppen verdwijnen.
 
-Eén nuance voor Belgische bedrijven. Cowork in Copilot draait deels op de Claude-modellen van Anthropic, en die vallen buiten de EU Data Boundary. Een beheerder kan die modellen uitzetten zonder Cowork kwijt te raken. Laat dat dus bewust beslissen. Wat het kost, schreef ik vorige week in [Copilot wordt elke maand beter. Wat het kost, weet je pas achteraf.](/blog/copilot-prijs-op-voorhand)
+Eén nuance voor Belgische bedrijven. Cowork in Copilot draait deels op de Claude-modellen van Anthropic, en die vallen buiten de EU Data Boundary. Een beheerder kan die modellen uitzetten zonder Cowork kwijt te raken. Laat dat dus bewust beslissen. Wat het kost, schreef ik vorige week in [Copilot wordt elke maand beter. Wat het kost, weet je pas achteraf.](/blog/copilot-prijs-op-voorhand/)
 
 Maandag: neem één taak die je deze week toch moet doen en die meer is dan een vraag. Schrijf in vijf zinnen op wat er moet liggen als het klaar is: welk bestand, voor wie, wat erin moet en wat niet. Geef dat aan Claude en ga een koffie halen. Wat terugkomt, zegt meer over je opdracht dan over Claude.

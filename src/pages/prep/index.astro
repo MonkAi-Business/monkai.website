@@ -53,7 +53,7 @@ const inWords = (day: string) => {
                 <span class="rel">{inWords(publishDay(post))}</span>
               </div>
               <div class="body">
-                <a class="title" href={`/prep/${post.id}`}>{post.data.title}</a>
+                <a class="title" href={`/prep/${post.id}/`}>{post.data.title}</a>
                 <p class="desc">{post.data.description}</p>
                 <div class="meta">
                   <span class="chip chip-ok">Ingepland</span>
@@ -78,7 +78,7 @@ const inWords = (day: string) => {
                 <span class="rel">gepland</span>
               </div>
               <div class="body">
-                <a class="title" href={`/prep/${post.id}`}>{post.data.title}</a>
+                <a class="title" href={`/prep/${post.id}/`}>{post.data.title}</a>
                 <p class="desc">{post.data.description}</p>
                 <div class="meta">
                   <span class="chip">Draft</span>
@@ -96,7 +96,7 @@ const inWords = (day: string) => {
         <ul class="live">
           {live.map((post) => (
             <li>
-              <a href={`/blog/${post.id}`}>{post.data.title}</a>
+              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
               <span class="date">{fmtShort(post.data.date)}</span>
             </li>
           ))}

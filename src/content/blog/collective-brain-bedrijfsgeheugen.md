@@ -8,7 +8,7 @@ imageAlt: "Verbonden knooppunten rond een centraal punt, als gedeeld bedrijfsgeh
 draft: false
 ---
 
-Een collective brain is het gedeelde geheugen van een bedrijf: een plek waar kennis, afspraken en ervaring worden vastgelegd zodat ze niet langer alleen in de hoofden van mensen zitten. Waar een [second brain](/blog/second-brain-een-map) jou als individu slimmer maakt, zorgt een collective brain ervoor dat je organisatie blijft weten wat ze weet - ook als iemand met vakantie is, van job verandert of met pensioen gaat.
+Een collective brain is het gedeelde geheugen van een bedrijf: een plek waar kennis, afspraken en ervaring worden vastgelegd zodat ze niet langer alleen in de hoofden van mensen zitten. Waar een [second brain](/blog/second-brain-een-map/) jou als individu slimmer maakt, zorgt een collective brain ervoor dat je organisatie blijft weten wat ze weet - ook als iemand met vakantie is, van job verandert of met pensioen gaat.
 
 ## Waarom een second brain alleen niet volstaat
 
@@ -21,7 +21,7 @@ Het is geen dure software en geen jarenlang project. Notion is een goede plek om
 - **Eén teamspace per domein, niet per persoon.** Klanten, Processen, Afspraken. Elke teamspace heeft eigen leden en rechten, dus niet iedereen ziet alles.
 - **Een database in plaats van losse pagina's.** Eén rij per klant, procedure of beslissing, met een paar vaste velden: eigenaar, laatst nagekeken, status. Zo zie je meteen wat verouderd is.
 - **Een sjabloon per soort pagina.** Een klantfiche heeft altijd dezelfde koppen. Dat maakt vastleggen sneller, en AI leest het makkelijker.
-- **Eén eigenaar per teamspace**, die elk kwartaal opruimt. Zonder eigenaar wordt het precies de dumpplaats waar ik in het [stuk over het second brain](/blog/second-brain-een-map) voor waarschuwde.
+- **Eén eigenaar per teamspace**, die elk kwartaal opruimt. Zonder eigenaar wordt het precies de dumpplaats waar ik in het [stuk over het second brain](/blog/second-brain-een-map/) voor waarschuwde.
 
 Eén ding om te weten: Notion bewaart je data standaard in de Verenigde Staten. Opslag in Frankfurt kan, maar enkel op het Enterprise-plan. Voor klantdossiers weeg je dat af.
 

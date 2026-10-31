@@ -136,7 +136,7 @@ const chapters = [
     >
       <div class="monkey-panel">
         <p class="monkey-kicker">MonkAi Business</p>
-        <h1>AI zonder apenstreken<span aria-hidden="true">.</span></h1>
+        <h2 class="monkey-title">AI zonder apenstreken<span aria-hidden="true">.</span></h2>
         <p class="monkey-lede">Ik help Vlaamse KMO's rustig en veilig starten met AI. Klein beginnen, herhalen, beheersen.</p>
         <div class="monkey-actions">
           <a class="btn" href="#monkey-contact">Laten we praten</a>
@@ -337,7 +337,7 @@ const chapters = [
         <h2>Van idee naar werkende oplossing</h2>
         <div class="monkey-link-grid">
           {useCases.map((item) => (
-            <a href={`/use-cases/${item.id}`}>
+            <a href={`/use-cases/${item.id}/`}>
               <span>{pad(item.data.order)}</span>
               <div>
                 <h3>{item.data.title}</h3>
@@ -476,14 +476,14 @@ const chapters = [
         <h2>Praktische AI-inzichten</h2>
         <div class="monkey-posts">
           {posts.map((post) => (
-            <a href={`/blog/${post.id}`}>
+            <a href={`/blog/${post.id}/`}>
               <span>{formatDate(post.data.date)}</span>
               <h3>{post.data.title}</h3>
               <p>{post.data.description}</p>
             </a>
           ))}
         </div>
-        <a class="monkey-link" href="/blog">Bekijk alle artikels</a>
+        <a class="monkey-link" href="/blog/">Bekijk alle artikels</a>
       </div>
     </section>
 
@@ -1389,23 +1389,10 @@ const chapters = [
     text-transform: uppercase;
   }
 
-  h1,
   h2,
   h3,
   p {
     margin: 0;
-  }
-
-  h1 {
-    max-width: 780px;
-    font-size: clamp(50px, 6vw, 84px);
-    font-weight: 500;
-    line-height: 1.02;
-    text-wrap: balance;
-  }
-
-  h1 span {
-    color: #78a66f;
   }
 
   h2 {
@@ -1413,6 +1400,17 @@ const chapters = [
     font-weight: 500;
     line-height: 1.08;
     text-wrap: balance;
+  }
+
+  /* De enige h1 van de homepage staat in Hero.astro, dit is de grote kop van Monkey mode. */
+  .monkey-title {
+    max-width: 780px;
+    font-size: clamp(50px, 6vw, 84px);
+    line-height: 1.02;
+  }
+
+  .monkey-title span {
+    color: #78a66f;
   }
 
   .monkey-chapter[data-panel-size='compact'] h2 {
@@ -1657,6 +1655,22 @@ const chapters = [
   .monkey-panel-services {
     width: min(900px, 66vw);
     padding: clamp(18px, 1.8vw, 26px);
+  }
+
+  /* Tien kaarten: vier kolommen met de brede Raad van advies houden het paneel op
+     drie rijen, en dus het hoofdstuk op één scherm hoog (zie les 45). */
+  @media (min-width: 981px) {
+    .monkey-chapter[data-panel-size='wide'] .monkey-panel-services {
+      width: min(1080px, 74vw);
+    }
+
+    .monkey-service-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .monkey-service-grid .featured {
+      grid-column: span 3;
+    }
   }
 
   .monkey-panel-services > * + * {

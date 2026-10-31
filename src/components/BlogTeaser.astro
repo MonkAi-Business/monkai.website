@@ -14,11 +14,11 @@ const gridMax = cols * 357 + (cols - 1) * 24;
   <div class="container blog-teaser-inner">
     <div class="head">
       <h2>Uit de blog</h2>
-      <a class="link-underline" href="/blog">Alle artikels</a>
+      <a class="link-underline" href="/blog/">Alle artikels</a>
     </div>
     <div class="grid" style={`--cols:${cols};--grid-max:${cols < 3 ? `${gridMax}px` : 'none'}`}>
       {posts.map((post) => (
-        <a class="card" href={`/blog/${post.id}`}>
+        <a class="card" href={`/blog/${post.id}/`}>
           {post.data.image && <img class="thumb" src={post.data.image} alt={post.data.imageAlt ?? ''} width="600" height="400" loading="lazy" />}
           <div class="card-body">
             <div class="date">{fmt(post.data.date)}</div>

@@ -1,12 +1,13 @@
 ---
 import Logo from './Logo.astro';
+import { CONTACT } from '../utils/contact';
 
 const sitemap = [
   { href: '/#aanpak', label: 'Aanpak' },
   { href: '/#diensten', label: 'Diensten' },
   { href: '/#over', label: 'Het team' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/#contact', label: 'Contact' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/contact/', label: 'Contact' },
 ];
 ---
 
@@ -28,19 +29,19 @@ const sitemap = [
       </div>
 
       <div class="footer-col">
-        <div class="footer-label">SDK Solutions BV</div>
-        <span>Robert De Preesterstraat 55, 9700 Oudenaarde</span>
+        <div class="footer-label">{CONTACT.company}</div>
+        <span>{CONTACT.street}, {CONTACT.postalCode} {CONTACT.city}</span>
         <span>BTW BE 1027.019.469</span>
-        <span>stijn@monkai.business</span>
-        <a href="/stijn-de-ketelaere">Over Stijn De Ketelaere</a>
+        <span>{CONTACT.email}</span>
+        <a href="/stijn-de-ketelaere/">Over Stijn De Ketelaere</a>
         <a href="https://www.linkedin.com/in/stijndeketelaere/" target="_blank" rel="noopener">Stijn op LinkedIn</a>
       </div>
     </div>
 
     <div class="footer-bottom">
       <div class="footer-legal">
-        <a href="/privacy">Privacy</a>
-        <a href="/cookies">Cookies</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/cookies/">Cookies</a>
       </div>
       <span class="footer-mono">Geen apen nodig gehad bij het maken van deze site. Wel AI.</span>
     </div>

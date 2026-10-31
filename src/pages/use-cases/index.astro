@@ -19,7 +19,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
       </div>
       <div class="grid">
         {cases.map((item) => (
-          <a class="card" href={`/use-cases/${item.id}`}>
+          <a class="card" href={`/use-cases/${item.id}/`}>
             <span class="num">{pad(item.data.order)}</span>
             <h2>{item.data.title}</h2>
             <p>{item.data.summary}</p>

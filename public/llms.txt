@@ -15,6 +15,7 @@ MonkAi Business helpt kleine en middelgrote ondernemingen in Vlaanderen om AI co
 - [Use cases](https://monkai.business/use-cases): concrete AI-toepassingen die vandaag al werken bij KMO's
 
 ## Contact
+- Contactpagina: https://monkai.business/contact/
 - E-mail: stijn@monkai.business
 - LinkedIn: https://www.linkedin.com/in/stijndeketelaere/
 - Bedrijf: SDK Solutions BV, Robert De Preesterstraat 55, 9700 Oudenaarde, België (BTW BE 1027.019.469)
