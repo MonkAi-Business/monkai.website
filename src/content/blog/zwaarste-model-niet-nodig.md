@@ -16,7 +16,7 @@ Ik draai standaard op Opus 5.5, het zwaarste model dat ik dagelijks gebruik. Dat
 
 In Claude kies je een model: Haiku, Sonnet, Opus of Fable. Maar eerlijk, je kiest dat één keer en laat het daarna staan. Voor een mail van drie regels net zo goed als voor een contract van veertig pagina's. Ik deed niets anders.
 
-Dat kost meer dan je denkt. Via de API is Haiku veertig keer goedkoper dan Opus. In een abonnement betaal je niet per vraag, maar je merkt het wel aan hoe snel je tegen je limiet loopt. Anthropic schrijft het zelf in zijn documentatie: Haiku voor eenvoudige taken, Sonnet voor het meeste werk, Opus voor het zwaarste denkwerk. Alleen doet bijna niemand dat, omdat je er bij elke vraag aan moet denken.
+Dat kost meer dan je denkt. Via de API is Haiku tot veertig keer goedkoper dan Opus. In een abonnement betaal je niet per vraag, maar je merkt het wel aan hoe snel je tegen je limiet loopt. Anthropic beschrijft in zijn documentatie zelf die andere route: begin bij eenvoudig werk met Haiku en stap pas over als dat nodig blijkt. Alleen doet bijna niemand dat, omdat je er bij elke vraag aan moet denken.
 
 ## Een portier voor je grote brein
 
