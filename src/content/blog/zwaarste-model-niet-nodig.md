@@ -5,7 +5,7 @@ description: "Ik liet een klein beslissingsmodel bij elke vraag kiezen welke Cla
 tags: ["claude", "productiviteit", "ai-adoptie"]
 image: "/media/blog/zwaarste-model-niet-nodig.svg"
 imageAlt: "Een stroom vragen die via een klein groen knooppunt verdeeld wordt over drie blokken van verschillende grootte, waarvan het kleinste de meeste vragen krijgt"
-draft: true
+draft: false
 ---
 
 Ik heb mijn Claude-verbruik gehalveerd. Niet door minder te vragen, maar door bij elke vraag eerst te laten beslissen welk model erop moest.

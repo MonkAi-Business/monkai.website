@@ -5,14 +5,14 @@ description: "De trucs zijn minder belangrijk geworden. Wat telt is dat het doel
 tags: ["productiviteit", "ai-adoptie"]
 image: "/media/blog/prompt-engineering-2026.svg"
 imageAlt: "Een vraag die naar een doelwit gaat, met een vraag die eerst terugkomt"
-draft: true
+draft: false
 ---
 
 Prompt engineering is minder belangrijk geworden. Niet omdat het niet uitmaakt wat je typt, maar omdat het gewicht verschoven is: van hoe je het vraagt naar wat je wil bereiken. Wie dat scherp heeft, heeft geen trucs meer nodig.
 
 ## De trucs zijn ingehaald
 
-Dat is geen aanvoelen, het staat in de handleidingen van de makers zelf. OpenAI schrijft voor zijn reasoning-modellen letterlijk dat je de prompts eenvoudig en direct moet houden, dat "denk stap per stap" onnodig is omdat het model dat intern al doet, en dat je best eerst zonder voorbeelden probeert. Anthropic waarschuwt in zijn richtlijnen dat je bij de nieuwste modellen je taal juist moet afzwakken: waar je vroeger "CRITICAL: je MOET dit gebruiken" schreef om iets gedaan te krijgen, volstaat nu "gebruik dit wanneer", want anders slaat het model door de andere kant uit.
+Dat is geen aanvoelen, het staat in de handleidingen van de makers zelf. OpenAI schrijft voor zijn reasoning-modellen letterlijk dat je de prompts eenvoudig en direct moet houden, dat "denk stap per stap" onnodig is omdat het model dat intern al doet, en dat je best eerst zonder voorbeelden probeert. Anthropic waarschuwt in zijn richtlijnen dat je bij recente modellen je taal juist moet afzwakken: waar je vroeger "CRITICAL: je MOET dit gebruiken" schreef om iets gedaan te krijgen, volstaat nu "gebruik dit wanneer", want anders slaat het model door de andere kant uit.
 
 Ook het woord zelf is verhuisd. In juni 2025 stelde Shopify-CEO Tobi Lütke voor om te spreken van context engineering in plaats van prompt engineering, en Andrej Karpathy pikte dat op: niet de formulering is het werk, maar het contextvenster vullen met precies de juiste informatie voor de volgende stap. Simon Willison vatte samen waarom die naamsverandering ertoe deed: prompt engineering was in de volksmond verworden tot slimme trucjes in een chatvenster typen.
 

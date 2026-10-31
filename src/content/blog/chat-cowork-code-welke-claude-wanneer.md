@@ -5,7 +5,7 @@ description: "Tot half september moest je in Claude eerst kiezen tussen chatten 
 tags: ["claude", "chatgpt", "copilot", "productiviteit"]
 image: "/media/blog/chat-cowork-code-welke-claude-wanneer.svg"
 imageAlt: "Drie panelen naast elkaar die oplopen van één cirkel tot een dicht raster"
-draft: true
+draft: false
 ---
 
 Tot half september moest je in Claude eerst een knop kiezen. Chat als je wou sparren, Cowork als je werk wou uitbesteden. Wie die tweede knop nooit gevonden had, wist ook niet dat hij bestond. Sinds 16 september rolt Anthropic één gesprek uit waarin Claude dat zelf inschat: een vraag krijgt een antwoord, een opdracht wordt uitgevoerd.

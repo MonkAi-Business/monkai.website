@@ -5,7 +5,7 @@ description: "Een prompt gebruik je één keer. Een skill leg je één keer vast
 tags: ["agents", "automatisatie", "claude", "chatgpt", "copilot"]
 image: "/media/blog/skills.svg"
 imageAlt: "Een centraal skill-blok dat vanuit meerdere kanten wordt opgeroepen en hergebruikt"
-draft: true
+draft: false
 ---
 
 Elke ochtend dezelfde klus. Een stapel PDF's die binnenkomt - facturen, offertes, attesten - en telkens hetzelfde ritueel: openen, kijken wat het juist is, en hernoemen volgens je eigen logica. Leverancier, datum, type, in de volgorde die je ooit met jezelf hebt afgesproken. Het is geen moeilijk werk. Het is gewoon werk dat elke dag terugkomt, altijd op dezelfde manier.
@@ -20,7 +20,7 @@ Belangrijk is vooral wat een skill níet is. Het is geen prompt die je één kee
 
 Waarom is dit dan AI, en niet gewoon een macro of een scriptje? Omdat de PDF zelf elke dag anders is. De ene factuur ziet er niet uit als de andere, de datum staat niet altijd op dezelfde plaats, de ene leverancier noemt het een creditnota en de andere een terugbetaling. Een klassiek script breekt daarop. De AI leest het document, begrijpt wat er staat, en past jouw afspraak toe - ook op een bestand dat hij nog nooit exact zo gezien heeft. Je legt de manier van werken vast, niet elke uitzondering apart.
 
-Dat is meteen de scheidslijn met gewone automatisatie. Het ophalen, verplaatsen en wegschrijven van die bestanden is logistiek en hoort thuis in een automatiseringsplatform. Het beoordelen is werk voor een model. Hoe je die twee aan elkaar knoopt, en hoe ze elkaar zelfs kunnen oproepen, staat in [n8n: laat je automatisatie en je AI met elkaar praten](/blog/n8n-automatisatie-en-ai/).
+Dat is meteen de scheidslijn met gewone automatisatie. Het ophalen, verplaatsen en wegschrijven van die bestanden is logistiek en hoort thuis in een automatiseringsplatform. Het beoordelen is werk voor een model. Hoe je die twee aan elkaar knoopt, en hoe ze elkaar zelfs kunnen oproepen, is iets voor een latere post.
 
 ## Je hoeft niet te kunnen programmeren
 
@@ -30,7 +30,7 @@ Het kan zelfs zonder tikwerk. Bij Claude kan je een skill opnemen in [Cowork](/b
 
 ## Niet één tool: skills worden een standaard
 
-Skills zijn geen Claude-truc. In 2026 hebben de drie grote AI-assistenten er allemaal een versie van. Anthropic bracht Skills uit voor Claude. OpenAI lanceerde Skills in ChatGPT als opvolger van de custom GPT's, die het sinds september 2026 uitfaseert: een skill zit daar in een plugin, samen met de apps waar hij bij mag. En Microsoft bouwde ze in Copilot Cowork, met net hetzelfde mapformaat als Claude - een mapje dat je in OneDrive zet en dat je AI voortaan kent.
+Skills zijn geen Claude-truc. In 2026 hebben de drie grote AI-assistenten er allemaal een versie van. Anthropic bracht Skills uit voor Claude. OpenAI bracht Skills naar ChatGPT en faseert sinds september 2026 de custom GPT's uit. Hun opvolger is de plugin: een skill zit daar in een bundel, samen met de bestanden en apps waar hij bij mag. En Microsoft bouwde ze in Copilot Cowork, met net hetzelfde mapformaat als Claude - een mapje dat je in OneDrive zet en dat je AI voortaan kent.
 
 Dat maakt dit meer dan een functie van één product. De manier waarop je een terugkerende taak vastlegt, begint op elkaar te lijken over de tools heen. Wat je bij de ene leert, neem je mee naar de andere. De precieze beschikbaarheid verschilt wel per tool en per abonnement, dus kijk even na wat jouw versie ondersteunt. Voor een Belgisch bedrijf zit er bij Copilot nog een addertje onder het gras: Cowork rekent per gebruik af, en een deel van de modellen erin draait buiten de EU Data Boundary. Over dat prijs- en beschikbaarheidsverhaal schreef ik apart, in [Copilot wordt elke maand beter. Wat het kost, weet je pas achteraf.](/blog/copilot-prijs-op-voorhand/)
 

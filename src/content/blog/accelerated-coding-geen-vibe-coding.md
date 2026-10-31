@@ -1,11 +1,11 @@
 ---
 title: "Accelerated coding: geen vibe coding, wel veel sneller"
-date: 2026-11-06
+date: 2026-10-31
 description: "Vibe coding is code laten schrijven zonder er nog naar te kijken. Accelerated coding is hetzelfde werk als altijd, veel sneller en met minder fouten, en je kijkt er wel naar."
 tags: ["productiviteit", "ai-adoptie"]
 image: "/media/blog/accelerated-coding.svg"
 imageAlt: "Links code die niemand meer bekijkt, rechts dezelfde code met snelheidslijnen en een vinkje"
-draft: true
+draft: false
 ---
 
 Ik noem het accelerated coding en niet vibe coding, en dat is geen woordspel. De twee betekenen echt iets anders, en dat verschil bepaalt of je er als developer iets aan hebt.
@@ -24,7 +24,7 @@ DORA noemt AI in zijn rapport over 2025 een versterker: sterke teams worden er b
 
 De cijfers uit 2025 zijn ontnuchterend, maar ze zeggen niet wat je denkt. In de Stack Overflow-enquête van 2025 gebruikt 84% van de developers AI of is het van plan, maar vertrouwt 46% de juistheid van de output níet, tegen 33% die dat wel doet. De grootste frustratie, bij 66%, is code die "bijna juist is, maar net niet"; 45% zegt dat het debuggen van AI-code meer tijd kost dan het uitspaart.
 
-METR liet zestien ervaren open-source developers 246 echte taken doen in codebases die ze al jaren kenden. Met AI deden ze er 19% langer over, terwijl ze vooraf 24% tijdwinst verwachtten en achteraf nog dachten dat ze 20% sneller waren geweest. Belangrijke nuance: dat was met de tools van begin 2025 (Cursor Pro met Claude 3.5 en 3.7 Sonnet), en de onderzoekers waarschuwen zelf dat je dit niet mag doortrekken naar alle softwarewerk.
+METR liet zestien ervaren open-source developers 246 echte taken doen in codebases die ze al jaren kenden. Met AI deden ze er 19% langer over, terwijl ze vooraf 24% tijdwinst verwachtten en achteraf nog dachten dat ze 20% sneller waren geweest. Belangrijke nuance: dat was met de tools van begin 2025 (Cursor Pro met Claude 3.5 en 3.7 Sonnet), en de onderzoekers waarschuwen zelf dat je dit niet mag doortrekken naar alle softwarewerk. Bij hun vervolgmeting met de tools van eind 2025 zagen ze wel tijdwinst. Die winst is klein en onzeker, en ze vermoeden dat ze hem onderschatten: wie niet meer zonder AI wil werken, doet niet meer mee aan zo'n proef.
 
 Het punt is niet dat AI niet werkt. Het punt is dat "bijna juist" het duurste resultaat is dat bestaat, en dat een gevoel van snelheid geen snelheid is. De controle is niet de overhead bovenop het werk. De controle ís het werk.
 

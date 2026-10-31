@@ -85,11 +85,11 @@ agents en skills, en tot slot governance, wetgeving en kosten.
 | 8 | 18 sep 2026 | `expert-collega-je-eigen-ai-agent` | **Live sinds 18 september 2026.** Van losse vragen naar een AI die je één keer inwerkt. Door Stijn goedgekeurd in de bestaande vorm. De slotalinea met de link naar n8n is op zijn vraag geschrapt, en er staat een voetnoot bij over het uitfaseren van Custom GPTs. |
 | 9 | 25 sep 2026 | `collective-brain-bedrijfsgeheugen` | **Live sinds 25 september 2026.** Kreeg op vraag van Stijn een sectie over de opzet in Notion (teamspaces, database, sjabloon, eigenaar) en de EU-opslagnuance. Goedgekeurd zonder anekdote-opening. Tilt het second brain van week 3 naar bedrijfsniveau. |
 | 10 | 2 okt 2026 | `copilot-prijs-op-voorhand` | **Live sinds 2 oktober 2026.** Titel: "Copilot wordt elke maand beter. Wat het kost, weet je pas achteraf." Vervangt `copilot-cowork-pay-as-you-go`, op 2 oktober 2026 op vraag van Stijn geschrapt. Gaat over de nieuwe Copilot van 25 september (Home, Code, Autopilot, de naamswijziging) en over het verbruiksmodel achter Cowork, Code en Autopilot. Introduceert Cowork voor week 11. |
-| 11 | 9 okt 2026 | `chat-cowork-code-welke-claude-wanneer` | Overzicht van de werkvormen, nu de lezer Cowork kent. |
-| 12 | 16 okt 2026 | `zwaarste-model-niet-nodig` | Titel: "Ik draaide alles op het zwaarste model. Vier op de vijf vragen hadden dat niet nodig." Nieuw geschreven op 9 oktober 2026, uit Stijns eigen LinkedIn-tekst over Jev, het kleine beslissingsmodel dat per vraag kiest tussen Haiku, Sonnet en Opus. Volgt logisch op de werkvormen van week 11. Geen interne links. De rest van de reeks schoof daardoor een week op. |
-| 13 | 23 okt 2026 | `skills-een-keer-vastleggen` | Bindt agents, werkvormen en herhaalwerk samen. Kan pas als die stukken online staan. |
-| 14 | 30 okt 2026 | `prompt-engineering-2026-uitkomst` | "De trucs zijn ingehaald" landt beter zodra plan mode, agents en skills bekend zijn. |
-| 15 | 6 nov 2026 | `accelerated-coding-geen-vibe-coding` | Technischer stuk, gericht op developers. Week 1 verwijst er inhoudelijk naar, zonder link. |
+| 11 | 9 okt 2026 | `chat-cowork-code-welke-claude-wanneer` | **Live sinds 31 oktober 2026**, met de datum van 9 oktober behouden. Overzicht van de werkvormen, nu de lezer Cowork kent. |
+| 12 | 16 okt 2026 | `zwaarste-model-niet-nodig` | **Live sinds 31 oktober 2026**, met de datum van 16 oktober behouden. Titel: "Ik draaide alles op het zwaarste model. Vier op de vijf vragen hadden dat niet nodig." Nieuw geschreven op 9 oktober 2026, uit Stijns eigen LinkedIn-tekst over Jev, het kleine beslissingsmodel dat per vraag kiest tussen Haiku, Sonnet en Opus. Volgt logisch op de werkvormen van week 11. Geen interne links. De rest van de reeks schoof daardoor een week op. |
+| 13 | 23 okt 2026 | `skills-een-keer-vastleggen` | **Live sinds 31 oktober 2026**, met de datum van 23 oktober behouden. Bindt agents, werkvormen en herhaalwerk samen. Kan pas als die stukken online staan. |
+| 14 | 30 okt 2026 | `prompt-engineering-2026-uitkomst` | **Live sinds 31 oktober 2026**, met de datum van 30 oktober behouden. "De trucs zijn ingehaald" landt beter zodra plan mode, agents en skills bekend zijn. |
+| 15 | 31 okt 2026 | `accelerated-coding-geen-vibe-coding` | **Live sinds 31 oktober 2026.** Stond op 6 november, op vraag van Stijn vervroegd; de datum is daarom 31 oktober. De vrijdag van 6 november is nu vrij. Technischer stuk, gericht op developers. Week 1 verwijst er inhoudelijk naar, zonder link. |
 | 16 | 13 nov 2026 | `eu-ai-act-kmo` | Start van het governanceblok. |
 | 17 | 20 nov 2026 | `governance-zit-in-je-prompts` | Governance in de praktijk, bovenop de wetgeving van week 16. |
 | 18 | 27 nov 2026 | `ai-tokens-niet-eeuwig-gesponsord` | De kostenkant, nu duidelijk is wat je allemaal draait. |
@@ -127,24 +127,15 @@ naar een post die nog verborgen is.
 
 ### Eén vooruitwijzing naar n8n
 
-`skills-een-keer-vastleggen` (week 12) bevat een alinea die naar `n8n-automatisatie-en-ai`
-(week 18) linkt. Dat is de enige plek in de reeks waar een post vooruitwijst in plaats van
-terug. Tussen 16 oktober en 27 november geeft die link dus een 404.
+`skills-een-keer-vastleggen` wees vooruit naar `n8n-automatisatie-en-ai` (week 19). Bij het
+vrijgeven op 31 oktober is die link eruit gehaald, want hij gaf een 404. De zin eindigt nu
+op "is iets voor een latere post".
+
+**Op 4 december:** zet in die alinea de link terug, wanneer de n8n-post live staat:
+`staat in [n8n: laat je automatisatie en je AI met elkaar praten](/blog/n8n-automatisatie-en-ai/).`
 
 `expert-collega-je-eigen-ai-agent` had dezelfde slotalinea. Die is bij het vrijgeven op
 18 september op vraag van Stijn helemaal geschrapt, dus daar speelt dit niet meer.
-
-Kies er één van bij het vrijgeven van de skills-post:
-
-- Haal de linkopmaak weg en laat de zin staan: `[n8n: laat je automatisatie en je AI met
-  elkaar praten](/blog/n8n-automatisatie-en-ai)` wordt gewoon `n8n`. De alinea blijft
-  kloppen, er is geen dode link, en op 6 november zet je de link terug.
-- Of laat de hele slotalinea weg tot 6 november. Ze staat in beide posts als laatste
-  alinea, dus knippen en later terugplakken is triviaal.
-- Of schuif `n8n-automatisatie-en-ai` naar voren, vóór week 5. Dan moet je wel de drie
-  links in die post zelf weghalen, want die wijzen naar skills, tokens en governance.
-
-De eerste optie is de minste moeite en houdt de opbouw van de reeks intact.
 
 ## Nieuwe posts
 
