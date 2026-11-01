@@ -3,6 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import { createLastmodLookup } from './src/utils/lastmod.mjs';
 
 const lastmodFor = createLastmodLookup();
+const NOINDEX_SECTIONS = ['bedankt', 'data', 'inspiratie', 'kickass', 'prep', 'prompt', 'prompts'];
 
 export default defineConfig({
   site: 'https://monkai.business',
@@ -15,16 +16,11 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      // /bedankt, /data, /inspiratie, /kickass, /prep en de doorstuurpaden
-      // /prompt(s) zijn noindex, die horen niet in de sitemap. '/prompt' dekt
-      // ook '/prompts'.
+      // Deze paden zijn noindex en horen niet in de sitemap. Vergelijk op het
+      // eerste padsegment, niet met includes(): dat gooide ook een blogpost
+      // weg waarvan de slug met 'prompt' begon.
       filter: (page) =>
-        !page.includes('/bedankt') &&
-        !page.includes('/data') &&
-        !page.includes('/inspiratie') &&
-        !page.includes('/kickass') &&
-        !page.includes('/prep') &&
-        !page.includes('/prompt'),
+        !NOINDEX_SECTIONS.includes(new URL(page).pathname.split('/')[1]),
       serialize: (item) => {
         const lastmod = lastmodFor(new URL(item.url).pathname);
         return lastmod ? { ...item, lastmod } : item;
