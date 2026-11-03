@@ -15,7 +15,7 @@ import Footer from '../components/Footer.astro';
   <Footer />
 </BaseLayout>
 <script is:inline>
-  // Primaire conversie: het contactformulier is verstuurd (Netlify leidt hierheen door).
+  // Primaire conversie: het contactformulier is verstuurd (ContactForm.astro stuurt hierheen na een geslaagde verzending).
   // De PostHog-stub is synchroon beschikbaar; het event wordt gequeued tot de lib geladen is.
   //
   // /bedankt is een statische pagina en dus ook rechtstreeks op te vragen. Meet de

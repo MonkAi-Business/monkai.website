@@ -10,20 +10,26 @@ const {
 } = Astro.props;
 
 const fieldId = (name: string) => `${idPrefix}-${name}`;
+
+// Web3Forms stuurt elke inzending naar het mailadres dat bij deze access key hoort.
+// De key is publiek (staat in de HTML), het mailadres zelf niet.
+const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY;
+// Zonder JavaScript post het formulier rechtstreeks naar Web3Forms, dat daarna hierheen terugstuurt.
+const bedanktUrl = new URL('/bedankt', Astro.site).href;
 ---
 
 <form
   class:list={['contact-form', { 'contact-form-compact': compact }]}
   name="contact"
   method="POST"
-  data-netlify="true"
-  netlify-honeypot="bot-field"
-  action="/bedankt"
+  action="https://api.web3forms.com/submit"
   data-contact-form
 >
-  <input type="hidden" name="form-name" value="contact" />
+  <input type="hidden" name="access_key" value={web3formsKey} />
+  <input type="hidden" name="from_name" value="monkai.business" />
+  <input type="hidden" name="redirect" value={bedanktUrl} />
   <input type="hidden" name="subject" value="Nieuwe aanvraag via monkai.business" />
-  <p hidden><label>Laat dit leeg: <input name="bot-field" /></label></p>
+  <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" />
   <div class="field-grid">
     <div class="field field-name">
       <label for={fieldId('naam')}>Naam</label>
@@ -51,6 +57,9 @@ const fieldId = (name: string) => `${idPrefix}-${name}`;
     <span>Ik ga akkoord dat mijn gegevens gebruikt worden om mijn vraag te beantwoorden. Meer in de <a href="/privacy/" class="privacy-link">privacyverklaring</a>.</span>
   </label>
   <button type="submit" class="btn">Verstuur je vraag</button>
+  <p class="form-error" role="alert" hidden>
+    Je bericht is niet verstuurd. Probeer het opnieuw of mail naar <a href="mailto:stijn@monkai.business">stijn@monkai.business</a>.
+  </p>
 </form>
 
 <script>
@@ -81,7 +90,34 @@ const fieldId = (name: string) => `${idPrefix}-${name}`;
 
     naamField?.addEventListener('input', updateSubject);
     bedrijfField?.addEventListener('input', updateSubject);
-    form.addEventListener('submit', updateSubject);
+
+    // Versturen via fetch en daarna zelf naar /bedankt gaan. Zo blijft de referrer op
+    // /bedankt van deze site komen en telt contact_submitted daar nog mee. Bij een gewone
+    // post zou de referrer api.web3forms.com zijn.
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const errorBox = form.querySelector<HTMLElement>('.form-error');
+
+    form.addEventListener('submit', async (event) => {
+      updateSubject();
+      event.preventDefault();
+      if (errorBox) errorBox.hidden = true;
+      if (button) button.disabled = true;
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
+        });
+        const result = await response.json().catch(() => null);
+        if (!response.ok || !result?.success) throw new Error(result?.message || `HTTP ${response.status}`);
+        window.location.href = '/bedankt';
+      } catch (error) {
+        window.posthog?.capture('contact_form_failed', { reden: String(error) });
+        if (errorBox) errorBox.hidden = false;
+        if (button) button.disabled = false;
+      }
+    });
   });
 </script>
 
@@ -177,6 +213,28 @@ const fieldId = (name: string) => `${idPrefix}-${name}`;
     border: none;
     font-size: 16px;
     cursor: pointer;
+  }
+
+  .contact-form .btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+
+  /* Honeypot van Web3Forms: onzichtbaar voor mensen, bots vinken hem aan. */
+  .botcheck {
+    display: none;
+  }
+
+  .form-error {
+    margin: 0;
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .form-error a {
+    color: inherit;
+    text-decoration: underline;
   }
 
   .contact-form-compact {
