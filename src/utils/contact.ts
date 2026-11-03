@@ -7,6 +7,7 @@
 export const CONTACT = {
   email: 'stijn@monkai.business',
   company: 'SDK Solutions BV',
+  vat: 'BE 1027.019.469',
   street: 'Robert De Preesterstraat 55',
   postalCode: '9700',
   city: 'Oudenaarde',

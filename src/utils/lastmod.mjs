@@ -15,6 +15,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 export const PAGE_DATES = {
   '/contact/': '2026-10-31',
   '/cookies/': '2026-07-27',
+  '/over-ons/': '2026-11-03',
   '/privacy/': '2026-07-27',
   '/stijn-de-ketelaere/': '2026-08-09',
   '/use-cases/': '2026-07-23',

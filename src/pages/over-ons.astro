@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { CONTACT } from '../utils/contact';
+import { PAGE_DATES } from '../utils/lastmod.mjs';
+import { approachSteps, agreement } from '../data/home';
+
+// Over het bedrijf, niet over de persoon: daarvoor is er /stijn-de-ketelaere/.
+// Alle inhoud komt uit wat al op de site staat (home.ts, Team.astro, contact.ts),
+// zodat hier geen nieuwe feiten bijkomen. Het bedrijf zelf staat sitewide als
+// ProfessionalService in BaseLayout; deze pagina verwijst ernaar.
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': 'https://monkai.business/over-ons/',
+    url: 'https://monkai.business/over-ons/',
+    name: 'Over ons - MonkAi Business',
+    inLanguage: 'nl-BE',
+    dateModified: PAGE_DATES['/over-ons/'],
+    mainEntity: { '@id': 'https://monkai.business/#business' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://monkai.business/' },
+      { '@type': 'ListItem', position: 2, name: 'Over ons' },
+    ],
+  },
+];
+---
+<BaseLayout
+  title="Over ons - MonkAi Business | AI-adoptie voor Vlaamse KMO's"
+  description="MonkAi Business is de AI-offering van SDK Solutions BV uit Oudenaarde. Wie we zijn, hoe we werken en wat je van ons mag verwachten."
+  schema={schema}
+>
+  <Nav />
+  <main class="section">
+    <article class="container about">
+      <p class="kicker">Over ons</p>
+      <h1>MonkAi Business</h1>
+      <p class="lede">MonkAi Business is de AI-offering van {CONTACT.company}. Vanuit Oudenaarde helpen we KMO's in {CONTACT.region} rustig en veilig starten met AI: klein beginnen, alles uitleggen in gewone taal, en pas vertrekken als jouw mensen het zelf kunnen.</p>
+
+      <div class="prose">
+        <h2>Wat we doen</h2>
+        <p>We werken met inspiratiesessies en sparring in kleine groepen, bij jou op locatie. Daarna begeleiden we bij automatiseren, onthouden en versnellen, en bij AI-geletterdheid en afspraken rond de EU AI Act. Voor formele opleidingen verwijzen we door naar partners. Het volledige aanbod staat bij <a href="/#diensten">de diensten</a>.</p>
+
+        <h2>Wie we zijn</h2>
+        <p>Vandaag werk je rechtstreeks met <a href="/stijn-de-ketelaere/">Stijn De Ketelaere</a>, AI-adoptiecoach en oprichter, van de eerste sessie tot de overdracht. Zijn achtergrond is technisch, met een loopbaan bij VSK Electronics, S&amp;V Management Consultants (later PwC) en Proceedix (later SymphonyAI). Daarnaast is hij medeoprichter van PinPoint Inspections.</p>
+        <p>Het team groeit. Er komen mensen bij die dezelfde nuchtere aanpak delen. Zie jij jezelf hier staan? <a href="/contact/">Laat het weten</a>.</p>
+      </div>
+
+      <section class="block">
+        <h2>Hoe we werken</h2>
+        <ol class="steps">
+          {approachSteps.map((step) => (
+            <li>
+              <span class="num">{step.num}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="block">
+        <h2>Onze afspraak</h2>
+        <div class="agreement">
+          <div>
+            <h3>Wat je van ons krijgt</h3>
+            <ul>{agreement.monkai.map((item) => <li>{item}</li>)}</ul>
+          </div>
+          <div>
+            <h3>Wat we van jou vragen</h3>
+            <ul>{agreement.customer.map((item) => <li>{item}</li>)}</ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Bedrijfsgegevens</h2>
+        <dl class="details">
+          <div><dt>Onderneming</dt><dd>{CONTACT.company}, handelsnaam MonkAi Business</dd></div>
+          <div><dt>Adres</dt><dd>{CONTACT.street}, {CONTACT.postalCode} {CONTACT.city}</dd></div>
+          <div><dt>BTW</dt><dd>{CONTACT.vat}</dd></div>
+          <div><dt>E-mail</dt><dd><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></dd></div>
+          <div><dt>Werkgebied</dt><dd>{CONTACT.region}</dd></div>
+        </dl>
+      </section>
+
+      <section class="cta">
+        <h2>Iets bespreken?</h2>
+        <p>Een eerste gesprek is vrijblijvend. We bekijken samen waar bij jou de winst zit.</p>
+        <a class="btn" href="/contact/">Contact opnemen</a>
+      </section>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .about { max-width: 760px; }
+
+  .kicker { font-family: var(--font-mono); font-size: 13px; color: var(--green); margin: 0 0 8px; }
+  h1 { font-size: 44px; font-weight: 500; line-height: 1.15; margin: 0 0 16px; }
+  .lede { font-size: 18px; line-height: 1.6; color: var(--ink-soft); margin: 0 0 8px; }
+
+  .prose { line-height: 1.7; font-size: 17px; color: var(--ink-soft); }
+  .prose h2, .block h2, .cta h2 { font-family: var(--font-serif); font-size: 26px; font-weight: 600; color: var(--ink); }
+  .prose h2 { margin: 40px 0 16px; }
+  .prose p { margin: 0 0 20px; }
+  .prose a, .details a { color: var(--green); text-decoration: underline; }
+
+  .block { margin-top: 48px; }
+  .block h2 { margin: 0 0 20px; }
+  h3 { font-size: 18px; font-weight: 600; margin: 0 0 6px; color: var(--ink); }
+
+  .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+  .steps li { display: grid; grid-template-columns: 48px 1fr; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .num { font-family: var(--font-mono); font-size: 14px; color: var(--green); padding-top: 2px; }
+  .steps p { margin: 0; color: var(--muted); line-height: 1.7; }
+
+  .agreement { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .agreement > div { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+  .agreement ul { margin: 12px 0 0; padding-left: 18px; color: var(--muted); line-height: 1.7; }
+
+  .details { display: flex; flex-direction: column; gap: 14px; margin: 0; }
+  .details dt { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .details dd { margin: 4px 0 0; font-size: 16px; color: var(--ink); }
+
+  .cta { margin-top: 56px; padding: 32px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); }
+  .cta h2 { margin: 0 0 10px; }
+  .cta p { margin: 0 0 20px; color: var(--muted); line-height: 1.7; }
+
+  @media (max-width: 768px) {
+    h1 { font-size: 32px; }
+    .lede, .prose { font-size: 16px; }
+    .agreement { grid-template-columns: 1fr; }
+    .cta { padding: 24px; }
+  }
+</style>
