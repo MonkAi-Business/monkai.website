@@ -17,15 +17,9 @@ geldt voor `/blog`, de detailpagina's, de homepageteaser en de monkey-scrollstor
 
 Daardoor kan je een goedgekeurde post vooruit plannen. Hij zit al in `main`, is al
 gebouwd geweest, en verschijnt pas wanneer er opnieuw gebouwd wordt op of na die dag.
-Die build komt vanzelf: `.github/workflows/publish-scheduled.yml` draait elke nacht,
-kijkt met `scripts/due-today.mjs` of er iets op vandaag staat, en roept dan de Netlify
-build hook aan. Twee tijdstippen (22:05 en 23:05 UTC) omdat GitHub in UTC draait en
-België tussen zomer- en wintertijd wisselt; de post verschijnt dus binnen enkele minuten
-na middernacht.
-
-**Eenmalig nodig:** een repository secret `NETLIFY_BUILD_HOOK` in GitHub, met de URL van
-een build hook uit Netlify (Site configuration → Build & deploy → Build hooks). Zonder
-dat secret faalt de job en verschijnt er niets vanzelf.
+Die build komt **niet** vanzelf. Sinds de verhuis naar Hetzner (3 november 2026) is
+de nachtelijke publicatie geschrapt: bouw de site op of na de vrijdag zelf en zet `dist/`
+op de server (zie "Deploy" in `CLAUDE.md`). Tot dan blijft de post onzichtbaar.
 
 ### Nalezen op /prep
 
@@ -97,7 +91,7 @@ agents en skills, en tot slot governance, wetgeving en kosten.
 | 20 | 11 dec 2026 | `duizend-inspecties-later` | PinPoint Inspections: waarom inspectiedata in pdf's onbruikbaar is en wat AI ermee kan zodra ze gestructureerd is. Al in de huisstijl geschreven. |
 
 De `date` in de frontmatter van elke post hierboven staat op de vrijdag uit deze tabel.
-Verschuif je een post, pas dan **beide** aan, anders publiceert de cron op de oude datum.
+Verschuif je een post, pas dan **beide** aan, anders verschijnt hij op de oude datum.
 
 ## Let op: interne links
 

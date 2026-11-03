@@ -9,8 +9,8 @@ export type Post = CollectionEntry<'blog'>;
  *   2. De `date` uit de frontmatter is aangebroken in Brusselse tijd.
  *
  * Zo kan je een goedgekeurde post vooruit plannen: hij zit al in `main`, maar
- * verschijnt pas bij de eerste build op of na die dag. Die build komt van de
- * nachtelijke cron in `.github/workflows/publish-scheduled.yml`.
+ * verschijnt pas bij de eerste build op of na die dag. Die build gebeurt met
+ * de hand: de nachtelijke cron is op 3 november 2026 geschrapt.
  *
  * Zolang een post nog niet live is, is hij te bekijken op /prep.
  */
