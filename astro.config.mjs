@@ -1,8 +1,9 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import { createLastmodLookup } from './src/utils/lastmod.mjs';
+import { createLastmodLookup, noindexBlogPaths } from './src/utils/lastmod.mjs';
 
 const lastmodFor = createLastmodLookup();
+const NOINDEX_POSTS = noindexBlogPaths();
 const NOINDEX_SECTIONS = ['bedankt', 'data', 'inspiratie', 'kickass', 'prep', 'prompt', 'prompts'];
 
 export default defineConfig({
@@ -20,7 +21,8 @@ export default defineConfig({
       // eerste padsegment, niet met includes(): dat gooide ook een blogpost
       // weg waarvan de slug met 'prompt' begon.
       filter: (page) =>
-        !NOINDEX_SECTIONS.includes(new URL(page).pathname.split('/')[1]),
+        !NOINDEX_SECTIONS.includes(new URL(page).pathname.split('/')[1]) &&
+        !NOINDEX_POSTS.includes(new URL(page).pathname),
       serialize: (item) => {
         const lastmod = lastmodFor(new URL(item.url).pathname);
         return lastmod ? { ...item, lastmod } : item;

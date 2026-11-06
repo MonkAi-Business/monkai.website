@@ -13,6 +13,7 @@ const { compact = false } = Astro.props;
     <details class="faq-item" data-faq-item>
       <summary>{faq.q}</summary>
       <p>{faq.a}</p>
+      {faq.link && <p class="faq-link"><a href={faq.link.href}>{faq.link.label} &rarr;</a></p>}
     </details>
   ))}
 </div>
@@ -78,6 +79,15 @@ const { compact = false } = Astro.props;
     color: var(--muted);
     font-size: 17px;
     line-height: 1.7;
+  }
+
+  .faq-item .faq-link {
+    margin-top: 10px;
+  }
+
+  .faq-link a {
+    color: var(--green);
+    font-weight: 600;
   }
 
   .faq-list-compact .faq-item {

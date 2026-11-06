@@ -6,6 +6,7 @@ tags: ["ai-adoptie", "kennis"]
 image: "/media/blog/elke-vrijdag-een-artikel.svg"
 imageAlt: "Een tijdlijn waarop elke vrijdag een nieuw artikel verschijnt"
 draft: false
+noindex: true
 ---
 
 Vanaf deze week staat er hier elke vrijdag een nieuw artikel. Eén per week, geen bulk, geen stilte van twee maanden en dan plots vijf stukken tegelijk.

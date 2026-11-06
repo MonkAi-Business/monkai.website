@@ -8,14 +8,42 @@ const cases = (await getCollection('usecases', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order);
 
 const pad = (n: number) => String(n).padStart(2, '0');
+
+const listSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: "AI use cases voor KMO's",
+  url: 'https://monkai.business/use-cases/',
+  inLanguage: 'nl-BE',
+  publisher: { '@id': 'https://monkai.business/#business' },
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: cases.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.data.title,
+      url: `https://monkai.business/use-cases/${item.id}/`,
+    })),
+  },
+};
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://monkai.business/' },
+    { '@type': 'ListItem', position: 2, name: 'Use cases' },
+  ],
+};
 ---
-<BaseLayout title="Use cases - MonkAi Business" description="Concrete AI-toepassingen die vandaag al werken bij Vlaamse KMO's.">
+<BaseLayout title="AI use cases voor KMO's - MonkAi Business" description="Zes concrete AI-toepassingen voor Vlaamse KMO's: offertes, facturen, klantmails, interne kennis, inwerken en maandrapporten. Met hoe je eraan begint." schema={[listSchema, breadcrumbSchema]}>
   <Nav />
   <main class="section usecases-list">
     <div class="container usecases-list-inner">
       <div class="head">
         <h1>Use cases uit de praktijk</h1>
         <p class="lede">Geen vergezichten. Dit werkt vandaag al bij KMO's.</p>
+        <p class="intro">Elke use case hieronder is een taak die in bijna elk bedrijf terugkomt: een offerte opstellen, facturen inboeken, een klantmail beantwoorden, iets opzoeken in de eigen documentatie. Per toepassing lees je de situatie, wat AI er concreet doet, wat het oplevert en hoe je er zelf aan begint. Telkens met dezelfde regel: AI maakt het voorstel, een mens beslist en verstuurt.</p>
+        <p class="intro">Niet elke use case past bij elk bedrijf. Begin bij de taak die het vaakst terugkomt en het meeste ergernis geeft. Twijfel je welke dat is, dan zoeken we het samen uit in een <a href="/contact/">kort gesprek</a>.</p>
       </div>
       <div class="grid">
         {cases.map((item) => (
@@ -34,6 +62,8 @@ const pad = (n: number) => String(n).padStart(2, '0');
   .usecases-list-inner { display: flex; flex-direction: column; gap: 44px; }
   .head { display: flex; flex-direction: column; gap: 12px; max-width: 640px; }
   h1 { font-size: 44px; font-weight: 500; }
+  .intro { margin: 0; font-size: 16px; line-height: 1.7; color: var(--ink-soft); }
+  .intro a { color: var(--green); text-decoration: underline; }
   .lede { margin: 0; font-size: 17px; line-height: 1.65; color: var(--muted); }
   .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; display: flex; flex-direction: column; gap: 10px; color: var(--ink); }

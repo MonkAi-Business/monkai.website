@@ -15,6 +15,8 @@ export type Service = TitledText & {
 export type Faq = {
   q: string;
   a: string;
+  /** Optionele leeslink onder het antwoord. Alleen naar een post die al live staat. */
+  link?: { href: string; label: string };
 };
 
 export const problemCards: TitledText[] = [
@@ -149,6 +151,11 @@ export const faqs: Faq[] = [
   {
     q: 'Doe je Claude-training voor bedrijven?',
     a: 'Ik werk met inspiratiesessies en sparringsessies in kleine groepen, waarin je team leert om veilig en slim met Claude te werken op de eigen taken. Zoek je een uitgebreide, formele opleiding? Dan verwijs ik je gericht door naar de juiste partner. Wil je zelf leren vibe coden, dan kan dat wel bij mij, in een 1-op-1 training op maat.',
+  },
+  {
+    q: 'Wat is shadow AI en moet je het verbieden?',
+    a: 'Shadow AI is het gebruik van AI-tools op het werk buiten het zicht of het beleid van de organisatie, meestal met een privéaccount. Verbieden werkt zelden: het gebruik verdwijnt niet, het wordt alleen onzichtbaar. Beter kies je één goedgekeurde tool met een zakelijk account en leg je in gewone taal uit wat wel en niet kan.',
+    link: { href: '/blog/shadow-ai-verbieden-werkt-niet/', label: 'Lees hoe je shadow AI aanpakt' },
   },
   {
     q: 'Wat is het verschil tussen een second brain en een collective brain?',

@@ -10,8 +10,12 @@ Een KMO in de installatietechniek maakt gemiddeld tien offertes per week. Elke o
 
 ## Wat AI doet
 
-De offertes van de voorbije jaren staan al ergens: in een gedeelde map, een CRM of een boekhoudpakket. Een AI-assistent krijgt toegang tot die historiek en tot de nieuwe klantvraag — een mail, een gesprek, een lastenboek. Op basis daarvan stelt hij een eerste versie samen: de juiste structuur, gelijkaardige projecten als referentie, en een inleiding die aansluit bij wat de klant vraagt. De verkoper leest na, past prijzen en details aan waar nodig, en verstuurt. Niets gaat automatisch de deur uit zonder menselijke controle.
+De offertes van de voorbije jaren staan al ergens: in een gedeelde map, een CRM of een boekhoudpakket. Een AI-assistent krijgt toegang tot die historiek en tot de nieuwe klantvraag - een mail, een gesprek, een lastenboek. Op basis daarvan stelt hij een eerste versie samen: de juiste structuur, gelijkaardige projecten als referentie, en een inleiding die aansluit bij wat de klant vraagt. De verkoper leest na, past prijzen en details aan waar nodig, en verstuurt. Niets gaat automatisch de deur uit zonder menselijke controle.
 
 ## Resultaat
 
-Wat vroeger anderhalf uur duurde, wordt twintig minuten nalezen en bijsturen. De verkoper doet nog altijd het denkwerk — welke oplossing past hier het best — maar niet meer het herhalend typewerk. Bij het bedrijf in kwestie steeg het aantal offertes dat dezelfde dag nog buiten kon van iets meer dan de helft naar bijna negen op tien, zonder dat de kwaliteit eronder leed. Integendeel: omdat de basis consistent is, verdwenen de kleine fouten die vroeger door tijdsdruk ontstonden.
+Wat vroeger anderhalf uur duurde, wordt twintig minuten nalezen en bijsturen. De verkoper doet nog altijd het denkwerk - welke oplossing past hier het best - maar niet meer het herhalend typewerk. Bij het bedrijf in kwestie steeg het aantal offertes dat dezelfde dag nog buiten kon van iets meer dan de helft naar bijna negen op tien, zonder dat de kwaliteit eronder leed. Integendeel: omdat de basis consistent is, verdwenen de kleine fouten die vroeger door tijdsdruk ontstonden.
+
+## Zo begin je eraan
+
+Kies vijf offertes waar je trots op bent en een klantvraag die vorige week binnenkwam. Geef ze samen aan een AI-assistent met een zakelijk account en vraag een eerste versie in dezelfde opbouw. Leg die naast wat je verkoper zelf zou schrijven. Klopt de structuur, dan kan je de vaste instructie bewaren als een [expert-collega](/blog/expert-collega-je-eigen-ai-agent/) die elke verkoper gebruikt. Prijzen blijven altijd mensenwerk.

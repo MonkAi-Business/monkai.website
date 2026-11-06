@@ -18,7 +18,7 @@ export const PAGE_DATES = {
   '/over-ons/': '2026-11-03',
   '/privacy/': '2026-07-27',
   '/stijn-de-ketelaere/': '2026-08-09',
-  '/use-cases/': '2026-07-23',
+  '/use-cases/': '2026-11-06',
 };
 
 const BLOG_DIR = new URL('../content/blog/', import.meta.url);
@@ -34,6 +34,7 @@ function readBlogPosts() {
         date: field('date'),
         updated: field('updated'),
         draft: field('draft') === 'true',
+        noindex: field('noindex') === 'true',
       };
     });
 }
@@ -69,4 +70,11 @@ export function createLastmodLookup() {
     if (pathname.startsWith('/use-cases/')) return PAGE_DATES['/use-cases/'];
     return PAGE_DATES[pathname];
   };
+}
+
+/** Blogpaden met `noindex: true`, voor de sitemapfilter in astro.config.mjs. */
+export function noindexBlogPaths() {
+  return readBlogPosts()
+    .filter((post) => post.noindex)
+    .map((post) => `/blog/${post.slug}/`);
 }

@@ -6,11 +6,15 @@ import Footer from '../../components/Footer.astro';
 import VideoEmbed from '../../components/VideoEmbed.astro';
 
 export async function getStaticPaths() {
-  const cases = await getCollection('usecases', ({ data }) => !data.draft);
-  return cases.map((item) => ({ params: { slug: item.id }, props: { item } }));
+  const cases = (await getCollection('usecases', ({ data }) => !data.draft))
+    .sort((a, b) => a.data.order - b.data.order);
+  return cases.map((item) => ({
+    params: { slug: item.id },
+    props: { item, others: cases.filter((other) => other.id !== item.id) },
+  }));
 }
 
-const { item } = Astro.props;
+const { item, others } = Astro.props;
 const { Content } = await render(item);
 
 const breadcrumbSchema = {
@@ -18,7 +22,7 @@ const breadcrumbSchema = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://monkai.business/' },
-    { '@type': 'ListItem', position: 2, name: 'Use cases', item: 'https://monkai.business/use-cases' },
+    { '@type': 'ListItem', position: 2, name: 'Use cases', item: 'https://monkai.business/use-cases/' },
     { '@type': 'ListItem', position: 3, name: item.data.title },
   ],
 };
@@ -34,6 +38,18 @@ const breadcrumbSchema = {
         </div>
       )}
       <div class="prose"><Content /></div>
+      <aside class="cta">
+        <p>Wil je weten of dit bij jouw bedrijf werkt? We bekijken het samen op jouw eigen voorbeelden.</p>
+        <a class="cta-btn" href="/contact/">Laten we praten</a>
+      </aside>
+      <nav class="others" aria-label="Andere use cases">
+        <h2>Andere use cases</h2>
+        <ul>
+          {others.map((other) => (
+            <li><a href={`/use-cases/${other.id}/`}><strong>{other.data.title}</strong><span>{other.data.summary}</span></a></li>
+          ))}
+        </ul>
+      </nav>
       <a class="back" href="/use-cases/">&larr; Alle use cases</a>
     </article>
   </main>
@@ -51,6 +67,17 @@ const breadcrumbSchema = {
   .prose :global(li) { margin-bottom: 8px; }
   .prose :global(a) { color: var(--green); text-decoration: underline; }
   .prose :global(strong) { color: var(--ink); }
+  .cta { margin-top: 48px; padding: 28px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+  .cta p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--ink); }
+  .cta-btn { background: var(--green); color: var(--on-green); padding: 12px 20px; border-radius: var(--radius); font-weight: 600; }
+  .cta-btn:hover { background: var(--green-hover); color: var(--on-green); }
+  .others { margin-top: 48px; }
+  .others h2 { font-family: var(--font-serif); font-size: 24px; font-weight: 600; margin: 0 0 16px; }
+  .others ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .others li { border-top: 1px solid var(--border); }
+  .others a { display: flex; flex-direction: column; gap: 4px; padding: 14px 0; color: var(--ink); }
+  .others a:hover strong { color: var(--green); }
+  .others span { color: var(--muted); font-size: 15px; line-height: 1.5; }
   .back { display: inline-block; margin-top: 40px; color: var(--ink); font-weight: 600; border-bottom: 1.5px solid var(--green); padding-bottom: 2px; }
   @media (max-width: 768px) {
     h1 { font-size: 30px; margin: 0 0 18px; }

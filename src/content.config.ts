@@ -12,6 +12,8 @@ const blog = defineCollection({
     image: z.string().optional(),
     imageAlt: z.string().optional(),
     draft: z.boolean().default(false),
+    // Live voor lezers, maar niet voor zoekmachines (en dus ook niet in de sitemap).
+    noindex: z.boolean().default(false),
   }),
 });
 
