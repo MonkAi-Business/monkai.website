@@ -27,3 +27,6 @@ Thumbs.db
 
 # local visual brainstorming sessions
 .superpowers/
+
+# Persoonlijke Claude Code-instellingen
+.claude/settings.local.json

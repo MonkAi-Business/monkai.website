@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "deploy": "node scripts/deploy.mjs",
     "check:scroll-story": "node scripts/check-scroll-story.mjs",
     "check:monkey": "node scripts/check-monkey-mode.mjs",
     "edit:transitions": "node scripts/transition-editor/server.mjs",
